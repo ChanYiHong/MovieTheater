@@ -49,7 +49,7 @@ a:link, a:hover, a:visited, a:active {
 
 /* Login */
 .login_form{
-    flex-basis: 400px;
+    flex-basis: 350px;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -62,25 +62,40 @@ a:link, a:hover, a:visited, a:active {
 }
 
 .login_input label{
-    padding-top: 5px;
+    background-color: rgb(224, 224, 224);
+    border: 1px solid  rgb(180, 180, 180);
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
     font-family: 'nanumgothic', sans-serif;
     font-weight: bold;
-    flex-grow: 1;
+    flex-basis: 65px;
+    flex-grow: 0;
+    position: relative;
 }
 .login_input input{
-    height: 40px;
-    flex-basis: 200px;
-    flex-grow: 0;
+    height: 50px;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 0px 5px 5px 0px;
+    border-left: none;
+    flex-grow: 1;
 }
 
 .login_form button{
-    margin-top: 20px;
+    margin-top: 35px;
     background-color: rgb(94,94,94);
     border-radius: 5px;
-    padding: 15px 5px 15px 5px;
+    padding: 11px 5px 11px 5px;
     color: white;
     font-weight: bold;
     font-size: 1rem;
+}
+
+.login_input span{
+    font-size: 25px;
+    position:absolute;
+    left: 15px;
+    top:5px;
+    color: rgb(151, 150, 150);
 }
 /* /Login */
 /* /Body */
