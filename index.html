@@ -2,28 +2,32 @@
 <html>
 <head>
   <title>Movie Reservation</title>
+  <link rel="stylesheet" href="index.css">
   <meta charset="utf-8" />
 </head>
 <body>
-<div>
+
     <!-- Header -->
-    <div id="header">
+    <div class="header">
       <!-- 서비스 메뉴 -->
-      <div id="header_menu">
-        <h1>TICKET</h1>
+      <div class="header_menu">
+        <h1>T I C K E T</h1>
 
       </div>
       <!-- /서비스 메뉴 -->
     </div>
     <!-- /Header -->
 
+
     <!-- Body -->
-    <div id="container">
-      <form method="post" id="login_form" action="/">
+    <div class="container">
+      <form method="post" class="login_form" action="/">
         <input type="hidden" name="redirectUrl" value="/">
-        <div>
+        <div class="login_input">
           <label for="login_id">ID</label>
           <input type="text" id="login_id" name="login_id" placeholder="ID">
+        </div>
+        <div class="login_input">
           <label for="login_pw">Passward</label>
           <input type="password" id="login_pw" name="login_pw" placeholder="Password">
         </div>
@@ -32,6 +36,6 @@
     </div>
     <!-- /Body -->
 
-</div>    
+  
 </body>
 </html>
