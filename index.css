@@ -2,11 +2,10 @@
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 
 body{ 
-    box-sizing: border-box;
-    margin: 50px;
+    width: 70%;
     display: flex;
+    margin: 50px auto;
     flex-direction: column;
-    align-items: stretch;
 }
 
 div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
@@ -24,7 +23,6 @@ a:link, a:hover, a:visited, a:active {
 /* Header */
 .header{
     background-color:wheat;
-    flex-shrink: 1;
 }
 
 .header h1{
@@ -41,15 +39,15 @@ a:link, a:hover, a:visited, a:active {
     border: 1px dotted gray;
     display: flex;
     margin-top: 50px;
-    flex-direction: row;
-    flex-basis: 250px;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 /* Login */
 .login_form{
-    flex-basis: 350px;
+    flex-basis: 0;
+    flex:1;
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -58,7 +56,6 @@ a:link, a:hover, a:visited, a:active {
 .login_input{
     display: flex;
     margin: 5px;
-    justify-content: space-evenly;
 }
 
 .login_input label{
@@ -79,17 +76,6 @@ a:link, a:hover, a:visited, a:active {
     border-left: none;
     flex-grow: 1;
 }
-
-.login_form button{
-    margin-top: 35px;
-    background-color: rgb(94,94,94);
-    border-radius: 5px;
-    padding: 11px 5px 11px 5px;
-    color: white;
-    font-weight: bold;
-    font-size: 1rem;
-}
-
 .login_input span{
     font-size: 25px;
     position:absolute;
@@ -97,5 +83,27 @@ a:link, a:hover, a:visited, a:active {
     top:5px;
     color: rgb(151, 150, 150);
 }
-/* /Login */
-/* /Body */
+
+.container button{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(94,94,94);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
+
+.container button:hover{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    padding: 5px;
+    color: rgb(56, 55, 55);
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
