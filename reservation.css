@@ -1,0 +1,151 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body{ 
+    width: 70%;
+    display: flex;
+    margin: 50px auto;
+    flex-direction: column;
+}
+
+div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
+blockquote, th, td, figure {
+  margin: 0;
+  padding: 0;
+  font-family:  Arial, Helvetica, sans-serif;
+}
+
+a:link, a:hover, a:visited, a:active {
+    text-decoration:none;
+    color:#000;
+}
+
+/* Header */
+.header{
+    background-color:wheat;
+}
+
+.header h1{
+    background-color: rgb(44, 62, 80);
+    text-align: center;
+    padding: 30px;
+    color: white;
+    font-family:  'Hanna', serif;
+}
+/* /Header */
+
+/* Body */
+.container{
+    border: 1px dotted gray;
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login */
+.login_form{
+    flex-basis: 0;
+    flex:1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login_input{
+    display: flex;
+    margin: 5px;
+}
+
+.login_input label{
+    background-color: rgb(224, 224, 224);
+    border: 1px solid  rgb(180, 180, 180);
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    font-family: 'nanumgothic', sans-serif;
+    font-weight: bold;
+    flex-basis: 65px;
+    flex-grow: 0;
+    position: relative;
+}
+.login_input input{
+    height: 50px;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 0px 5px 5px 0px;
+    border-left: none;
+    flex-grow: 1;
+}
+.login_input span{
+    font-size: 25px;
+    position:absolute;
+    left: 15px;
+    top:5px;
+    color: rgb(151, 150, 150);
+}
+
+.container button{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(94,94,94);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
+
+.container button:hover{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    padding: 5px;
+    color: rgb(56, 55, 55);
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
+
+/****************** Reservation *********************/
+
+.movie_container{
+    align-self: stretch;
+    flex-basis: 0;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie_header{
+    display: flex;
+
+}
+.movie_contents{
+    display: flex;
+}
+
+.reserv_title{
+    align-self: flex-start;
+    background-color: rgb(106,110,112);
+    color: white;
+    font-weight: bold;
+    padding: 4px 4px 0px 4px;
+}
+
+.reserv_title_back{
+    width: 30px;
+    height: 150px;
+    border: 10px solid rgb(106,110,112);
+    border-right: none;
+    background-color: white;
+}
+
+
+#movie_contents_list{
+    flex:1;
+    border: 8px solid rgb(225,209,209);
+    border-left: none;
+    margin: 2px 0px 2px 0px;
+}
