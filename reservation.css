@@ -147,32 +147,52 @@ a:link, a:hover, a:visited, a:active {
     max-height: 130px;
     flex:1;
     border: 8px solid rgb(225,209,209);
+    font-weight: bold;
     border-left: none;
     margin: 2px 0px 2px 0px;
     padding: 20px 10px 20px 10px;
-    
+    overflow:scroll;
 }
 
-.movie_contents_box ul li{
 
-    margin-bottom: 20px;
+
+/* Movie rate list icon */
+.movie_contents_box ul li.movie_rate_all{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/all.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+.movie_contents_box ul li.movie_rate_12{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+.movie_contents_box ul li.movie_rate_15{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/15.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+.movie_contents_box ul li.movie_rate_19{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/19.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
 }
 
-ul{
-    list-style-type: none;
-}
 
-.movie_contents_box ul li img{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-}
-
-.movie_contents_box ul li span{
-    position: relative;
-    font-size: 0.9rem;    
-    left: 45px;
-    top: 5px;
-    padding-bottom: 5px;
-}
 
