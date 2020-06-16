@@ -136,7 +136,7 @@ a:link, a:hover, a:visited, a:active {
 
 .reserv_title_back{
     width: 30px;
-    height: 170px;
+    height: 190px;
     border: 10px solid rgb(106,110,112);
     border-right: none;
     background-color: white;
@@ -144,7 +144,7 @@ a:link, a:hover, a:visited, a:active {
 
 
 .movie_contents_box{
-    max-height: 130px;
+    max-height: 150px;
     flex:1;
     border: 8px solid rgb(225,209,209);
     font-weight: bold;
@@ -152,6 +152,7 @@ a:link, a:hover, a:visited, a:active {
     margin: 2px 0px 2px 0px;
     padding: 20px 10px 20px 10px;
     overflow:scroll;
+    overflow-x: hidden;
 }
 
 
@@ -194,5 +195,9 @@ a:link, a:hover, a:visited, a:active {
     background-size: 30px;
 }
 
+.movie_contents_box ul li:hover{
+    background-color: rgb(106,110,112);
+    color:white;
+}
 
 
