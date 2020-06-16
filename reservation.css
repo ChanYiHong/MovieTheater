@@ -136,16 +136,24 @@ a:link, a:hover, a:visited, a:active {
 
 .reserv_title_back{
     width: 30px;
-    height: 150px;
+    height: 170px;
     border: 10px solid rgb(106,110,112);
     border-right: none;
     background-color: white;
 }
 
 
-#movie_contents_list{
+.movie_contents_box{
+    max-height: 130px;
     flex:1;
     border: 8px solid rgb(225,209,209);
     border-left: none;
     margin: 2px 0px 2px 0px;
+    padding: 20px 10px 20px 10px;
+    
+}
+
+.movie_contents_box ul li{
+    font-size: 0.9rem;    
+    margin-bottom: 15px;
 }
