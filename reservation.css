@@ -196,8 +196,57 @@ a:link, a:hover, a:visited, a:active {
 }
 
 .movie_contents_box ul li:hover{
-    background-color: rgb(106,110,112);
+    background-color: rgb(158, 177, 187);
     color:white;
 }
+
+.movie_contents_box ul li.movie_all_selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/all.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_12_selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_15_selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/15.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_19_selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/19.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+/* / Movie rate list icon */
 
 
