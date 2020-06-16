@@ -8,7 +8,7 @@ body{
     flex-direction: column;
 }
 
-div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
+div, dl, dt, dd,  ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
 blockquote, th, td, figure {
   margin: 0;
   padding: 0;
@@ -154,6 +154,25 @@ a:link, a:hover, a:visited, a:active {
 }
 
 .movie_contents_box ul li{
-    font-size: 0.9rem;    
-    margin-bottom: 15px;
+
+    margin-bottom: 20px;
 }
+
+ul{
+    list-style-type: none;
+}
+
+.movie_contents_box ul li img{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+}
+
+.movie_contents_box ul li span{
+    position: relative;
+    font-size: 0.9rem;    
+    left: 45px;
+    top: 5px;
+    padding-bottom: 5px;
+}
+
