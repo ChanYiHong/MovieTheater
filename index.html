@@ -4,6 +4,7 @@
   <title>Movie Reservation</title>
   <link rel="stylesheet" href="index.css">
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <script src="./index.js"></script>
   <meta charset="utf-8" />
 </head>
 <body>
@@ -22,7 +23,8 @@
 
     <!-- Body -->
     <div class="container">
-      <form method="post" class="login_form" action="/">
+      <!-- Login -->
+      <form method="post" class="login_form" action="./reservation.html">
         <input type="hidden" name="redirectUrl" value="/">
         <div class="login_input">
           <label for="login_id"><span><i class="fas fa-user fa-fw"></i></span></label>
@@ -33,9 +35,9 @@
           <input type="password" id="login_pw" name="login_pw">
         </div>
         <button type="submit"> Sign in </button>   
-        <button> Sign up </button>    
+        <button type="button" id="sign_up_button"> Sign up </button>    
       </form>
-        
+      <!-- /Login --> 
     </div>
     <!-- /Body -->
 
