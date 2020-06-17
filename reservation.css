@@ -7,6 +7,13 @@ body{
     margin: 50px auto;
     flex-direction: column;
 }
+/* 스크롤바 색상 */
+::-webkit-scrollbar{width: 16px;}
+::-webkit-scrollbar-track {background-color:rgb(241,241,241);}
+::-webkit-scrollbar-thumb {background-color: rgba(199, 127, 127, 0.74);border-radius: 0px;}
+::-webkit-scrollbar-thumb:hover {background: rgba(196, 101, 101, 0.74);}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+width:16px;height:16px;background:#e7e1e1;} 
 
 div, dl, dt, dd,  ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
 blockquote, th, td, figure {
