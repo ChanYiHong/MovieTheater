@@ -17,9 +17,10 @@ width:16px;height:16px;background:#e7e1e1;}
 
 div, dl, dt, dd,  ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
 blockquote, th, td, figure {
-  margin: 0;
-  padding: 0;
-  font-family:  Arial, Helvetica, sans-serif;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family:  Arial, Helvetica, sans-serif;
 }
 
 a:link, a:hover, a:visited, a:active {
@@ -117,7 +118,7 @@ a:link, a:hover, a:visited, a:active {
 
 /****************** Reservation *********************/
 
-.movie_container{
+.movie_select_container{
     align-self: stretch;
     flex-basis: 0;
     flex:1;
@@ -133,12 +134,14 @@ a:link, a:hover, a:visited, a:active {
     display: flex;
 }
 
-.reserv_title{
+/*중복*/
+.movie_header .reserv_title{
     align-self: flex-start;
     background-color: rgb(106,110,112);
     color: white;
     font-weight: bold;
     padding: 4px 4px 0px 4px;
+    text-align: center;
 }
 
 .reserv_title_back{
@@ -148,7 +151,7 @@ a:link, a:hover, a:visited, a:active {
     border-right: none;
     background-color: white;
 }
-
+                                                                             
 
 .movie_contents_box{
     max-height: 150px;
@@ -257,3 +260,65 @@ a:link, a:hover, a:visited, a:active {
 /* / Movie rate list icon */
 
 
+
+/* MOVIE Theater Selection*/
+.movie_info_container{
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    margin-top: 50px;
+}
+
+.movie_theater_container .reserv_title{
+    align-self: flex-start;
+    width: 300px;
+    background-color: rgb(106,110,112);
+    color: white;
+    font-weight: bold;
+    padding: 4px 4px 4px 4px;
+    text-align: center;
+}
+
+
+
+
+.movie_theater_container{
+    display: flex;
+    background-color: rgb(225,209,209);
+    flex-direction: column;
+}
+
+.movie_theater_box{
+    display: flex;
+    margin: 0px 8px 8px 8px;
+    background-color: white;
+    flex-direction: row;
+}
+
+.movie_theater_area_list{
+    height: 400px;
+    margin: 10px 10px 10px 15px;
+}
+
+.movie_theater_area_list li{
+    border: 1px solid rgb(187, 185, 185);
+    padding: 10px 15px 10px 45px;
+    font-size: 0.8rem;
+    color: rgb(106,110,112);
+    font-weight: bold;
+}
+.movie_theater_area_detail_list{
+    margin: 10px 10px 30px 0px;
+    width: 165px;
+}
+.movie_theater_area_detail_list select{
+    border: 1px solid rgb(187, 185, 185);
+    height: 100%;
+    width: 100%;
+}
+
+.movie_theater_area_detail_list select option{
+    font-size: 1.15rem;
+    color: rgb(106,110,112);
+    padding : 8px 8px 8px 12px
+}
