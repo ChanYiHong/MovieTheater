@@ -207,7 +207,7 @@ a:link, a:hover, a:visited, a:active {
     color:white;
 }
 
-.movie_contents_box ul li.movie_all_selected{
+.movie_contents_box ul li.movie_rate_all.selected{
     margin: 0;
 	padding: 10px 0px 10px 50px;
 	list-style: none;
@@ -219,7 +219,7 @@ a:link, a:hover, a:visited, a:active {
     color:white;
 }
 
-.movie_contents_box ul li.movie_12_selected{
+.movie_contents_box ul li.movie_rate_12.selected{
     margin: 0;
 	padding: 10px 0px 10px 50px;
 	list-style: none;
@@ -231,7 +231,7 @@ a:link, a:hover, a:visited, a:active {
     color:white;
 }
 
-.movie_contents_box ul li.movie_15_selected{
+.movie_contents_box ul li.movie_rate_15.selected{
     margin: 0;
 	padding: 10px 0px 10px 50px;
 	list-style: none;
@@ -243,7 +243,7 @@ a:link, a:hover, a:visited, a:active {
     color:white;
 }
 
-.movie_contents_box ul li.movie_19_selected{
+.movie_contents_box ul li.movie_rate_19.selected{
     margin: 0;
 	padding: 10px 0px 10px 50px;
 	list-style: none;

@@ -34,27 +34,13 @@ function movieSelect(clicked_movie){
 
 function movieCheckedState(clicked_movie, clicked_movie_id){
     var className = clicked_movie.getAttribute('class');
-    var value;
-    switch(className){
-        case 'movie_rate_all': value ="movie_all_selected"; break;
-        case 'movie_rate_12': value ="movie_12_selected"; break;
-        case 'movie_rate_15': value ="movie_15_selected"; break;
-        case 'movie_rate_19': value ="movie_19_selected"; break;
-    }
+    clicked_movie.classList.toggle("selected");
     selected_movie_id = clicked_movie_id;
-    clicked_movie.setAttribute('class', value);
 }
 
 function movieUncheckedState(){
     var selected_movie= document.querySelector(`#movie_contents_list #${selected_movie_id}`);
-    var value;
-    switch(selected_movie.className){
-        case 'movie_all_selected': value ="movie_rate_all"; break;
-        case 'movie_12_selected': value ="movie_rate_12"; break;
-        case 'movie_15_selected': value ="movie_rate_15"; break;
-        case 'movie_19_selected': value ="movie_rate_19"; break;
-    }
-    selected_movie.className=value;
+    selected_movie.classList.toggle("selected");
 }
 
  /* /영화 Title 선택 List */
