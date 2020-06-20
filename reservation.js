@@ -33,7 +33,6 @@ function movieSelect(clicked_movie){
 }
 
 function movieCheckedState(clicked_movie, clicked_movie_id){
-    var className = clicked_movie.getAttribute('class');
     clicked_movie.classList.toggle("selected");
     selected_movie_id = clicked_movie_id;
 }
