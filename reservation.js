@@ -2,6 +2,8 @@ var selected_movie_id; //선택된 movie의 id
 
 window.onload = function(){
    
+    Init();
+
     // movie select list event listener
     var movie_lists = document.querySelectorAll('#movie_contents_list li');
     for(var i=0; i<movie_lists.length; i++){
@@ -9,8 +11,34 @@ window.onload = function(){
             movieSelect(this);
         });
     }
+
+
     
+    // theater list event listner
 }
+
+
+function Init(){
+    //영화목록 불러오기 DB
+
+
+    //영화지점 불러오기 DB
+    var theater_area_lists = document.querySelectorAll('.movie_theater_area_list li a span');
+    var theater_area_array = ['서울','경기','강원','대전/충청','대구','부산/울산','경상','광주/전라/제주'];
+    for(var i=0; i<theater_area_lists.length; i++){
+        theater_area_lists[i].innerHTML = theater_area_array[i];
+    }
+
+}
+
+
+
+
+
+
+
+
+
 
  /* 영화 Title 선택 List */
 function movieSelect(clicked_movie){
@@ -35,6 +63,7 @@ function movieSelect(clicked_movie){
 function movieCheckedState(clicked_movie, clicked_movie_id){
     clicked_movie.classList.toggle("selected");
     selected_movie_id = clicked_movie_id;
+    TheaterArea();
 }
 
 function movieUncheckedState(){

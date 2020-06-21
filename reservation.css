@@ -293,7 +293,7 @@ a:link, a:hover, a:visited, a:active {
 
 .movie_theater_container .reserv_title{
     align-self: flex-start;
-    width: 305px;
+    width: 315px;
     background-color: rgb(106,110,112);
     color: white;
     font-weight: bold;
@@ -323,8 +323,8 @@ a:link, a:hover, a:visited, a:active {
 
 .movie_theater_area_list li{
     border: 1px solid rgb(187, 185, 185);
-    padding: 10px 15px 10px 45px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
+    text-align: right;
     color: rgb(106,110,112);
     font-weight: bold;
 }
@@ -336,6 +336,16 @@ a:link, a:hover, a:visited, a:active {
     border: 1px solid rgb(187, 185, 185);
     height: 100%;
     width: 100%;
+}
+
+.movie_theater_area_list li a{
+    display: block;
+    padding: 10px;
+}
+
+.movie_theater_area_list li.selected{
+    background-color: rgb(245, 147, 147);
+    color:white;
 }
 
 .movie_theater_area_detail_list select option{
