@@ -47,11 +47,10 @@ a:link, a:hover, a:visited, a:active {
 }
 
 /* Header */
-.header{
-    background-color:wheat;
-}
 
 .header h1{
+    margin: 5px 60px 5px 60px;
+    min-width: 200px;
     background-color: rgb(44, 62, 80);
     text-align: center;
     padding: 30px;
