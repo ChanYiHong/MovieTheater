@@ -343,7 +343,7 @@ a:link, a:hover, a:visited, a:active {
 }
 
 .movie_theater_area_list li a.selected{
-    background-color: rgb(245, 147, 147);
+    background-color: rgba(199, 127, 127, 0.74);
 }
 
 .movie_theater_area_list li .unavailable {

@@ -109,6 +109,11 @@ function movieUncheckedState(){
             theater_area_lists[i].parentElement.classList.remove("unavailable");
         }else{
             theater_area_lists[i].parentElement.classList.add("unavailable");
+            if(theater_area_lists[i].parentElement.classList.contains("selected")){
+                theater_area_lists[i].parentElement.classList.remove("selected");
+                selected_theater_area=undefined;
+            }
+            
         }
     }
  }
