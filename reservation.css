@@ -345,7 +345,13 @@ a:link, a:hover, a:visited, a:active {
 
 .movie_theater_area_list li.selected{
     background-color: rgb(245, 147, 147);
-    color:white;
+}
+
+.movie_theater_area_list li .unavailable {
+    background-color: rgb(224, 224, 224);
+}
+.movie_theater_area_list li .unavailable span{
+    color:rgb(226, 226, 226);
 }
 
 .movie_theater_area_detail_list select option{

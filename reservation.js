@@ -49,13 +49,6 @@ function Init(){
 
 
 
-
-
-
-
-
-
-
  /* 영화 Title 선택 List */
 function movieSelect(clicked_movie){
     var clicked_movie_id = clicked_movie.getAttribute('id');
@@ -95,11 +88,27 @@ function movieUncheckedState(){
  function TheaterArea(){
      console.log(selected_movie_id);
      getAvailableTheaterArea();
-
  }
 
 /*  DB에서 가능한 영화관 목록 가져오기 */
  function getAvailableTheaterArea(){
+    var TheaterObject = {
+        movie_list_1: ['서울','경기','강원','대전/충청','대구','부산/울산','경상','광주/전라/제주'],
+        movie_list_2: ['서울','경기','강원','대전/충청','대구','부산/울산'],
+        movie_list_3: ['서울','경기','강원','부산/울산','경상','광주/전라/제주'],
+        movie_list_4: ['서울','경기','대전/충청','대구','광주/전라/제주'],
+        movie_list_5: ['서울','경기','강원','대구','부산/울산','경상','광주/전라/제주']
+    }
+
     var theater_area_lists = document.querySelectorAll('.movie_theater_area_list li a span');
- 
+    var available_theater_lists = TheaterObject[selected_movie_id];
+
+    for(var i=0; i<theater_area_lists.length; i++){
+        // 이용 가능한 theater
+        if(available_theater_lists.includes(theater_area_lists[i].innerHTML)){
+            theater_area_lists[i].parentElement.classList.remove("unavailable");
+        }else{
+            theater_area_lists[i].parentElement.classList.add("unavailable");
+        }
+    }
  }
