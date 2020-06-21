@@ -1,4 +1,5 @@
 var selected_movie_id; //선택된 movie의 id
+var selected_theater_area; //영화관 지역
 
 window.onload = function(){
    
@@ -13,8 +14,15 @@ window.onload = function(){
     }
 
 
-    
     // theater list event listner
+    var theater_area_lists = document.querySelectorAll('.movie_theater_area_list li a');
+     for(var i=0; i<theater_area_lists.length; i++){
+        theater_area_lists[i].addEventListener('click',function(event){
+            TheaterAreaSelect(this);
+        });
+    }
+
+
 }
 
 function Init(){
@@ -72,7 +80,7 @@ function movieSelect(clicked_movie){
 function movieCheckedState(clicked_movie, clicked_movie_id){
     clicked_movie.classList.toggle("selected");
     selected_movie_id = clicked_movie_id;
-    TheaterArea();
+    getAvailableTheaterArea();
 }
 
 function movieUncheckedState(){
@@ -81,14 +89,6 @@ function movieUncheckedState(){
 }
 
  /* /영화 Title 선택 List */
-
-
-
- /* 영화관 선택 */
- function TheaterArea(){
-     console.log(selected_movie_id);
-     getAvailableTheaterArea();
- }
 
 /*  DB에서 가능한 영화관 목록 가져오기 */
  function getAvailableTheaterArea(){
@@ -111,4 +111,34 @@ function movieUncheckedState(){
             theater_area_lists[i].parentElement.classList.add("unavailable");
         }
     }
+ }
+
+
+ 
+ /* 영화관 선택 */
+ function TheaterAreaSelect(clicked_area){
+
+    if(clicked_area.classList.contains('unavailable')){
+        console.log("unavailable");
+        return;
+    }
+    
+    console.log(clicked_area.id);
+     //선택된 지역이 없음
+     if(selected_theater_area===undefined){
+        clicked_area.classList.toggle("selected");
+        selected_theater_area = clicked_area.id;
+     }else{
+        //선택됐던 지역을 unchecked로
+        document.querySelector(`.movie_theater_area_list #${selected_theater_area}`).classList.remove("selected");
+        
+        if(selected_theater_area === clicked_area.id ){
+            selected_theater_area=undefined;
+        }else{
+            clicked_area.classList.toggle("selected");
+            selected_theater_area = clicked_area.id;
+        }
+     }
+    console.log("Selected area:",selected_theater_area);
+
  }
