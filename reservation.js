@@ -1,5 +1,6 @@
 var selected_movie_id; //선택된 movie의 id
 var selected_theater_area; //영화관 지역
+var selected_theater_detail;  //영화관 지점
 
 window.onload = function(){
    
@@ -118,8 +119,6 @@ function movieUncheckedState(){
         }
     }
  }
-
-
  
  /* 영화관 선택 */
  function TheaterAreaSelect(clicked_area){
@@ -138,6 +137,7 @@ function movieUncheckedState(){
      if(selected_theater_area===undefined){
         clicked_area.classList.toggle("selected");
         selected_theater_area = clicked_area.id;
+        addTheaterDetail();
      }else{
         //선택됐던 지역을 unchecked로
         document.querySelector(`.movie_theater_area_list #${selected_theater_area}`).classList.remove("selected");
@@ -147,8 +147,90 @@ function movieUncheckedState(){
         }else{
             clicked_area.classList.toggle("selected");
             selected_theater_area = clicked_area.id;
+            addTheaterDetail();
         }
      }
     console.log("Selected area:",selected_theater_area);
 
  }
+
+ function addTheaterDetail(){
+    var detailData = {
+        movie_area_1: ['서울1','서울2','서울3','서울4','서울5','서울6','서울7','서울8','서울','서울','서울','서울','서울','서울'],
+        movie_area_1_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_2: ['경기','경기','경기','경기','경기','경기','경기','경기','경기','경기'],
+        movie_area_2_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_3: ['강원','강원','강원','강원','강원','강원','강원','강원'],
+        movie_area_3_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_4: ['대전/충청','대전/충청','대전/충청','대전/충청','대전/충청','대전/충청','대전/충청'],
+        movie_area_4_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_5: ['대구','대구','대구','대구','대구','대구','대구'],
+        movie_area_5_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_6: ['부산/울산','부산/울산','부산/울산','부산/울산','부산/울산','부산/울산','부산/울산'],
+        movie_area_6_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_7: ['경상', '경상','경상','경상','경상','경상','경상' ],
+        movie_area_7_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+        movie_area_8: ['광주/전라/제주','광주/전라/제주'],
+        movie_area_8_id: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14'],
+    }
+    var theater_detail_box = document.querySelector(".movie_theater_area_detail_list select");
+    var available_detail_lists = detailData[selected_theater_area];
+
+    //전부 remove
+    theater_detail_box.innerHTML="";
+
+    //option 추가
+    for(var i=0; i<available_detail_lists.length; i++){
+        theater_detail_box.innerHTML += `
+            <option value="theater_detail_${detailData[`${selected_theater_area}_id`][i]}"> ${available_detail_lists[i]} </option>`
+    }
+
+    //Event Listener
+    // var theater_detail_lists = document.querySelectorAll(".movie_theater_area_detail_list select option");
+
+    // for(var i=0; i<theater_detail_lists.length; i++){
+    //     theater_detail_lists[i].addEventListener("click",SelectTheaterDetail(this));    
+    // }
+    
+
+
+    // function max (a, b){
+    //     if(a>b) return a;
+    //     else return b;
+    // }
+
+    // for(var i=0; i<max(theater_detail_lists.length,available_detail_lists.length); i++){     
+    //     // 둘 다 O
+    //     if(i<available_detail_lists.length && i<theater_detail_lists.length){
+    //         theater_detail_lists[i].innerHTML = available_detail_lists[i];
+    //     }
+    //     else if(i>=available_detail_lists.length){
+    //         //option이 더 많음
+    //         theater_detail_lists[i].parentElement.removeChild(theater_detail_lists[i]);
+    //     }else{
+    //         var newNode = document.createElement('option');
+    //         newNode.innerHTML = `${available_detail_lists[i]}`;
+    //         theater_detail_lists[0].parentElement.appendChild(newNode);
+    //     }
+
+        
+        
+    // }
+
+
+ }
+
+ // console.log(theater_detail_lists[i].parentElement);
+
+
+        // if(i<available_detail_lists.length){
+        //     theater_detail_lists[i].innerHTML = available_detail_lists[i];
+        // }else{
+        //     theater_detail_lists[i].innerHTML = "";
+        // }
+        
+
+function SelectTheaterDetail(areaSelect){   
+    selected_theater_detail = areaSelect.options[areaSelect.selectedIndex].value;
+    console.log("click theater", selected_theater_detail);
+}
