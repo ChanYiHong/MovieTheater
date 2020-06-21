@@ -15,17 +15,16 @@ window.onload = function(){
     }
 
 
-    // theater list event listner
+    // theater list event listener
     var theater_area_lists = document.querySelectorAll('.movie_theater_area_list li a');
      for(var i=0; i<theater_area_lists.length; i++){
         theater_area_lists[i].addEventListener('click',function(event){
             TheaterAreaSelect(this);
         });
     }
-
-
 }
 
+/* 초기 설정 */
 function Init(){
     //영화목록 불러오기 DB
     var movieArray = []; 
@@ -57,9 +56,19 @@ function Init(){
 }
 
 
-
- /* 영화 Title 선택 List */
+ /* 영화 Title 선택 List  - Event Handler*/
 function movieSelect(clicked_movie){
+    function movieCheckedState(clicked_movie, clicked_movie_id){
+        clicked_movie.classList.toggle("selected");
+        selected_movie_id = clicked_movie_id;
+        getAvailableTheaterArea();
+    }
+
+    function movieUncheckedState(){
+        var selected_movie= document.querySelector(`#movie_contents_list #${selected_movie_id}`);
+        selected_movie.classList.toggle("selected");
+    }
+
     var clicked_movie_id = clicked_movie.getAttribute('id');
     //선택된 영화가 아예 없음
     if(selected_movie_id===undefined){
@@ -71,26 +80,14 @@ function movieSelect(clicked_movie){
             //선택한 영화 == 클릭한 영화 > 아무것도 선택 X
             selected_movie_id = undefined;
             selected_theater_area = undefined;
+            selected_theater_detail = undefined;
         }else{        
             //새로 클릭한 영화가 checked
             movieCheckedState(clicked_movie, clicked_movie_id);
         }      
     }
-    console.log("Selected movie:",selected_movie_id);
+    console.log("- Movie:",selected_movie_id);
 }
-
-function movieCheckedState(clicked_movie, clicked_movie_id){
-    clicked_movie.classList.toggle("selected");
-    selected_movie_id = clicked_movie_id;
-    getAvailableTheaterArea();
-}
-
-function movieUncheckedState(){
-    var selected_movie= document.querySelector(`#movie_contents_list #${selected_movie_id}`);
-    selected_movie.classList.toggle("selected");
-}
-
- /* /영화 Title 선택 List */
 
 /*  DB에서 가능한 영화관 목록 가져오기 */
  function getAvailableTheaterArea(){
@@ -120,7 +117,7 @@ function movieUncheckedState(){
     }
  }
  
- /* 영화관 선택 */
+ /* 영화관 선택 - Event Handler*/
  function TheaterAreaSelect(clicked_area){
     if(selected_movie_id===undefined){
         alert("Select Movie First");
@@ -131,8 +128,7 @@ function movieUncheckedState(){
         console.log("unavailable");
         return;
     }
-    
-    console.log(clicked_area.id);
+
      //선택된 지역이 없음
      if(selected_theater_area===undefined){
         clicked_area.classList.toggle("selected");
@@ -150,10 +146,11 @@ function movieUncheckedState(){
             addTheaterDetail();
         }
      }
-    console.log("Selected area:",selected_theater_area);
+    console.log("- Area:",selected_theater_area);
 
  }
 
+ /* 영화관 지점 Option 추가*/
  function addTheaterDetail(){
     var detailData = {
         movie_area_1: ['서울1','서울2','서울3','서울4','서울5','서울6','서울7','서울8','서울','서울','서울','서울','서울','서울'],
@@ -184,53 +181,10 @@ function movieUncheckedState(){
         theater_detail_box.innerHTML += `
             <option value="theater_detail_${detailData[`${selected_theater_area}_id`][i]}"> ${available_detail_lists[i]} </option>`
     }
-
-    //Event Listener
-    // var theater_detail_lists = document.querySelectorAll(".movie_theater_area_detail_list select option");
-
-    // for(var i=0; i<theater_detail_lists.length; i++){
-    //     theater_detail_lists[i].addEventListener("click",SelectTheaterDetail(this));    
-    // }
-    
-
-
-    // function max (a, b){
-    //     if(a>b) return a;
-    //     else return b;
-    // }
-
-    // for(var i=0; i<max(theater_detail_lists.length,available_detail_lists.length); i++){     
-    //     // 둘 다 O
-    //     if(i<available_detail_lists.length && i<theater_detail_lists.length){
-    //         theater_detail_lists[i].innerHTML = available_detail_lists[i];
-    //     }
-    //     else if(i>=available_detail_lists.length){
-    //         //option이 더 많음
-    //         theater_detail_lists[i].parentElement.removeChild(theater_detail_lists[i]);
-    //     }else{
-    //         var newNode = document.createElement('option');
-    //         newNode.innerHTML = `${available_detail_lists[i]}`;
-    //         theater_detail_lists[0].parentElement.appendChild(newNode);
-    //     }
-
-        
-        
-    // }
-
-
  }
 
- // console.log(theater_detail_lists[i].parentElement);
-
-
-        // if(i<available_detail_lists.length){
-        //     theater_detail_lists[i].innerHTML = available_detail_lists[i];
-        // }else{
-        //     theater_detail_lists[i].innerHTML = "";
-        // }
-        
-
-function SelectTheaterDetail(areaSelect){   
-    selected_theater_detail = areaSelect.options[areaSelect.selectedIndex].value;
-    console.log("click theater", selected_theater_detail);
+ /* 영화관 지점 선택 시 - Event Handler*/
+function SelectTheaterDetail(selectbox_area){   
+    selected_theater_detail = selectbox_area.options[selectbox_area.selectedIndex].value;
+    console.log("- Theater:", selected_theater_detail);
 }
