@@ -1,5 +1,12 @@
 @import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+:root{
+    /*--point-color: rgb(225, 209, 209);*/
+    --point-color: rgb(225, 209, 209);
+    --box-color: rgb(255, 255, 255);
+    --title-color:rgb(106,110,112);
+     /*--title-color:rgb(106,110,112);*/
+}
 html{
     width: 100%; height: 100%;
 }
@@ -10,20 +17,20 @@ body{
     margin: 50px auto;
     flex-direction: column;
 }
-/* 배경에 투명도 image 
+/* 배경에 투명도 image */
 .container::after{
     background-image:url("./img/background1.jpg");
-    top:0;
+    bottom: 350px;
     left:0;
     position:absolute;
     background-size: 100%;
-    opacity:0.2!important;
+    opacity:0.6!important;
     filter:alpha(opacity=50);
     z-index:-1;
     content:"";
     width:100%;
     height:100%;
-}*/
+}
 
 /* 스크롤바 색상 */
 ::-webkit-scrollbar{width: 16px;}
@@ -155,7 +162,8 @@ a:link, a:hover, a:visited, a:active {
 /*중복*/
 .movie_header .reserv_title{
     align-self: flex-start;
-    background-color: rgb(106,110,112);
+    background-color: var(--title-color);
+
     color: white;
     font-weight: bold;
     padding: 4px 4px 0px 4px;
@@ -165,23 +173,23 @@ a:link, a:hover, a:visited, a:active {
 .reserv_title_back{
     width: 30px;
     height: 190px;
-    border: 10px solid rgb(106,110,112);
+    border: 10px solid var(--title-color);
     border-right: none;
-    background-color: white;
+    background-color: var(--box-color);
 }
                                                                              
 
 .movie_contents_box{
     max-height: 150px;
     flex:1;
-    border: 8px solid rgb(225,209,209);
+    border: 8px solid var(--point-color);
     font-weight: bold;
     border-left: none;
     margin: 2px 0px 2px 0px;
     padding: 20px 10px 20px 10px;
     overflow:scroll;
     overflow-x: hidden;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--box-color);
 }
 
 
@@ -293,7 +301,7 @@ a:link, a:hover, a:visited, a:active {
 .movie_theater_container .reserv_title{
     align-self: flex-start;
     width: 315px;
-    background-color: rgb(106,110,112);
+    background-color:  var(--title-color);
     color: white;
     font-weight: bold;
     padding: 4px 4px 4px 4px;
@@ -302,7 +310,7 @@ a:link, a:hover, a:visited, a:active {
 
 .movie_theater_container{
     display: flex;
-    background-color: rgb(225,209,209);
+    background-color: var(--point-color);
     flex-direction: column;
     flex-grow: 0;
 }
@@ -310,7 +318,7 @@ a:link, a:hover, a:visited, a:active {
 .movie_theater_box{
     display: flex;
     margin: 0px 10px 8px 12px;
-    background-color: white;
+    background-color: var(--box-color);
     flex-direction: row;
 }
 
@@ -367,7 +375,8 @@ a:link, a:hover, a:visited, a:active {
 .movie_date_container .reserv_title{
     align-self: flex-start;
     flex:1;
-    background-color: rgb(106,110,112);
+    background-color:  var(--title-color);
+
     color: white;
     font-weight: bold;
     padding: 4px 4px 4px 4px;
@@ -378,12 +387,12 @@ a:link, a:hover, a:visited, a:active {
 /* Calender */
 .movie_calender_container{
     height: 240px;
-    background-color: rgb(225,209,209);
+    background-color: var(--point-color);
 }
 
 .movie_calender_box{
     height: 240px;
-    background-color: white;
+    background-color: var(--box-color);
     margin-right: 12px;
 }
 
@@ -391,11 +400,11 @@ a:link, a:hover, a:visited, a:active {
 /* Time */
 .movie_time_container{
     height: 220px;
-    background-color: rgb(225,209,209);
+    background-color: var(--point-color);
 }
 
 .movie_time_box{
     height: 180px;
-    background-color: white;
+    background-color: var(--box-color);
     margin-right: 12px;
 }
