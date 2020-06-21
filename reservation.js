@@ -69,6 +69,7 @@ function movieSelect(clicked_movie){
         if(selected_movie_id === clicked_movie_id){
             //선택한 영화 == 클릭한 영화 > 아무것도 선택 X
             selected_movie_id = undefined;
+            selected_theater_area = undefined;
         }else{        
             //새로 클릭한 영화가 checked
             movieCheckedState(clicked_movie, clicked_movie_id);
@@ -122,6 +123,10 @@ function movieUncheckedState(){
  
  /* 영화관 선택 */
  function TheaterAreaSelect(clicked_area){
+    if(selected_movie_id===undefined){
+        alert("Select Movie First");
+        return;
+    }
 
     if(clicked_area.classList.contains('unavailable')){
         console.log("unavailable");
