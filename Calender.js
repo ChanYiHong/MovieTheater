@@ -1,24 +1,46 @@
 var today = new Date(); // 오늘 날짜
 var date = new Date();
+var selectedYear = today.getFullYear();
 var selectedMonth = today.getMonth();
 
 window.onload = function(){
     MakeMonthSelectBox();
     build();
-
-    function MakeMonthSelectBox() //이전 달을 today에 값을 저장
-    { 
-        console.log(today.getMonth()+1);
-        var monthSelect = document.querySelector('select');
-        console.log(monthSelect);
-
-
-        for(var i = today.getMonth()-1; i<today.getMonth()+3; i++){
-            monthSelect.innerHTML += `<option value=${i}> ${i+1}월</option>`;
-        }     
-    }
 } 
 
+
+function MakeMonthSelectBox() //이전 달을 today에 값을 저장
+{ 
+    // select box
+    var monthSelect = document.querySelector('select');
+    var thisMonth = today.getMonth()+12; 
+
+    // 4개의 달력만 출력
+    // Unavailable 
+    monthSelect.innerHTML += `<option value=${(thisMonth-1)%12} disabled> ${(thisMonth-1)%12+1}월</option>`;
+    // This month 
+    monthSelect.innerHTML += `<option value=${thisMonth%12} selected> ${thisMonth%12+1}월</option>`;
+    // Next month (만약 다음달이 해가 바뀐다면?)
+    if((thisMonth+1)%12 == 0) monthSelect.innerHTML += `<option class="changeYear" value=${(thisMonth+1)%12}> ${(thisMonth+1)%12+1}월</option>`;
+    else monthSelect.innerHTML += `<option value=${(thisMonth+1)%12}> ${(thisMonth+1)%12+1}월</option>`;
+    // Unavailable 
+    monthSelect.innerHTML += `<option value=${(thisMonth+2)%12} disabled> ${(thisMonth+2)%12+1}월</option>`;
+}
+
+function SelectMonth(selectbox_month) //이전 달을 today에 값을 저장
+{ 
+    var selected_option = selectbox_month.options[selectbox_month.selectedIndex];
+    if(selected_option.className ==="changeYear"){
+        selectedYear = date.getFullYear()+1;
+        console.log("change year");
+    }else{
+        selectedYear = date.getFullYear();
+    }
+    
+    selectedMonth = selected_option.value;
+    today = new Date(selectedYear, selected_option.value, today.getDate());
+    build(); //만들기
+}
 
 function build()
     {
@@ -28,8 +50,10 @@ function build()
         var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
         yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
              
-
-
+        console.group("Date");
+        console.log("Year:", selectedYear);
+        console.log("Month:", selectedMonth);
+        console.groupEnd()
 
 
         // 남은 테이블 줄 삭제
@@ -47,7 +71,10 @@ function build()
             cell = row.insertCell();
             cnt = cnt + 1;
         }
- 
+
+
+        var availableDate
+
         // 달력 출력
         for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
         { 
@@ -71,12 +98,7 @@ function build()
     }
 
 
-function SelectMonth(selectbox_month) //이전 달을 today에 값을 저장
-{ 
-    selectedMonth = selectbox_month.options[selectbox_month.selectedIndex].value;
-    today = new Date(today.getFullYear(), selectedMonth, today.getDate());
-    build(); //만들기
-}
+
 
 
 
@@ -110,4 +132,9 @@ function SelectMonth(selectbox_month) //이전 달을 today에 값을 저장
     
         //     build();
         // }
+
+
+
+
+    
         
