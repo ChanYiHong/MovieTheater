@@ -46,8 +46,6 @@ function build()
 
 
 function Calender(row, cnt, lastDate){
-    // { 202006 : [1,2,5,7,9,10] }
-    // DB에서 가능한 정보 받아오기
     Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
         var dd = this.getDate();
@@ -63,7 +61,7 @@ function Calender(row, cnt, lastDate){
     console.log("Month:", today.yyyymmdd().substring(4,6));
     console.groupEnd();
 
-    // 요청 
+    // 요청 - 가능한 date 불러오기
     // {Year: 2020, Month: 05}
 
     // Response (임시 데이터)
@@ -73,7 +71,6 @@ function Calender(row, cnt, lastDate){
 
 
     var date_id;
-    
     // 달력 출력
     for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
     { 
@@ -81,13 +78,13 @@ function Calender(row, cnt, lastDate){
         date_id = new Date(selectedYear, selectedMonth, i).yyyymmdd();
         console.log(date_id);
 
-        cell.innerHTML = `<a href="#" > ${i} </a>`;
+        cell.innerHTML = `<a href="#" id="${date_id}" > ${i} </a>`;
         cnt = cnt + 1;
         if (cnt % 7 == 1) {//일요일 계산
-            cell.innerHTML = "<font color=#FF9090>" +  `<a href="#" > ${i} </a>`//일요일에 색
+            cell.innerHTML = "<font color=#FF9090>" +  `<a href="#" id="${date_id}"> ${i} </a>`//일요일에 색
         }
         if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-            cell.innerHTML = "<font color=#7ED5E4>" +  `<a href="#" > ${i} </a>`//토요일에 색
+            cell.innerHTML = "<font color=#7ED5E4>" +  `<a href="#" id="${date_id}"> ${i} </a>`//토요일에 색
             row = calendar.insertRow();// 줄 추가
         }
         if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
