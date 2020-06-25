@@ -408,3 +408,10 @@ a:link, a:hover, a:visited, a:active {
     background-color: var(--box-color);
     margin-right: 12px;
 }
+
+
+/* Form submit button */
+
+form button{
+    background-color: blueviolet;
+}

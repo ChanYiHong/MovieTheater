@@ -188,3 +188,10 @@ function SelectTheaterDetail(selectbox_area){
     selected_theater_detail = selectbox_area.options[selectbox_area.selectedIndex].value;
     console.log("- Theater:", selected_theater_detail);
 }
+
+
+function temp_check(){
+    alert("Movie :  "+selected_movie_id+"\n"
+        + "Area  :  "+selected_theater_area+"\n"
+        + "Branch:  "+ selected_theater_detail);
+}
