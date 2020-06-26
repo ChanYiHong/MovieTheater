@@ -64,7 +64,7 @@ function Init(){
 
 
     MakeMonthSelectBox();
-    CalenderBuild();
+    CalenderBuild([]);
 
 
 }
@@ -160,6 +160,7 @@ function movieSelect(clicked_movie){
             addTheaterDetail();
         }
      }
+    selected_theater_detail = undefined;
     console.log("- Area:",selected_theater_area);
 
  }
@@ -201,21 +202,24 @@ function movieSelect(clicked_movie){
 function SelectTheaterDetail(selectbox_area){   
     selected_theater_detail = selectbox_area.options[selectbox_area.selectedIndex].value;
     console.log("- Theater:", selected_theater_detail);
+
+    // 이용 가능한 날짜 불러오기
+    CalenderBuild(getAvailableDate());
 }
 
 
 
-function CalenderBuild(){
+function CalenderBuild(available_date){
     var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
     var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
     var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
     var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
     yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
             
-    // console.group("Date");
-    // console.log("Year:", selectedYear);
-    // console.log("Month:", selectedMonth);
-    // console.groupEnd()
+    console.group("Date");
+    console.log("Year:", selectedYear);
+    console.log("Month:", selectedMonth);
+    console.groupEnd()
 
 
     // 남은 테이블 줄 삭제
@@ -234,10 +238,10 @@ function CalenderBuild(){
         cnt = cnt + 1;
     }
 
-    Calender(row, cnt,  lastDate);     
+    Calender(row, cnt,  lastDate, available_date);     
 }
 
-function Calender(row, cnt, lastDate){
+function Calender(row, cnt, lastDate, available_date){
     Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
         var dd = this.getDate();
@@ -248,18 +252,18 @@ function Calender(row, cnt, lastDate){
                 ].join('');
     };
         
-    console.group("Date Query");
-    console.log("Year:", today.yyyymmdd().substring(0,4));
-    console.log("Month:", today.yyyymmdd().substring(4,6));
-    console.groupEnd();
+    // console.group("Date Query");
+    // console.log("Year:", today.yyyymmdd().substring(0,4));
+    // console.log("Month:", today.yyyymmdd().substring(4,6));
+    // console.groupEnd();
 
     // 요청 - 가능한 date 불러오기
     // {Year: 2020, Month: 05}
 
     // Response (임시 데이터)
-    var available_date = [];
-    if(selectedMonth == 5) available_date = [25,26,27,28,29,30];
-    else available_date =[1,2,3,4,5,7,9,10,11,13,15,18,19,20];
+    // var available_date = [];
+    // if(selectedMonth == 5) available_date = [25,26,27,28,29,30];
+    // else available_date =[1,2,3,4,5,7,9,10,11,13,15,18,19,20];
 
 
     var date_id;
@@ -268,8 +272,6 @@ function Calender(row, cnt, lastDate){
     { 
         cell = row.insertCell();
         date_id = new Date(selectedYear, selectedMonth, i).yyyymmdd();
-        console.log(date_id);
-
         cell.innerHTML = `<a href="#" onclick="return false" id="${date_id}" > ${i} </a>`;
         cnt = cnt + 1;
         if (cnt % 7 == 1) {//일요일 계산
@@ -317,7 +319,22 @@ function SelectMonth(selectbox_month){
     
     selectedMonth = selected_option.value;
     today = new Date(selectedYear, selected_option.value, today.getDate());
-    CalenderBuild(); //만들기
+    CalenderBuild(getAvailableDate()); //만들기
+}
+
+// 현재 Data를 기반으로 Available Date를 return
+function getAvailableDate(){
+    console.group("Available Date");
+    console.log("movie id:", selected_movie_id);
+    console.log("movie area:", selected_theater_area);
+    console.log("movie theater:", selected_theater_detail);
+    console.log("Year:", selectedYear);
+    console.log("Month", selectedMonth);
+    console.groupEnd();
+
+
+
+    return [1,2,3];
 }
 
 

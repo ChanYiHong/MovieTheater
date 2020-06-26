@@ -407,37 +407,29 @@ a:link, a:hover, a:visited, a:active {
     flex-direction: column;
     justify-content: center;
     flex-shrink: 0;
-    
 }
 
 .month_box select{
     align-self: center;
-    border: 1px dotted pink;
-   
+    border: 1px dotted #e2dfdf;
     min-width: 20px;
     max-width: 80px;
     width: 80%;
     height: 80%;
-    /* margin:25px 10px 25px 35px; */
-
     margin: 10px;
-
-
     text-align: center;
     overflow-y: auto;
-
     vertical-align: middle;
 }
+
 .month_box option{
     padding: 9px 0px 9px 0px;
-    font-size: 1.2rem;
-    
+    font-size: 1.2rem;  
 }
 
 .month_box option:disabled{
     color: rgb(163, 163, 163);  
 }
-
 
 .month_box select option:focus, 
 .month_box select option:active, 
@@ -470,16 +462,14 @@ a:link, a:hover, a:visited, a:active {
     height:80%;
     border:1px solid #e2dfdf;
     text-align:center;
-    margin-left: 0px;
-
+    margin-left: 10px;
 }
 
 .date_box table #yearmonth{
     padding : 2px 0px 2px 0px;
     background-color: rgb(247, 208, 207);
     color:rgba(138, 15, 42, 0.527);
-    font-weight: bold;
-    
+    font-weight: bold;  
 }
 
 .date_box a{
@@ -488,11 +478,8 @@ a:link, a:hover, a:visited, a:active {
     text-decoration: none;
     display: block;
     color: white;
-    background-color: rgb(221, 148, 148);
+    background-color: rgb(221, 164, 164);
 }
-
-
-
 
 .date_box a:hover{
     background-color: rgb(214, 52, 52);
