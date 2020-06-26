@@ -6,6 +6,7 @@ var selected_theater_area; //영화관 지역
 var selected_theater_detail;  //영화관 지점
 var selectedYear = today.getFullYear();
 var selectedMonth = today.getMonth();
+var selectedDate;
 
 window.onload = function(){
    
@@ -208,7 +209,7 @@ function SelectTheaterDetail(selectbox_area){
 }
 
 
-
+// 달력 build 설정
 function CalenderBuild(available_date){
     var nMonth = new Date(today.getFullYear(), today.getMonth(), 1); //현재달의 첫째 날
     var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
@@ -241,6 +242,7 @@ function CalenderBuild(available_date){
     Calender(row, cnt,  lastDate, available_date);     
 }
 
+// 달력 build
 function Calender(row, cnt, lastDate, available_date){
     Date.prototype.yyyymmdd = function() {
         var mm = this.getMonth() + 1; // getMonth() is zero-based
@@ -287,9 +289,21 @@ function Calender(row, cnt, lastDate, available_date){
         }
 
         if(!available_date.includes(i)) cell.querySelector('a').setAttribute("class", "disabled");
+
+        cell.querySelector('a').addEventListener('click',function(event){
+            clickDate(this);
+        });
+
     }
 }
 
+function clickDate(clicked_date){
+    console.log(clicked_date.id);
+
+    clicked_date.style ="background-color: rgb(214, 52, 52)";
+}
+
+// 현재 month를 기준으로 4개의 month를 띄워줌
 function MakeMonthSelectBox(){ 
     // select box
     var monthSelect = document.querySelector('select.select_month');
@@ -307,7 +321,7 @@ function MakeMonthSelectBox(){
     monthSelect.innerHTML += `<option value=${(thisMonth+2)%12} disabled> ${(thisMonth+2)%12+1}월</option>`;
 }
 
-
+// month를 클릭했을 때 event
 function SelectMonth(selectbox_month){ 
     var selected_option = selectbox_month.options[selectbox_month.selectedIndex];
     if(selected_option.className ==="changeYear"){
@@ -332,9 +346,10 @@ function getAvailableDate(){
     console.log("Month", selectedMonth);
     console.groupEnd();
 
+    if(selected_movie_id===undefined || selected_theater_area===undefined || selected_theater_detail===undefined) return [];
 
 
-    return [1,2,3];
+    return [1,2,3,5,6,7,10];
 }
 
 
