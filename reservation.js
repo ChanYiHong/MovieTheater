@@ -291,16 +291,34 @@ function Calender(row, cnt, lastDate, available_date){
         if(!available_date.includes(i)) cell.querySelector('a').setAttribute("class", "disabled");
 
         cell.querySelector('a').addEventListener('click',function(event){
-            clickDate(this);
+            ClickDate(this);
         });
 
     }
 }
 
-function clickDate(clicked_date){
+function ClickDate(clicked_date){
     console.log(clicked_date.id);
 
-    clicked_date.style ="background-color: rgb(214, 52, 52)";
+    //선택된 지역이 없음
+    if(selectedDate===undefined){
+        clicked_date.style ="background-color: rgb(214, 52, 52)"; //selected
+        selectedDate = clicked_date.id;
+        // TIME 불러오는 이벤트
+     }else{
+        //선택됐던 지역을 unchecked로
+ 
+        document.getElementById(selectedDate).style = "background-color: rgb(221, 164, 164)"; //unchecked
+
+        if(clicked_date.id === selectedDate){
+            selectedDate = undefined;
+        }else{
+            clicked_date.style ="background-color: rgb(214, 52, 52)"; //selected
+            selectedDate = clicked_date.id;
+            // TIME  불러오는 이벤트
+        }
+        //  TIME = undefined
+     }
 }
 
 // 현재 month를 기준으로 4개의 month를 띄워줌
@@ -368,5 +386,6 @@ function getAvailableDate(){
 function temp_check(){
     alert("Movie :  "+selected_movie_id+"\n"
         + "Area  :  "+selected_theater_area+"\n"
-        + "Branch:  "+ selected_theater_detail);
+        + "Branch:  "+ selected_theater_detail+"\n"
+        + "Date  :  "+ selectedDate) ;
 }
