@@ -391,10 +391,37 @@ a:link, a:hover, a:visited, a:active {
 }
 
 .movie_calender_box{
+    display: flex;
     height: 240px;
     background-color: var(--box-color);
     margin-right: 12px;
 }
+
+
+.date_box table{
+    border:1px solid #BDBDBD;
+    text-align:center;
+    width:30%;
+}
+
+.date_box a{
+    text-decoration: none;
+    display: block;
+    color: white;
+    background-color: rgb(221, 148, 148);
+}
+
+.date_box a.disabled{
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+    background-color: white;
+    color:gray;
+}
+
+
+
+
 
 
 /* Time */

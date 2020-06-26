@@ -40,6 +40,7 @@
         <div class="movie_theater_container">
           <div class="reserv_title">극장</div>
           <div class="movie_theater_box">
+              <!-- 영화 지역 선택 --> 
               <div class="movie_theater_area_list">
                   <ul>
                     <li><a href="#" id="movie_area_1" onclick="return false;"><span class="name"></span></a></li>
@@ -53,6 +54,7 @@
                   </ul>
 
               </div>
+              <!-- 영화 상영관 선택 --> 
               <div class="movie_theater_area_detail_list">
                   <select size="8" onchange="SelectTheaterDetail(this);">
                     <option></option>
@@ -67,8 +69,32 @@
 
         <div class="movie_date_container">
           <div class="movie_calender_container">
-            <div class="reserv_title">날짜</div>
+            <!-- 영화 날짜 --> 
+            <div class="reserv_title">날짜</div>      
             <div class="movie_calender_box">
+              <!-- 영화 Month --> 
+              <div class="month_box">
+                <select class="select_month" size="8" onchange="SelectMonth(this);">
+                  <option> </option>
+                </select>
+              </div>
+              <!-- 영화 Date --> 
+              <div class="date_box">
+                <table align="center" id="calendar">
+                    <tr>
+                        <td colspan="7" align="center" id="yearmonth"></td>
+                    </tr>
+                    <tr>
+                        <td align="center"> <font color="#FF9090">일</font></td>
+                        <td align="center"> 월 </td>
+                        <td align="center"> 화 </td>
+                        <td align="center"> 수 </td>
+                        <td align="center"> 목 </td>
+                        <td align="center"> 금 </td>
+                        <td align="center"><font color=#7ED5E4>토</font></td>
+                    </tr>
+                </table>
+              </div>         
             </div>
 
 
