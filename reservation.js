@@ -270,13 +270,13 @@ function Calender(row, cnt, lastDate){
         date_id = new Date(selectedYear, selectedMonth, i).yyyymmdd();
         console.log(date_id);
 
-        cell.innerHTML = `<a href="#" id="${date_id}" > ${i} </a>`;
+        cell.innerHTML = `<a href="#" onclick="return false" id="${date_id}" > ${i} </a>`;
         cnt = cnt + 1;
         if (cnt % 7 == 1) {//일요일 계산
-            cell.innerHTML = "<font color=#FF9090>" +  `<a href="#" id="${date_id}"> ${i} </a>`//일요일에 색
+            cell.innerHTML = "<font color=#FF9090>" +  `<a href="#" onclick="return false" id="${date_id}"> ${i} </a>`//일요일에 색
         }
         if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-            cell.innerHTML = "<font color=#7ED5E4>" +  `<a href="#" id="${date_id}"> ${i} </a>`//토요일에 색
+            cell.innerHTML = "<font color=#7ED5E4>" +  `<a href="#" onclick="return false" id="${date_id}"> ${i} </a>`//토요일에 색
             row = calendar.insertRow();// 줄 추가
         }
         if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 

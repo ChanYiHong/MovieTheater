@@ -392,31 +392,100 @@ a:link, a:hover, a:visited, a:active {
 
 .movie_calender_box{
     display: flex;
-    height: 240px;
+    height: 210px;
     background-color: var(--box-color);
     margin-right: 12px;
+    align-content: center;
 }
 
 
+
+/* Month */
+.month_box{
+    flex:2;
+}
+
+.month_box select{
+    flex-shrink: 10;
+    min-width: 20px;
+    max-width: 100px;
+    width: 80%;
+    height: 85%;
+    margin:20px 10px 20px 35px;
+    text-align: center;
+    overflow-y: auto;
+
+    vertical-align: middle;
+}
+.month_box option{
+    padding: 9px 0px 9px 0px;
+    font-size: 1.2rem;
+    
+}
+
+.month_box option:disabled{
+    color: rgb(163, 163, 163);  
+}
+
+
+.month_box select option:focus, 
+.month_box select option:active, 
+.month_box select option:checked
+{
+    background: linear-gradient(#f0b3a4, #e7c5c5);
+    background-color: #e69952 !important; /* for IE  */
+}
+
+.month_box select, .month_box select:focus {
+    color:rgb(199, 107, 107);
+    font-weight: bold;
+}
+ 
+
+
+/* Date */
+.date_box{
+    flex-shrink: 1;
+    flex:6;
+}
+
 .date_box table{
-    border:1px solid #BDBDBD;
+    margin:20px;
+    width: 80%;
+    height:80%;
+    border:1px solid #e2dfdf;
     text-align:center;
-    width:30%;
+
+}
+
+.date_box table #yearmonth{
+    padding : 2px 0px 2px 0px;
+    background-color: rgb(247, 208, 207);
+    color:rgba(138, 15, 42, 0.527);
+    
 }
 
 .date_box a{
+    height: 25px;
+    padding-top:2px;
     text-decoration: none;
     display: block;
     color: white;
     background-color: rgb(221, 148, 148);
 }
 
+
+
+
+.date_box a:hover{
+    background-color: rgb(214, 52, 52);
+}
+
 .date_box a.disabled{
-    text-decoration: none;
     pointer-events: none;
     cursor: default;
     background-color: white;
-    color:gray;
+    color:rgb(168, 166, 166);
 }
 
 
