@@ -31,6 +31,43 @@ window.onload = function(){
 
 
 
+     // Get the modal
+   var modal = document.getElementById('myModal');
+ 
+   // Get the button that opens the modal
+   var btn = document.getElementById("myBtn");
+
+   // Get the <span> element that closes the modal
+   var span = document.getElementsByClassName("close")[0];                                          
+
+   // When the user clicks on the button, open the modal 
+   btn.onclick = function() {
+       modal.style.display = "block";
+   }
+
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function() {
+       modal.style.display = "none";
+   }
+
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function(event) {
+       if (event.target == modal) {
+           modal.style.display = "none";
+       }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -306,7 +343,7 @@ function ClickDate(clicked_date){
     if(selectedDate===undefined){
         clicked_date.style ="background-color: rgb(214, 52, 52)"; //selected
         selectedDate = clicked_date.id;
-        // TIME 불러오는 이벤트
+        addTimeData();
      }else{
         //선택됐던 지역을 unchecked로
  
@@ -318,9 +355,46 @@ function ClickDate(clicked_date){
             clicked_date.style ="background-color: rgb(214, 52, 52)"; //selected
             selectedDate = clicked_date.id;
             // TIME  불러오는 이벤트
+            addTimeData();
         }
         //  TIME = undefined
      }
+}
+
+function addTimeData(){
+    console.group("Available Date");
+    console.log("movie id:", selected_movie_id);
+    console.log("movie area:", selected_theater_area);
+    console.log("movie theater:", selected_theater_detail);
+    console.log("Year:", selectedDate);
+    console.groupEnd();
+
+    //DB에서 정보를 기반으로 추가
+    var available_time = {
+        '01': [{'Time':`7`, "Minute":`00`, "Seats":`70`}, {'Time':`9`, "Minute":`20`, "Seats":`60`}, {'Time':`12`, "Minute":`30`, "Seats":`34`}, {'Time':`13`, "Minute":`50`, "Seats":`60`} ],
+        '02': [{'Time':`10`, "Minute":`00`, "Seats":`50`}, {'Time':`15`, "Minute":`30`, "Seats":`42`}, {'Time':`23`, "Minute":`30`, "Seats":`7`}],
+        '03': [{'Time':`7`, "Minute":`00`, "Seats":`70`}, {'Time':`9`, "Minute":`20`, "Seats":`60`}, {'Time':`12`, "Minute":`30`, "Seats":`34`}],
+        '05': [{'Time':`10`, "Minute":`00`, "Seats":`50`}, {'Time':`15`, "Minute":`30`, "Seats":`42`}, {'Time':`23`, "Minute":`30`, "Seats":`7`}],
+        '06': [{'Time':`7`, "Minute":`00`, "Seats":`70`}, {'Time':`9`, "Minute":`20`, "Seats":`60`}, {'Time':`12`, "Minute":`30`, "Seats":`34`}],
+        '07': [{'Time':`7`, "Minute":`00`, "Seats":`70`}, {'Time':`9`, "Minute":`20`, "Seats":`60`}, {'Time':`23`, "Minute":`30`, "Seats":`7`},
+               {'Time':`10`, "Minute":`00`, "Seats":`50`}, {'Time':`15`, "Minute":`30`, "Seats":`42`}, {'Time':`12`, "Minute":`30`, "Seats":`34`}]
+    };
+
+    var time_box = document.querySelector('.movie_time_box');
+    time_box.innerHTML=``;
+
+    var timesArray = available_time[selectedDate.substring(6,8)];
+    if(timesArray==null) return;
+    
+    for(var i=0; i<timesArray.length; i++){
+        time_box.innerHTML+=`
+        <div class="movie_time_div">
+            <button>${timesArray[i].Time}: ${timesArray[i].Minute}</button>
+            <span class="seats_num">${timesArray[i].Seats}석</span>
+        </div>     
+        `
+    }
+
 }
 
 // 현재 month를 기준으로 4개의 month를 띄워줌
@@ -359,13 +433,7 @@ function SelectMonth(selectbox_month){
 
 // 현재 Data를 기반으로 Available Date를 return
 function getAvailableDate(){
-    console.group("Available Date");
-    console.log("movie id:", selected_movie_id);
-    console.log("movie area:", selected_theater_area);
-    console.log("movie theater:", selected_theater_detail);
-    console.log("Year:", selectedYear);
-    console.log("Month", selectedMonth);
-    console.groupEnd();
+    
 
     if(selected_movie_id===undefined || selected_theater_area===undefined || selected_theater_detail===undefined) return [];
 
