@@ -117,7 +117,7 @@ a:link, a:hover, a:visited, a:active {
     color: rgb(151, 150, 150);
 }
 
-.container button{
+/* .container button{
     width: 300px;
     margin-top: 10px;
     background-color: rgb(94,94,94);
@@ -139,7 +139,7 @@ a:link, a:hover, a:visited, a:active {
     font-weight: bold;
     font-family: 'nanumgothic', sans-serif;
     font-size: 0.8rem;
-}
+} */
 
 /****************** Reservation *********************/
 
@@ -419,11 +419,12 @@ a:link, a:hover, a:visited, a:active {
     margin: 10px;
     text-align: center;
     overflow-y: auto;
+    font-family:  'Hanna', serif;
     vertical-align: middle;
 }
 
 .month_box option{
-    padding: 9px 0px 9px 0px;
+    padding: 11px 0px 10px 0px;
     font-size: 1.2rem;  
 }
 
@@ -507,11 +508,63 @@ a:link, a:hover, a:visited, a:active {
     height: 180px;
     background-color: var(--box-color);
     margin-right: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow:scroll;
 }
+
+.movie_time_box .movie_time_div{
+    display: flex;
+    align-content: center;
+    margin: 30px 20px 20px 45px;
+    width: 15%;
+}
+
+.movie_time_box button{
+    border-radius: 5px;
+    background-color: rgb(44, 62, 80);
+    width: 80%;
+    height: 30px;
+    font-size: 1rem;
+    min-width: 70px;
+    font-family:  'Hanna', serif;
+    color:white;
+    
+}
+.movie_time_box span{
+    font-size: 0.85rem;
+    min-width: 30px;
+    font-weight: bold;
+    padding-top:10px;
+    margin-left: 10px;
+    color: var(--title-color);
+}
+
+
 
 
 /* Form submit button */
 
-form button{
-    background-color: blueviolet;
+button.submit{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(94,94,94);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
+
+button.submit:hover{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    padding: 5px;
+    color: rgb(56, 55, 55);
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
 }

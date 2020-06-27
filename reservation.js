@@ -84,6 +84,8 @@ function movieSelect(clicked_movie){
         selected_movie.classList.toggle("selected");
     }
 
+
+
     var clicked_movie_id = clicked_movie.getAttribute('id');
     //선택된 영화가 아예 없음
     if(selected_movie_id===undefined){
@@ -216,7 +218,7 @@ function CalenderBuild(available_date){
     var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
     var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
     yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
-            
+    selectedDate=undefined;
     console.group("Date");
     console.log("Year:", selectedYear);
     console.log("Month:", selectedMonth);
@@ -348,7 +350,8 @@ function SelectMonth(selectbox_month){
     }else{
         selectedYear = date.getFullYear();
     }
-    
+
+    selectedDate=undefined;
     selectedMonth = selected_option.value;
     today = new Date(selectedYear, selected_option.value, today.getDate());
     CalenderBuild(getAvailableDate()); //만들기
