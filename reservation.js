@@ -7,6 +7,9 @@ var selected_theater_detail;  //영화관 지점
 var selectedYear = today.getFullYear();
 var selectedMonth = today.getMonth();
 var selectedDate;
+var selectedTime;
+
+var modal, close_span;
 
 window.onload = function(){
    
@@ -28,33 +31,22 @@ window.onload = function(){
             TheaterAreaSelect(this);
         });
     }
-
-
-    // Get the modal
-    var modal = document.getElementById('myModal');
-    
+ 
     // Get the button that opens the modal
     var btn = document.getElementById("myBtn");
+    // Modal
+    modal = document.getElementById('myModal');
+    close_span = document.getElementsByClassName("close")[0];    
+                                          
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];                                          
+    
 
-    // When the user clicks on the button, open the modal 
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    // X누르면 modal 자체를 안보이게 
+    close_span.onclick = function() {
         modal.style.display = "none";
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+ 
 
 
 
@@ -352,13 +344,6 @@ function ClickDate(clicked_date){
 }
 
 function addTimeData(){
-    console.group("Available Date");
-    console.log("movie id:", selected_movie_id);
-    console.log("movie area:", selected_theater_area);
-    console.log("movie theater:", selected_theater_detail);
-    console.log("Year:", selectedDate);
-    console.groupEnd();
-
     //DB에서 정보를 기반으로 추가
     var available_time = {
         '01': [{'Time':`7`, "Minute":`00`, "Seats":`70`}, {'Time':`9`, "Minute":`20`, "Seats":`60`}, {'Time':`12`, "Minute":`30`, "Seats":`34`}, {'Time':`13`, "Minute":`50`, "Seats":`60`} ],
@@ -379,11 +364,29 @@ function addTimeData(){
     for(var i=0; i<timesArray.length; i++){
         time_box.innerHTML+=`
         <div class="movie_time_div">
-            <button>${timesArray[i].Time}: ${timesArray[i].Minute}</button>
+            <button id="${timesArray[i].Time}:${timesArray[i].Minute}" onclick="TimeClicked(this)" >
+                ${timesArray[i].Time}: ${timesArray[i].Minute}</button>
             <span class="seats_num">${timesArray[i].Seats}석</span>
         </div>     
         `
     }
+
+}
+
+// Time 버튼 클릭 이벤트 
+function TimeClicked(clickedTime){
+    selectedTime = clickedTime.id;
+
+    console.group("Available Date");
+    console.log("movie id:", selected_movie_id);
+    console.log("movie area:", selected_theater_area);
+    console.log("movie theater:", selected_theater_detail);
+    console.log("Year:", selectedDate);
+    console.log("Time:", selectedTime);
+    console.groupEnd();
+
+    modal.style.display = "block";
+
 
 }
 
@@ -450,3 +453,12 @@ function temp_check(){
         + "Branch:  "+ selected_theater_detail+"\n"
         + "Date  :  "+ selectedDate) ;
 }
+
+
+
+   // // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function(event) {
+    //     if (event.target == modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
