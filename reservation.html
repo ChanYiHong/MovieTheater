@@ -110,16 +110,40 @@
       <button class="submit" onclick="temp_check()"> Check</button>    
     </div>
 
-     <!-- Trigger/Open The Modal -->
-     <button id="myBtn">Open Modal</button>
- 
      <!-- The Modal -->
      <div id="myModal" class="modal">
   
        <!-- Modal content -->
        <div class="modal-content">
-         <span class="close">&times;</span>                                                               
-         <p>Some text in the Modal..</p>
+         <span class="close">&times;</span>
+         <div class="seats_movie_title">
+            <span>Movie:</span> 
+            <span id="movie_title">Avengers: Endgame</span>
+         </div>
+         <div class="seats_person">
+           <div>
+              <span>Children</span>
+              <button class="minus_button"> - </button>
+              <span class="children personnel"> 0 </span>
+              <button class="plus_button"> + </button>
+           </div>
+           <div>
+              <span>Adult</span>
+              <button class="minus_button"> - </button>
+              <span class="adult personnel"> 0 </span>
+              <button class="plus_button"> + </button>
+          </div>
+         </div>
+         <div class="seats_box">
+
+         </div>
+         <div class="fee">
+              <p>You have selected <span id="seats_num">0</span>seats - Price : <span id="price">0</span> </p>
+         </div>
+         
+         <button> Select </button>
+
+
        </div>
   
      </div>

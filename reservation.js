@@ -381,7 +381,7 @@ function TimeClicked(clickedTime){
     console.log("movie id:", selected_movie_id);
     console.log("movie area:", selected_theater_area);
     console.log("movie theater:", selected_theater_detail);
-    console.log("Year:", selectedDate);
+    console.log("Date:", selectedDate);
     console.log("Time:", selectedTime);
     console.groupEnd();
 
