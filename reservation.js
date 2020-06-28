@@ -376,7 +376,13 @@ function addTimeData(){
 // Time 버튼 클릭 이벤트 
 function TimeClicked(clickedTime){
     selectedTime = clickedTime.id;
+    modal.style.display = "block";
+    Modal_Seats();
 
+
+}
+
+function Modal_Seats(){
     console.group("Available Date");
     console.log("movie id:", selected_movie_id);
     console.log("movie area:", selected_theater_area);
@@ -385,7 +391,51 @@ function TimeClicked(clickedTime){
     console.log("Time:", selectedTime);
     console.groupEnd();
 
-    modal.style.display = "block";
+    //DB에서 좌석 정보 얻어오기
+
+
+    // <div class="row">
+    //     <div class="seat selected"></div>
+    //     <div class="seat"></div>
+    //     <div class="seat"></div>
+    //     <div class="seat"></div>
+    //     <div class="seat"></div>
+    //     <div class="seat"></div>
+    //     <div class="seat"></div>
+    //     <div class="seat"></div>
+    // </div>
+
+    var seats_container = document.querySelector('.seats_container');
+    var seats_line = seats_container.getElementsByClassName('line');
+    var row_num = ['A','B','C','D','E','F','G'];
+
+    for( var l=0; l<seats_line.length; l++){
+        seats_line[l].innerHTML ='';
+        for(var i=0; i<row_num.length; i++){
+            seats_line[l].innerHTML += `<div class="seat"></div>`;
+        }
+
+    }
+
+    // for(var line=0; line<seats_line.length; line++){
+    //     console.log(seats_line[line].innerHTML);
+    //     seats_line[line].innerHTML ='';
+
+    //     for(var i=0; i<row_num.length; i++){
+    //         seats_line[line].innerHTML += `<div class="seat"></div>`;
+    //     }
+    //     // if(seats_line[line].className==="aisle"){
+    //     //     for(var i=0; i<row_num.length; i++){
+    //     //         seats_line[line].innerHTML += `<div class="seat"></div>`;
+    //     //     }
+    //     // }else{
+    //     //     for(var i=0; i<row_num.length; i++){
+    //     //         seats_line[line].innerHTML += `<div class="seat"></div>`;
+    //     //     }
+    //     // }
+    // }
+    console.log(seats_line.length);
+    
 
 
 }
