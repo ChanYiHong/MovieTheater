@@ -411,29 +411,18 @@ function Modal_Seats(){
 
     for( var l=0; l<seats_line.length; l++){
         seats_line[l].innerHTML ='';
-        for(var i=0; i<row_num.length; i++){
-            seats_line[l].innerHTML += `<div class="seat"></div>`;
-        }
 
+        if(seats_line[l].classList.contains('row')){
+            for(var i=0; i<row_num.length; i++){
+                seats_line[l].innerHTML += `<div id="${l+1}${row_num[i]}"class="seat"></div>`;
+            }
+        }else{
+            for(var i=0; i<row_num.length; i++){
+                seats_line[l].innerHTML += `<div class="seat"></div>`;
+            }
+        }
     }
 
-    // for(var line=0; line<seats_line.length; line++){
-    //     console.log(seats_line[line].innerHTML);
-    //     seats_line[line].innerHTML ='';
-
-    //     for(var i=0; i<row_num.length; i++){
-    //         seats_line[line].innerHTML += `<div class="seat"></div>`;
-    //     }
-    //     // if(seats_line[line].className==="aisle"){
-    //     //     for(var i=0; i<row_num.length; i++){
-    //     //         seats_line[line].innerHTML += `<div class="seat"></div>`;
-    //     //     }
-    //     // }else{
-    //     //     for(var i=0; i<row_num.length; i++){
-    //     //         seats_line[line].innerHTML += `<div class="seat"></div>`;
-    //     //     }
-    //     // }
-    // }
     console.log(seats_line.length);
     
 
