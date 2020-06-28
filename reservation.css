@@ -654,7 +654,7 @@ button.submit:hover{
 
 .sets_person_box{
     display: flex;
-    margin: 0px 30px 0px 30px;
+    margin: 0px 30px 20px 30px;
 }
 
 .seats_person .personnel{
@@ -669,6 +669,7 @@ button.submit:hover{
 
 
 .seats_box{
+    width:65%;
     height:55%;
 }
 
@@ -681,4 +682,69 @@ button.submit:hover{
     height: 30px;
     font-size: 1.1rem;
     font-family: 'Hanna','Serif';
+}
+
+
+
+/* Modal-Seats */
+.seats_box{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.seats_box .seats_status{
+    display: flex;
+    background-color: rgba(0, 0, 9, 0.185);
+    width: 100%;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    color: #818196;
+}
+
+.seats_box .seats_status li{
+    display: flex;
+    margin-left: 15px;
+}
+
+.seats_box .seats_status li span{
+    margin-left: 5px;
+}
+
+.seat{
+    background-color: white;
+    width:17px;
+    height: 13px;
+    border-radius: 10px 10px 0px 0px;
+    margin:3px;
+}
+
+.seat.selected{
+    background-color: rgb(223, 94, 94);
+}
+
+.seat.occupied{
+    background-color: #444451;
+}
+
+
+.screen{
+    align-self: center;
+    margin: 20px 0px 20px 0px;
+    background-color: white;
+    width:180px;
+    height: 55px;
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+}
+
+.seats_container{
+    margin: 10px 0px 10px 0px;
+    display: flex;
+    align-self: center;
+}
+
+.aisle .seat{
+    background-color: #242333;
 }
