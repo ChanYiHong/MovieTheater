@@ -719,14 +719,19 @@ button.submit:hover{
     height: 13px;
     border-radius: 10px 10px 0px 0px;
     margin:3px;
+    cursor: pointer;
 }
 
+.seat:hover{
+    background-color: rgb(223, 94, 94);
+}
 .seat.selected{
     background-color: rgb(223, 94, 94);
 }
 
 .seat.occupied{
     background-color: #444451;
+    pointer-events: none;
 }
 
 

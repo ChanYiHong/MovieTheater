@@ -11,6 +11,8 @@ var selectedTime;
 
 var modal, close_span;
 var childNum=0, adultNum=0, max_childNum=20, max_adultNum=20;
+var seats_to_select = 0;
+
 
 window.onload = function(){
    
@@ -59,25 +61,6 @@ window.onload = function(){
     document.querySelector(".adult.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
 
 
-}
-function Modal_PersonButton(clicked_button){
-    if(clicked_button.classList.contains("children")){
-        if(clicked_button.classList.contains("plus_button")){
-            if(childNum < max_childNum) childNum++; // + 제한두기!
-        }else{
-            if(childNum>0) childNum--;
-        }
-        // childNum 숫자 변경
-        document.querySelector(".children.personnel").innerHTML=childNum;
-    }else{
-        if(clicked_button.classList.contains("plus_button")){
-            if(adultNum<max_adultNum) adultNum++; // + 제한두기!
-        }else{
-            if(adultNum>0) adultNum--;
-        }
-        // Adult 숫자 변경
-        document.querySelector(".adult.personnel").innerHTML=adultNum;
-    }
 }
 
 
@@ -441,7 +424,7 @@ function Modal_Seats(){
             for(var i=0; i<row_num.length; i++){
                 var seat_id = `${line_num}${row_num[i]}`
                 if(available_seats.includes(seat_id)){
-                    seats_line[l].innerHTML += `<div id="${seat_id}"class="seat"></div>`;
+                    seats_line[l].innerHTML += `<div onclick="ClickSeats(this)"id="${seat_id}"class="seat"></div>`;
                 }else{
                     seats_line[l].innerHTML += `<div id="${seat_id}"class="seat occupied"></div>`;
                 }
@@ -454,6 +437,7 @@ function Modal_Seats(){
     }
 
 }
+
 
 // 현재 month를 기준으로 4개의 month를 띄워줌
 function MakeMonthSelectBox(){ 
@@ -515,3 +499,47 @@ function temp_check(){
     //         modal.style.display = "none";
     //     }
     // }
+
+
+
+
+function Modal_PersonButton(clicked_button){
+    if(clicked_button.classList.contains("children")){
+        if(clicked_button.classList.contains("plus_button")){
+            if(childNum < max_childNum) {childNum++; seats_to_select++;} 
+        }else{
+            if(childNum>0) childNum--;
+        }
+        // childNum 숫자 변경
+        document.querySelector(".children.personnel").innerHTML=childNum;
+    }else{
+        if(clicked_button.classList.contains("plus_button")){
+            if(adultNum<max_adultNum) { adultNum++; seats_to_select++;} 
+        }else{
+            if(adultNum>0) adultNum--;
+        }
+        // Adult 숫자 변경
+        document.querySelector(".adult.personnel").innerHTML=adultNum;
+    }
+
+}
+
+
+function ClickSeats(clicked_seat){
+    console.log("seats to select", seats_to_select);
+
+    //선택된 좌석이라면
+    if(clicked_seat.classList.contains("selected")){
+        clicked_seat.classList.remove("selected");
+        seats_to_select++;
+    }else{
+        if(seats_to_select>0){
+            console.log("click", clicked_seat.id);
+            clicked_seat.classList.add("selected");
+            seats_to_select--;
+        }
+
+    }
+
+    
+}
