@@ -110,6 +110,16 @@ a:link, a:hover, a:visited, a:active {
 
 
 
+#back_button{
+    align-self: flex-start;
+    width: 45px;
+    height: 45PX;
+    font-size: 2rem;
+    margin: 10PX;
+    display: flex;
+}
+
+
 /* Sign up */
 .login{
     margin: 20px 0px 20px 0px;
