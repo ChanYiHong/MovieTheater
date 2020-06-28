@@ -10,6 +10,7 @@ var selectedDate;
 var selectedTime;
 
 var modal, close_span;
+var childNum=0, adultNum=0, max_childNum=20, max_adultNum=20;
 
 window.onload = function(){
    
@@ -47,11 +48,38 @@ window.onload = function(){
     }
 
  
+    // Test code
+    modal.style.display = "block";
+    Modal_Seats();
 
-
+    // Modal button
+    document.querySelector(".children.minus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
+    document.querySelector(".children.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
+    document.querySelector(".adult.minus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
+    document.querySelector(".adult.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
 
 
 }
+function Modal_PersonButton(clicked_button){
+    if(clicked_button.classList.contains("children")){
+        if(clicked_button.classList.contains("plus_button")){
+            if(childNum < max_childNum) childNum++; // + 제한두기!
+        }else{
+            if(childNum>0) childNum--;
+        }
+        // childNum 숫자 변경
+        document.querySelector(".children.personnel").innerHTML=childNum;
+    }else{
+        if(clicked_button.classList.contains("plus_button")){
+            if(adultNum<max_adultNum) adultNum++; // + 제한두기!
+        }else{
+            if(adultNum>0) adultNum--;
+        }
+        // Adult 숫자 변경
+        document.querySelector(".adult.personnel").innerHTML=adultNum;
+    }
+}
+
 
 /* 초기 설정 */
 function Init(){
