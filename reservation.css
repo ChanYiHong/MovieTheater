@@ -753,3 +753,14 @@ button.submit:hover{
 .aisle .seat{
     background-color: #242333;
 }
+
+
+#seats_num{
+    font-weight: bold;
+    color: rgb(223, 94, 94);
+}
+
+#price{
+    font-weight: bold;
+    color: rgb(223, 94, 94);
+}

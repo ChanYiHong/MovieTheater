@@ -12,6 +12,7 @@ var selectedSeats = new Array();
 
 var modal, close_span;
 var childNum=0, adultNum=0, max_childNum=20, max_adultNum=20;
+var childPrice, adultPrice;
 var seats_to_select = 0;
 
 
@@ -60,6 +61,11 @@ window.onload = function(){
     document.querySelector(".children.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
     document.querySelector(".adult.minus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
     document.querySelector(".adult.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
+
+    // Set Price
+    childPrice = 6000;
+    adultPrice = 10000;
+
 }
 
 
@@ -507,9 +513,11 @@ function Modal_PersonButton(clicked_button){
         for(var i=0; i<selectedSeats.length; i++){
             document.getElementById(selectedSeats[i]).classList.remove("selected");
         }
+        // seats정보, price정보 reset
+        document.getElementById("seats_num").innerText= 0;
+        document.getElementById("price").innerText= 0;
+
     }
-
-
 
     if(clicked_button.classList.contains("children")){
         if(clicked_button.classList.contains("plus_button")){
@@ -522,9 +530,9 @@ function Modal_PersonButton(clicked_button){
                 selectedSeats = [];
                 seats_to_select = childNum+adultNum;
             }
-            if(childNum>0) {childNum--; seats_to_select--;}
-            
+            if(childNum>0) {childNum--; seats_to_select--;}       
         }
+
         // childNum 숫자 변경
         document.querySelector(".children.personnel").innerHTML=childNum;
     }else{
@@ -542,6 +550,9 @@ function Modal_PersonButton(clicked_button){
         // Adult 숫자 변경
         document.querySelector(".adult.personnel").innerHTML=adultNum;
     }
+
+    // 가격 설정
+    document.getElementById("price").innerText= childNum*childPrice + adultNum*adultPrice;
 
 }
 
@@ -565,6 +576,8 @@ function ClickSeats(clicked_seat){
         }
 
     }
+
+    document.getElementById("seats_num").innerText= selectedSeats.length;
 
     console.log(selectedSeats);
     
