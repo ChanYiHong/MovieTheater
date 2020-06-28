@@ -107,3 +107,35 @@ a:link, a:hover, a:visited, a:active {
     font-family: 'nanumgothic', sans-serif;
     font-size: 0.8rem;
 }
+
+
+
+/* Sign up */
+.login{
+    margin: 20px 0px 20px 0px;
+}
+.login form div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.login form div{
+    width: 500px;
+    margin: 30px 0px 30px 0px;
+    display: flex;
+}
+
+.login .login_label{
+    display: block;
+    font-size: 1.2rem;
+    width: 100px;
+    font-family: 'Hanna','Serif';
+}
+.login form input{
+    height: 40px;
+    width: 250px;
+    border-radius: 5px;
+    padding: 0px 0px 0px 20px;
+}

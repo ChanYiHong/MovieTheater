@@ -434,19 +434,6 @@ function getAvailableDate(){
     return [1,2,3,5,6,7,10];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function temp_check(){
     alert("Movie :  "+selected_movie_id+"\n"
         + "Area  :  "+selected_theater_area+"\n"
