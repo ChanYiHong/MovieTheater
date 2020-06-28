@@ -520,7 +520,7 @@ function Modal_PersonButton(clicked_button){
                 // 선택된 좌석 다 비우기
                 ResetAllSeats();
                 selectedSeats = [];
-                childNum=0; adultNum=0;
+                seats_to_select = childNum+adultNum;
             }
             if(childNum>0) {childNum--; seats_to_select--;}
             
@@ -535,7 +535,7 @@ function Modal_PersonButton(clicked_button){
             if(seats_to_select==0){
                 ResetAllSeats();
                 selectedSeats = [];
-                childNum=0; adultNum=0;
+                seats_to_select = childNum+adultNum;
             }
             if(adultNum>0) {adultNum--; seats_to_select--;}
         }
