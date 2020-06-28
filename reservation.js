@@ -8,6 +8,7 @@ var selectedYear = today.getFullYear();
 var selectedMonth = today.getMonth();
 var selectedDate;
 var selectedTime;
+var selectedSeats = new Array();
 
 var modal, close_span;
 var childNum=0, adultNum=0, max_childNum=20, max_adultNum=20;
@@ -59,8 +60,6 @@ window.onload = function(){
     document.querySelector(".children.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
     document.querySelector(".adult.minus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
     document.querySelector(".adult.plus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
-
-
 }
 
 
@@ -531,15 +530,20 @@ function ClickSeats(clicked_seat){
     //선택된 좌석이라면
     if(clicked_seat.classList.contains("selected")){
         clicked_seat.classList.remove("selected");
+        var idx = selectedSeats.findIndex(function(item) {return item === clicked_seat.id});
+        if (idx > -1) selectedSeats.splice(idx, 1);
         seats_to_select++;
+
     }else{
         if(seats_to_select>0){
             console.log("click", clicked_seat.id);
             clicked_seat.classList.add("selected");
+            selectedSeats.push(clicked_seat.id);
             seats_to_select--;
         }
 
     }
 
+    console.log(selectedSeats);
     
 }
