@@ -392,19 +392,6 @@ function Modal_Seats(){
     console.groupEnd();
 
     //DB에서 좌석 정보 얻어오기
-
-
-    // <div class="row">
-    //     <div class="seat selected"></div>
-    //     <div class="seat"></div>
-    //     <div class="seat"></div>
-    //     <div class="seat"></div>
-    //     <div class="seat"></div>
-    //     <div class="seat"></div>
-    //     <div class="seat"></div>
-    //     <div class="seat"></div>
-    // </div>
-
     var seats_container = document.querySelector('.seats_container');
     var seats_line = seats_container.getElementsByClassName('line');
     var row_num = ['A','B','C','D','E','F','G'];
@@ -437,10 +424,6 @@ function Modal_Seats(){
             }
         }
     }
-
-    console.log(seats_line.length);
-    
-
 
 }
 
