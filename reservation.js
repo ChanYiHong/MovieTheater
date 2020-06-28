@@ -503,11 +503,27 @@ function temp_check(){
 
 
 function Modal_PersonButton(clicked_button){
+    function ResetAllSeats(){
+        for(var i=0; i<selectedSeats.length; i++){
+            document.getElementById(selectedSeats[i]).classList.remove("selected");
+        }
+    }
+
+
+
     if(clicked_button.classList.contains("children")){
         if(clicked_button.classList.contains("plus_button")){
             if(childNum < max_childNum) {childNum++; seats_to_select++;} 
         }else{
-            if(childNum>0) childNum--;
+            // selected seat 수가 0이면 reset
+            if(seats_to_select==0){
+                // 선택된 좌석 다 비우기
+                ResetAllSeats();
+                selectedSeats = [];
+                childNum=0; adultNum=0;
+            }
+            if(childNum>0) {childNum--; seats_to_select--;}
+            
         }
         // childNum 숫자 변경
         document.querySelector(".children.personnel").innerHTML=childNum;
@@ -515,7 +531,13 @@ function Modal_PersonButton(clicked_button){
         if(clicked_button.classList.contains("plus_button")){
             if(adultNum<max_adultNum) { adultNum++; seats_to_select++;} 
         }else{
-            if(adultNum>0) adultNum--;
+            // selected seat 수가 0이면 reset
+            if(seats_to_select==0){
+                ResetAllSeats();
+                selectedSeats = [];
+                childNum=0; adultNum=0;
+            }
+            if(adultNum>0) {adultNum--; seats_to_select--;}
         }
         // Adult 숫자 변경
         document.querySelector(".adult.personnel").innerHTML=adultNum;
