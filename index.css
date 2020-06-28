@@ -121,31 +121,47 @@ a:link, a:hover, a:visited, a:active {
 
 
 /* Sign up */
-.login{
-    margin: 20px 0px 20px 0px;
+.signup{
+    align-self: stretch;
 }
-.login form div{
+.signup form{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
 }
-
-
-.login form div{
-    width: 500px;
+.signup form div{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 70%;
     margin: 30px 0px 30px 0px;
     display: flex;
 }
 
-.login .login_label{
+.signup form div button{
+    align-self: center;
+    height: 50PX;
+    width: 300px;
+    margin-top: 10px;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.signup form div button:hover{
+    width: 300px;
+    height: 50PX;
+    font-size: 1.1rem;
+}
+.signup .signup_label{
     display: block;
-    font-size: 1.2rem;
-    width: 100px;
+    font-size: 1.3rem;
+    flex-basis: 100px;
+    align-self: center;
     font-family: 'Hanna','Serif';
 }
-.login form input{
-    height: 40px;
-    width: 250px;
+.signup form input{
+    flex-basis: 300px;
+    height: 55px;
     border-radius: 5px;
+    font-size: 1.2rem;
     padding: 0px 0px 0px 20px;
 }
