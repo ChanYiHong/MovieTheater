@@ -409,12 +409,27 @@ function Modal_Seats(){
     var seats_line = seats_container.getElementsByClassName('line');
     var row_num = ['A','B','C','D','E','F','G'];
 
+
+    var available_seats =['1A','2A','3A','4A','5A','6A','7A','8A','9A',
+                        '1B','2B','3B','4B','5B','6B','7B','8B','9B',
+                        '1C','2C','7C','8C','9C',
+                        '4E','5E','8E',
+                        '1G','2G','7G','8G'];
+
+
+    var line_num=0;
     for( var l=0; l<seats_line.length; l++){
         seats_line[l].innerHTML ='';
 
-        if(seats_line[l].classList.contains('row')){
+        if(seats_line[l].classList.contains('row')){  
+            line_num++; 
             for(var i=0; i<row_num.length; i++){
-                seats_line[l].innerHTML += `<div id="${l+1}${row_num[i]}"class="seat"></div>`;
+                var seat_id = `${line_num}${row_num[i]}`
+                if(available_seats.includes(seat_id)){
+                    seats_line[l].innerHTML += `<div id="${seat_id}"class="seat"></div>`;
+                }else{
+                    seats_line[l].innerHTML += `<div id="${seat_id}"class="seat occupied"></div>`;
+                }
             }
         }else{
             for(var i=0; i<row_num.length; i++){
