@@ -111,14 +111,15 @@ function movieSelect(clicked_movie){
     function movieCheckedState(clicked_movie, clicked_movie_id){
         clicked_movie.classList.toggle("selected");
         selected_movie_id = clicked_movie_id;
+        UpdateReservInfo("selectedMovie", selected_movie_id);
         getAvailableTheaterArea();
     }
 
     function movieUncheckedState(){
         var selected_movie= document.querySelector(`#movie_contents_list #${selected_movie_id}`);
         selected_movie.classList.toggle("selected");
+        UpdateReservInfo("selectedMovie", "영화를 선택해주세요");
     }
-
 
 
     var clicked_movie_id = clicked_movie.getAttribute('id');
@@ -597,4 +598,8 @@ function ModalSelectButton(select_button){
         alert(`현재 인원 수: ${childNum+adultNum}\n선택 좌석 수: ${childNum+adultNum-seats_to_select}`);
         return;
     }
+}
+
+function UpdateReservInfo(id_to_update, value){
+    document.getElementById(id_to_update).innerHTML = `<span>${value}</span>`;
 }
