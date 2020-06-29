@@ -602,6 +602,13 @@ function ModalSelectButton(select_button){
         alert(`현재 인원 수: ${childNum+adultNum}\n선택 좌석 수: ${childNum+adultNum-seats_to_select}`);
         return;
     }
+
+    var seats_info =``;
+    for(var i=0; i<selectedSeats.length; i++){
+        seats_info += `${selectedSeats[i]} `;
+    }
+    UpdateReservInfo("selectedSeats", seats_info);
+    modal.style.display = "none";
 }
 
 function UpdateReservInfo(id_to_update, value){
