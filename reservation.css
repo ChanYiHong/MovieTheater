@@ -575,6 +575,48 @@ button.submit:hover{
 }
 
 
+.movie_reserv_info_box{
+    margin:20px 0px 20px 0px;
+    align-self: stretch;
+    flex-basis:900px;
+    background-color: rgb(221, 221, 221);
+    height: 70px;
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+}
+
+
+.movie_reserv_info{
+    display: flex;
+    justify-content: space-evenly;
+    width: 97%;
+    height: 80%;
+    background-color: white;
+}
+
+
+.movie_reserv_info div{
+    display: flex;
+    flex:1;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px dotted rgb(221, 221, 221);
+    font-family:'Hanna', serif;
+}
+
+#selectedMovie {flex:5;}
+#selectedTheater {flex:2;}
+#selectedDate {flex:2;}
+#selectedTime {flex:2;}
+#selectedSeats {flex:2;}
+
+.movie_reserv_info div:last-child{
+    border-right: none;
+}
+
+
+
 /* Modal */
 
 
