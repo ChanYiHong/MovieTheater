@@ -61,6 +61,11 @@ window.onload = function(){
     childPrice = 6000;
     adultPrice = 10000;
 
+
+    document.querySelector(".modal_select_button").addEventListener("click", function(event){
+        ModalSelectButton(this);
+    })
+
 }
 
 
@@ -584,4 +589,12 @@ function ClickSeats(clicked_seat){
 function Modal_updateInfo(IDquery,id_to_update, value){
     if(IDquery) document.getElementById(`${id_to_update}`).innerText= value;
     else {document.querySelector(`${id_to_update}`).innerHTML= value;}
+}
+
+
+function ModalSelectButton(select_button){
+    if(seats_to_select!=0 || childNum+adultNum ==0){
+        alert(`현재 인원 수: ${childNum+adultNum}\n선택 좌석 수: ${childNum+adultNum-seats_to_select}`);
+        return;
+    }
 }
