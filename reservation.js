@@ -200,6 +200,7 @@ function movieSelect(clicked_movie){
         }
      }
     selected_theater_detail = undefined;
+    UpdateReservInfo("selectedTheater", "-영화관-");
     console.log("- Area:",selected_theater_area);
 
  }
@@ -241,6 +242,7 @@ function movieSelect(clicked_movie){
 function SelectTheaterDetail(selectbox_area){   
     selected_theater_detail = selectbox_area.options[selectbox_area.selectedIndex].value;
     console.log("- Theater:", selected_theater_detail);
+    UpdateReservInfo("selectedTheater", selected_theater_detail);
 
     // 이용 가능한 날짜 불러오기
     CalenderBuild(getAvailableDate());
@@ -342,17 +344,18 @@ function ClickDate(clicked_date){
     if(selectedDate===undefined){
         clicked_date.style ="background-color: rgb(214, 52, 52)"; //selected
         selectedDate = clicked_date.id;
+        UpdateReservInfo("selectedDate", selectedDate.substring(4,8));
         addTimeData();
      }else{
         //선택됐던 지역을 unchecked로
- 
         document.getElementById(selectedDate).style = "background-color: rgb(221, 164, 164)"; //unchecked
-
+        UpdateReservInfo("selectedDate", "-날짜-");
         if(clicked_date.id === selectedDate){
             selectedDate = undefined;
         }else{
             clicked_date.style ="background-color: rgb(214, 52, 52)"; //selected
             selectedDate = clicked_date.id;
+            UpdateReservInfo("selectedDate", selectedDate.substring(4,8));
             // TIME  불러오는 이벤트
             addTimeData();
         }
@@ -393,6 +396,7 @@ function addTimeData(){
 // Time 버튼 클릭 이벤트 
 function TimeClicked(clickedTime){
     selectedTime = clickedTime.id;
+    UpdateReservInfo("selectedTime", selectedTime);
     modal.style.display = "block";
 
 
