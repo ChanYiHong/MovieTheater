@@ -11,9 +11,9 @@ var selectedTime;
 var selectedSeats = new Array();
 
 var modal, close_span;
-var childNum=0, adultNum=0, max_childNum=20, max_adultNum=20;
+var childNum, adultNum, max_childNum, max_adultNum;
 var childPrice, adultPrice;
-var seats_to_select = 0;
+var seats_to_select;
 
 
 window.onload = function(){
@@ -50,11 +50,6 @@ window.onload = function(){
     close_span.onclick = function() {
         modal.style.display = "none";
     }
-
- 
-    // Test code
-    modal.style.display = "block";
-    Modal_Seats();
 
     // Modal button
     document.querySelector(".children.minus_button").addEventListener("click", function(event){Modal_PersonButton(this); });
@@ -393,9 +388,15 @@ function addTimeData(){
 function TimeClicked(clickedTime){
     selectedTime = clickedTime.id;
     modal.style.display = "block";
+
+
+    childNum=0; adultNum=0; max_childNum=20; max_adultNum=20;
+    seats_to_select=0;
+    selectedSeats = [];
+    Modal_updateInfo(true, "price",childNum*childPrice + adultNum*adultPrice);    
+    Modal_updateInfo(true, "seats_num",selectedSeats.length);    
+
     Modal_Seats();
-
-
 }
 
 function Modal_Seats(){
@@ -534,7 +535,7 @@ function Modal_PersonButton(clicked_button){
         }
 
         // childNum 숫자 변경
-        document.querySelector(".children.personnel").innerHTML=childNum;
+        Modal_updateInfo(false, ".children.personnel" ,childNum);
     }else{
         if(clicked_button.classList.contains("plus_button")){
             if(adultNum<max_adultNum) { adultNum++; seats_to_select++;} 
@@ -548,12 +549,11 @@ function Modal_PersonButton(clicked_button){
             if(adultNum>0) {adultNum--; seats_to_select--;}
         }
         // Adult 숫자 변경
-        document.querySelector(".adult.personnel").innerHTML=adultNum;
+        Modal_updateInfo(false, ".adult.personnel" ,adultNum);
     }
 
     // 가격 설정
-    document.getElementById("price").innerText= childNum*childPrice + adultNum*adultPrice;
-
+    Modal_updateInfo(true, "price",childNum*childPrice + adultNum*adultPrice);    
 }
 
 
@@ -577,8 +577,10 @@ function ClickSeats(clicked_seat){
 
     }
 
-    document.getElementById("seats_num").innerText= selectedSeats.length;
+    Modal_updateInfo(true, "seats_num",selectedSeats.length);    
+}
 
-    console.log(selectedSeats);
-    
+function Modal_updateInfo(IDquery,id_to_update, value){
+    if(IDquery) document.getElementById(`${id_to_update}`).innerText= value;
+    else {document.querySelector(`${id_to_update}`).innerHTML= value;}
 }
