@@ -395,7 +395,8 @@ function TimeClicked(clickedTime){
     selectedSeats = [];
     Modal_updateInfo(true, "price",childNum*childPrice + adultNum*adultPrice);    
     Modal_updateInfo(true, "seats_num",selectedSeats.length);    
-
+    Modal_updateInfo(false, ".children.personnel" ,childNum);
+    Modal_updateInfo(false, ".adult.personnel" ,adultNum);
     Modal_Seats();
 }
 
