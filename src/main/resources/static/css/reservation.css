@@ -1,0 +1,575 @@
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+:root{
+    /*--point-color: rgb(225, 209, 209);*/
+    --point-color: rgb(225, 209, 209);
+    --box-color: rgb(255, 255, 255);
+    --title-color:rgb(106,110,112);
+     /*--title-color:rgb(106,110,112);*/
+}
+html{
+    width: 100%; height: 100%;
+}
+body{ 
+    width: 70%;
+    height: 100%;
+    display: flex;
+    margin: 50px auto;
+    flex-direction: column;
+}
+/* 배경에 투명도 image */
+.container::after{
+    background-image:url("./img/background1.jpg");
+    bottom: 350px;
+    left:0;
+    position:absolute;
+    background-size: 100%;
+    opacity:0.6!important;
+    filter:alpha(opacity=50);
+    z-index:-1;
+    content:"";
+    width:100%;
+    height:100%;
+}
+
+/* 스크롤바 색상 */
+::-webkit-scrollbar{width: 16px;}
+::-webkit-scrollbar-track {background-color:rgb(241,241,241);}
+::-webkit-scrollbar-thumb {background-color: rgba(199, 127, 127, 0.74);border-radius: 0px;}
+::-webkit-scrollbar-thumb:hover {background: rgba(196, 101, 101, 0.74);}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+width:16px;height:16px;background:#e7e1e1;} 
+
+div, dl, dt, dd,  ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, 
+blockquote, th, td, figure {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family:  Arial, Helvetica, sans-serif;
+}
+
+a:link, a:hover, a:visited, a:active {
+    text-decoration:none;
+    color:#000;
+}
+
+/* Header */
+
+.header h1{
+    margin: 5px 60px 5px 60px;
+    min-width: 200px;
+    background-color: rgb(44, 62, 80);
+    text-align: center;
+    padding: 30px;
+    color: white;
+    font-family:  'Hanna', serif;
+}
+/* /Header */
+
+/* Body */ /*border: 1px dotted gray;*/
+.container{
+    height: 100%;
+    display: flex;
+    margin-top: 50px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Login */
+.login_form{
+    flex-basis: 0;
+    flex:1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.login_input{
+    display: flex;
+    margin: 5px;
+}
+
+.login_input label{
+    background-color: rgb(224, 224, 224);
+    border: 1px solid  rgb(180, 180, 180);
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    font-family: 'nanumgothic', sans-serif;
+    font-weight: bold;
+    flex-basis: 65px;
+    flex-grow: 0;
+    position: relative;
+}
+.login_input input{
+    height: 50px;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 0px 5px 5px 0px;
+    border-left: none;
+    flex-grow: 1;
+}
+.login_input span{
+    font-size: 25px;
+    position:absolute;
+    left: 15px;
+    top:5px;
+    color: rgb(151, 150, 150);
+}
+
+/* .container button{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(94,94,94);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
+
+.container button:hover{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    padding: 5px;
+    color: rgb(56, 55, 55);
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+} */
+
+/****************** Reservation *********************/
+
+.movie_select_container{
+    align-self: stretch;
+    flex-basis: 0;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie_header{
+    display: flex;
+
+}
+.movie_contents{
+    display: flex;
+}
+
+/*중복*/
+.movie_header .reserv_title{
+    align-self: flex-start;
+    background-color: var(--title-color);
+
+    color: white;
+    font-weight: bold;
+    padding: 4px 4px 0px 4px;
+    text-align: center;
+}
+
+.reserv_title_back{
+    width: 30px;
+    height: 190px;
+    border: 10px solid var(--title-color);
+    border-right: none;
+    background-color: var(--box-color);
+}
+                                                                             
+
+.movie_contents_box{
+    max-height: 150px;
+    flex:1;
+    border: 8px solid var(--point-color);
+    font-weight: bold;
+    border-left: none;
+    margin: 2px 0px 2px 0px;
+    padding: 20px 10px 20px 10px;
+    overflow:scroll;
+    overflow-x: hidden;
+    background-color: var(--box-color);
+}
+
+
+/* Movie rate list icon */
+.movie_contents_box ul li.movie_rate_all{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/all.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+.movie_contents_box ul li.movie_rate_12{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+.movie_contents_box ul li.movie_rate_15{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/15.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+.movie_contents_box ul li.movie_rate_19{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/19.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+}
+
+.movie_contents_box ul li:hover{
+    background-color: rgb(158, 177, 187);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_rate_all.selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/all.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_rate_12.selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/12.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_rate_15.selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/15.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+
+.movie_contents_box ul li.movie_rate_19.selected{
+    margin: 0;
+	padding: 10px 0px 10px 50px;
+	list-style: none;
+	background-image: url('./img/19.png');
+	background-repeat: no-repeat;
+	background-position: left center;
+    background-size: 30px;
+    background-color: rgb(21, 77, 105);
+    color:white;
+}
+/* / Movie rate list icon */
+
+
+
+/* MOVIE Theater Selection*/
+.movie_info_container{
+    flex:1;
+    flex-basis: 0;
+    display: flex;
+    align-self: stretch;
+    flex-direction: row;
+    align-content: stretch;
+    margin-top: 50px;
+}
+
+.movie_theater_container .reserv_title{
+    align-self: flex-start;
+    width: 315px;
+    background-color:  var(--title-color);
+    color: white;
+    font-weight: bold;
+    padding: 4px 4px 4px 4px;
+    text-align: center;
+}
+
+.movie_theater_container{
+    display: flex;
+    background-color: var(--point-color);
+    flex-direction: column;
+    flex-grow: 0;
+}
+
+.movie_theater_box{
+    display: flex;
+    margin: 0px 10px 8px 12px;
+    background-color: var(--box-color);
+    flex-direction: row;
+}
+
+
+.movie_theater_area_list{
+    height: 400px;
+    margin: 10px 10px 10px 15px;
+}
+
+.movie_theater_area_list li{
+    border: 1px solid rgb(187, 185, 185);
+    font-size: 0.75rem;
+    text-align: right;
+    color: rgb(106,110,112);
+    font-weight: bold;
+}
+.movie_theater_area_detail_list{
+    margin: 10px 10px 30px 0px;
+    width: 165px;
+}
+.movie_theater_area_detail_list select{
+    border: 1px solid rgb(187, 185, 185);
+    height: 100%;
+    width: 100%;
+}
+
+.movie_theater_area_list li a{
+    display: block;
+    padding: 10px;
+}
+
+.movie_theater_area_list li a.selected{
+    background-color: rgba(199, 127, 127, 0.74);
+}
+
+.movie_theater_area_list li .unavailable {
+    background-color: rgb(245, 243, 243);
+}
+.movie_theater_area_list li .unavailable span{
+    color:rgb(238, 236, 236);
+}
+
+.movie_theater_area_detail_list select option{
+    font-size: 1.15rem;
+    color: rgb(106,110,112);
+    padding : 8px 8px 8px 12px
+}
+
+
+/* Movie date container */
+.movie_date_container{
+    flex-grow: 10;
+}
+.movie_date_container .reserv_title{
+    align-self: flex-start;
+    flex:1;
+    background-color:  var(--title-color);
+
+    color: white;
+    font-weight: bold;
+    padding: 4px 4px 4px 4px;
+    text-align: center;
+}
+
+
+/* Calender */
+.movie_calender_container{
+    height: 260px;
+    background-color: var(--point-color);
+}
+
+.movie_calender_box{
+    display: flex;
+    height: 87%;
+    background-color: var(--box-color);
+    margin-right: 12px;
+    align-content: center;
+}
+
+
+
+/* Month */
+.month_box{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.month_box select{
+    align-self: center;
+    border: 1px dotted #e2dfdf;
+    min-width: 20px;
+    max-width: 80px;
+    width: 80%;
+    height: 80%;
+    margin: 10px;
+    text-align: center;
+    overflow-y: auto;
+    font-family:  'Hanna', serif;
+    vertical-align: middle;
+}
+
+.month_box option{
+    padding: 11px 0px 10px 0px;
+    font-size: 1.2rem;  
+}
+
+.month_box option:disabled{
+    color: rgb(163, 163, 163);  
+}
+
+.month_box select option:focus, 
+.month_box select option:active, 
+.month_box select option:checked
+{
+    background: linear-gradient(#f0b3a4, #e7c5c5);
+    background-color: #e69952 !important; /* for IE  */
+}
+
+.month_box select, .month_box select:focus {
+    color:rgb(199, 107, 107);
+    font-weight: bold;
+}
+ 
+
+
+/* Date */
+.date_box{
+    flex-shrink: 10;
+    flex:6;
+    display: flex;    
+    flex-direction: row;
+    justify-content: center;
+}
+
+.date_box table{
+    /* margin:20px; */
+    align-self: center;
+    width: 80%;
+    height:80%;
+    border:1px solid #e2dfdf;
+    text-align:center;
+    margin-left: 10px;
+}
+
+.date_box table #yearmonth{
+    padding : 2px 0px 2px 0px;
+    background-color: rgb(247, 208, 207);
+    color:rgba(138, 15, 42, 0.527);
+    font-weight: bold;  
+}
+
+.date_box a{
+    height: 25px;
+    padding-top:2px;
+    text-decoration: none;
+    display: block;
+    color: white;
+    background-color: rgb(221, 164, 164);
+}
+
+.date_box a:hover{
+    background-color: rgb(214, 52, 52);
+}
+
+.date_box a.disabled{
+    pointer-events: none;
+    cursor: default;
+    background-color: white;
+    color:rgb(168, 166, 166);
+}
+
+
+
+
+
+
+/* Time */
+.movie_time_container{
+    height: 220px;
+    background-color: var(--point-color);
+}
+
+.movie_time_box{
+    height: 180px;
+    background-color: var(--box-color);
+    margin-right: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    overflow:scroll;
+}
+
+.movie_time_box .movie_time_div{
+    display: flex;
+    align-content: center;
+    margin: 30px 20px 20px 45px;
+    width: 15%;
+}
+
+.movie_time_box button{
+    border-radius: 5px;
+    background-color: rgb(44, 62, 80);
+    width: 80%;
+    height: 30px;
+    font-size: 1rem;
+    min-width: 70px;
+    font-family:  'Hanna', serif;
+    color:white;
+    
+}
+
+.movie_time_box button:hover{
+    background-color: rgba(199, 127, 127, 0.74); 
+}
+
+.movie_time_box span{
+    font-size: 0.85rem;
+    min-width: 30px;
+    font-weight: bold;
+    padding-top:10px;
+    margin-left: 10px;
+    color: var(--title-color);
+}
+
+
+
+
+/* Form submit button */
+
+button.submit{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(94,94,94);
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
+
+button.submit:hover{
+    width: 300px;
+    margin-top: 10px;
+    background-color: rgb(233, 232, 232);
+    border-radius: 5px;
+    padding: 5px;
+    color: rgb(56, 55, 55);
+    font-weight: bold;
+    font-family: 'nanumgothic', sans-serif;
+    font-size: 0.8rem;
+}
