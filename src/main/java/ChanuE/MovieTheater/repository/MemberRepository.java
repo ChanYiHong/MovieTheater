@@ -26,4 +26,11 @@ public class MemberRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
+    public Member findByIdPassword(String nickname, String password){
+        return em.createQuery("select m from Member m where m.nickname = :nickname and m.password = :password", Member.class)
+                .setParameter("nickname", nickname)
+                .setParameter("password", password)
+                .getSingleResult();
+    }
 }

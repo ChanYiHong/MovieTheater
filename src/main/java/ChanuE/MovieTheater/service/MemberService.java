@@ -36,4 +36,10 @@ public class MemberService {
         }
     }
 
+    // == 로그인 == //
+
+    public Member login(String nickname, String password){
+        Member user = memberRepository.findByIdPassword(nickname, password);
+        return user;
+    }
 }
