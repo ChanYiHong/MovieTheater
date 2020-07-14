@@ -43,5 +43,15 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @PostMapping("/login")
+    public String checkUser(HttpServletRequest request, HttpServletResponse response) throws Exception{
 
+        String nickname = request.getParameter("login_id");
+        String password = request.getParameter("login_pw");
+
+        Member member = memberService.login(nickname, password);
+
+        if(member != null) return "redirect:/reservation";
+        else return "아이디 패스워드를 확인해 주세요!";
+    }
 }

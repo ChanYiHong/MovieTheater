@@ -1,5 +1,6 @@
 package ChanuE.MovieTheater.service;
 
+import ChanuE.MovieTheater.controller.MemberForm;
 import ChanuE.MovieTheater.domain.Address;
 import ChanuE.MovieTheater.domain.Member;
 import ChanuE.MovieTheater.repository.MemberRepository;
@@ -8,12 +9,16 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.reactive.server.StatusAssertions;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 import static org.junit.Assert.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,8 +32,8 @@ public class MemberServiceTest {
     @Autowired
     EntityManager em;
 
-//    @Autowired
-//    MockMvc mockMvc;
+    @Autowired
+    MockMvc mockMvc;
 
     @Test
     public void 회원가입() throws Exception {
@@ -59,13 +64,19 @@ public class MemberServiceTest {
     public void 로그인성공() throws Exception {
         //given
         Member 웅아 = 웅아생성();
+        memberService.join(웅아);
 
         //when
-        
+        Member 내꼬 = memberRepository.findByIdPassword(웅아.getNickname(), 웅아.getPassword());
+        assertEquals("웅아가 맞나요?", 웅아, 내꼬);
 
         //then
+        mockMvc.perform(post("/login"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("reservation"));
 
     }
+
 
     public Member 웅아생성(){
         Member 웅아 = new Member();
