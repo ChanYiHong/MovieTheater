@@ -13,6 +13,7 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
 
+    @Column(name = "login_id")
     private String nickname;
     private String password;
     private String name;

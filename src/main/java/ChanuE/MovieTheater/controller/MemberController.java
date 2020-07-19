@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -27,7 +28,7 @@ public class MemberController {
 
 
     @PostMapping("/sign_up")
-    public String create(HttpServletRequest request, HttpServletResponse response) throws Exception{
+    public String create(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception{
 
         Address address = new Address(request.getParameter("signup_city"), request.getParameter("signup_email"));
 
@@ -37,6 +38,11 @@ public class MemberController {
         member.setName(request.getParameter("signup_name"));
 
         member.setAddress(address);
+
+        // 회원 이름이 중복이면 다시 입력하게!
+        if(!memberService.validateMember(member.getName())) return "/members/signup_again";
+
+        session.setAttribute("sessionedMember", member);
 
         memberService.join(member);
 
@@ -52,6 +58,6 @@ public class MemberController {
         Member member = memberService.login(nickname, password);
 
         if(member != null) return "redirect:/reservation";
-        else return "아이디 패스워드를 확인해 주세요!";
+        else return "redirect:/reservation";
     }
 }
