@@ -4,6 +4,14 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test
+            client-secret: test
+            scope: profile,email
 
   jpa:
     hibernate:
@@ -17,3 +25,5 @@ logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
+

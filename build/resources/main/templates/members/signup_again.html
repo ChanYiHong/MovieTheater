@@ -8,3 +8,54 @@
 </head>
 <body>
 <script>alert("사용자 이름 중복입니다. 다시 입력해 주세요!")</script>
+<!-- Header -->
+<div class="header">
+    <!-- 서비스 메뉴 -->
+    <div class="header_menu">
+        <h1>T I C K E T</h1>
+
+    </div>
+    <!-- /서비스 메뉴 -->
+</div>
+<!-- /Header -->
+
+
+<!-- Body -->
+<div class="container">
+    <button id="back_button" onclick="history.back();"> <i class="far fa-arrow-alt-circle-left"></i></button>
+
+
+    <div class="signup">
+        <form method="POST" action = "/sign_up">
+            <div>
+                <label for="signup_id" class="signup_label"> <span>ID</span> </label>
+                <input type="text" name="signup_id" id="signup_id" required />
+            </div>
+            <div>
+                <label for="signup_pw" class="signup_label"> <span>Password</span> </label>
+                <input type="text" name="signup_pw" id="signup_pw" required />
+            </div>
+            <div>
+                <label for="signup_name" class="signup_label"> Name </label>
+                <input type="text" name="signup_name" id="signup_name" required />
+            </div>
+            <div>
+                <label for="signup_city" class="signup_label"> City </label>
+                <input type="text" name="signup_city" id="signup_city" required />
+            </div>
+            <div>
+                <label for="signup_email" class="signup_label"> E-mail </label>
+                <input type="email" name="signup_email" id="signup_email" required />
+            </div>
+            <div>
+                <button type="submit">회원가입</button>
+            </div>
+        </form>
+    </div>
+    <!-- /Login -->
+</div>
+<!-- /Body -->
+
+
+</body>
+</html>
