@@ -1,0 +1,48 @@
+{{>layout/header}}
+<!-- Header -->
+
+<h1>T I C K E T</h1>
+
+<!-- /Header -->
+
+<!-- Body -->
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/movie/save" role="button" class="btn btn-primary">영화 등록</a>
+
+            {{#memberName}}
+                Logged in as : <span id="member">{{memberName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+
+            {{/memberName}}
+            {{^memberName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+            {{/memberName}}
+        </div>
+    </div>
+
+    <br>
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>관람등급</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#movies}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                <td>{{ageLimit}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/movies}}
+        </tbody>
+    </table>
+</div>
+<!-- /Body -->
+{{>layout/footer}}
