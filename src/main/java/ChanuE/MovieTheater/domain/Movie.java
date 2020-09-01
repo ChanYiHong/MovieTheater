@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@Getter @Setter
+@Getter
 public class Movie {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -13,8 +13,9 @@ public class MovieRepository {
 
     private final EntityManager em;
 
-    public void save(Movie movie){
+    public Long save(Movie movie){
         em.persist(movie);
+        return movie.getId();
     }
 
     public Movie findOne(Long id){
@@ -22,7 +23,11 @@ public class MovieRepository {
     }
 
     public List<Movie> findAll(){
-        return em.createQuery("select movie m from m", Movie.class)
+        return em.createQuery("select m from Movie m", Movie.class)
                 .getResultList();
+    }
+
+    public void deleteOne(Movie movie){
+        em.remove(movie);
     }
 }

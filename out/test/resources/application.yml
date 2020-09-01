@@ -12,6 +12,9 @@ spring:
             client-id: test
             client-secret: test
             scope: profile,email
+  output:
+    ansi:
+      enabled: always
 
   jpa:
     hibernate:

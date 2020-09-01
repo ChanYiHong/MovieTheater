@@ -13,7 +13,7 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-@Entity @Setter
+@Entity
 public class TimeTable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
