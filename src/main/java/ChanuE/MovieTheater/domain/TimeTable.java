@@ -39,10 +39,10 @@ public class TimeTable {
     // == 연관관계 메서드 == //
     // == TimeTable(다) <--> Movie(1)
 
-    public void setMovie(Movie movie){
-        this.movie = movie;
-        movie.getTimeTables().add(this);
-    }
+//    public void setMovie(Movie movie){
+//        this.movie = movie;
+//        movie.getTimeTables().add(this);
+//    }
 
 
 }

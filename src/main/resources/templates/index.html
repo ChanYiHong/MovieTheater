@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
-    <title>Movie Theater</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
     <h1>Welcome to Eunah & ChanYi Movie Theater !!</h1>
 
+    <!-- Header -->
+    <div class="header">
+        <!-- 서비스 메뉴 -->
+        <div class="header_menu">
+            <h1>T I C K E T</h1>
+        </div>
+        <!-- /서비스 메뉴 -->
+    </div>
+    <!-- /Header -->
 
+    <div class="container">
+        <!-- Movie Select -->
+        <div class = "movie_select_container">
+            <div class ="movie_header">
+                <span class="reserv_title">영화</span>
+            </div>
+            <div class="movie_contents">
+                <div class="reserv_title_back"> </div>
+                <div class = "movie_contents_box" th:each="movie : ${movies}">
+<!--                    <ul id="movie_contents_list">-->
+                    <ul th:text="${movie.name}">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="/movie/create">영화 생성</a>
 
     <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>

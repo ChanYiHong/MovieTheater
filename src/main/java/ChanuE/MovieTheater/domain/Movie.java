@@ -21,8 +21,8 @@ public class Movie {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "time")
-    private List<TimeTable> timeTables = new ArrayList<>();
+//    @OneToMany(mappedBy = "time")
+//    private List<TimeTable> timeTables = new ArrayList<>();
 
     @Builder
     public Movie(String name){

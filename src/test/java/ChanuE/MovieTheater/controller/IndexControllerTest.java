@@ -1,6 +1,7 @@
 package ChanuE.MovieTheater.controller;
 
 import ChanuE.MovieTheater.domain.Movie;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.repository.MovieRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -17,8 +18,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -55,15 +57,17 @@ public class IndexControllerTest {
     @Test
     public void mainPage() throws Exception {
         //given
-        mockMvc.perform(get("/"))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.view().name("index"));
 
         //when
 
 
         //then
 
+        mockMvc.perform(get("/"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("index"))
+                .andExpect(model().attributeExists("movies"))
+                .andExpect(model().attribute("movies", hasSize(3)));
     }
 
     @After

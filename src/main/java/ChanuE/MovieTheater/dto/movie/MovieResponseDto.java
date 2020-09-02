@@ -1,8 +1,10 @@
 package ChanuE.MovieTheater.dto.movie;
 
 import ChanuE.MovieTheater.domain.Movie;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
