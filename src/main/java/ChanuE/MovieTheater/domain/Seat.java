@@ -21,9 +21,9 @@ public class Seat {
     @Column
     private boolean isAvailable;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "time_id")
-    private TimeTable timeTable;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "time_id")
+//    private TimeTable timeTable;
 
     @Builder
     public Seat(String location, boolean isAvailable){
@@ -34,11 +34,11 @@ public class Seat {
 
     // == 연관관계 메서드 == //
     // == Seat(다) <--> TimeTable(1)
-
-    public void setTimeTable(TimeTable timeTable){
-        this.timeTable = timeTable;
-        timeTable.getSeats().add(this);
-    }
+//
+//    public void setTimeTable(TimeTable timeTable){
+//        this.timeTable = timeTable;
+//        timeTable.getSeats().add(this);
+//    }
 
 
 }

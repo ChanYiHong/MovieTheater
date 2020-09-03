@@ -27,8 +27,8 @@ public class TimeTable {
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @OneToMany(mappedBy = "timeTable")
-    private List<Seat> seats = new ArrayList<>();
+//    @OneToMany(mappedBy = "timeTable")
+//    private List<Seat> seats = new ArrayList<>();
 
     @Builder
     public TimeTable(LocalDateTime time, Movie movie){
@@ -39,10 +39,8 @@ public class TimeTable {
     // == 연관관계 메서드 == //
     // == TimeTable(다) <--> Movie(1)
 
-//    public void setMovie(Movie movie){
-//        this.movie = movie;
-//        movie.getTimeTables().add(this);
-//    }
-
-
+    public void setMovie(Movie movie){
+        this.movie = movie;
+        movie.getTimeTables().add(this);
+    }
 }
