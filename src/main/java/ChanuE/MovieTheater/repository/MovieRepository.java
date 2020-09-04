@@ -22,6 +22,12 @@ public class MovieRepository {
         return em.find(Movie.class, id);
     }
 
+    public List<Movie> findOneByName(String name){
+        return em.createQuery("select m from Movie m where m.name = :name", Movie.class)
+                .setParameter("name", name)
+                .getResultList();
+    }
+
     public List<Movie> findAll(){
         return em.createQuery("select m from Movie m", Movie.class)
                 .getResultList();

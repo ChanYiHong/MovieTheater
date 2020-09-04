@@ -17,13 +17,19 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
 
+    @Transactional
     public void saveMovie(MovieSaveRequestDto requestDto){
         Movie movie = requestDto.toEntity();
         movieRepository.save(movie);
     }
 
+    public MovieResponseDto findOneMovie(String name){
+        List<Movie> movies = movieRepository.findOneByName(name);
+        return MovieResponseDto.movieToMovieResponseDto(movies).get(0);
+    }
+
     public List<MovieResponseDto> findAllMovie(){
         List<Movie> movies = movieRepository.findAll();
-        return new MovieResponseDto().movieToMovieResponseDto(movies);
+        return MovieResponseDto.movieToMovieResponseDto(movies);
     }
 }

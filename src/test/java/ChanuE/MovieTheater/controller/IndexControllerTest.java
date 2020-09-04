@@ -57,10 +57,7 @@ public class IndexControllerTest {
     @Test
     public void mainPage() throws Exception {
         //given
-
         //when
-
-
         //then
 
         mockMvc.perform(get("/"))

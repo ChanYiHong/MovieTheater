@@ -1,7 +1,9 @@
 package ChanuE.MovieTheater.controller;
 
+import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.repository.MovieRepository;
+import ChanuE.MovieTheater.service.AreaService;
 import ChanuE.MovieTheater.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,14 +17,19 @@ import java.util.List;
 public class IndexController {
 
     private final MovieService movieService;
+    private final AreaService areaService;
 
     @GetMapping("/")
     public String index(Model model){
 
         List<MovieResponseDto> allMovies = movieService.findAllMovie();
+        List<AreaResponseDto> allAreas = areaService.findAllArea();
 
         if(allMovies != null) {
             model.addAttribute("movies", allMovies);
+        }
+        if(allAreas != null) {
+            model.addAttribute("areas", allAreas);
         }
 
         return "index";
