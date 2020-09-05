@@ -24,10 +24,14 @@
             </div>
             <div class="movie_contents">
                 <div class="reserv_title_back"> </div>
-                <div class = "movie_contents_box" th:each="movie : ${movies}">
-<!--                    <ul id="movie_contents_list">-->
-                    <a th:text="${movie.name}" th:href="@{/{name}/area/create (name=${movie.name})}">
-                    </a>
+                <div class = "movie_contents_box">
+                    <ul id="movie_contents_list">
+                    </ul>
+<!--                    <div th:each="movie : ${movies}">-->
+<!--                        <ul>-->
+<!--                            <a th:text="${movie.name}" th:href="@{/{name}/area/create (name=${movie.name})}"></a>-->
+<!--                        </ul>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
