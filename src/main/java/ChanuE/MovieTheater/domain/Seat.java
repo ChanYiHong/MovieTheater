@@ -19,14 +19,14 @@ public class Seat {
     private String location;
 
     @Column
-    private boolean isAvailable;
+    private int isAvailable;
 
 //    @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "time_id")
 //    private TimeTable timeTable;
 
     @Builder
-    public Seat(String location, boolean isAvailable){
+    public Seat(String location, int isAvailable){
         this.location = location;
         this.isAvailable = isAvailable;
     }
