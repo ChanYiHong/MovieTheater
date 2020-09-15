@@ -26,7 +26,7 @@ public class TimeTableService {
         timeTableRepository.save(timeTable);
     }
 
-    public List<SeatResponseDto> findAllSeat(){
-        return SeatResponseDto.seatToSeatResponseDto(seatRepository.findAll());
+    public List<TimeTableResponseDto> findAllTimeTable(){
+        return TimeTableResponseDto.timeTableToTimeTableResponseDto(timeTableRepository.findAll());
     }
 }
