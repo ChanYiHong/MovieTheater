@@ -1,124 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/header :: header">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html, charset=UTF-8" />
 </head>
 <body>
-    <h1>Welcome to Eunah & ChanYi Movie Theater !!</h1>
-
-    <!-- Header -->
-    <div class="header">
-        <!-- 서비스 메뉴 -->
-        <div class="header_menu">
-            <h1>T I C K E T</h1>
-        </div>
-        <!-- /서비스 메뉴 -->
+<div class="container">
+    <h1>영화 목록</h1>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movie : ${movies}">
+                <td th:text="${movie.id}"></td>
+                <td th:text="${movie.title}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <!-- /Header -->
+    <a class="btn btn-primary" href="/post">예약</a>
+</div>
 
-    <div class="container">
-        <!-- Movie Select -->
-        <div class = "movie_select_container">
-            <div class ="movie_header">
-                <span class="reserv_title">영화</span>
-            </div>
-            <div class="movie_contents">
-                <div class="reserv_title_back"> </div>
-                <div class = "movie_contents_box">
-                    <ul id="movie_contents_list">
-                    </ul>
-<!--                    <div th:each="movie : ${movies}">-->
-<!--                        <ul>-->
-<!--                            <a th:text="${movie.name}" th:href="@{/{name}/area/create (name=${movie.name})}"></a>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <a href="/movie/create">영화 생성</a>
-
-
-    <!-- Body -->
-    <div class="container">
-        <!-- /Movie -->
-        <div class="movie_info_container">
-            <div class="movie_theater_container">
-                <div class="reserv_title">극장</div>
-                <div class="movie_theater_box">
-                    <!-- 영화 지역 선택 -->
-                    <div class="movie_theater_area_list">
-<!--                        <ul>-->
-<!--                            <li><a href="#" id="movie_area_1" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_2" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_3" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_4" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_5" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_6" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_7" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                            <li><a href="#" id="movie_area_8" onclick="return false;"><span class="name"></span></a></li>-->
-<!--                        </ul>-->
-                        <ul>
-                            <li></li>
-                        </ul>
-
-                    </div>
-                    <!-- 영화 상영관 선택 -->
-                    <div class="movie_theater_area_detail_list">
-                        <select size="8" onchange="SelectTheaterDetail(this);">
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                        </select>
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="movie_date_container">
-                <div class="movie_calender_container">
-                    <!-- 영화 날짜 -->
-                    <div class="reserv_title">날짜</div>
-                    <div class="movie_calender_box">
-                        <!-- 영화 Month -->
-                        <div class="month_box">
-                            <select class="select_month" size="4" onchange="SelectMonth(this);">
-                            </select>
-                        </div>
-                        <!-- 영화 Date -->
-                        <div class="date_box">
-                            <table align="center" id="calendar">
-                                <tr>
-                                    <td colspan="7" align="center" id="yearmonth"></td>
-                                </tr>
-                                <tr>
-                                    <td align="center"> <font color="#FF9090">일</font></td>
-                                    <td align="center"> 월 </td>
-                                    <td align="center"> 화 </td>
-                                    <td align="center"> 수 </td>
-                                    <td align="center"> 목 </td>
-                                    <td align="center"> 금 </td>
-                                    <td align="center"><font color=#7ED5E4>토</font></td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="movie_time_container">
-                    <div class="reserv_title">시간</div>
-                    <div class="movie_time_box">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <button class="submit" onclick="temp_check()"> Check</button>
-    </div>
-
-    <th:block th:replace="fragments/footer :: footer"></th:block>
+<th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>
