@@ -7,6 +7,9 @@
 <body>
 <div class="container">
     <h1>영화 목록</h1>
+
+    <a class="btn btn-primary" href="/movie/create">영화 생성</a>
+
     <div>
         <table class="table table-striped">
             <thead>
@@ -18,12 +21,14 @@
             <tbody>
             <tr th:each="movie : ${movies}">
                 <td th:text="${movie.id}"></td>
-                <td th:text="${movie.title}"></td>
+                <td th:text="${movie.name}"></td>
+                <td>
+                    <a th:text="지역" th:href="@{/{name}/area (name=${movie.name})}"></a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <a class="btn btn-primary" href="/post">예약</a>
 </div>
 
 <th:block th:replace="fragments/footer :: footer"></th:block>

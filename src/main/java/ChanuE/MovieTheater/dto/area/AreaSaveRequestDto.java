@@ -4,9 +4,10 @@ import ChanuE.MovieTheater.domain.Area;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Getter
+@Getter @Setter
 public class AreaSaveRequestDto {
 
     private String name;

@@ -3,10 +3,11 @@ package ChanuE.MovieTheater.controller;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.repository.MovieRepository;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +23,7 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@RunWith(SpringRunner.class)
+
 @SpringBootTest
 @WebAppConfiguration
 @Transactional
@@ -40,7 +41,7 @@ public class IndexControllerTest {
     Movie movie2;
     Movie movie3;
 
-    @Before
+    @BeforeEach
     public void setting(){
 
         mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
@@ -67,7 +68,7 @@ public class IndexControllerTest {
                 .andExpect(model().attribute("movies", hasSize(3)));
     }
 
-    @After
+    @AfterEach
     public void tearDown(){
         movieRepository.deleteOne(movie1);
         movieRepository.deleteOne(movie2);

@@ -34,22 +34,36 @@ window.onload = function(){
 /* 초기 설정 */
 function Init(){
     //영화목록 불러오기 DB
-    var movieArray = []; 
-    movieArray.push({id: 1, title : '나미와 잡화점의 기적', rate :"all"}); 
-    movieArray.push({id: 2, title : '지금,만나러갑니다', rate :"12"}); 
-    movieArray.push({id: 3, title : '로스트인파리', rate :"12"}); 
-    movieArray.push({id: 4, title : '죠스', rate :"19"}); 
-    movieArray.push({id: 5, title : '레이니데이인뉴욕', rate :"15"}); 
+//    var movieArray = [];
+//    movieArray.push({id: 1, title : '나미와 잡화점의 기적', rate :"all"});
+//    movieArray.push({id: 2, title : '지금,만나러갑니다', rate :"12"});
+//    movieArray.push({id: 3, title : '로스트인파리', rate :"12"});
+//    movieArray.push({id: 4, title : '죠스', rate :"19"});
+//    movieArray.push({id: 5, title : '레이니데이인뉴욕', rate :"15"});
 
-    var movie_lists= document.querySelector(`#movie_contents_list`);
-    for(var i=0; i<movieArray.length; i++){
-        var movie_id = 'movie_list_' + movieArray[i].id;
-        var movie_class = 'movie_rate_' + movieArray[i].rate;
-        var movie_html =`
-            <label for = "${movie_id}"></label>
-            <li id="${movie_id}" class="${movie_class}"> ${movieArray[i].title} </li>
-        ` 
-        movie_lists.innerHTML += movie_html;
+
+    var requestURL = "/";
+    var request = new XMLHttpRequest();
+    request.open('GET', requestURL);
+
+    request.responseType = 'json';
+    request.send();
+
+    request.onload = function(){
+
+        var movies = request.response;
+
+        var movie_lists= document.querySelector(`#movie_contents_list`);
+        for(var i=0; i< movies.length; i++){
+    //        var movie_id = 'movie_list_' + movieArray[i].id;
+    //        var movie_class = 'movie_rate_' + movieArray[i].rate;
+            var movie_html =`
+//                <label for = "${movie_id}"></label>
+//                <li id="${movie_id}" class="${movie_class}"> ${movieArray[i].title} </li>
+                <li> movies[i].name </li>
+            `
+            movie_lists.innerHTML += movie_html;
+            }
     }
 
 

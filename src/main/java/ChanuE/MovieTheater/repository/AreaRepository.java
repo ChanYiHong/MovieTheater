@@ -22,6 +22,12 @@ public class AreaRepository {
         return em.find(Area.class, id);
     }
 
+    public List<Area> findAllByMovieId(Long movieId){
+        return em.createQuery("select a from Area a where where a.movie_id = :movieId", Area.class)
+                .setParameter("movieId", movieId)
+                .getResultList();
+    }
+
     public List<Area> findAll(){
         return em.createQuery("select a from Area a",Area.class)
                 .getResultList();

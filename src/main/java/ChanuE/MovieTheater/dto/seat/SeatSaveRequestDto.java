@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 public class SeatSaveRequestDto {
 
