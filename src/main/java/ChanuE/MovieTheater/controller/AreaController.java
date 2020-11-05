@@ -22,11 +22,15 @@ public class AreaController {
     private final MovieService movieService;
     private final AreaService areaService;
 
-//    @GetMapping("/{movie_name}/area")
-//    public String areaList(@PathVariable("movie_name") String name, Model model){
-//
-//
-//    }
+    @GetMapping("/{movie_name}/area")
+    public String areaList(@PathVariable("movie_name") String name, Model model){
+
+        List<AreaResponseDto> areas = areaService.findAllAreaByMovieName(name);
+        model.addAttribute("areas", areas);
+        model.addAttribute("movie", name);
+
+        return "/areas/area_list";
+    }
 
     @GetMapping("/{movie_name}/area/create")
     public String createArea(@PathVariable("movie_name") String name, Model model){

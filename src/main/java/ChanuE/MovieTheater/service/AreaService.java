@@ -33,4 +33,9 @@ public class AreaService {
         return AreaResponseDto.areaToAreaResponseDto(areas);
     }
 
+    public List<AreaResponseDto> findAllAreaByMovieName(String movieName){
+        List<Area> areas = areaRepository.findAllByMovieId(movieName);
+        return AreaResponseDto.areaToAreaResponseDto(areas);
+    }
+
 }
