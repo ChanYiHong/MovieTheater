@@ -23,7 +23,7 @@ public class AreaRepository {
     }
 
     public List<Area> findAllByMovieId(Long movieId){
-        return em.createQuery("select a from Area a where a.movie_id = :movieId", Area.class)
+        return em.createQuery("select a from Area a where a.id = :movieId", Area.class)
                 .setParameter("movieId", movieId)
                 .getResultList();
     }
