@@ -23,7 +23,7 @@
                 <td th:text="${movie.id}"></td>
                 <td th:text="${movie.name}"></td>
                 <td>
-                    <a th:text="지역" th:href="@{/{name}/area (name=${movie.name})}"></a>
+                    <a th:text="지역" th:href="@{/{id}/area (id=${movie.id})}"></a>
                 </td>
             </tr>
             </tbody>

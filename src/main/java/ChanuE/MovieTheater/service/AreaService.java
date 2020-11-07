@@ -21,10 +21,10 @@ public class AreaService {
     private final MovieRepository movieRepository;
 
     @Transactional
-    public void saveArea(AreaSaveRequestDto requestDto, String movieName){
+    public void saveArea(AreaSaveRequestDto requestDto, Long id){
         Area area = requestDto.toEntity();
-        List<Movie> movies = movieRepository.findOneByName(movieName);
-        area.setMovie(movies.get(0));
+        Movie movie = movieRepository.findOne(id);
+        area.setMovie(movie);
         areaRepository.save(area);
     }
 
@@ -33,8 +33,8 @@ public class AreaService {
         return AreaResponseDto.areaToAreaResponseDto(areas);
     }
 
-    public List<AreaResponseDto> findAllAreaByMovieName(String movieName){
-        List<Area> areas = areaRepository.findAllByMovieId(movieName);
+    public List<AreaResponseDto> findAllAreaByMovieId(Long id){
+        List<Area> areas = areaRepository.findAllByMovieId(id);
         return AreaResponseDto.areaToAreaResponseDto(areas);
     }
 

@@ -21,12 +21,16 @@ public class MovieResponseDto {
         this.name = movie.getName();
     }
 
-    public static List<MovieResponseDto> movieToMovieResponseDto(List<Movie> movies){
+    public static List<MovieResponseDto> movieToMovieResponseDtos(List<Movie> movies){
         List<MovieResponseDto> dtos = new ArrayList<>();
         for(Movie m : movies){
             dtos.add(new MovieResponseDto(m));
         }
         return dtos;
+    }
+
+    public static MovieResponseDto movieToMovieResponseDto(Movie movie){
+        return new MovieResponseDto(movie);
     }
 
 }

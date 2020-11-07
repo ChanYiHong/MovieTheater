@@ -23,13 +23,18 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
-    public MovieResponseDto findOneMovie(String name){
+    public MovieResponseDto findOneMovieById(Long id){
+        Movie movie = movieRepository.findOne(id);
+        return MovieResponseDto.movieToMovieResponseDto(movie);
+    }
+
+    public MovieResponseDto findOneMovieByName(String name){
         List<Movie> movies = movieRepository.findOneByName(name);
-        return MovieResponseDto.movieToMovieResponseDto(movies).get(0);
+        return MovieResponseDto.movieToMovieResponseDtos(movies).get(0);
     }
 
     public List<MovieResponseDto> findAllMovie(){
         List<Movie> movies = movieRepository.findAll();
-        return MovieResponseDto.movieToMovieResponseDto(movies);
+        return MovieResponseDto.movieToMovieResponseDtos(movies);
     }
 }

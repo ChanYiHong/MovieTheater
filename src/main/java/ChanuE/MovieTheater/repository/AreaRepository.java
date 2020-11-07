@@ -22,9 +22,9 @@ public class AreaRepository {
         return em.find(Area.class, id);
     }
 
-    public List<Area> findAllByMovieId(String movieName){
-        return em.createQuery("select a from Area a where a.name = :movieName", Area.class)
-                .setParameter("movieName", movieName)
+    public List<Area> findAllByMovieId(Long movieId){
+        return em.createQuery("select a from Area a where a.movie_id = :movieId", Area.class)
+                .setParameter("movieId", movieId)
                 .getResultList();
     }
 
