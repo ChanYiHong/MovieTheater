@@ -28,7 +28,7 @@ public class AreaController {
         List<AreaResponseDto> areas = areaService.findAllAreaByMovieId(id);
         MovieResponseDto movie = movieService.findOneMovieById(id);
         model.addAttribute("areas", areas);
-        model.addAttribute("movie", movie.getName());
+        model.addAttribute("movie", movie);
 
         return "/areas/area_list";
     }
@@ -37,7 +37,7 @@ public class AreaController {
     public String createArea(@PathVariable("movie_id") Long id, Model model){
 
         MovieResponseDto movie = movieService.findOneMovieById(id);
-        model.addAttribute("movie", movie.getName());
+        model.addAttribute("movie", movie);
         model.addAttribute("area", new AreaSaveRequestDto());
 
         return "/areas/area_create";
@@ -48,7 +48,7 @@ public class AreaController {
 
         areaService.saveArea(requestDto, id);
 
-        return "redirect:/areas/area_list";
+        return "redirect:/";
 
     }
 }

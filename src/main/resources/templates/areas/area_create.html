@@ -9,8 +9,8 @@
 
 <div>
     <div>
-        <p th:value="${movie}"></p><br/>
-        <form role="form" th:action="@{/{n}/area/create (name=${movie})}" th:object="${area}" method="post">
+        <p th:value="${movie.name}"></p><br/>
+        <form role="form" th:action="@{/{id}/area/create (id=${movie.id})}" th:object="${area}" method="post">
             <div>
                 <label th:for="name">Name : </label>
                 <input type="text" th:field="*{name}" size="50" placeholder="지역 입력" /><br/>

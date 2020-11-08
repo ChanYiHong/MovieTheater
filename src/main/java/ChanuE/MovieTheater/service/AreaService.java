@@ -23,9 +23,18 @@ public class AreaService {
     @Transactional
     public void saveArea(AreaSaveRequestDto requestDto, Long id){
         Area area = requestDto.toEntity();
+        checkDuplicateArea(area.getName());
         Movie movie = movieRepository.findOne(id);
         area.setMovie(movie);
         areaRepository.save(area);
+    }
+
+    private void checkDuplicateArea(String name){
+        List<Area> areas = areaRepository.findAllAreaByAreaName(name);
+
+        if(!areas.isEmpty()){
+            throw new IllegalArgumentException("Duplicate area name!! Please try another name :)");
+        }
     }
 
     public List<AreaResponseDto> findAllArea(){
@@ -34,7 +43,8 @@ public class AreaService {
     }
 
     public List<AreaResponseDto> findAllAreaByMovieId(Long id){
-        List<Area> areas = areaRepository.findAllByMovieId(id);
+        //List<Area> areas = areaRepository.findAllAreaByMovieId(id);
+        List<Area> areas = areaRepository.findAllAreaByMovieId(id);
         return AreaResponseDto.areaToAreaResponseDto(areas);
     }
 

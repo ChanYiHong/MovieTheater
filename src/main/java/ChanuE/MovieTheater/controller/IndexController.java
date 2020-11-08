@@ -23,13 +23,9 @@ public class IndexController {
     public String index(Model model){
 
         List<MovieResponseDto> allMovies = movieService.findAllMovie();
-        List<AreaResponseDto> allAreas = areaService.findAllArea();
 
         if(allMovies != null) {
             model.addAttribute("movies", allMovies);
-        }
-        if(allAreas != null) {
-            model.addAttribute("areas", allAreas);
         }
 
         return "index";

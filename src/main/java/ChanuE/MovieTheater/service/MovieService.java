@@ -20,7 +20,15 @@ public class MovieService {
     @Transactional
     public void saveMovie(MovieSaveRequestDto requestDto){
         Movie movie = requestDto.toEntity();
+        checkDuplicateMovie(movie.getName());
         movieRepository.save(movie);
+    }
+
+    private void checkDuplicateMovie(String name){
+        List<Movie> movies = movieRepository.findOneByName(name);
+        if(!movies.isEmpty()){
+            throw new IllegalStateException("Duplicate Movie Name!! Please type other movie name!!");
+        }
     }
 
     public MovieResponseDto findOneMovieById(Long id){

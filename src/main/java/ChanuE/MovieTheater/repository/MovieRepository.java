@@ -1,5 +1,6 @@
 package ChanuE.MovieTheater.repository;
 
+import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.domain.Movie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

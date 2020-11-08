@@ -1,6 +1,7 @@
 package ChanuE.MovieTheater.repository;
 
 import ChanuE.MovieTheater.domain.Area;
+import ChanuE.MovieTheater.domain.Movie;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,9 +23,27 @@ public class AreaRepository {
         return em.find(Area.class, id);
     }
 
-    public List<Area> findAllByMovieId(Long movieId){
-        return em.createQuery("select a from Area a where a.id = :movieId", Area.class)
+    public List<Area> findAllAreaByMovieId(Long movieId){
+        return em.createQuery("select ", Area.class)
                 .setParameter("movieId", movieId)
+                .getResultList();
+
+        //SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'  
+
+        //SELECT m, t FROM Member m LEFT JOIN Team t on m.username = t.name 
+
+        //select t from Team t join fetch t.members  where t.name = ‘팀A'
+    }
+
+//    public List<Area> findAreaByMovie(Long movieId){
+//        return em.createQuery("select m.areas from Movie m where m.id =:movie_id", Movie.class)
+//                .setParameter("movie_id", movieId)
+//                .getResultList();
+//    }
+
+    public List<Area> findAllAreaByAreaName(String name){
+        return em.createQuery("select a from Area a where a.name = :name", Area.class)
+                .setParameter("name", name)
                 .getResultList();
     }
 
