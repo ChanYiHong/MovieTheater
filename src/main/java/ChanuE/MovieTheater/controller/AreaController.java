@@ -48,7 +48,7 @@ public class AreaController {
 
         areaService.saveArea(requestDto, id);
 
-        return "redirect:/";
+        return "redirect:/{movie_id}/area";
 
     }
 }

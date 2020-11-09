@@ -24,22 +24,12 @@ public class AreaRepository {
     }
 
     public List<Area> findAllAreaByMovieId(Long movieId){
-        return em.createQuery("select ", Area.class)
+        return em.createQuery("select a from Area a left join a.movie m on m.id = :movieId", Area.class)
                 .setParameter("movieId", movieId)
                 .getResultList();
-
-        //SELECT m, t FROM Member m LEFT JOIN m.team t on t.name = 'A'  
-
-        //SELECT m, t FROM Member m LEFT JOIN Team t on m.username = t.name 
-
-        //select t from Team t join fetch t.members  where t.name = ‘팀A'
     }
 
-//    public List<Area> findAreaByMovie(Long movieId){
-//        return em.createQuery("select m.areas from Movie m where m.id =:movie_id", Movie.class)
-//                .setParameter("movie_id", movieId)
-//                .getResultList();
-//    }
+//    "select a from Area a join Movie m on m.id = :movieId"
 
     public List<Area> findAllAreaByAreaName(String name){
         return em.createQuery("select a from Area a where a.name = :name", Area.class)
