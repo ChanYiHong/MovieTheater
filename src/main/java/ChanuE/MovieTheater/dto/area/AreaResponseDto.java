@@ -15,9 +15,9 @@ public class AreaResponseDto {
     private Long id;
     private String name;
 
-    @Builder
-    public AreaResponseDto(String name){
-        this.name = name;
+    public AreaResponseDto(Area area){
+        this.id = area.getId();
+        this.name = area.getName();
     }
 
     public static List<AreaResponseDto> areaToAreaResponseDto(List<Area> areas){
@@ -25,7 +25,7 @@ public class AreaResponseDto {
 
         // Builder를 통해 AreaResponseDto를 바로 생성해서 Collection List에 저장.
         for(Area a : areas){
-            areaResponseDtos.add(AreaResponseDto.builder().name(a.getName()).build());
+            areaResponseDtos.add(new AreaResponseDto(a));
         }
 
         return areaResponseDtos;

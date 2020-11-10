@@ -28,9 +28,15 @@ public class SpecificAreaRepository {
                 .getResultList();
     }
 
-    public List<SpecificArea> findSpecificAreaByAreaId(Long id){
-        return em.createQuery("select s from SpecificArea left join s.area a on a.name =:id", SpecificArea.class)
-                .setParameter("id", id)
+    //"select a from Area a left join a.movie m on m.id = :movieId"
+
+    public List<SpecificArea> findSpecificAreaByAreaId(Long areaId){
+        return em.createQuery("select s from SpecificArea s join Area a on s.area = a.id " +
+                "where a.id = :areaId", SpecificArea.class)
+                .setParameter("areaId", areaId)
                 .getResultList();
     }
+
+    // "select s from SpecificArea s left join s.area a on a.id = :id"
+
 }

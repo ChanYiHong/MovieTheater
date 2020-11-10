@@ -1,7 +1,11 @@
 package ChanuE.MovieTheater.service;
 
+import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.domain.SpecificArea;
+import ChanuE.MovieTheater.dto.area.AreaResponseDto;
+import ChanuE.MovieTheater.dto.specificArea.SpecificAreaResponseDto;
 import ChanuE.MovieTheater.dto.specificArea.SpecificAreaSaveRequestDto;
+import ChanuE.MovieTheater.repository.AreaRepository;
 import ChanuE.MovieTheater.repository.SpecificAreaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,10 +19,14 @@ import java.util.List;
 public class SpecificAreaService {
 
     private final SpecificAreaRepository specificAreaRepository;
+    private final AreaRepository areaRepository;
 
-    public void saveSpecificAreaRepository(SpecificAreaSaveRequestDto requestDto){
+    @Transactional
+    public void saveSpecificArea(SpecificAreaSaveRequestDto requestDto, Long areaId){
         SpecificArea specificArea = requestDto.toEntity();
         checkDuplicateSpecificArea(specificArea.getName());
+        Area area = areaRepository.findOne(areaId);
+        specificArea.setArea(area);
         specificAreaRepository.saveSpecificArea(specificArea);
     }
 
@@ -29,5 +37,9 @@ public class SpecificAreaService {
         }
     }
 
+    public List<SpecificAreaResponseDto> findAllSpecificArea(Long areaId){
+        List<SpecificArea> areas = specificAreaRepository.findSpecificAreaByAreaId(areaId);
+        return SpecificAreaResponseDto.SpecificAreaToSpecificAreaResponseDto(areas);
+    }
 
 }

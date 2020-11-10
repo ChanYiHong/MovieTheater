@@ -48,4 +48,9 @@ public class AreaService {
         return AreaResponseDto.areaToAreaResponseDto(areas);
     }
 
+    public AreaResponseDto findOne(Long id){
+        Area area = areaRepository.findOne(id);
+        return new AreaResponseDto(area);
+    }
+
 }

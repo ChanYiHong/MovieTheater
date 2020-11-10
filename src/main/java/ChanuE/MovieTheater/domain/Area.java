@@ -29,7 +29,7 @@ public class Area {
     private Movie movie;
 
     @OneToMany(mappedBy = "area")
-    List<SpecificArea> areas = new ArrayList<>();
+    List<SpecificArea> specificAreas = new ArrayList<>();
 
     // == 연관 관계 메서드 == //
     public void setMovie(Movie movie){

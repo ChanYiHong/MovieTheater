@@ -31,7 +31,7 @@ public class SpecificArea {
     // (항상 Many 쪽에!!)
     public void setArea(Area area){
         this.area = area;
-        area.getAreas().add(this);
+        area.getSpecificAreas().add(this);
     }
 
 }

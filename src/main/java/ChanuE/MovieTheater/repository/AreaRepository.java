@@ -24,11 +24,17 @@ public class AreaRepository {
     }
 
     public List<Area> findAllAreaByMovieId(Long movieId){
-        return em.createQuery("select a from Area a left join a.movie m on m.id = :movieId", Area.class)
+        return em.createQuery("select a from Area a join Movie m on a.movie = m.id where m.id = :movieId", Area.class)
                 .setParameter("movieId", movieId)
                 .getResultList();
     }
 
+    //select * from area a join movie m on a.movie_id = m.movie_id
+    //where m.movie_id = 2
+
+    //select a from Area a join Movie m on m.id = :movieId
+
+//    "select a from Area a left join a.movie m on m.id = :movieId"
 //    "select a from Area a join Movie m on m.id = :movieId"
 
     public List<Area> findAllAreaByAreaName(String name){
