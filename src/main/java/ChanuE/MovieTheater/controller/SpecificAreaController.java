@@ -44,8 +44,6 @@ public class SpecificAreaController {
         AreaResponseDto area = areaService.findOne(areaId);
         MovieResponseDto movie = movieService.findOneMovieById(movieId);
 
-        System.out.println("areaId = " + areaId);
-
         model.addAttribute("specificArea", new SpecificAreaSaveRequestDto());
         model.addAttribute("area", area);
         model.addAttribute("movie", movie);
@@ -56,7 +54,6 @@ public class SpecificAreaController {
     @PostMapping("/{movie_id}/{area_id}/specificArea/create")
     public String specificAreaSave(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId, SpecificAreaSaveRequestDto requestDto) {
 
-        System.out.println("areaId = " + areaId);
         specificAreaService.saveSpecificArea(requestDto, areaId);
 
         return "redirect:/{movie_id}/{area_id}/specificArea";

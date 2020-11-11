@@ -26,6 +26,10 @@
         <tr th:each="specificArea : ${specificArea}">
             <td th:text="${specificArea.id}"></td>
             <td th:text="${specificArea.name}"></td>
+            <td>
+                <a th:text="날짜" th:href="@{/{movie_id}/{area_id}/{spec_id}/date_list
+                (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id})}"></a>
+            </td>
         </tr>
         </tbody>
     </table>

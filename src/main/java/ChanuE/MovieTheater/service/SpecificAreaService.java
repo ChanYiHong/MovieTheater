@@ -39,7 +39,12 @@ public class SpecificAreaService {
 
     public List<SpecificAreaResponseDto> findAllSpecificArea(Long areaId){
         List<SpecificArea> areas = specificAreaRepository.findSpecificAreaByAreaId(areaId);
-        return SpecificAreaResponseDto.SpecificAreaToSpecificAreaResponseDto(areas);
+        return SpecificAreaResponseDto.SpecificAreaToSpecificAreaResponseDtos(areas);
+    }
+
+    public SpecificAreaResponseDto findOne(Long specificAreaId){
+        SpecificArea specificArea = specificAreaRepository.findOne(specificAreaId);
+        return SpecificAreaResponseDto.SpecificAreaToSpecificAreaResponseDto(specificArea);
     }
 
 }

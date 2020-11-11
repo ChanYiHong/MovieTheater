@@ -20,7 +20,7 @@ public class SpecificAreaResponseDto {
         this.name = specificArea.getName();
     }
 
-   public static List<SpecificAreaResponseDto> SpecificAreaToSpecificAreaResponseDto(List<SpecificArea> specificAreas){
+   public static List<SpecificAreaResponseDto> SpecificAreaToSpecificAreaResponseDtos(List<SpecificArea> specificAreas){
         List<SpecificAreaResponseDto> responseDtos = new ArrayList<>();
 
         for(SpecificArea s : specificAreas){
@@ -28,5 +28,9 @@ public class SpecificAreaResponseDto {
         }
 
         return responseDtos;
+   }
+
+   public static SpecificAreaResponseDto SpecificAreaToSpecificAreaResponseDto(SpecificArea specificArea){
+        return new SpecificAreaResponseDto(specificArea);
    }
 }
