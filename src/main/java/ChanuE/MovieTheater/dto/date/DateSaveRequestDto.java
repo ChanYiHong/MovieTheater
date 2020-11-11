@@ -12,15 +12,25 @@ import java.time.LocalDate;
 @Getter @Setter
 public class DateSaveRequestDto {
 
-    private LocalDate date;
+    private String year;
+    private String month;
+    private String day;
 
     @Builder
-    public DateSaveRequestDto(LocalDate date){
-        this.date = date;
+    public DateSaveRequestDto(String year, String month, String day){
+        this.year = year;
+        this.month = month;
+        this.day = day;
     }
 
     public Date toEntity(){
-        return Date.builder().localDate(this.date).build();
+
+        int intYear = Integer.parseInt(this.year);
+        int intMonth = Integer.parseInt(this.month);
+        int intDay = Integer.parseInt(this.day);
+        LocalDate date = LocalDate.of(intYear, intMonth, intDay);
+
+        return Date.builder().localDate(date).build();
     }
 
 }
