@@ -23,36 +23,34 @@
         <div>
             <form role="form" th:action="@{/movie_id}/{area_id}/{spec_id}/date_create
             (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id})}" method="post" th:object="date">
-                <label for="hour">시간 선택:</label>
-                <select name="hour" id="hour" th:field="*{hour}">
+                <label for="year">년도 선택:</label>
+                <select name="year" id="year" th:field="*{year}">
                     <option value="" selected>선택</option>
-                    <option value="0900">0900</option>
-                    <option value="1000">1000</option>
-                    <option value="1100">1100</option>
-                    <option value="1200">1200</option>
-                    <option value="1300">1300</option>
-                    <option value="1400">1400</option>
-                    <option value="1500">1500</option>
-                    <option value="1600">1600</option>
-                    <option value="1700">1700</option>
-                    <option value="1800">1800</option>
-                    <option value="1900">1900</option>
-                    <option value="2000">2000</option>
-                    <option value="2100">2100</option>
-                    <option value="2200">2200</option>
-                    <option value="2300">2300</option>
-                    <option value="2400">2400</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
                 </select>
-                <label for="minute">분 선택:</label>
-                <select name="minute" id="minute" th:field="*{minute}">
+                <label for="month">월 선택:</label>
+                <select name="month" id="month" th:field="*{month}">
                     <option value="" selected>선택</option>
-                    <option value="00">00</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                    <option value="60">60</option>
+                    <option value="01">1월</option>
+                    <option value="02">2월</option>
+                    <option value="03">3월</option>
+                    <option value="04">4월</option>
+                    <option value="05">5월</option>
+                    <option value="06">6월</option>
+                    <option value="07">7월</option>
+                </select>
+                <label for="day">일 선택:</label>
+                <select name="day" id="day" th:field="*{day}">
+                    <option value="" selected>선택</option>
+                    <option value="01">1일</option>
+                    <option value="02">2일</option>
+                    <option value="03">3일</option>
+                    <option value="04">4일</option>
+                    <option value="05">5일</option>
+                    <option value="06">6일</option>
+                    <option value="07">7일</option>
                 </select>
                 <button type="submit">저장</button>
             </form>
