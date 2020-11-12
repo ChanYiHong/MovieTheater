@@ -21,38 +21,49 @@
 <!--            <button type="submit">저장</button>-->
 <!--        </form>-->
         <div>
-            <form role="form" th:action="@{/movie_id}/{area_id}/{spec_id}/date_create
-            (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id})}" method="post" th:object="date">
-                <label for="year">년도 선택:</label>
-                <select name="year" id="year" th:field="*{year}">
-                    <option value="" selected>선택</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
+            <form role="form" th:action="@{/{movie_id}/{area_id}/{spec_id}/date_create
+            (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id})}" method="post" th:object="${date}">
+                <label>년도 선택:</label>
+<!--                <select name="year" id="year" th:field="*{year}">-->
+<!--                    <option value="" selected>선택</option>-->
+<!--                    <option th:value="2019" th:text="2019">2019</option>-->
+<!--                    <option th:value="2020" th:text="2020">2020</option>-->
+<!--                    <option th:value="2021" th:text="2021">2021</option>-->
+<!--                </select>-->
+                <select th:field="*{year}">
+                    <option th:each="i : ${#numbers.sequence(2020, 2021)}" th:value="${i}" th:text="${i} + '년'"></option>
                 </select>
-                <label for="month">월 선택:</label>
-                <select name="month" id="month" th:field="*{month}">
-                    <option value="" selected>선택</option>
-                    <option value="01">1월</option>
-                    <option value="02">2월</option>
-                    <option value="03">3월</option>
-                    <option value="04">4월</option>
-                    <option value="05">5월</option>
-                    <option value="06">6월</option>
-                    <option value="07">7월</option>
+                <label>월 선택:</label>
+<!--                <select name="month" id="month" th:field="*{month}">-->
+<!--                    <option value="" selected>선택</option>-->
+<!--                    <option th:value="01" th:text="1월">1월</option>-->
+<!--                    <option th:value="02" th:text="2월">2월</option>-->
+<!--                    <option th:value="03" th:text="3월">3월</option>-->
+<!--                    <option th:value="04" th:text="4월">4월</option>-->
+<!--                    <option th:value="05" th:text="5월">5월</option>-->
+<!--                    <option th:value="06" th:text="6월">6월</option>-->
+<!--                    <option th:value="07" th:text="7월">7월</option>-->
+<!--                </select>-->
+                <select th:field="*{month}">
+                    <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i} + '월'"></option>
                 </select>
-                <label for="day">일 선택:</label>
-                <select name="day" id="day" th:field="*{day}">
-                    <option value="" selected>선택</option>
-                    <option value="01">1일</option>
-                    <option value="02">2일</option>
-                    <option value="03">3일</option>
-                    <option value="04">4일</option>
-                    <option value="05">5일</option>
-                    <option value="06">6일</option>
-                    <option value="07">7일</option>
+<!--                <label for="day">일 선택:</label>-->
+<!--                <select name="day" id="day" th:field="*{day}">-->
+<!--                    <option value="" selected>선택</option>-->
+<!--                    <option th:value="01" th:text="1일">1일</option>-->
+<!--                    <option th:value="02" th:text="2일">2일</option>-->
+<!--                    <option th:value="03" th:text="3일">3일</option>-->
+<!--                    <option th:value="04" th:text="4일">4일</option>-->
+<!--                    <option th:value="05" th:text="5일">5일</option>-->
+<!--                    <option th:value="06" th:text="6일">6일</option>-->
+<!--                    <option th:value="07" th:text="7일">7일</option>-->
+<!--                </select>-->
+                <label>일 선택:</label>
+                <select th:field="*{day}">
+                    <option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i} + '일'">
+                    </option>
                 </select>
-                <button type="submit">저장</button>
+                <input type="submit" value="제출하기">
             </form>
         </div>
     </div>

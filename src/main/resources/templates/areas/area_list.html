@@ -26,7 +26,7 @@
             <td th:text="${area.id}"></td>
             <td th:text="${area.name}"></td>
             <td>
-                <a th:text="지역" th:href="@{/{movie_id}/{area_id}/specificArea (movie_id=${movie.id}, area_id=${area.id})}"></a>
+                <a class="btn btn-primary" th:text="지역" th:href="@{/{movie_id}/{area_id}/specificArea (movie_id=${movie.id}, area_id=${area.id})}"></a>
             </td>
         </tr>
         </tbody>

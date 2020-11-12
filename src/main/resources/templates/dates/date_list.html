@@ -7,14 +7,13 @@
 </head>
 <body>
 
-<h1>관리자 권한 : 구체적 지역 화면</h1>
+<h1>관리자 권한 : 날짜 리스트</h1>
 
 <h2 th:text="${movie.name}"></h2>
 <h2 th:text="${area.name}"></h2>
 <h2 th:text="${specificArea.name}"></h2>
 
-<!--<a class="btn btn-primary" th:text="날짜 추가" th:href="@{/{movie_id}/{area_id}/{specific_id}/date/create-->
-<!--(movie_id=${movie.id}, area_id=${area.id}, specific_id=${specificArea.id})}"></a>-->
+<a class="btn btn-primary" th:text="날짜추가" th:href="@{/{movie_id}/{area_id}/{specific_id}/date_create (movie_id=${movie.id}, area_id=${area.id}, specific_id=${specificArea.id})}"></a>
 
 <div>
     <table class="table table-striped"> <thead>
