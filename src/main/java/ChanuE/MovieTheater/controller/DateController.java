@@ -15,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -65,12 +66,15 @@ public class DateController {
     }
 
 
-    @PostMapping("/{movie_id}/{area_id}/{specific_id}/date_list")
+    @GetMapping("/{movie_id}/{area_id}/{specific_id}/date_done")
     public String saveDate(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
-                             @PathVariable("specific_id") Long specificId, DateSaveRequestDto requestDto){
+                             @PathVariable("specific_id") Long specificId, @ModelAttribute("date") DateSaveRequestDto requestDto){
 
         dateService.saveDate(requestDto, specificId);
 
-        return "redirect:/dates/date_create";
+        //return "redirect:/dates/date_create";
+        return "redirect:/{movie_id}/{area_id}/{specific_id}/date_list";
     }
+
+
 }

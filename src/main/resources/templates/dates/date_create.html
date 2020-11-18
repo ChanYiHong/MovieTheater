@@ -21,8 +21,8 @@
 <!--            <button type="submit">저장</button>-->
 <!--        </form>-->
         <div>
-            <form role="form" th:action="@{/{movie_id}/{area_id}/{spec_id}/date_create
-            (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id})}" method="post" th:object="${date}">
+            <form th:action="@{/{movie_id}/{area_id}/{spec_id}/date_done
+            (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id})}" th:object="${date}">
                 <label>년도 선택:</label>
 <!--                <select name="year" id="year" th:field="*{year}">-->
 <!--                    <option value="" selected>선택</option>-->
