@@ -13,11 +13,11 @@ public class AreaSaveRequestDto {
     private String name;
 
     @Builder
-    public AreaSaveRequestDto(String name){
-        this.name = name;
+    public AreaSaveRequestDto(String areaName){
+        this.name = areaName;
     }
 
     public Area toEntity(){
-        return Area.builder().name(this.name).build();
+        return Area.builder().areaName(this.name).build();
     }
 }

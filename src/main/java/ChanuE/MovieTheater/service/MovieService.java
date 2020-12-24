@@ -3,41 +3,46 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
-import ChanuE.MovieTheater.repository.MovieRepository;
+import ChanuE.MovieTheater.repository.movie.MovieRepository;
+import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class MovieService {
 
-    private final MovieRepository movieRepository;
+    //private final MovieRepository movieRepositorytemp;
+    private final MovieSpringDataJpaRepository movieRepository;
 
     @Transactional
     public void saveMovie(MovieSaveRequestDto requestDto){
         Movie movie = requestDto.toEntity();
-        checkDuplicateMovie(movie.getName());
+        checkDuplicateMovie(movie.getMovieName());
         movieRepository.save(movie);
     }
 
     private void checkDuplicateMovie(String name){
-        List<Movie> movies = movieRepository.findOneByName(name);
+        List<Movie> movies = movieRepository.findMovieByMovieName(name);
         if(!movies.isEmpty()){
             throw new IllegalStateException("Duplicate Movie Name!! Please type other movie name!!");
         }
     }
 
     public MovieResponseDto findOneMovieById(Long id){
-        Movie movie = movieRepository.findOne(id);
-        return MovieResponseDto.movieToMovieResponseDto(movie);
+        Movie movie = movieRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 영화가 없습니다. id = " + id));
+
+        return new MovieResponseDto(movie);
     }
 
     public MovieResponseDto findOneMovieByName(String name){
-        List<Movie> movies = movieRepository.findOneByName(name);
+        List<Movie> movies = movieRepository.findMovieByMovieName(name);
         return MovieResponseDto.movieToMovieResponseDtos(movies).get(0);
     }
 

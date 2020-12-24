@@ -18,7 +18,7 @@ public class SpecificArea {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String specificAreaName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
@@ -28,8 +28,8 @@ public class SpecificArea {
     private List<Date> dates = new ArrayList<>();
 
     @Builder
-    public SpecificArea(String name) {
-        this.name = name;
+    public SpecificArea(String specificAreaName) {
+        this.specificAreaName = specificAreaName;
     }
 
     // == 연관 관계 메서드 == //

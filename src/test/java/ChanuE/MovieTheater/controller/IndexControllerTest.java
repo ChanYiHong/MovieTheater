@@ -1,20 +1,16 @@
 package ChanuE.MovieTheater.controller;
 
 import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
-import ChanuE.MovieTheater.repository.MovieRepository;
+import ChanuE.MovieTheater.repository.movie.MovieRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
@@ -46,9 +42,9 @@ public class IndexControllerTest {
 
         mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
 
-        movie1 = Movie.builder().name("name1").build();
-        movie2 = Movie.builder().name("name2").build();
-        movie3 = Movie.builder().name("name3").build();
+        movie1 = Movie.builder().movieName("name1").build();
+        movie2 = Movie.builder().movieName("name2").build();
+        movie3 = Movie.builder().movieName("name3").build();
 
         movieRepository.save(movie1);
         movieRepository.save(movie2);

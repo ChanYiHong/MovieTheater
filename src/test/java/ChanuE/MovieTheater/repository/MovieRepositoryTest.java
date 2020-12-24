@@ -1,10 +1,10 @@
 package ChanuE.MovieTheater.repository;
 
 import ChanuE.MovieTheater.domain.Movie;
+import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class MovieRepositoryTest {
     @Test
     public void saveMovie() throws Exception {
         //given
-        Movie movie = Movie.builder().name("name").build();
+        Movie movie = Movie.builder().movieName("name").build();
 
         Long id = movieRepository.save(movie);
 
@@ -33,7 +33,7 @@ public class MovieRepositoryTest {
 
         //then
 
-        assertThat(findMovie.getName()).isEqualTo(movie.getName());
+        assertThat(findMovie.getMovieName()).isEqualTo(movie.getMovieName());
 
     }
 
@@ -41,9 +41,9 @@ public class MovieRepositoryTest {
     public void findAllMovie() throws Exception {
         //given
 
-        Movie movie1 = Movie.builder().name("name1").build();
-        Movie movie2 = Movie.builder().name("name2").build();
-        Movie movie3 = Movie.builder().name("name3").build();
+        Movie movie1 = Movie.builder().movieName("name1").build();
+        Movie movie2 = Movie.builder().movieName("name2").build();
+        Movie movie3 = Movie.builder().movieName("name3").build();
 
         movieRepository.save(movie1);
         movieRepository.save(movie2);
@@ -54,9 +54,9 @@ public class MovieRepositoryTest {
         List<Movie> movies = movieRepository.findAll();
 
         //then
-        assertThat(movies.get(0).getName()).isEqualTo(movie1.getName());
-        assertThat(movies.get(1).getName()).isEqualTo(movie2.getName());
-        assertThat(movies.get(2).getName()).isEqualTo(movie3.getName());
+        assertThat(movies.get(0).getMovieName()).isEqualTo(movie1.getMovieName());
+        assertThat(movies.get(1).getMovieName()).isEqualTo(movie2.getMovieName());
+        assertThat(movies.get(2).getMovieName()).isEqualTo(movie3.getMovieName());
 
     }
 

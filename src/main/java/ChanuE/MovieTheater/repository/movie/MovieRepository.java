@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.repository;
+package ChanuE.MovieTheater.repository.movie;
 
 import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.domain.Movie;

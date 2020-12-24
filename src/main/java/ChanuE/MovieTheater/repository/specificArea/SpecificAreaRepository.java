@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.repository;
+package ChanuE.MovieTheater.repository.specificArea;
 
 import ChanuE.MovieTheater.domain.SpecificArea;
 import lombok.RequiredArgsConstructor;

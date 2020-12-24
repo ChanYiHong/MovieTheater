@@ -17,7 +17,7 @@ public class AreaResponseDto {
 
     public AreaResponseDto(Area area){
         this.id = area.getId();
-        this.name = area.getName();
+        this.name = area.getAreaName();
     }
 
     public static List<AreaResponseDto> areaToAreaResponseDto(List<Area> areas){

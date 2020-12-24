@@ -1,8 +1,6 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
-import ChanuE.MovieTheater.repository.MovieRepository;
 import ChanuE.MovieTheater.service.AreaService;
 import ChanuE.MovieTheater.service.MovieService;
 import lombok.RequiredArgsConstructor;

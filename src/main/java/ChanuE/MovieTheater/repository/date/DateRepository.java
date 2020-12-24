@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.repository;
+package ChanuE.MovieTheater.repository.date;
 
 import ChanuE.MovieTheater.domain.Date;
 import lombok.RequiredArgsConstructor;

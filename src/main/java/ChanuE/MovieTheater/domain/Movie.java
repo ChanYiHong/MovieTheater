@@ -19,7 +19,7 @@ public class Movie {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String movieName;
 
 //    @OneToMany(mappedBy = "movie")
 //    private List<TimeTable> timeTables = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Movie {
     private List<Area> areas = new ArrayList<>();
 
     @Builder
-    public Movie(String name){
-        this.name = name;
+    public Movie(String movieName){
+        this.movieName = movieName;
     }
 }

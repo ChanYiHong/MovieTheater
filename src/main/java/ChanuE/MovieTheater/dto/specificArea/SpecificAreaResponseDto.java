@@ -17,7 +17,7 @@ public class SpecificAreaResponseDto {
 
     public SpecificAreaResponseDto(SpecificArea specificArea){
         this.id = specificArea.getId();
-        this.name = specificArea.getName();
+        this.name = specificArea.getSpecificAreaName();
     }
 
    public static List<SpecificAreaResponseDto> SpecificAreaToSpecificAreaResponseDtos(List<SpecificArea> specificAreas){

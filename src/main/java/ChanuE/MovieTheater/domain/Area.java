@@ -17,11 +17,11 @@ public class Area {
     @Column(name = "area_id")
     private Long id;
 
-    private String name;
+    private String areaName;
 
     @Builder
-    public Area(String name){
-        this.name = name;
+    public Area(String areaName){
+        this.areaName = areaName;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)

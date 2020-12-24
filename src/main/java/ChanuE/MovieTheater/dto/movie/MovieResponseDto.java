@@ -18,7 +18,7 @@ public class MovieResponseDto {
 
     public MovieResponseDto(Movie movie){
         this.id = movie.getId();
-        this.name = movie.getName();
+        this.name = movie.getMovieName();
     }
 
     public static List<MovieResponseDto> movieToMovieResponseDtos(List<Movie> movies){
