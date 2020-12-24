@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: oauth
+    include: local
   datasource:
     url: jdbc:h2:tcp://localhost/~/MovieTheater
     username: sa
