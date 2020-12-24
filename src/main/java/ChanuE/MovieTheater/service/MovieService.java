@@ -17,7 +17,6 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class MovieService {
 
-    //private final MovieRepository movieRepositorytemp;
     private final MovieSpringDataJpaRepository movieRepository;
 
     @Transactional
