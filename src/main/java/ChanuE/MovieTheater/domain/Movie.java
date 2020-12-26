@@ -21,6 +21,10 @@ public class Movie {
     @Column(nullable = false)
     private String movieName;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "reservation_id")
+    private Reservation reservation;
+
 //    @OneToMany(mappedBy = "movie")
 //    private List<TimeTable> timeTables = new ArrayList<>();
 
