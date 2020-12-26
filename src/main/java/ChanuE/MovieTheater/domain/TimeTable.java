@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,26 +22,25 @@ public class TimeTable {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime time;
+    private LocalTime time;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "movie_id")
-//    private Movie movie;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "date_id")
+    private Date date;
 
 //    @OneToMany(mappedBy = "timeTable")
 //    private List<Seat> seats = new ArrayList<>();
 
     @Builder
-    public TimeTable(LocalDateTime time, Movie movie){
+    public TimeTable(LocalTime time, Movie movie){
         this.time = time;
         //this.movie = movie;
     }
 
     // == 연관관계 메서드 == //
-    // == TimeTable(다) <--> Movie(1)
-
-//    public void setMovie(Movie movie){
-//        this.movie = movie;
-//        movie.getTimeTables().add(this);
-//    }
+    // == TimeTable(다) <--> Date(1)
+    public void setDate(Date date){
+        this.date = date;
+        date.getTimeTables().add(this);
+    }
 }

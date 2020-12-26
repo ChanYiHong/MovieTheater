@@ -43,4 +43,9 @@ public class DateService {
 
     }
 
+    public DateResponseDto findOne(Long id){
+        return new DateResponseDto(dateRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 하는 날짜가 없음 id = " + id)));
+    }
+
 }

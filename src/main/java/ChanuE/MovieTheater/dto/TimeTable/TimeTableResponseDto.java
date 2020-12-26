@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,20 +14,11 @@ import java.util.List;
 public class TimeTableResponseDto {
 
     private Long id;
-    private LocalDateTime time;
+    private LocalTime time;
 
-    public TimeTableResponseDto(Long id, LocalDateTime time){
-        this.id = id;
-        this.time = time;
+    public TimeTableResponseDto(TimeTable timeTable){
+        this.id = timeTable.getId();
+        this.time = timeTable.getTime();
     }
 
-    public static List<TimeTableResponseDto> timeTableToTimeTableResponseDto(List<TimeTable> timeTables){
-        List<TimeTableResponseDto> responseDtos = new ArrayList<>();
-
-        for(TimeTable t : timeTables){
-            responseDtos.add(new TimeTableResponseDto(t.getId(), t.getTime()));
-        }
-
-        return responseDtos;
-    }
 }

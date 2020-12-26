@@ -34,7 +34,7 @@ public class MovieService {
         }
     }
 
-    public MovieResponseDto findOneMovieById(Long id){
+    public MovieResponseDto findOne(Long id){
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 영화가 없습니다. id = " + id));
 

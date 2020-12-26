@@ -29,7 +29,7 @@ public class SpecificAreaController {
 
         List<SpecificAreaResponseDto> allSpecificArea = specificAreaService.findAllSpecificArea(areaId);
         AreaResponseDto area = areaService.findOne(areaId);
-        MovieResponseDto movie = movieService.findOneMovieById(movieId);
+        MovieResponseDto movie = movieService.findOne(movieId);
 
         model.addAttribute("specificArea", allSpecificArea);
         model.addAttribute("area", area);
@@ -42,7 +42,7 @@ public class SpecificAreaController {
     public String specificAreaCreate(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId, Model model) {
 
         AreaResponseDto area = areaService.findOne(areaId);
-        MovieResponseDto movie = movieService.findOneMovieById(movieId);
+        MovieResponseDto movie = movieService.findOne(movieId);
 
         model.addAttribute("specificArea", new SpecificAreaSaveRequestDto());
         model.addAttribute("area", area);

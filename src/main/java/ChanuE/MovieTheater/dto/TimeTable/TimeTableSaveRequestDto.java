@@ -7,19 +7,28 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter @Setter
 @NoArgsConstructor
 public class TimeTableSaveRequestDto {
 
-    private LocalDateTime time;
+    private String hour;
+    private String minute;
 
     @Builder
-    public TimeTableSaveRequestDto(LocalDateTime time){
-        this.time = time;
+    public TimeTableSaveRequestDto(String hour, String minute) {
+        this.hour = hour;
+        this.minute = minute;
     }
 
     public TimeTable toEntity(){
-        return TimeTable.builder().time(this.time).build();
+
+        int hour = Integer.parseInt(this.hour);
+        int minute = Integer.parseInt(this.minute);
+
+        LocalTime time = LocalTime.of(hour, minute);
+
+        return TimeTable.builder().time(time).build();
     }
 }

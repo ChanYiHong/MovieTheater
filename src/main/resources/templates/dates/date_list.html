@@ -3,7 +3,7 @@
 <head th:replace="fragments/header :: header">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta charset="UTF-8">
-    <title>지역별 구체적 지역 추가 화면</title>
+    <title>날짜 추가!</title>
 </head>
 <body>
 
@@ -26,6 +26,10 @@
         <tr th:each="date : ${dates}">
             <td th:text="${date.id}"></td>
             <td th:text="${date.localDate}"></td>
+            <td>
+                <a class="btn btn-primary" th:text="시간" th:href="@{/{movie_id}/{area_id}/{spec_id}/{date_id}/time_table_list
+                (movie_id=${movie.id}, area_id=${area.id}, spec_id=${specificArea.id}, date_id=${date.id})}"></a>
+            </td>
         </tr>
         </tbody>
     </table>

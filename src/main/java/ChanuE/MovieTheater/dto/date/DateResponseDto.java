@@ -19,16 +19,4 @@ public class DateResponseDto {
         this.id = date.getId();
         this.localDate = date.getLocalDate();
     }
-
-    public static List<DateResponseDto> DateToDateResponseDtos(List<Date> dates){
-
-        List<DateResponseDto> responseDtos = new ArrayList<>();
-
-        for(Date d : dates){
-            responseDtos.add(new DateResponseDto(d));
-        }
-
-        return responseDtos;
-
-    }
 }

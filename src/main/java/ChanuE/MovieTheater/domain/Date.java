@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -25,6 +27,10 @@ public class Date {
     public Date(LocalDate localDate){
         this.localDate = localDate;
     }
+
+    @OneToMany(mappedBy = "date")
+    private List<TimeTable> timeTables = new ArrayList<>();
+
 
     // == 연관 관계 메서드 == //
     public void setSpecificArea(SpecificArea specificArea){

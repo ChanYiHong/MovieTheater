@@ -1,6 +1,5 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.area.AreaSaveRequestDto;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
@@ -26,7 +25,7 @@ public class AreaController {
     public String areaList(@PathVariable("movie_id") Long id, Model model){
 
         List<AreaResponseDto> areas = areaService.findAllAreaByMovieId(id);
-        MovieResponseDto movie = movieService.findOneMovieById(id);
+        MovieResponseDto movie = movieService.findOne(id);
         model.addAttribute("areas", areas);
         model.addAttribute("movie", movie);
 
@@ -36,7 +35,7 @@ public class AreaController {
     @GetMapping("/{movie_id}/area/create")
     public String createArea(@PathVariable("movie_id") Long id, Model model){
 
-        MovieResponseDto movie = movieService.findOneMovieById(id);
+        MovieResponseDto movie = movieService.findOne(id);
         model.addAttribute("movie", movie);
         model.addAttribute("area", new AreaSaveRequestDto());
 
