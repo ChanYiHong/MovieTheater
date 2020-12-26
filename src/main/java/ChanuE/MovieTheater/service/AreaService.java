@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,15 +41,11 @@ public class AreaService {
         }
     }
 
-    public List<AreaResponseDto> findAllArea(){
-        List<Area> areas = areaRepository.findAll();
-        return AreaResponseDto.areaToAreaResponseDto(areas);
-    }
-
     public List<AreaResponseDto> findAllAreaByMovieId(Long id){
-        //List<Area> areas = areaRepository.findAllAreaByMovieId(id);
         List<Area> areas = areaRepository.findAllAreaByMovieId(id);
-        return AreaResponseDto.areaToAreaResponseDto(areas);
+        return areas.stream()
+                .map(AreaResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     public AreaResponseDto findOne(Long id){

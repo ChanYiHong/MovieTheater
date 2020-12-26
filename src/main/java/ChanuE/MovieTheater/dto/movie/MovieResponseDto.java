@@ -21,16 +21,4 @@ public class MovieResponseDto {
         this.name = movie.getMovieName();
     }
 
-    public static List<MovieResponseDto> movieToMovieResponseDtos(List<Movie> movies){
-        List<MovieResponseDto> dtos = new ArrayList<>();
-        for(Movie m : movies){
-            dtos.add(new MovieResponseDto(m));
-        }
-        return dtos;
-    }
-
-    public static MovieResponseDto movieToMovieResponseDto(Movie movie){
-        return new MovieResponseDto(movie);
-    }
-
 }

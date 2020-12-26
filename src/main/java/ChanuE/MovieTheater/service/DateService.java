@@ -5,35 +5,41 @@ import ChanuE.MovieTheater.domain.SpecificArea;
 import ChanuE.MovieTheater.dto.date.DateResponseDto;
 import ChanuE.MovieTheater.dto.date.DateSaveRequestDto;
 import ChanuE.MovieTheater.repository.date.DateRepository;
+import ChanuE.MovieTheater.repository.date.DateSpringDataJpaRepository;
 import ChanuE.MovieTheater.repository.specificArea.SpecificAreaRepository;
+import ChanuE.MovieTheater.repository.specificArea.SpecificAreaSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
 public class DateService {
 
-    private final DateRepository dateRepository;
-    private final SpecificAreaRepository specificAreaRepository;
+    private final DateSpringDataJpaRepository dateRepository;
+    private final SpecificAreaSpringDataJpaRepository specificAreaRepository;
 
     @Transactional
     public void saveDate(DateSaveRequestDto requestDto, Long specificAreaId){
 
         Date date = requestDto.toEntity();
-        SpecificArea specificArea = specificAreaRepository.findOne(specificAreaId);
+        SpecificArea specificArea = specificAreaRepository.findById(specificAreaId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 특정 지역이 없음. id = " + specificAreaId));
         date.setSpecificArea(specificArea);
-        dateRepository.saveDate(date);
+        dateRepository.save(date);
 
     }
 
     public List<DateResponseDto> findAllDatesBySpecificAreaId(Long id){
 
         List<Date> dates = dateRepository.findAllDateBySpecificAreaId(id);
-        return DateResponseDto.DateToDateResponseDtos(dates);
+        return dates.stream()
+                .map(DateResponseDto::new)
+                .collect(Collectors.toList());
 
     }
 

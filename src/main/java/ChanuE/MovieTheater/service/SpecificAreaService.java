@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -41,13 +42,15 @@ public class SpecificAreaService {
 
     public List<SpecificAreaResponseDto> findAllSpecificArea(Long areaId){
         List<SpecificArea> areas = specificAreaRepository.findSpecificAreaByAreaId(areaId);
-        return SpecificAreaResponseDto.SpecificAreaToSpecificAreaResponseDtos(areas);
+        return areas.stream()
+                .map(SpecificAreaResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     public SpecificAreaResponseDto findOne(Long specificAreaId){
         SpecificArea specificArea = specificAreaRepository.findById(specificAreaId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 특정 지역이 없음 id = " + specificAreaId));
-        return SpecificAreaResponseDto.SpecificAreaToSpecificAreaResponseDto(specificArea);
+        return new SpecificAreaResponseDto(specificArea);
     }
 
 }

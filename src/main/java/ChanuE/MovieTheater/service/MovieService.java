@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -40,13 +41,11 @@ public class MovieService {
         return new MovieResponseDto(movie);
     }
 
-    public MovieResponseDto findOneMovieByName(String name){
-        List<Movie> movies = movieRepository.findMovieByMovieName(name);
-        return MovieResponseDto.movieToMovieResponseDtos(movies).get(0);
-    }
-
     public List<MovieResponseDto> findAllMovie(){
         List<Movie> movies = movieRepository.findAll();
-        return MovieResponseDto.movieToMovieResponseDtos(movies);
+        return movies
+                .stream()
+                .map(MovieResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
