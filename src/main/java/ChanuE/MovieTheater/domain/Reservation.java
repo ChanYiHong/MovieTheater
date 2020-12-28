@@ -26,7 +26,8 @@ public class Reservation extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-    @OneToOne(mappedBy = "reservation", fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
 

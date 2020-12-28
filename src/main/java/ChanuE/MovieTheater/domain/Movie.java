@@ -21,8 +21,7 @@ public class Movie extends BaseEntity{
     @Column(nullable = false)
     private String movieName;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reservation_id")
+    @OneToOne(mappedBy = "movie", fetch = FetchType.LAZY)
     private Reservation reservation;
 
 //    @OneToMany(mappedBy = "movie")

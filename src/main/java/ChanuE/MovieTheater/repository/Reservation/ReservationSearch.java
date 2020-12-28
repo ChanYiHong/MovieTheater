@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter @Setter
 public class ReservationSearch {
 
-    public String memberName;
-    public String movieName;
-    public ReservationStatus reservationStatus;
+    private String memberName;
+    private String movieName;
+    private ReservationStatus reservationStatus;
 
 }

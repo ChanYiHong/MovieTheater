@@ -24,8 +24,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 
         List<Reservation> result = queryFactory
                 .selectFrom(reservation)
-                .join(reservation.member, member).fetchJoin()
-                .join(reservation.movie, movie).fetchJoin()
+                .leftJoin(reservation.member, member).fetchJoin()
+                .leftJoin(reservation.movie, movie).fetchJoin()
                 .where(
                         memberEq(reservationSearch.getMemberName()),
                         movieEq(reservationSearch.getMovieName()),
