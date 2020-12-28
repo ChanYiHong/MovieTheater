@@ -41,7 +41,7 @@ public class MovieService {
         return new MovieResponseDto(movie);
     }
 
-    public List<MovieResponseDto> findAllMovie(){
+    public List<MovieResponseDto> findAll(){
         List<Movie> movies = movieRepository.findAll();
         return movies
                 .stream()

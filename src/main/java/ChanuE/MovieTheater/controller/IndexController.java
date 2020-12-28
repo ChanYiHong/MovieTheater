@@ -20,7 +20,7 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model){
 
-        List<MovieResponseDto> allMovies = movieService.findAllMovie();
+        List<MovieResponseDto> allMovies = movieService.findAll();
 
         if(allMovies != null) {
             model.addAttribute("movies", allMovies);
