@@ -12,10 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,14 +28,6 @@ public class ReservationController {
     public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch, Model model){
 
         List<ReservationResponseDto> reservations = reservationService.findAll(reservationSearch);
-
-        for (ReservationResponseDto reservation : reservations) {
-            System.out.println("id = " + reservation.getId());
-            System.out.println("member name = " + reservation.getMember().getMemberName());
-            System.out.println("movie name = " + reservation.getMovie().getMovieName());
-            System.out.println("status = " + reservation.getStatus());
-        }
-
         model.addAttribute("reservations", reservations);
 
         return "/reservation/reservation_list";
@@ -66,5 +55,10 @@ public class ReservationController {
 
     }
 
+    @PostMapping("/reservation/{reservation_id}/cancel")
+    public String cancelReservation(@PathVariable("reservation_id") Long id){
+        reservationService.cancelReservation(id);
+        return "redirect:/reservations";
+    }
 
 }

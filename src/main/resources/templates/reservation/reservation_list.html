@@ -46,8 +46,11 @@
 </body>
 <script>
 function cancel(id) {
-var form = document.createElement("form"); form.setAttribute("method", "post"); form.setAttribute("action", "/reservation/" + id + "/cancel"); document.body.appendChild(form);
-form.submit();
-
- } </script>
+    var form = document.createElement("form");
+    form.setAttribute("method", "post");
+    form.setAttribute("action", "/reservation/" + id + "/cancel");
+    document.body.appendChild(form);
+    form.submit();
+}
+</script>
 </html>

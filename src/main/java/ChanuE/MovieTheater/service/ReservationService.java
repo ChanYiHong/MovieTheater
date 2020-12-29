@@ -51,4 +51,12 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
+    /** 취소 **/
+    @Transactional
+    public void cancelReservation(Long id){
+        Reservation findReservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 예약이 없습니다. id = " + id));
+        findReservation.cancel();
+    }
+
 }

@@ -67,4 +67,14 @@ public class Reservation extends BaseEntity{
         reservation.setStatus(ReservationStatus.RESERVED);
         return reservation;
     }
+
+
+    // == 취소 메서드 == //
+    // 예약 취소!
+    public void cancel(){
+        if(this.status == ReservationStatus.CANCEL){
+            throw new IllegalStateException("이미 취소된 예약입니다~!!!");
+        }
+        this.status = ReservationStatus.CANCEL;
+    }
 }
