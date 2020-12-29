@@ -9,14 +9,14 @@
             <label for="member">예약회원</label>
             <select name="memberId" id="member" class="form-control">
                 <option value="">회원선택</option>
-                <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}" />
+                <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.memberName}" />
             </select>
         </div>
         <div class="form-group">
             <label for="movie">영화제목</label>
             <select name="movieId" id="movie" class="form-control">
                 <option value="">영화선택</option>
-                <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.name}" />
+                <option th:each="movie : ${movies}" th:value="${movie.id}" th:text="${movie.movieName}" />
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>

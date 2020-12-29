@@ -4,6 +4,7 @@ import ChanuE.MovieTheater.domain.Member;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Reservation;
 import ChanuE.MovieTheater.domain.ReservationStatus;
+import ChanuE.MovieTheater.dto.reservation.ReservationResponseDto;
 import ChanuE.MovieTheater.repository.Reservation.ReservationRepository;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.repository.member.MemberRepository;
@@ -70,13 +71,13 @@ class ReservationServiceTest {
 
         //when
 
-        List<Reservation> result = reservationService.findAll(reservationSearch);
+        List<ReservationResponseDto> result = reservationService.findAll(reservationSearch);
 
         //then
 
         System.out.println(result.size());
         System.out.println("=============== 출력되나? =============");
-        for (Reservation reservation : result) {
+        for (ReservationResponseDto reservation : result) {
             System.out.println(reservation.getId());
             System.out.println(reservation.getMember().getMemberName());
             System.out.println(reservation.getMovie().getMovieName());

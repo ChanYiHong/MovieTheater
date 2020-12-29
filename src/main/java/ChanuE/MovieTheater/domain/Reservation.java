@@ -1,8 +1,6 @@
 package ChanuE.MovieTheater.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -30,6 +28,15 @@ public class Reservation extends BaseEntity{
     @JoinColumn(name = "movie_id")
     private Movie movie;
 
+    @Builder
+    public Reservation(Long id, int totalPerson, int totalPrice, Member member, ReservationStatus status, Movie movie) {
+        this.id = id;
+        this.totalPerson = totalPerson;
+        this.totalPrice = totalPrice;
+        this.member = member;
+        this.status = status;
+        this.movie = movie;
+    }
 
     // == 연관관계 메서드 == //
     // member (1) <--> reservation (다)

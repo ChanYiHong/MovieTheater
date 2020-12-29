@@ -1,9 +1,6 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.domain.Area;
-import ChanuE.MovieTheater.domain.Date;
-import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.domain.SpecificArea;
+import ChanuE.MovieTheater.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -56,6 +53,9 @@ public class InitMovie {
             date1.setSpecificArea(specificArea1);
             date2.setSpecificArea(specificArea1);
 
+            Member member1 = new Member("찬의");
+            Member member2 = new Member("은아");
+
             em.persist(movie1);
             em.persist(movie2);
             em.persist(area1);
@@ -64,6 +64,8 @@ public class InitMovie {
             em.persist(specificArea2);
             em.persist(date1);
             em.persist(date2);
+            em.persist(member1);
+            em.persist(member2);
         }
     }
 }

@@ -3,6 +3,7 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Member;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Reservation;
+import ChanuE.MovieTheater.dto.reservation.ReservationResponseDto;
 import ChanuE.MovieTheater.repository.Reservation.ReservationRepository;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.repository.member.MemberRepository;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,12 +38,17 @@ public class ReservationService {
 
         Reservation reservation = Reservation.createReservation(member, movie);
 
+        memberRepository.save(member);
+        movieRepository.save(movie);
         reservationRepository.save(reservation);
     }
 
     /** 검색 **/
-    public List<Reservation> findAll(ReservationSearch reservationSearch){
-        return reservationRepository.findAllBySearchCond(reservationSearch);
+    public List<ReservationResponseDto> findAll(ReservationSearch reservationSearch){
+        List<Reservation> result = reservationRepository.findAllBySearchCond(reservationSearch);
+        return result.stream()
+                .map(ReservationResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }

@@ -14,18 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class IndexController {
 
-    private final MovieService movieService;
-    private final AreaService areaService;
-
     @GetMapping("/")
-    public String index(Model model){
-
-        List<MovieResponseDto> allMovies = movieService.findAll();
-
-        if(allMovies != null) {
-            model.addAttribute("movies", allMovies);
-        }
-
+    public String index(){
         return "index";
     }
 }
