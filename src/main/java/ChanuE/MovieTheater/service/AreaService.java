@@ -5,6 +5,7 @@ import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.area.AreaSaveRequestDto;
 import ChanuE.MovieTheater.repository.area.AreaRepository;
+import ChanuE.MovieTheater.repository.area.AreaSearch;
 import ChanuE.MovieTheater.repository.area.AreaSpringDataJpaRepository;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
@@ -52,6 +53,13 @@ public class AreaService {
         Area area = areaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id = " + id));
         return new AreaResponseDto(area);
+    }
+
+    public List<AreaResponseDto> findAllByAreaSearch(AreaSearch areaSearch){
+        List<Area> result = areaRepository.findAllAreaBySearchCond(areaSearch);
+        return result.stream()
+                .map(AreaResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }

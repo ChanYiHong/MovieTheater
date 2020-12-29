@@ -21,7 +21,7 @@
             <tbody>
             <tr th:each="movie : ${movies}">
                 <td th:text="${movie.id}"></td>
-                <td th:text="${movie.name}"></td>
+                <td th:text="${movie.movieName}"></td>
                 <td>
                     <a class="btn btn-primary" th:text="지역" th:href="@{/{id}/area (id=${movie.id})}"></a>
                 </td>

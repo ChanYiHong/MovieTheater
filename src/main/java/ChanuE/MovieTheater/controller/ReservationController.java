@@ -1,13 +1,16 @@
 package ChanuE.MovieTheater.controller;
 
 import ChanuE.MovieTheater.domain.Reservation;
+import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.member.MemberResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.reservation.ReservationResponseDto;
+import ChanuE.MovieTheater.dto.specificArea.SpecificAreaResponseDto;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
-import ChanuE.MovieTheater.service.MemberService;
-import ChanuE.MovieTheater.service.MovieService;
-import ChanuE.MovieTheater.service.ReservationService;
+import ChanuE.MovieTheater.repository.area.AreaSearch;
+import ChanuE.MovieTheater.repository.movie.MovieSearch;
+import ChanuE.MovieTheater.repository.specificArea.SpecificAreaSearch;
+import ChanuE.MovieTheater.service.*;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,8 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final MemberService memberService;
     private final MovieService movieService;
+    private final AreaService areaService;
+    private final SpecificAreaService specificAreaService;
 
     @GetMapping("/reservations")
     public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch, Model model){
@@ -35,15 +40,32 @@ public class ReservationController {
     }
 
     @GetMapping("/reservation/create")
-    public String reservationForm(Model model){
-
+    public String reservationForm(Model model)
+    {
         List<MemberResponseDto> findMembers = memberService.findAll();
         List<MovieResponseDto> findMovies = movieService.findAll();
         model.addAttribute("members", findMembers);
         model.addAttribute("movies", findMovies);
 
         return "/reservation/reservation_form";
+    }
 
+    @GetMapping("/reservation/createV2")
+    public String reservationFormV2(
+            @ModelAttribute("areaSearch") AreaSearch areaSearch,
+            @ModelAttribute("specificAreaSearch") SpecificAreaSearch specificAreaSearch,
+            Model model
+    ) {
+        List<MemberResponseDto> findMembers = memberService.findAll();
+        List<MovieResponseDto> findMovies = movieService.findAll();
+        List<AreaResponseDto> findAreas = areaService.findAllByAreaSearch(areaSearch);
+        List<SpecificAreaResponseDto> findSpecificAreas = specificAreaService.findAllBySpecificAreaSearch(specificAreaSearch);
+        model.addAttribute("members", findMembers);
+        model.addAttribute("movies", findMovies);
+        model.addAttribute("areas", findAreas);
+        model.addAttribute("specificAreas",findSpecificAreas);
+
+        return "/reservation/reservation_form_v2";
     }
 
     @PostMapping("/reservation/create")

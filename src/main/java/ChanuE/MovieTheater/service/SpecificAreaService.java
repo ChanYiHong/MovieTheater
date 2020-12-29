@@ -7,6 +7,7 @@ import ChanuE.MovieTheater.dto.specificArea.SpecificAreaSaveRequestDto;
 import ChanuE.MovieTheater.repository.area.AreaRepository;
 import ChanuE.MovieTheater.repository.area.AreaSpringDataJpaRepository;
 import ChanuE.MovieTheater.repository.specificArea.SpecificAreaRepository;
+import ChanuE.MovieTheater.repository.specificArea.SpecificAreaSearch;
 import ChanuE.MovieTheater.repository.specificArea.SpecificAreaSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,13 @@ public class SpecificAreaService {
         SpecificArea specificArea = specificAreaRepository.findById(specificAreaId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 특정 지역이 없음 id = " + specificAreaId));
         return new SpecificAreaResponseDto(specificArea);
+    }
+
+    public List<SpecificAreaResponseDto> findAllBySpecificAreaSearch(SpecificAreaSearch specificAreaSearch) {
+        List<SpecificArea> result = specificAreaRepository.findAllBySearchCond(specificAreaSearch);
+        return result.stream()
+                .map(SpecificAreaResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }

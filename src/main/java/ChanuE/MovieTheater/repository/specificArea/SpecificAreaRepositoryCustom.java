@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SpecificAreaRepositoryCustom {
     public List<SpecificArea> findSpecificAreaByAreaId(Long id);
+    public List<SpecificArea> findAllBySearchCond(SpecificAreaSearch specificAreaSearch);
 }

@@ -40,8 +40,8 @@ class ReservationServiceTest {
     @Test
     public void saveReservation() throws Exception {
         //given
-        Member member = new Member("member1");
-        Movie movie = new Movie("movie1");
+        Member member = Member.builder().memberName("member1").build();
+        Movie movie = Movie.builder().movieName("movie1").build();
 
         memberRepository.save(member);
         movieRepository.save(movie);
