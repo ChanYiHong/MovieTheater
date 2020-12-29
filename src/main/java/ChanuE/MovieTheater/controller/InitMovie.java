@@ -53,8 +53,12 @@ public class InitMovie {
             date1.setSpecificArea(specificArea1);
             date2.setSpecificArea(specificArea1);
 
-            Member member1 = new Member("찬의");
-            Member member2 = new Member("은아");
+            Member member1 = Member.builder().memberName("찬의")
+                    .address(new Address("Seoul", "Jamsil"))
+                    .authority(Authority.ADMIN).build();
+            Member member2 = Member.builder().memberName("웅아")
+                    .address(new Address("Suwon", "Jungja"))
+                    .authority(Authority.USER).build();
 
             em.persist(movie1);
             em.persist(movie2);

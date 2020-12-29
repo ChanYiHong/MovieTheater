@@ -28,9 +28,9 @@ public class Member extends BaseEntity {
     List<Reservation> reservations = new ArrayList<>();
 
     @Builder
-    public Member(String memberName){
+    public Member(String memberName, Address address, Authority authority) {
         this.memberName = memberName;
+        this.address = address;
+        this.authority = authority;
     }
-
-
 }
