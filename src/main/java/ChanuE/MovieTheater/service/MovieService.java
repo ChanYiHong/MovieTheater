@@ -21,10 +21,11 @@ public class MovieService {
     private final MovieSpringDataJpaRepository movieRepository;
 
     @Transactional
-    public void saveMovie(MovieSaveRequestDto requestDto){
+    public Long saveMovie(MovieSaveRequestDto requestDto){
         Movie movie = requestDto.toEntity();
         checkDuplicateMovie(movie.getMovieName());
         movieRepository.save(movie);
+        return movie.getId();
     }
 
     private void checkDuplicateMovie(String name){
