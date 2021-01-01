@@ -79,8 +79,8 @@ class ReservationServiceTest {
         System.out.println("=============== 출력되나? =============");
         for (ReservationResponseDto reservation : result) {
             System.out.println(reservation.getId());
-            System.out.println(reservation.getMember().getMemberName());
-            System.out.println(reservation.getMovie().getMovieName());
+            System.out.println(reservation.getMemberName());
+            System.out.println(reservation.getMovieName());
             System.out.println(reservation.getStatus());
         }
         System.out.println("======================================");

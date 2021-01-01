@@ -9,7 +9,7 @@
 
 <div>
     <div>
-        <p th:value="${movie.name}"></p><br/>
+        <p th:value="${movie.movieName}"></p><br/>
         <p th:value="${area.name}"></p><br/>
         <form role="form" th:action="@{/{movie_id}/{area_id}/specificArea/create
         (movie_id=${movie.id}, area_id=${area.id})}" th:object="${specificArea}" method="post">

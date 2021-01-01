@@ -29,7 +29,6 @@ public class MovieApiController {
         return new saveResponseDto(result);
     }
 
-
     @Data
     @AllArgsConstructor
     static class Result<T>{

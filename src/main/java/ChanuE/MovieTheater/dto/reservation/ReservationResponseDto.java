@@ -11,15 +11,15 @@ import lombok.*;
 public class ReservationResponseDto {
 
     private Long id;
-    private Member member;
-    private Movie movie;
+    private String memberName;
+    private String movieName;
     private ReservationStatus status;
 
     @Builder
     public ReservationResponseDto(Reservation reservation) {
         this.id = reservation.getId();
-        this.member = reservation.getMember();
-        this.movie = reservation.getMovie();
+        this.memberName = reservation.getMember().getMemberName();
+        this.movieName = reservation.getMovie().getMovieName();
         this.status = reservation.getStatus();
     }
 
