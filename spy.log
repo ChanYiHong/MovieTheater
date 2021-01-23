@@ -1,2 +1,0 @@
-1604468236521|202|statement|connection 19|url jdbc:h2:mem:testdb|SHUTDOWN|SHUTDOWN
-1604926097696|207|statement|connection 18|url jdbc:h2:mem:testdb|SHUTDOWN|SHUTDOWN
