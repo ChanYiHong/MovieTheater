@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+<th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
 
-    <h1>관리자 권한 : 영화 추가 화면</h1>
+    <th:block th:fragment="content">
+    <h1 class="mt-4">관리자 권한 : 영화 추가 화면</h1>
 
-    <div>
+    <form th:action="@{/movie/create}" th:object="${movie}" method="post">
         <div>
-            <form role="form" th:action="@{/movie/create}" th:object="${movie}" method="post">
-                <div>
-                    <label th:for="name">Name : </label>
-                    <input type="text" th:field="*{name}" size="50" placeholder="제목 입력란" /><br/>
-                </div>
-                <button type="submit">저장</button>
-            </form>
+            <label th:for="name">Name : </label>
+            <input type="text" th:field="*{name}" size="50" placeholder="제목 입력란" /><br/>
         </div>
-    </div>
+        <button type="submit">저장</button>
+    </form>
 
-    <th:block th:replace="fragments/footer :: footer"></th:block>
-</body>
+    </th:block>
+</th:block>
 </html>

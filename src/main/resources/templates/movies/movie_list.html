@@ -21,7 +21,7 @@
                 <tbody>
                 <tr th:each="movie : ${result.dtoList}">
                     <td>[[${movie.id}]]</td>
-                    <td>[[${movie.name}]]</td>
+                    <td>[[${movie.movieName}]]</td>
                     <td>
                         <a class="btn btn-primary" th:text="지역" th:href="@{/{id}/area (id=${movie.id})}"></a>
                     </td>
@@ -32,7 +32,7 @@
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item " th:if="${result.prev}">
                 </li>
-                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList"}>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList}"}>
                     <a class="page-link">[[${page}]]</a>
                 </li>
                 <li class="page-item" th:if="${result.next}">
