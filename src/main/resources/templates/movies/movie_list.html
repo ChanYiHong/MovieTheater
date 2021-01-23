@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <title>Hello</title>
-    <meta http-equiv="Content-Type" content="text/html, charset=UTF-8" />
-</head>
-<body>
-<div>
-    <h1>영화 목록</h1>
+<th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <div>
+            <h1 class="mt-4">Movie List
+                <span>
+                    <a th:href="@{/movie/create}">
+                        <button type="button" class="btn btn-outline-primary">CREATE</button>
+                    </a>
+                </span>
+            </h1>
 
-    <a class="btn btn-primary" href="/movie/create">영화 생성</a>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="movie : ${result.dtoList}">
+                    <td>[[${movie.id}]]</td>
+                    <td>[[${movie.name}]]</td>
+                    <td>
+                        <a class="btn btn-primary" th:text="지역" th:href="@{/{id}/area (id=${movie.id})}"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Title</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="movie : ${movies}">
-                <td th:text="${movie.id}"></td>
-                <td th:text="${movie.movieName}"></td>
-                <td>
-                    <a class="btn btn-primary" th:text="지역" th:href="@{/{id}/area (id=${movie.id})}"></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item " th:if="${result.prev}">
+                </li>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList"}>
+                    <a class="page-link">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:if="${result.next}">
+                </li>
+            </ul>
 
-<th:block th:replace="fragments/footer :: footer"></th:block>
-</body>
+        </div>
+    </th:block>
+</th:block>
 </html>

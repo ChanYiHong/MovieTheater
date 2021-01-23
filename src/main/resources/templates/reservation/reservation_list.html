@@ -32,8 +32,8 @@
                     <tbody>
                     <tr th:each="booking : ${reservations}">
                         <td th:text="${booking.id}"></td>
-                        <td th:text="${booking.member.memberName}"></td>
-                        <td th:text="${booking.movie.movieName}"></td>
+                        <td th:text="${booking.memberName}"></td>
+                        <td th:text="${booking.movieName}"></td>
                         <td th:text="${booking.status}"></td>
                         <td>
                             <a th:if="${booking.status.name() == 'RESERVED'}" href="#" th:href="'javascript:cancel('+${booking.id}+')'"

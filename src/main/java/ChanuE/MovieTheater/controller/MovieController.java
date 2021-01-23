@@ -1,7 +1,9 @@
 package ChanuE.MovieTheater.controller;
 
+import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
+import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,11 @@ public class MovieController {
         return "/movies/movie_create";
     }
 
+    @GetMapping("/api/movie/create")
+    public String createMovieForm(){
+        return "/movies/movie_api_create";
+    }
+
     @PostMapping("/movie/create")
     public String saveMovie(MovieSaveRequestDto requestDto){
 
@@ -33,8 +40,8 @@ public class MovieController {
 
     @GetMapping("/movies")
     public String movieList(Model model){
-        List<MovieResponseDto> movies = movieService.findAll();
-        model.addAttribute("movies", movies);
+        PageResponseDTO<Movie, MovieResponseDto> result = movieService.findAll();
+        model.addAttribute("result", result);
         return "/movies/movie_list";
     }
 }

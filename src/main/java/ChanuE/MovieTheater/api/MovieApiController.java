@@ -1,7 +1,9 @@
 package ChanuE.MovieTheater.api;
 
+import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
+import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.service.MovieService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,14 +21,14 @@ public class MovieApiController {
 
     @GetMapping("/api/movies")
     public Result movieList(){
-        List<MovieResponseDto> result = movieService.findAll();
-        return new Result(result.size(), result);
+        PageResponseDTO<Movie, MovieResponseDto> result = movieService.findAll();
+        return new Result<>(result.getDtoList().size(), result);
     }
 
     @PostMapping("/api/movie/create")
-    public saveResponseDto createMovie(@RequestBody @Valid MovieSaveRequestDto dto){
+    public String createMovie(@RequestBody @Valid MovieSaveRequestDto dto){
         Long result = movieService.saveMovie(dto);
-        return new saveResponseDto(result);
+        return "redirect:/";
     }
 
     @Data

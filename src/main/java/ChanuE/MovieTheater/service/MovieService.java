@@ -3,14 +3,19 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
+import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,11 +47,16 @@ public class MovieService {
         return new MovieResponseDto(movie);
     }
 
-    public List<MovieResponseDto> findAll(){
-        List<Movie> movies = movieRepository.findAll();
-        return movies
-                .stream()
-                .map(MovieResponseDto::new)
-                .collect(Collectors.toList());
+    public PageResponseDTO<Movie, MovieResponseDto> findAll(){
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Movie> movies = movieRepository.findAll(pageable);
+
+        Function<Movie, MovieResponseDto> fn = movie -> MovieResponseDto.builder().movie(movie).build();
+        return new PageResponseDTO<>(movies, fn);
+
+//        return movies
+//                .stream()
+//                .map(MovieResponseDto::new)
+//                .collect(Collectors.toList());
     }
 }

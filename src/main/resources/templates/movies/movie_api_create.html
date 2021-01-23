@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div>
+        <h1>영화 추가 API (영화 이름만)</h1>
+        <form id="movie-form">
+            <label for="movieName">이름 : </label>
+            <input id="movieName" type="text" placeholder="영화제목">
+            <button id="btn-create" type="submit">SAVE</button>
+        </form>
+    </div>
+    <script src="./../../static/js/app/movie.js"></script>
+    <th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>

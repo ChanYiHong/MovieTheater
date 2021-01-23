@@ -1,9 +1,11 @@
 package ChanuE.MovieTheater.controller;
 
+import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Reservation;
 import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.member.MemberResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
+import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationResponseDto;
 import ChanuE.MovieTheater.dto.specificArea.SpecificAreaResponseDto;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
@@ -43,7 +45,7 @@ public class ReservationController {
     public String reservationForm(Model model)
     {
         List<MemberResponseDto> findMembers = memberService.findAll();
-        List<MovieResponseDto> findMovies = movieService.findAll();
+        PageResponseDTO<Movie, MovieResponseDto> findMovies = movieService.findAll();
         model.addAttribute("members", findMembers);
         model.addAttribute("movies", findMovies);
 
@@ -57,7 +59,7 @@ public class ReservationController {
             Model model
     ) {
         List<MemberResponseDto> findMembers = memberService.findAll();
-        List<MovieResponseDto> findMovies = movieService.findAll();
+        PageResponseDTO<Movie, MovieResponseDto> findMovies = movieService.findAll();
         List<AreaResponseDto> findAreas = areaService.findAllByAreaSearch(areaSearch);
         List<SpecificAreaResponseDto> findSpecificAreas = specificAreaService.findAllBySpecificAreaSearch(specificAreaSearch);
         model.addAttribute("members", findMembers);
