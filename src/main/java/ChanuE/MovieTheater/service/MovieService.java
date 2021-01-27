@@ -50,17 +50,9 @@ public class MovieService {
         return entityToDto(movie);
     }
 
-    public PageResponseDTO<Movie, MovieResponseDto> findAll(){
-        Pageable pageable = PageRequest.of(0, 10);
-        Page<Movie> movies = movieRepository.findAll(pageable);
-
-        Function<Movie, MovieResponseDto> fn = movie -> {
-            return MovieResponseDto.builder()
-                    .id(movie.getId())
-                    .movieName(movie.getMovieName())
-                    .build();
-        };
-        return new PageResponseDTO<>(movies, fn);
+    public List<MovieResponseDto> findAll(){
+        List<Movie> result = movieRepository.findAll();
+        return result.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 
     public PageResponseDTO<Movie, MovieResponseDto> list(PageRequestDTO pageRequestDTO, MovieSearch movieSearch) {

@@ -44,30 +44,10 @@ public class ReservationController {
     @GetMapping("/reservation/create")
     public String reservationForm(Model model)
     {
-        List<MemberResponseDto> findMembers = memberService.findAll();
-        PageResponseDTO<Movie, MovieResponseDto> findMovies = movieService.findAll();
-        model.addAttribute("members", findMembers);
-        model.addAttribute("movies", findMovies);
+        List<MovieResponseDto> movies = movieService.findAll();
+        model.addAttribute("movies", movies);
 
         return "/reservation/reservation_form";
-    }
-
-    @GetMapping("/reservation/createV2")
-    public String reservationFormV2(
-            @ModelAttribute("areaSearch") AreaSearch areaSearch,
-            @ModelAttribute("specificAreaSearch") SpecificAreaSearch specificAreaSearch,
-            Model model
-    ) {
-        List<MemberResponseDto> findMembers = memberService.findAll();
-        PageResponseDTO<Movie, MovieResponseDto> findMovies = movieService.findAll();
-        List<AreaResponseDto> findAreas = areaService.findAllByAreaSearch(areaSearch);
-        List<SpecificAreaResponseDto> findSpecificAreas = specificAreaService.findAllBySpecificAreaSearch(specificAreaSearch);
-        model.addAttribute("members", findMembers);
-        model.addAttribute("movies", findMovies);
-        model.addAttribute("areas", findAreas);
-        model.addAttribute("specificAreas",findSpecificAreas);
-
-        return "/reservation/reservation_form_v2";
     }
 
     @PostMapping("/reservation/create")

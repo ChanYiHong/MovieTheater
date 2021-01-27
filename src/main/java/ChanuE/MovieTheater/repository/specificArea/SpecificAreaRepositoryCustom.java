@@ -5,6 +5,6 @@ import ChanuE.MovieTheater.domain.SpecificArea;
 import java.util.List;
 
 public interface SpecificAreaRepositoryCustom {
-    public List<SpecificArea> findSpecificAreaByAreaId(Long id);
-    public List<SpecificArea> findAllBySearchCond(SpecificAreaSearch specificAreaSearch);
+    List<SpecificArea> findSpecificAreaByAreaId(Long id);
+    List<SpecificArea> findAllBySearchCond(SpecificAreaSearch specificAreaSearch);
 }

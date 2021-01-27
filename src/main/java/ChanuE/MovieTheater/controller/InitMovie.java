@@ -36,12 +36,12 @@ public class InitMovie {
             Movie movie1 = Movie.builder().movieName("반지의 제왕").build();
             Movie movie2 = Movie.builder().movieName("담보").build();
 
-            IntStream.rangeClosed(1,200).forEach(value -> {
-                Movie movie = Movie.builder()
-                        .movieName("Movie Name " + value)
-                        .build();
-                em.persist(movie);
-            });
+//            IntStream.rangeClosed(1,200).forEach(value -> {
+//                Movie movie = Movie.builder()
+//                        .movieName("Movie Name " + value)
+//                        .build();
+//                em.persist(movie);
+//            });
 
             Area area1 = new Area("서울");
             Area area2 = new Area("경기");

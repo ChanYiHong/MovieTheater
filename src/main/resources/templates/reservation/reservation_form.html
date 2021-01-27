@@ -3,10 +3,80 @@
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
 
+        <div>
+            <div class="list-group movieList">
+                <ul th:each="movie: ${movies}">
+                    <li class="movieName" th:attr="data-id=${movie.id}" th:text="${movie.movieName}"></li>
+                </ul>
+            </div>
+            <div class="list-group areaList">
 
+            </div>
+            <div class="list-group specificAreaList">
 
+            </div>
+        </div>
 
+        <script th:inline="javascript">
+            $(document).ready(function() {
 
+                var areaList = $(".areaList");
+                var specificAreaList = $(".specificAreaList");
+
+                // 영화 제목 클릭시 지역 보이게!
+                $(".movieName").on("click", function() {
+
+                    var movieId = $(this).data("id");
+
+                    $.getJSON('/api/reservations/area/'+movieId, function(arr) {
+
+                        var str = "";
+
+                        var data = arr["data"];
+
+                        $.each(data, function(idx, area){
+
+                            console.log(idx + " : " + area);
+                            str += "<div class='card-body' data-areaid=" + area.id + ">";  // areaId 하면 오류.. 소문자만
+                            str += "<h5 class='card-title'>" + area.name + "</h5>";
+                            str += "</div>";
+
+                        });
+
+                        areaList.html(str);
+
+                    });
+
+                });
+
+                // 지역 클릭시 구체적인 지역 보이게!
+                $(".areaList").on("click", ".card-body", function() {
+
+                    var areaId = $(this).data("areaid");
+
+                    $.getJSON('/api/reservations/specificArea/'+areaId, function(arr) {
+
+                        var str = "";
+
+                        var data = arr["data"];
+
+                        $.each(data, function(idx, specificArea){
+
+                            console.log(idx + " : " + specificArea);
+                            str += "<div class='card-body' data-specificareaid=" + specificArea.id + ">";
+                            str += "<h5 class='card-title'>" + specificArea.name + "</h5>";
+                            str += "</div>";
+
+                        });
+
+                        specificAreaList.html(str);
+
+                    });
+
+                });
+
+            });
+        </script>
 
     </th:block>
 </th:block>

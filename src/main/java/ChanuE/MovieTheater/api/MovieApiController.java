@@ -19,11 +19,6 @@ public class MovieApiController {
 
     private final MovieService movieService;
 
-    @GetMapping("/api/movies")
-    public Result movieList(){
-        PageResponseDTO<Movie, MovieResponseDto> result = movieService.findAll();
-        return new Result<>(result.getDtoList().size(), result);
-    }
 
     @PostMapping("/api/movie/create")
     public String createMovie(@RequestBody @Valid MovieSaveRequestDto dto){
