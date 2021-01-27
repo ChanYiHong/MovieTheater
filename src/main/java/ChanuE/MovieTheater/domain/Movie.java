@@ -9,6 +9,9 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@AllArgsConstructor
+@Builder
+@ToString(exclude = {"reservation", "areas"})
 public class Movie extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +28,8 @@ public class Movie extends BaseEntity{
 //    private List<TimeTable> timeTables = new ArrayList<>();
 
     @OneToMany(mappedBy = "movie")
+    @Builder.Default
     private List<Area> areas = new ArrayList<>();
-
-    @Builder
-    public Movie(String movieName){
-        this.movieName = movieName;
-    }
 
 
     // == 연관관계 메서드 == //

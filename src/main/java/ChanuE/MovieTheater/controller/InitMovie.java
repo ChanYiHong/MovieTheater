@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
+import java.util.stream.IntStream;
 
 @Component
 @Profile("local")
@@ -32,8 +33,15 @@ public class InitMovie {
         @Transactional
         public void init() {
 
-            Movie movie1 = new Movie("반지의 제왕");
-            Movie movie2 = new Movie("담보");
+            Movie movie1 = Movie.builder().movieName("반지의 제왕").build();
+            Movie movie2 = Movie.builder().movieName("담보").build();
+
+            IntStream.rangeClosed(1,200).forEach(value -> {
+                Movie movie = Movie.builder()
+                        .movieName("Movie Name " + value)
+                        .build();
+                em.persist(movie);
+            });
 
             Area area1 = new Area("서울");
             Area area2 = new Area("경기");

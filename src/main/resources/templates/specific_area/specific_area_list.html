@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta charset="UTF-8">
-    <title>지역별 구체적 지역 추가 화면</title>
-</head>
-<body>
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+
+    <th:block th:fragment="content">
 
 <h1>관리자 권한 : 구체적 지역 화면</h1>
 
@@ -37,6 +34,6 @@
 
 <a class="btn btn-primary" th:text="돌아가기" th:href="@{/{movie_id}/area (movie_id =${movie_id})}"></a>
 
-<th:block th:replace="fragments/footer :: footer"></th:block>
-</body>
+    </th:block>
+</th:block>
 </html>

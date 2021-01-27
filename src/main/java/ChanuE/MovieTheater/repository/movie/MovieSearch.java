@@ -9,8 +9,5 @@ import java.time.LocalDate;
 public class MovieSearch {
 
     private String movieName;
-    private String areaName;
-    private String specificAreaName;
-    private LocalDate localDate;
 
 }

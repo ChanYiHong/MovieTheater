@@ -5,14 +5,12 @@ import lombok.*;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 public class MovieResponseDto {
 
     private Long id;
     private String movieName;
 
-    @Builder
-    public MovieResponseDto(Movie movie){
-        this.id = movie.getId();
-        this.movieName = movie.getMovieName();
-    }
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
         <div>
             <h1 class="mt-4">Movie List
@@ -10,6 +10,15 @@
                     </a>
                 </span>
             </h1>
+
+            <div>
+                <form th:action="@{/movie/list}" th:object="${MovieSearch}" class="form-inline">
+                    <div class="form-group mb-2">
+                        <input type="text" th:field="*{movieName}" class="form-control" placeholder="영화명"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">검색</button>
+                </form>
+            </div>
 
             <table class="table table-striped">
                 <thead>
@@ -31,11 +40,13 @@
 
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item " th:if="${result.prev}">
+                    <a class="page-link" th:href="@{/movie/list(page=${result.start-1})}" tabindex="-1">PREVIOUS</a>
                 </li>
                 <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList}"}>
-                    <a class="page-link">[[${page}]]</a>
+                    <a class="page-link" th:href="@{/movie/list(page=${page})}">[[${page}]]</a>
                 </li>
                 <li class="page-item" th:if="${result.next}">
+                    <a class="page-link" th:href="@{/movie/list(page=${result.end+1})}">NEXT</a>
                 </li>
             </ul>
 

@@ -3,13 +3,16 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
+import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
+import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +30,7 @@ public class MovieService {
 
     @Transactional
     public Long saveMovie(MovieSaveRequestDto requestDto){
-        Movie movie = requestDto.toEntity();
+        Movie movie = dtoToEntity(requestDto);
         checkDuplicateMovie(movie.getMovieName());
         movieRepository.save(movie);
         return movie.getId();
@@ -44,19 +47,40 @@ public class MovieService {
         Movie movie = movieRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 영화가 없습니다. id = " + id));
 
-        return new MovieResponseDto(movie);
+        return entityToDto(movie);
     }
 
     public PageResponseDTO<Movie, MovieResponseDto> findAll(){
         Pageable pageable = PageRequest.of(0, 10);
         Page<Movie> movies = movieRepository.findAll(pageable);
 
-        Function<Movie, MovieResponseDto> fn = movie -> MovieResponseDto.builder().movie(movie).build();
+        Function<Movie, MovieResponseDto> fn = movie -> {
+            return MovieResponseDto.builder()
+                    .id(movie.getId())
+                    .movieName(movie.getMovieName())
+                    .build();
+        };
         return new PageResponseDTO<>(movies, fn);
+    }
 
-//        return movies
-//                .stream()
-//                .map(MovieResponseDto::new)
-//                .collect(Collectors.toList());
+    public PageResponseDTO<Movie, MovieResponseDto> list(PageRequestDTO pageRequestDTO, MovieSearch movieSearch) {
+        Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").ascending());
+        Page<Movie> result = movieRepository.findAllBySearchCond(movieSearch, pageable);
+        // Search condition, controller랑 view에 추가 하기 시작
+        Function<Movie, MovieResponseDto> fn = this::entityToDto;
+        return new PageResponseDTO<>(result, fn);
+    }
+
+    private MovieResponseDto entityToDto(Movie movie) {
+        return MovieResponseDto.builder()
+                .id(movie.getId())
+                .movieName(movie.getMovieName())
+                .build();
+    }
+
+    private Movie dtoToEntity(MovieSaveRequestDto dto) {
+        return Movie.builder()
+                .movieName(dto.getName())
+                .build();
     }
 }

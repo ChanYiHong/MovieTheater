@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header :: header">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta charset="UTF-8">
-    <title>날짜 추가!</title>
-</head>
-<body>
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+
+    <th:block th:fragment="content">
 
 <h1>관리자 권한 : 날짜 리스트</h1>
 
@@ -38,6 +35,6 @@
 <a class="btn btn-primary" th:text="돌아가기" th:href="@{/{movie_id}/{area_id}/specificArea
 (movie_id=${movie.id}, area_id=${area.id})}"></a>
 
-<th:block th:replace="fragments/footer :: footer"></th:block>
-</body>
+    </th:block>
+</th:block>
 </html>

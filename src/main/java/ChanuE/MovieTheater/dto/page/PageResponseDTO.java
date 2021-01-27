@@ -44,6 +44,6 @@ public class PageResponseDTO<EN, DTO> {
         prev = start > 1;
         next = totalPage > tempEnd;
 
-        pageList = IntStream.rangeClosed(1, 10).boxed().collect(Collectors.toList());
+        pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
     }
 }
