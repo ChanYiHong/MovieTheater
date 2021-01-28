@@ -6,21 +6,22 @@ import ChanuE.MovieTheater.domain.Reservation;
 import ChanuE.MovieTheater.domain.ReservationStatus;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
-public class ReservationResponseDto {
+@AllArgsConstructor
+@Builder
+public class ReservationDTO {
 
     private Long id;
+    private Long memberId, movieId;
     private String memberName;
     private String movieName;
     private ReservationStatus status;
-
-    @Builder
-    public ReservationResponseDto(Reservation reservation) {
-        this.id = reservation.getId();
-        this.memberName = reservation.getMember().getMemberName();
-        this.movieName = reservation.getMovie().getMovieName();
-        this.status = reservation.getStatus();
-    }
+    private String areaName;
+    private String specificAreaName;
+    private LocalDateTime movieDate;
+    private LocalDateTime createdDate;
 
 }

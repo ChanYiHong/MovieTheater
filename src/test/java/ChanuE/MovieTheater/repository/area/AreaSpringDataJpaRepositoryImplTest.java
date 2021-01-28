@@ -2,7 +2,7 @@ package ChanuE.MovieTheater.repository.area;
 
 import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
+import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -20,13 +19,13 @@ class AreaSpringDataJpaRepositoryImplTest {
     @Autowired
     AreaSpringDataJpaRepository areaRepository;
     @Autowired
-    MovieSpringDataJpaRepository movieRepository;
+    MovieRepository movieRepository;
 
     @Test
     public void findAllAreaByMovieId() throws Exception {
 
         //given
-        Movie movie = new Movie("movie1");
+        Movie movie = Movie.builder().movieName("movie1").build();
         Area area1 = new Area("area1");
         Area area2 = new Area("area2");
         Area area3 = new Area("area3");

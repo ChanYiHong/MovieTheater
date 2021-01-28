@@ -25,7 +25,7 @@ import static ChanuE.MovieTheater.domain.QArea.area;
 import static ChanuE.MovieTheater.domain.QMovie.movie;
 
 @RequiredArgsConstructor
-public class MovieSpringDataJpaRepositoryImpl implements MovieRepositoryCustom{
+public class MovieRepositoryImpl implements MovieRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
 

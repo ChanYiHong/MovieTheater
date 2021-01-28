@@ -4,11 +4,9 @@ import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.dto.area.AreaResponseDto;
 import ChanuE.MovieTheater.dto.area.AreaSaveRequestDto;
-import ChanuE.MovieTheater.repository.area.AreaRepository;
 import ChanuE.MovieTheater.repository.area.AreaSearch;
 import ChanuE.MovieTheater.repository.area.AreaSpringDataJpaRepository;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
-import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,7 @@ import java.util.stream.Collectors;
 public class AreaService {
 
     private final AreaSpringDataJpaRepository areaRepository;
-    private final MovieSpringDataJpaRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     @Transactional
     public void saveArea(AreaSaveRequestDto requestDto, Long id){

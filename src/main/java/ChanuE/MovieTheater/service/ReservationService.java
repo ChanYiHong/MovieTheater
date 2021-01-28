@@ -3,60 +3,48 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Member;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Reservation;
-import ChanuE.MovieTheater.dto.reservation.ReservationResponseDto;
-import ChanuE.MovieTheater.repository.Reservation.ReservationRepository;
+import ChanuE.MovieTheater.dto.page.PageRequestDTO;
+import ChanuE.MovieTheater.dto.page.PageResponseDTO;
+import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
-import ChanuE.MovieTheater.repository.member.MemberRepository;
-import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-@Service
-@Transactional(readOnly = true)
-@RequiredArgsConstructor
-public class ReservationService {
+public interface ReservationService {
 
-    private final ReservationRepository reservationRepository;
-    private final MemberRepository memberRepository;
-    private final MovieSpringDataJpaRepository movieRepository;
+    Long reservation(ReservationDTO reservationDTO);
 
-    /** 예약 **/
-    @Transactional
-    public void reservation(Long memberId, Long movieId){
+    PageResponseDTO<Object[], ReservationDTO> getList(ReservationSearch reservationSearch, PageRequestDTO pageRequestDTO);
 
-        // Entity inquire (조회)
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 member 없음 id = " + memberId));
+    void cancelReservation(Long id);
 
-        Movie movie = movieRepository.findById(movieId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 movie 없음 id = " + movieId));
-
-        Reservation reservation = Reservation.createReservation(member, movie);
-
-        memberRepository.save(member);
-        movieRepository.save(movie);
-        reservationRepository.save(reservation);
+    default ReservationDTO entityToDTO(Reservation reservation, Movie movie, Member member) {
+        return ReservationDTO.builder()
+                .id(reservation.getId())
+                .memberId(member.getId())
+                .movieId(movie.getId())
+                .memberName(member.getMemberName())
+                .movieName(movie.getMovieName())
+                .areaName(reservation.getAreaName())
+                .specificAreaName(reservation.getSpecificAreaName())
+                .movieDate(reservation.getMovieDate())
+                .createdDate(reservation.getCreatedDate())
+                .status(reservation.getStatus())
+                .build();
     }
 
-    /** 검색 **/
-    public List<ReservationResponseDto> findAll(ReservationSearch reservationSearch){
-        List<Reservation> result = reservationRepository.findAllBySearchCond(reservationSearch);
-        return result.stream()
-                .map(ReservationResponseDto::new)
-                .collect(Collectors.toList());
-    }
-
-    /** 취소 **/
-    @Transactional
-    public void cancelReservation(Long id){
-        Reservation findReservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 예약이 없습니다. id = " + id));
-        findReservation.cancel();
+    default Reservation dtoToEntity(ReservationDTO reservationDTO) {
+        Movie movie = Movie.builder().id(reservationDTO.getMovieId()).build();
+        Member member = Member.builder().id(reservationDTO.getMemberId()).build();
+        return Reservation.builder()
+                .id(reservationDTO.getId())
+                .member(member)
+                .movie(movie)
+                .areaName(reservationDTO.getAreaName())
+                .specificAreaName(reservationDTO.getSpecificAreaName())
+                .movieDate(reservationDTO.getMovieDate())
+                .status(reservationDTO.getStatus())
+                .build();
     }
 
 }

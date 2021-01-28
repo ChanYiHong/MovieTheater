@@ -21,7 +21,7 @@ public class InitMovie {
 
     @PostConstruct
     public void init() {
-        initMovieService.init();
+        //initMovieService.init();
     }
 
     @Component
@@ -68,7 +68,7 @@ public class InitMovie {
                     .address(new Address("Suwon", "Jungja"))
                     .authority(Authority.USER).build();
 
-            Reservation reservation = Reservation.createReservation(member1, movie1);
+            //Reservation reservation = Reservation.createReservation(member1, movie1);
 
             em.persist(movie1);
             em.persist(movie2);
@@ -80,7 +80,7 @@ public class InitMovie {
             em.persist(date2);
             em.persist(member1);
             em.persist(member2);
-            em.persist(reservation);
+            //em.persist(reservation);
         }
     }
 }

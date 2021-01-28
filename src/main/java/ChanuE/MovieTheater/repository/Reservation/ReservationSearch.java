@@ -1,10 +1,12 @@
 package ChanuE.MovieTheater.repository.Reservation;
 
 import ChanuE.MovieTheater.domain.ReservationStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter @Setter
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ReservationSearch {
 
     private String memberName;

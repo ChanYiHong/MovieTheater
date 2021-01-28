@@ -1,40 +1,14 @@
 package ChanuE.MovieTheater.repository.movie;
 
-import ChanuE.MovieTheater.domain.Area;
 import ChanuE.MovieTheater.domain.Movie;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
-@Repository
-@RequiredArgsConstructor
-public class MovieRepository {
+public interface MovieRepository extends JpaRepository<Movie, Long>, MovieRepositoryCustom{
 
-    private final EntityManager em;
+    List<Movie> findMovieByMovieName(String name);
 
-    public Long save(Movie movie){
-        em.persist(movie);
-        return movie.getId();
-    }
-
-    public Movie findOne(Long id){
-        return em.find(Movie.class, id);
-    }
-
-    public List<Movie> findOneByName(String name){
-        return em.createQuery("select m from Movie m where m.name = :name", Movie.class)
-                .setParameter("name", name)
-                .getResultList();
-    }
-
-    public List<Movie> findAll(){
-        return em.createQuery("select m from Movie m", Movie.class)
-                .getResultList();
-    }
-
-    public void deleteOne(Movie movie){
-        em.remove(movie);
-    }
 }

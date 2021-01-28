@@ -5,19 +5,16 @@ import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
-import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
-import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
+import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,7 +23,7 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class MovieService {
 
-    private final MovieSpringDataJpaRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     @Transactional
     public Long saveMovie(MovieSaveRequestDto requestDto){

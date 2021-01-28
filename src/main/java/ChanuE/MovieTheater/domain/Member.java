@@ -10,6 +10,9 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
+@ToString
 public class Member extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +27,4 @@ public class Member extends BaseEntity {
     @Enumerated
     private Authority authority;
 
-    @OneToMany(mappedBy = "member")
-    List<Reservation> reservations = new ArrayList<>();
-
-    @Builder
-    public Member(String memberName, Address address, Authority authority) {
-        this.memberName = memberName;
-        this.address = address;
-        this.authority = authority;
-    }
 }

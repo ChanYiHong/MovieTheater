@@ -1,16 +1,8 @@
 package ChanuE.MovieTheater.mytest;
 
-import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.repository.movie.MovieSpringDataJpaRepository;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,8 +1,8 @@
 package ChanuE.MovieTheater.controller;
 
 import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.repository.movie.MovieRepository;
 
+import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,9 +66,9 @@ public class IndexControllerTest {
 
     @AfterEach
     public void tearDown(){
-        movieRepository.deleteOne(movie1);
-        movieRepository.deleteOne(movie2);
-        movieRepository.deleteOne(movie3);
+        movieRepository.delete(movie1);
+        movieRepository.delete(movie2);
+        movieRepository.delete(movie3);
     }
 
 }
