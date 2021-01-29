@@ -5,14 +5,14 @@
         <div>
             <h1 class="mt-4">Movie List
                 <span>
-                    <a th:href="@{/movie/create}">
+                    <a th:href="@{/movies/create}">
                         <button type="button" class="btn btn-outline-primary">CREATE</button>
                     </a>
                 </span>
             </h1>
 
             <div>
-                <form th:action="@{/movie/list}" th:object="${MovieSearch}" class="form-inline">
+                <form th:action="@{/movies/list}" th:object="${MovieSearch}" class="form-inline">
                     <div class="form-group mb-2">
                         <input type="text" th:field="*{movieName}" class="form-control" placeholder="영화명"/>
                     </div>
@@ -40,13 +40,13 @@
 
             <ul class="pagination h-100 justify-content-center align-items-center">
                 <li class="page-item " th:if="${result.prev}">
-                    <a class="page-link" th:href="@{/movie/list(page=${result.start-1})}" tabindex="-1">PREVIOUS</a>
+                    <a class="page-link" th:href="@{/movies/list(page=${result.start-1})}" tabindex="-1">PREVIOUS</a>
                 </li>
                 <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList}"}>
-                    <a class="page-link" th:href="@{/movie/list(page=${page})}">[[${page}]]</a>
+                    <a class="page-link" th:href="@{/movies/list(page=${page})}">[[${page}]]</a>
                 </li>
                 <li class="page-item" th:if="${result.next}">
-                    <a class="page-link" th:href="@{/movie/list(page=${result.end+1})}">NEXT</a>
+                    <a class="page-link" th:href="@{/movies/list(page=${result.end+1})}">NEXT</a>
                 </li>
             </ul>
 

@@ -1,6 +1,8 @@
 package ChanuE.MovieTheater.domain;
 
+import ChanuE.MovieTheater.converter.AgeLimitConverter;
 import lombok.*;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,6 +22,16 @@ public class Movie extends BaseEntity{
 
     @Column(nullable = false)
     private String movieName;
+
+    @Convert(converter = AgeLimitConverter.class)
+    @Column(nullable = false)
+    private AgeLimit ageLimit;
+
+    private String description;
+
+    private String director;
+
+    private int runningTime;
 
     @OneToMany(mappedBy = "movie")
     @Builder.Default

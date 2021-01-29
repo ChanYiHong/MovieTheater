@@ -1,8 +1,6 @@
 package ChanuE.MovieTheater.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString(exclude = {"specificArea", "timeTables"})
 @Getter
 @Entity
 public class Date extends BaseEntity{

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <div>
+            <h1 class="mt-4">Movie Info</h1>
+
+            <div>
+                <form th:action="@{/movies/info}" th:object="${MovieSearch}" class="form-inline">
+                    <div class="form-group mb-2">
+                        <input type="text" th:field="*{movieName}" class="form-control" placeholder="영화명"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">검색</button>
+                </form>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>AgeLimit</th>
+                    <th>Title</th>
+                    <th>Director</th>
+                    <th>RunningTime</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="movies" th:each="movie : ${result.dtoList}">
+                    <td>
+                        <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('ALL')}">
+                            <img src="./../../static/img/all.png" alt="전체이용가">
+                        </span>
+                        <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('TWELVE')}">
+                            <img src="./../../static/img/12.png" alt="12세이용가">
+                        </span>
+                        <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('FIFTEEN')}">
+                            <img src="./../../static/img/15.png" alt="15세이용가">
+                        </span>
+                        <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('NINETEEN')}">
+                            <img src="./../../static/img/19.png" alt="19세이용가">
+                        </span>
+                    </td>
+                    <td>[[${movie.movieName}]]</td>
+                    <td>[[${movie.director}]]</td>
+                    <td>[[${movie.runningTime}]]</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item " th:if="${result.prev}">
+                    <a class="page-link" th:href="@{/movies/info(page=${result.start-1})}" tabindex="-1">PREVIOUS</a>
+                </li>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList}"}>
+                    <a class="page-link" th:href="@{/movies/info(page=${page})}">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:if="${result.next}">
+                    <a class="page-link" th:href="@{/movies/info(page=${result.end+1})}">NEXT</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <script inline="javascript">
+
+        </script>
+    </th:block>
+</th:block>
+</html>

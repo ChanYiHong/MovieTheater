@@ -64,6 +64,10 @@ public class MovieService {
         return MovieResponseDto.builder()
                 .id(movie.getId())
                 .movieName(movie.getMovieName())
+                .ageLimit(movie.getAgeLimit())
+                .director(movie.getDirector())
+                .runningTime(movie.getRunningTime())
+                .description(movie.getDescription())
                 .build();
     }
 

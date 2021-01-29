@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/movie/")
+@RequestMapping("/movies/")
 @Log4j2
 @RequiredArgsConstructor
 public class MovieController {
@@ -45,6 +45,15 @@ public class MovieController {
     public String saveMovie(@ModelAttribute MovieSaveRequestDto requestDto){
         log.info("이름 : " + requestDto.getName());
         movieService.saveMovie(requestDto);
-        return "redirect:/movie/list";
+        return "redirect:/movies/list";
+    }
+
+    @GetMapping("/info")
+    public String movieInfo(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
+                            PageRequestDTO pageRequestDTO, Model model) {
+        log.info("Movie Information");
+        PageResponseDTO<Movie, MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
+        model.addAttribute("result", result);
+        return "/movies/movie_info";
     }
 }
