@@ -58,8 +58,8 @@ public class ReviewServiceImpl implements ReviewService{
 
     @Override
     @Transactional
-    public void remove(ReviewDTO reviewDTO) {
-        log.info("Remove Review : " + reviewDTO.getId());
-        reviewRepository.deleteById(reviewDTO.getId());
+    public void remove(Long id) {
+        log.info("Remove Review : " + id);
+        reviewRepository.deleteById(id);
     }
 }

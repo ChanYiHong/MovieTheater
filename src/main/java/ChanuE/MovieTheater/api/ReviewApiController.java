@@ -36,4 +36,20 @@ public class ReviewApiController {
         Long result = reviewService.register(reviewDTO);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Long> modifyReview(@PathVariable("id") Long id, @RequestBody ReviewDTO reviewDTO) {
+
+        log.info("Modify Review : " + reviewDTO);
+        reviewService.modify(reviewDTO);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> removeReview(@PathVariable Long id) {
+
+        log.info("Delete Review : " + id);
+        reviewService.remove(id);
+        return new ResponseEntity<>(id, HttpStatus.OK);
+    }
 }

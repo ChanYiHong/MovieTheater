@@ -95,10 +95,10 @@
 
                     $.each(data, function(idx, review){
 
-                        str += "<div>";
-                        str += "<h5>"+review.content+"</h5>";
-                        str += "<h6>"+review.writer+"</h6>";
-                        str += "<h6>"+review.grade+"</h6>";
+                        str += "<div class='reviewBody' data-id='"+review.id+"'>";
+                        str += "<h5 class='reviewContent'>"+review.content+"</h5>";
+                        str += "<h6 class='reviewWriter'>"+review.writer+"</h6>";
+                        str += "<h6 class='reviewGrade'>"+review.grade+"</h6>";
                         str += "</div>";
 
                     });
@@ -158,6 +158,59 @@
                             console.log(result);
                             var newId = parseInt(result);
                             alert(newId + "번 리뷰가 등록되었습니다!");
+                            self.location.reload();
+                        }
+                    })
+
+                });
+
+                $(".reviewList").on("click", ".reviewBody", function() {
+
+                    var id = $(this).data('id');
+                    $('input[name="content"]').val($(this).find(".reviewContent").html());
+                    $('input[name="writer"]').val($(this).find(".reviewWriter").html());
+                    $('input[name="id"]').val(id);
+
+                    $('.modal-footer .btn').hide();
+                    $('.reviewRemove, .reviewModify, .reviewClose').show();
+
+                    modal.modal('show');
+
+                });
+
+                $(".reviewRemove").on("click", function() {
+
+                    var id = $('input[name="id"]').val();
+
+                    $.ajax({
+                        url: "/reviews/"+id,
+                        method: "DELETE",
+                        contentType: "application/json; charset=utf-8",
+                        success: function(result){
+                            alert(result + "번 리뷰 삭제!!");
+                            self.location.reload();
+                        }
+                    });
+
+                });
+
+                $(".reviewModify").on("click", function() {
+
+                    var id = $('input[name="id"]').val();
+                    var data = {
+                        id = id,
+                        content = $('input[name="content"]').val(),
+                        writer = $('input[name="writer"]').val()
+                    }
+
+                    $.ajax({
+                        url: "/reviews/"+id,
+                        method: "PUT",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(data),
+                        dataType: 'json',
+                        success: function(result) {
+                            alert(result + "번 리뷰 수정 완료!!");
                             self.location.reload();
                         }
                     })

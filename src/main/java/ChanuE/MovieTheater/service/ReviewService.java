@@ -16,7 +16,7 @@ public interface ReviewService {
 
     void modify(ReviewDTO reviewDTO);
 
-    void remove(ReviewDTO reviewDTO);
+    void remove(Long id);
 
     default Review dtoToEntity(ReviewDTO reviewDTO) {
         Movie movie = Movie.builder().id(reviewDTO.getMovieId()).build();
