@@ -23,6 +23,35 @@
         </div>
 
         <a class="btn btn-warning" th:href="@{/movies/info(page=${pageRequestDTO.page})}">돌아가기</a>
+        <button type="button" class="btn btn-light addReview">리뷰 작성</button>
+
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">리뷰 작성</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="content" placeholder="Reply Text...">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="writer" placeholder="Replyer">
+                            <input type="hidden" name="id">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger reviewRemove">Remove</button>
+                        <button type="button" class="btn btn-warning reviewModify">Modify</button>
+                        <button type="button" class="btn btn-primary reviewSave">Save changes</button>
+                        <button type="button" class="btn btn-outline-secondary reviewClose" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="reviewList">
 
@@ -33,9 +62,11 @@
             $(document).ready(function(){
                 var reviewList = $(".reviewList");
                 var movieId = [[${result.id}]];
+                var modal = $(".modal");
 
                 $.getJSON("/reviews/"+movieId, function(arr){
                     console.log(arr);
+                    // 리뷰 화면 재조정.
                     makeReviewPage(arr);
                 });
 
@@ -50,12 +81,14 @@
                         dataType: 'json',
                         success: function(arr){
                             console.log(arr);
+                            // 리뷰 화면 재조정.
                             makeReviewPage(arr);
                         }
                     });
 
                 });
 
+                // API GET 요청으로 Review를 가져오면 가져온 정보를 토대로 리뷰 화면 다시 조정.
                 function makeReviewPage(arr) {
                     var data = arr["dtoList"];
                     var str = "";
@@ -92,6 +125,45 @@
 
                     reviewList.html(str);
                 }
+
+                // 리뷰 추가 버튼 눌렀을 때!
+                $(".addReview").on("click", function() {
+
+                    modal.modal("show");
+
+                    $('input[name="content"]').val('');
+                    $('input[name="writer"]').val('');
+
+                    $('.modal-footer .btn').hide(); // 버튼 다 가리고
+                    $('.reviewSave, .reviewClose').show(); // 필요한 버튼만 보이게
+
+                });
+
+                // 리뷰 모달창에서 저장 버튼 누를때!
+                $(".reviewSave").on("click", function() {
+
+                    var data = {
+                        movieId: movieId,
+                        content: $('input[name="content"]').val(),
+                        writer: $('input[name="writer"]').val()
+                    }
+
+                    $.ajax({
+                        url: '/reviews/',
+                        method: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        data: JSON.stringify(data),
+                        dataType: 'json',
+                        success: function(result){
+                            console.log(result);
+                            var newId = parseInt(result);
+                            alert(newId + "번 리뷰가 등록되었습니다!");
+                            self.location.reload();
+                        }
+                    })
+
+                });
+
             });
 
         </script>

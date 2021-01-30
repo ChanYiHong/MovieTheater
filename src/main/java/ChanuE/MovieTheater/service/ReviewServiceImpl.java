@@ -38,7 +38,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public PageResponseDTO<Review, ReviewDTO> list(PageRequestDTO pageRequestDTO, Long movieId) {
         log.info("Get List of Reviews");
-        Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").ascending());
+        Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").descending());
         Movie movie = Movie.builder().id(movieId).build();
         Page<Review> result = reviewRepository.findByMovie(movie, pageable);
         Function<Review, ReviewDTO> fn = this::entityToDTO;
