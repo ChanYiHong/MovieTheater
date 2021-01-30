@@ -17,29 +17,33 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>AgeLimit</th>
-                    <th>Title</th>
-                    <th>Director</th>
-                    <th>RunningTime</th>
+                    <th scope="col">AgeLimit</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Director</th>
+                    <th scope="col">RunningTime</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr class="movies" th:each="movie : ${result.dtoList}">
                     <td>
                         <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('ALL')}">
-                            <img src="./../../static/img/all.png" alt="전체이용가">
+                            <img th:src="@{/img/all.png}" alt="전체이용가">
                         </span>
                         <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('TWELVE')}">
-                            <img src="./../../static/img/12.png" alt="12세이용가">
+                            <img th:src="@{/img/12.png}" alt="12세이용가">
                         </span>
                         <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('FIFTEEN')}">
-                            <img src="./../../static/img/15.png" alt="15세이용가">
+                            <img th:src="@{/img/15.png}" alt="15세이용가">
                         </span>
                         <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('NINETEEN')}">
-                            <img src="./../../static/img/19.png" alt="19세이용가">
+                            <img th:src="@{/img/19.png}" alt="19세이용가">
                         </span>
                     </td>
-                    <td>[[${movie.movieName}]]</td>
+                    <th scope="row">
+                        <a th:href="@{/movies/{id} (id=${movie.id}, page=${result.page})}">
+                            [[${movie.movieName}]]
+                        </a>
+                    </th>
                     <td>[[${movie.director}]]</td>
                     <td>[[${movie.runningTime}]]</td>
                 </tr>

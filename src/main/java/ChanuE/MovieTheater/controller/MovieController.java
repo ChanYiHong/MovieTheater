@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -48,6 +45,7 @@ public class MovieController {
         return "redirect:/movies/list";
     }
 
+    // 사용자 영화 목록 화면 조회용.
     @GetMapping("/info")
     public String movieInfo(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
                             PageRequestDTO pageRequestDTO, Model model) {
@@ -55,5 +53,17 @@ public class MovieController {
         PageResponseDTO<Movie, MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
         model.addAttribute("result", result);
         return "/movies/movie_info";
+    }
+
+    // 사용자 영화 상세 정보창.
+    @GetMapping("/{id}")
+    public String readMovie(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO,
+                            @PathVariable("id") Long id, Model model) {
+        log.info("Movie Specific");
+        MovieResponseDto findMovie = movieService.findOne(id);
+
+        log.info(findMovie);
+        model.addAttribute("result", findMovie);
+        return "/movies/movie_read";
     }
 }

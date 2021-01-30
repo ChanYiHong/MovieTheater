@@ -47,11 +47,13 @@ public class MovieService {
         return entityToDto(movie);
     }
 
+    // 영화 예약 화면에서 단순한 영화 목록만 조회시 사용.
     public List<MovieResponseDto> findAll(){
         List<Movie> result = movieRepository.findAll();
         return result.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 
+    // 영화 목록 페이징 추가.
     public PageResponseDTO<Movie, MovieResponseDto> list(PageRequestDTO pageRequestDTO, MovieSearch movieSearch) {
         Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").ascending());
         Page<Movie> result = movieRepository.findAllBySearchCond(movieSearch, pageable);
