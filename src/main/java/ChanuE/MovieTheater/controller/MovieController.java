@@ -27,7 +27,7 @@ public class MovieController {
     public String movieList(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
                             PageRequestDTO pageRequestDTO, Model model){
         log.info("Get Movie List");
-        PageResponseDTO<Movie, MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
+        PageResponseDTO<Object[], MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
         model.addAttribute("result", result);
         return "/movies/movie_list";
     }
@@ -50,7 +50,7 @@ public class MovieController {
     public String movieInfo(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
                             PageRequestDTO pageRequestDTO, Model model) {
         log.info("Movie Information");
-        PageResponseDTO<Movie, MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
+        PageResponseDTO<Object[], MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
         model.addAttribute("result", result);
         return "/movies/movie_info";
     }

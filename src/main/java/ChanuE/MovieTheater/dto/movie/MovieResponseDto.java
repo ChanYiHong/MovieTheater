@@ -18,4 +18,7 @@ public class MovieResponseDto {
     private String director;
     private int runningTime;
 
+    private int reviewCnt;
+    private double gradeAvg;
+
 }

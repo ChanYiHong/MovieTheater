@@ -19,4 +19,7 @@ public interface MovieRepository extends JpaRepository<Movie, Long>, MovieReposi
             "left join Date d on d.specificArea = s where m.movieName = :movieName")
     List<Object[]> findMovieForReservation(@PathVariable("movieName") String movieName);
 
+    @Query("select m, count(r), avg(coalesce(r.grade, 1)) from Movie m join Review r on r.movie = m where m.id = :id")
+    List<Object[]> findMovieWithReviewCount(@PathVariable("id") Long id);
+
 }

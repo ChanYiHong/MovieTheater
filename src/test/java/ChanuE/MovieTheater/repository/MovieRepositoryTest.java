@@ -3,9 +3,13 @@ package ChanuE.MovieTheater.repository;
 import ChanuE.MovieTheater.domain.AgeLimit;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
+import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +59,21 @@ public class MovieRepositoryTest {
         List<Movie> results = nativeQuery.getResultList();
 
         System.out.println(results.get(0));
+
+    }
+
+    @Test
+    public void movieListTest() throws Exception {
+
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Object[]> result = movieRepository.findAllBySearchCond(new MovieSearch(), pageable);
+
+        List<Object[]> content = result.getContent();
+        content.forEach(objects -> {
+            System.out.println((Movie)objects[0]);
+            System.out.println((Long)objects[1]);
+            System.out.println((Double)objects[2]);
+        });
 
     }
 

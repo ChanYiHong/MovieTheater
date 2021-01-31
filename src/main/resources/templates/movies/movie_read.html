@@ -4,7 +4,7 @@
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
 
-        <h1 class="mt-4">영화 상세 : [[${result.movieName}]]</h1>
+        <h1 class="mt-4">[[${result.movieName}]]</h1>
 
         <div class="form-group">
             <label >Title</label>
@@ -21,8 +21,15 @@
             <label >Running Time</label>
             <input class="form-control" th:value="${result.runningTime}" name="runningTime" readonly>
         </div>
+        <div class="form-group">
+            <label >Review Average</label>
+            <input class="form-control" th:value="${result.gradeAvg}" name="gradeAvg" readonly>
+        </div>
 
         <a class="btn btn-warning" th:href="@{/movies/info(page=${pageRequestDTO.page})}">돌아가기</a>
+        <button type="button" class="btn btn-primary">
+            Review Count <span class="badge badge-light">[[${result.reviewCnt}]]</span>
+        </button>
         <button type="button" class="btn btn-light addReview">리뷰 작성</button>
 
         <div class="modal" tabindex="-1" role="dialog">
@@ -36,10 +43,16 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input class="form-control" type="text" name="content" placeholder="Reply Text...">
+                            <Label >리뷰 내용</Label>
+                            <input class="form-control" type="text" name="content" placeholder="정말 잘만든 영화에요!">
                         </div>
                         <div class="form-group">
-                            <input class="form-control" type="text" name="writer" placeholder="Replyer">
+                            <Label >평점 <span class="grade"></span></Label>
+                            <div class="starrr"></div>
+                        </div>
+                        <div class="form-group">
+                            <Label >작성자</Label>
+                            <input class="form-control" type="text" name="writer" placeholder="작성자">
                             <input type="hidden" name="id">
                         </div>
                     </div>
@@ -57,12 +70,27 @@
 
         </div>
 
+        <script th:src="@{/starrr.js}"></script>
+        <link th:href="@{/css/starrr.css}" rel="stylesheet">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+
         <script th:inline="javascript">
 
             $(document).ready(function(){
                 var reviewList = $(".reviewList");
                 var movieId = [[${result.id}]];
                 var modal = $(".modal");
+                var grade = 1;
+
+                $('.starrr').starrr({
+                    rating: grade,
+                    change: function(e, value) {
+                        if (value) {
+                            console.log(value);
+                            grade = value;
+                        }
+                    }
+                });
 
                 $.getJSON("/reviews/"+movieId, function(arr){
                     console.log(arr);
@@ -95,15 +123,15 @@
 
                     $.each(data, function(idx, review){
 
-                        str += "<div class='reviewBody' data-id='"+review.id+"'>";
-                        str += "<h5 class='reviewContent'>"+review.content+"</h5>";
-                        str += "<h6 class='reviewWriter'>"+review.writer+"</h6>";
-                        str += "<h6 class='reviewGrade'>"+review.grade+"</h6>";
+                        str += "<div class='card m-3 reviewBody' data-id='"+review.id+"'>";
+                        str += "<h5 class='card-body reviewContent'>"+review.content+"</h5>";
+                        str += "<h6 class='card-footer reviewWriter'>"+review.writer+"</h6>";
+                        str += "<h6 class='card-footer reviewGrade'>"+review.grade+"</h6>";
                         str += "</div>";
 
                     });
 
-                    str += "<ul class='pagination h-100 justify-content-left align-items-center'>";
+                    str += "<ul class='pagination h-100 justify-content-center align-items-center'>";
                     if(arr.prev) {
                         str += "<li class='page-item'>";
                         str += "<a class='page-link' data-page='"+(arr.start - 1)+"' tabindex='-1'>PREVIOUS</a>"
@@ -145,7 +173,8 @@
                     var data = {
                         movieId: movieId,
                         content: $('input[name="content"]').val(),
-                        writer: $('input[name="writer"]').val()
+                        writer: $('input[name="writer"]').val(),
+                        grade: grade
                     }
 
                     $.ajax({
@@ -170,6 +199,9 @@
                     $('input[name="content"]').val($(this).find(".reviewContent").html());
                     $('input[name="writer"]').val($(this).find(".reviewWriter").html());
                     $('input[name="id"]').val(id);
+
+                    var grade = $(this).find('.reviewGrade').html();
+                    $(".starrr a:nth-child("+grade+")").trigger("click");
 
                     $('.modal-footer .btn').hide();
                     $('.reviewRemove, .reviewModify, .reviewClose').show();
@@ -198,9 +230,9 @@
 
                     var id = $('input[name="id"]').val();
                     var data = {
-                        id = id,
-                        content = $('input[name="content"]').val(),
-                        writer = $('input[name="writer"]').val()
+                        id: id,
+                        content: $('input[name="content"]').val(),
+                        grade: grade
                     }
 
                     $.ajax({
