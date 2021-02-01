@@ -18,6 +18,6 @@ public class AreaSaveRequestDto {
     }
 
     public Area toEntity(){
-        return Area.builder().areaName(this.name).build();
+        return Area.builder().name(this.name).build();
     }
 }

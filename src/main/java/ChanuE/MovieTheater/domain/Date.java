@@ -30,6 +30,7 @@ public class Date extends BaseEntity{
     }
 
     @OneToMany(mappedBy = "date")
+    @Builder.Default
     private List<TimeTable> timeTables = new ArrayList<>();
 
 

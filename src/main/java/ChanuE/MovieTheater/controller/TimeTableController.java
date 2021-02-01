@@ -26,52 +26,52 @@ public class TimeTableController {
     private final SpecificAreaService specificAreaService;
     private final DateService dateService;
     private final TimeTableService timeTableService;
-
-    @GetMapping("/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_list")
-    public String timeTableList(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
-                                @PathVariable("specific_id") Long specificId, @PathVariable("date_id") Long dateId, Model model){
-
-        MovieResponseDto movie = movieService.findOne(movieId);
-        AreaResponseDto area = areaService.findOne(areaId);
-        SpecificAreaResponseDto specificArea = specificAreaService.findOne(specificId);
-        DateResponseDto date = dateService.findOne(dateId);
-        List<TimeTableResponseDto> timeTables = timeTableService.findAllTimeTableByDateId(dateId);
-
-        model.addAttribute("movie", movie);
-        model.addAttribute("area", area);
-        model.addAttribute("specificArea", specificArea);
-        model.addAttribute("date", date);
-        model.addAttribute("timeTables", timeTables);
-
-        return "/time_tables/time_table_list";
-
-    }
-
-    @GetMapping("/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_create")
-    public String createTimeTable(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
-                                  @PathVariable("specific_id") Long specificId, @PathVariable("date_id") Long dateId, Model model){
-
-        MovieResponseDto movie = movieService.findOne(movieId);
-        AreaResponseDto area = areaService.findOne(areaId);
-        SpecificAreaResponseDto specificArea = specificAreaService.findOne(specificId);
-        DateResponseDto date = dateService.findOne(dateId);
-
-        model.addAttribute("movie", movie);
-        model.addAttribute("area", area);
-        model.addAttribute("specificArea", specificArea);
-        model.addAttribute("date", date);
-        model.addAttribute("timeTable", new TimeTableSaveRequestDto());
-
-        return "/time_tables/time_table_create";
-    }
-
-    @GetMapping("/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_done")
-    public String saveTimeTable(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
-                           @PathVariable("specific_id") Long specificId, @PathVariable("date_id") Long dateId,
-                                @ModelAttribute("date") TimeTableSaveRequestDto requestDto){
-
-        timeTableService.saveTimeTable(requestDto, dateId);
-
-        return "redirect:/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_list";
-    }
+//
+//    @GetMapping("/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_list")
+//    public String timeTableList(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
+//                                @PathVariable("specific_id") Long specificId, @PathVariable("date_id") Long dateId, Model model){
+//
+//        MovieResponseDto movie = movieService.findOne(movieId);
+//        AreaResponseDto area = areaService.findOne(areaId);
+//        SpecificAreaResponseDto specificArea = specificAreaService.findOne(specificId);
+//        DateResponseDto date = dateService.findOne(dateId);
+//        List<TimeTableResponseDto> timeTables = timeTableService.findAllTimeTableByDateId(dateId);
+//
+//        model.addAttribute("movie", movie);
+//        model.addAttribute("area", area);
+//        model.addAttribute("specificArea", specificArea);
+//        model.addAttribute("date", date);
+//        model.addAttribute("timeTables", timeTables);
+//
+//        return "/time_tables/time_table_list";
+//
+//    }
+//
+//    @GetMapping("/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_create")
+//    public String createTimeTable(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
+//                                  @PathVariable("specific_id") Long specificId, @PathVariable("date_id") Long dateId, Model model){
+//
+//        MovieResponseDto movie = movieService.findOne(movieId);
+//        AreaResponseDto area = areaService.findOne(areaId);
+//        SpecificAreaResponseDto specificArea = specificAreaService.findOne(specificId);
+//        DateResponseDto date = dateService.findOne(dateId);
+//
+//        model.addAttribute("movie", movie);
+//        model.addAttribute("area", area);
+//        model.addAttribute("specificArea", specificArea);
+//        model.addAttribute("date", date);
+//        model.addAttribute("timeTable", new TimeTableSaveRequestDto());
+//
+//        return "/time_tables/time_table_create";
+//    }
+//
+//    @GetMapping("/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_done")
+//    public String saveTimeTable(@PathVariable("movie_id") Long movieId, @PathVariable("area_id") Long areaId,
+//                           @PathVariable("specific_id") Long specificId, @PathVariable("date_id") Long dateId,
+//                                @ModelAttribute("date") TimeTableSaveRequestDto requestDto){
+//
+//        timeTableService.saveTimeTable(requestDto, dateId);
+//
+//        return "redirect:/{movie_id}/{area_id}/{specific_id}/{date_id}/time_table_list";
+//    }
 }

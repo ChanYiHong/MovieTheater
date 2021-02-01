@@ -19,19 +19,15 @@ public class SpecificArea extends BaseEntity{
     private Long id;
 
     @Column(nullable = false)
-    private String specificAreaName;
+    private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "area_id")
     private Area area;
 
     @OneToMany(mappedBy = "specificArea")
+    @Builder.Default
     private List<Date> dates = new ArrayList<>();
-
-    @Builder
-    public SpecificArea(String specificAreaName) {
-        this.specificAreaName = specificAreaName;
-    }
 
     // == 연관 관계 메서드 == //
     // (항상 Many 쪽에!!)

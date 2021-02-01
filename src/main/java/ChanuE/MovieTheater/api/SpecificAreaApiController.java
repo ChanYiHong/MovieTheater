@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/specificArea/")
+@RequestMapping("/api/specificAreas/")
 @Log4j2
 @RequiredArgsConstructor
 public class SpecificAreaApiController {
 
     private final SpecificAreaService specificAreaService;
 
-    @GetMapping(value = "/{areaId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ReservationApiController.Result<SpecificAreaResponseDto>> getSpecificArea(@PathVariable("areaId") Long areaId) {
-        List<SpecificAreaResponseDto> specificAreas = specificAreaService.findAllSpecificArea(areaId);
-        return new ResponseEntity<>(new ReservationApiController.Result<>(specificAreas, specificAreas.size()), HttpStatus.OK);
-    }
+//    @GetMapping(value = "/{areaId}", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<ReservationApiController.Result<SpecificAreaResponseDto>> getSpecificArea(@PathVariable("areaId") Long areaId) {
+//        List<SpecificAreaResponseDto> specificAreas = specificAreaService.findAllSpecificArea(areaId);
+//        return new ResponseEntity<>(new ReservationApiController.Result<>(specificAreas, specificAreas.size()), HttpStatus.OK);
+//    }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"movie", "specificAreas"})
+@ToString(exclude = {"specificAreas", "theaters"})
 @Entity
 public class Area extends BaseEntity{
 
@@ -18,24 +18,14 @@ public class Area extends BaseEntity{
     @Column(name = "area_id")
     private Long id;
 
-    private String areaName;
-
-    @Builder
-    public Area(String areaName){
-        this.areaName = areaName;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
-    private Movie movie;
+    private String name;
 
     @OneToMany(mappedBy = "area")
-    List<SpecificArea> specificAreas = new ArrayList<>();
+    @Builder.Default
+    private List<Theater> theaters = new ArrayList<>();
 
-    // == 연관 관계 메서드 == //
-    public void setMovie(Movie movie){
-        this.movie = movie;
-        movie.getAreas().add(this);
-    }
+    @OneToMany(mappedBy = "area")
+    @Builder.Default
+    private List<SpecificArea> specificAreas = new ArrayList<>();
 
 }

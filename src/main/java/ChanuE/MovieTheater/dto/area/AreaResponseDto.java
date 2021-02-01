@@ -1,12 +1,8 @@
 package ChanuE.MovieTheater.dto.area;
 
 import ChanuE.MovieTheater.domain.Area;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -17,6 +13,6 @@ public class AreaResponseDto {
 
     public AreaResponseDto(Area area){
         this.id = area.getId();
-        this.name = area.getAreaName();
+        this.name = area.getName();
     }
 }

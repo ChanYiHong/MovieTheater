@@ -37,14 +37,6 @@ public class MovieRepositoryTest {
 
     }
 
-    @Test
-    public void getMovieForReservation() throws Exception {
-
-        List<Object[]> result = movieRepository.findMovieForReservation("반지의 제왕");
-
-        result.forEach(objects -> System.out.println(objects.toString()));
-
-    }
 
     @Test
     @Transactional

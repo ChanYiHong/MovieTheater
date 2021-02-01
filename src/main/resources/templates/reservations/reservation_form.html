@@ -3,13 +3,22 @@
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
 
+        <style>
+         .box1 {
+          float:left;
+          }
+         .box2 {
+          display:inline-block; margin-left:10px;
+          }
+        </style>
+
         <div>
-            <div class="list-group movieList">
-                <ul th:each="movie: ${movies}">
-                    <li class="movieName" th:attr="data-id=${movie.id}" th:text="${movie.movieName}"></li>
+            <div class="box1 movieList">
+                <ul class="list-group" th:each="movie: ${movies}">
+                    <li class="list-group-item movieName" th:attr="data-id=${movie.id}" th:text="${movie.movieName}"></li>
                 </ul>
             </div>
-            <div class="list-group areaList">
+            <div class="box2 areaList">
 
             </div>
             <div class="list-group specificAreaList">
@@ -28,7 +37,7 @@
 
                     var movieId = $(this).data("id");
 
-                    $.getJSON('/api/reservations/area/'+movieId, function(arr) {
+                    $.getJSON('/api/areas/'+movieId, function(arr) {
 
                         var str = "";
 
@@ -54,7 +63,7 @@
 
                     var areaId = $(this).data("areaid");
 
-                    $.getJSON('/api/reservations/specificArea/'+areaId, function(arr) {
+                    $.getJSON('/api/specificAreas/'+areaId, function(arr) {
 
                         var str = "";
 

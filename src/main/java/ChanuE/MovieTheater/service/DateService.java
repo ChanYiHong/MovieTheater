@@ -4,10 +4,8 @@ import ChanuE.MovieTheater.domain.Date;
 import ChanuE.MovieTheater.domain.SpecificArea;
 import ChanuE.MovieTheater.dto.date.DateResponseDto;
 import ChanuE.MovieTheater.dto.date.DateSaveRequestDto;
-import ChanuE.MovieTheater.repository.date.DateRepository;
 import ChanuE.MovieTheater.repository.date.DateSpringDataJpaRepository;
 import ChanuE.MovieTheater.repository.specificArea.SpecificAreaRepository;
-import ChanuE.MovieTheater.repository.specificArea.SpecificAreaSpringDataJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +19,7 @@ import java.util.stream.Collectors;
 public class DateService {
 
     private final DateSpringDataJpaRepository dateRepository;
-    private final SpecificAreaSpringDataJpaRepository specificAreaRepository;
+    private final SpecificAreaRepository specificAreaRepository;
 
     @Transactional
     public void saveDate(DateSaveRequestDto requestDto, Long specificAreaId){

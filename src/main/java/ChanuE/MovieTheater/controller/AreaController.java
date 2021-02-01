@@ -21,16 +21,16 @@ public class AreaController {
     private final MovieService movieService;
     private final AreaService areaService;
 
-    @GetMapping("/{movie_id}/area")
-    public String areaList(@PathVariable("movie_id") Long id, Model model){
-
-        List<AreaResponseDto> areas = areaService.findAllAreaByMovieId(id);
-        MovieResponseDto movie = movieService.findOne(id);
-        model.addAttribute("areas", areas);
-        model.addAttribute("movie", movie);
-
-        return "/areas/area_list";
-    }
+//    @GetMapping("/{movie_id}/area")
+//    public String areaList(@PathVariable("movie_id") Long id, Model model){
+//
+//        List<AreaResponseDto> areas = areaService.findAllAreaByMovieId(id);
+//        MovieResponseDto movie = movieService.findOne(id);
+//        model.addAttribute("areas", areas);
+//        model.addAttribute("movie", movie);
+//
+//        return "/areas/area_list";
+//    }
 
     @GetMapping("/{movie_id}/area/create")
     public String createArea(@PathVariable("movie_id") Long id, Model model){
@@ -42,12 +42,12 @@ public class AreaController {
         return "/areas/area_create";
     }
 
-    @PostMapping("/{movie_id}/area/create")
-    public String saveArea(@PathVariable("movie_id") Long id, AreaSaveRequestDto requestDto){
-
-        areaService.saveArea(requestDto, id);
-
-        return "redirect:/{movie_id}/area";
-
-    }
+//    @PostMapping("/{movie_id}/area/create")
+//    public String saveArea(@PathVariable("movie_id") Long id, AreaSaveRequestDto requestDto){
+//
+//        areaService.saveArea(requestDto, id);
+//
+//        return "redirect:/{movie_id}/area";
+//
+//    }
 }

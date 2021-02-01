@@ -18,7 +18,7 @@ public class SpecificAreaSaveRequestDto {
     }
 
     public SpecificArea toEntity(){
-        return SpecificArea.builder().specificAreaName(this.name).build();
+        return SpecificArea.builder().name(this.name).build();
     }
 
 }
