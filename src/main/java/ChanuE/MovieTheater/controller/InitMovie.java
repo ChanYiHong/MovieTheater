@@ -22,8 +22,8 @@ public class InitMovie {
     @PostConstruct
     public void init() {
         //initMovieService.init();
-        initMovieService.initMovie();
-        initMovieService.initArea();
+        //initMovieService.initMovie();
+        //initMovieService.initTheater();
     }
 
     @Component
@@ -123,72 +123,35 @@ public class InitMovie {
         }
 
         @Transactional
-        public void initArea() {
-            Area 서울 = Area.builder().name("서울").build();
-            Area 경기 = Area.builder().name("경기").build();
-            Area 인천 = Area.builder().name("인천").build();
-            Area 강원 = Area.builder().name("강원").build();
-            Area 대전충청 = Area.builder().name("대전/충청").build();
-            Area 대구 = Area.builder().name("대구").build();
-            Area 부산울산 = Area.builder().name("부산/울산").build();
-            Area 경상 = Area.builder().name("경상").build();
-            Area 광주전라제주 = Area.builder().name("광주/전라/제주").build();
-
+        public void initTheater() {
 
             /** 서울 **/
 
+            Theater 강남 = Theater.builder().name("HCY서울강남").area("서울").specificArea("강남").build();
+            Theater 강변= Theater.builder().name("HCY서울강변").area("서울").specificArea("강변").build();
+            Theater 건대입구 = Theater.builder().name("HCY서울건대입구").area("서울").specificArea("건대입구").build();
+            Theater 구로 = Theater.builder().name("HCY서울구로").area("서울").specificArea("구로").build();
+            Theater 동대문 = Theater.builder().name("HCY서울동대문").area("서울").specificArea("동대문").build();
+            Theater 명동 = Theater.builder().name("HCY서울명동").area("서울").specificArea("명동").build();
+            Theater 목동 = Theater.builder().name("HCY서울목동").area("서울").specificArea("목동").build();
+            Theater 미아 = Theater.builder().name("HCY서울미아").area("서울").specificArea("미아").build();
+            Theater 불광 = Theater.builder().name("HCY서울불광").area("서울").specificArea("불광").build();
+            Theater 상봉 = Theater.builder().name("HCY서울상봉").area("서울").specificArea("상봉").build();
+            Theater 성신여대입구 = Theater.builder().name("HCY서울성신여대입구").area("서울").specificArea("성신여대입구").build();
+            Theater 송파 = Theater.builder().name("HCY서울송파").area("서울").specificArea("송파").build();
+            Theater 수유 = Theater.builder().name("HCY서울수유").area("서울").specificArea("수유").build();
+            Theater 신촌 = Theater.builder().name("HCY서울신촌").area("서울").specificArea("신촌").build();
+            Theater 압구정 = Theater.builder().name("HCY서울압구정").area("서울").specificArea("압구정").build();
+            Theater 용산 = Theater.builder().name("HCY서울용산").area("서울").specificArea("용산").build();
+            Theater 여의도 = Theater.builder().name("HCY서울여의도").area("서울").specificArea("여의도").build();
+            Theater 영등포 = Theater.builder().name("HCY서울영등포").area("서울").specificArea("영등포").build();
+            Theater 왕십리 = Theater.builder().name("HCY서울왕십리").area("서울").specificArea("왕십리").build();
+            Theater 중계 = Theater.builder().name("HCY서울중계").area("서울").specificArea("중계").build();
+            Theater 천호 = Theater.builder().name("HCY서울천호").area("서울").specificArea("천호").build();
+            Theater 청담 = Theater.builder().name("HCY서울청담").area("서울").specificArea("청담").build();
+            Theater 하계 = Theater.builder().name("HCY서울하계").area("서울").specificArea("하계").build();
+            Theater 홍대 = Theater.builder().name("HCY서울홍대").area("서울").specificArea("홍대").build();
 
-            SpecificArea 강남 = SpecificArea.builder().name("강남").build();
-            SpecificArea 강변 = SpecificArea.builder().name("강변").build();
-            SpecificArea 건대입구 = SpecificArea.builder().name("건대입구").build();
-            SpecificArea 구로 = SpecificArea.builder().name("구로").build();
-            SpecificArea 동대문 = SpecificArea.builder().name("동대문").build();
-            SpecificArea 명동 = SpecificArea.builder().name("명동").build();
-            SpecificArea 목동 = SpecificArea.builder().name("목동").build();
-            SpecificArea 미아 = SpecificArea.builder().name("미아").build();
-            SpecificArea 불광 = SpecificArea.builder().name("불광").build();
-            SpecificArea 상봉 = SpecificArea.builder().name("상봉").build();
-            SpecificArea 성신여대입구 = SpecificArea.builder().name("성신여대입구").build();
-            SpecificArea 송파 = SpecificArea.builder().name("송파").build();
-            SpecificArea 수유 = SpecificArea.builder().name("수유").build();
-            SpecificArea 신촌 = SpecificArea.builder().name("신촌").build();
-            SpecificArea 압구정 = SpecificArea.builder().name("압구정").build();
-            SpecificArea 용산 = SpecificArea.builder().name("용산").build();
-            SpecificArea 여의도 = SpecificArea.builder().name("여의도").build();
-            SpecificArea 영등포 = SpecificArea.builder().name("영등포").build();
-            SpecificArea 왕십리 = SpecificArea.builder().name("왕십리").build();
-            SpecificArea 중계 = SpecificArea.builder().name("중계").build();
-            SpecificArea 천호 = SpecificArea.builder().name("천호").build();
-            SpecificArea 청담 = SpecificArea.builder().name("청담").build();
-            SpecificArea 하계 = SpecificArea.builder().name("하계").build();
-            SpecificArea 홍대 = SpecificArea.builder().name("홍대").build();
-
-            강남.setArea(서울);
-            강변.setArea(서울);
-            건대입구.setArea(서울);
-            구로.setArea(서울);
-            동대문.setArea(서울);
-            명동.setArea(서울);
-            목동.setArea(서울);
-            미아.setArea(서울);
-            불광.setArea(서울);
-            상봉.setArea(서울);
-            성신여대입구.setArea(서울);
-            송파.setArea(서울);
-            수유.setArea(서울);
-            신촌.setArea(서울);
-            압구정.setArea(서울);
-            용산.setArea(서울);
-            여의도.setArea(서울);
-            영등포.setArea(서울);
-            왕십리.setArea(서울);
-            중계.setArea(서울);
-            천호.setArea(서울);
-            청담.setArea(서울);
-            하계.setArea(서울);
-            홍대.setArea(서울);
-
-            em.persist(서울);
             em.persist(강남);
             em.persist(강변);
             em.persist(건대입구);
@@ -217,53 +180,29 @@ public class InitMovie {
 
             /** 경기 **/
 
-            SpecificArea 광교 = SpecificArea.builder().name("광교").build();
-            SpecificArea 구리 = SpecificArea.builder().name("구리").build();
-            SpecificArea 동수원 = SpecificArea.builder().name("동수원").build();
-            SpecificArea 동탄 = SpecificArea.builder().name("동탄").build();
-            SpecificArea 범계 = SpecificArea.builder().name("범계").build();
-            SpecificArea 부천 = SpecificArea.builder().name("부천").build();
-            SpecificArea 산본 = SpecificArea.builder().name("산본").build();
-            SpecificArea 서현 = SpecificArea.builder().name("서현").build();
-            SpecificArea 모란 = SpecificArea.builder().name("모란").build();
-            SpecificArea 위례 = SpecificArea.builder().name("위례").build();
-            SpecificArea 안산 = SpecificArea.builder().name("안산").build();
-            SpecificArea 오리 = SpecificArea.builder().name("오리").build();
-            SpecificArea 용인 = SpecificArea.builder().name("용인").build();
-            SpecificArea 의정부 = SpecificArea.builder().name("의정부").build();
-            SpecificArea 이천 = SpecificArea.builder().name("이천").build();
-            SpecificArea 일산 = SpecificArea.builder().name("일산").build();
-            SpecificArea 죽전 = SpecificArea.builder().name("죽전").build();
-            SpecificArea 파주 = SpecificArea.builder().name("파주").build();
-            SpecificArea 판교 = SpecificArea.builder().name("판교").build();
-            SpecificArea 평택 = SpecificArea.builder().name("평택").build();
-            SpecificArea 포천 = SpecificArea.builder().name("포천").build();
-            SpecificArea 하남 = SpecificArea.builder().name("하남").build();
+            Theater 광교 = Theater.builder().name("HCY경기광교").area("경기").specificArea("광교").build();
+            Theater 구리 = Theater.builder().name("HCY경기구리").area("경기").specificArea("구리").build();
+            Theater 동수원 = Theater.builder().name("HCY경기동수원").area("경기").specificArea("동수원").build();
+            Theater 동탄 = Theater.builder().name("HCY경기동탄").area("경기").specificArea("동탄").build();
+            Theater 범계 = Theater.builder().name("HCY경기범계").area("경기").specificArea("범계").build();
+            Theater 부천 = Theater.builder().name("HCY경기부천").area("경기").specificArea("부천").build();
+            Theater 산본 = Theater.builder().name("HCY경기산본").area("경기").specificArea("산본").build();
+            Theater 서현 = Theater.builder().name("HCY경기서현").area("경기").specificArea("서현").build();
+            Theater 모란 = Theater.builder().name("HCY경기모란").area("경기").specificArea("모란").build();
+            Theater 위례 = Theater.builder().name("HCY경기위례").area("경기").specificArea("위례").build();
+            Theater 안산 = Theater.builder().name("HCY경기안산").area("경기").specificArea("안산").build();
+            Theater 오리 = Theater.builder().name("HCY경기오리").area("경기").specificArea("오리").build();
+            Theater 용인 = Theater.builder().name("HCY경기용인").area("경기").specificArea("용인").build();
+            Theater 의정부 = Theater.builder().name("HCY경기의정부").area("경기").specificArea("의정부").build();
+            Theater 이천 = Theater.builder().name("HCY경기이천").area("경기").specificArea("이천").build();
+            Theater 일산 = Theater.builder().name("HCY경기일산").area("경기").specificArea("일산").build();
+            Theater 죽전 = Theater.builder().name("HCY경기죽전").area("경기").specificArea("죽전").build();
+            Theater 파주 = Theater.builder().name("HCY경기파주").area("경기").specificArea("파주").build();
+            Theater 판교 = Theater.builder().name("HCY경기판교").area("경기").specificArea("판교").build();
+            Theater 평택 = Theater.builder().name("HCY경기평택").area("경기").specificArea("평택").build();
+            Theater 포천 = Theater.builder().name("HCY경기포천").area("경기").specificArea("포천").build();
+            Theater 하남 = Theater.builder().name("HCY경기하남").area("경기").specificArea("하남").build();
 
-            광교.setArea(경기);
-            구리.setArea(경기);
-            동수원.setArea(경기);
-            동탄.setArea(경기);
-            범계.setArea(경기);
-            부천.setArea(경기);
-            산본.setArea(경기);
-            서현.setArea(경기);
-            모란.setArea(경기);
-            위례.setArea(경기);
-            안산.setArea(경기);
-            오리.setArea(경기);
-            용인.setArea(경기);
-            의정부.setArea(경기);
-            이천.setArea(경기);
-            일산.setArea(경기);
-            죽전.setArea(경기);
-            파주.setArea(경기);
-            판교.setArea(경기);
-            평택.setArea(경기);
-            포천.setArea(경기);
-            하남.setArea(경기);
-
-            em.persist(경기);
             em.persist(광교);
             em.persist(구리);
             em.persist(동수원);
@@ -291,17 +230,11 @@ public class InitMovie {
 
             /** 인천 **/
 
-            SpecificArea 계양 = SpecificArea.builder().name("광교").build();
-            SpecificArea 부평 = SpecificArea.builder().name("구리").build();
-            SpecificArea 송도 = SpecificArea.builder().name("동수원").build();
-            SpecificArea 청라 = SpecificArea.builder().name("동탄").build();
+            Theater 계양 = Theater.builder().name("HCY인천계양").area("인천").specificArea("계양").build();
+            Theater 부평 = Theater.builder().name("HCY인천부평").area("인천").specificArea("부평").build();
+            Theater 송도 = Theater.builder().name("HCY인천송도").area("인천").specificArea("송도").build();
+            Theater 청라 = Theater.builder().name("HCY인천청라").area("인천").specificArea("청라").build();
 
-            계양.setArea(인천);
-            부평.setArea(인천);
-            송도.setArea(인천);
-            청라.setArea(인천);
-
-            em.persist(인천);
             em.persist(계양);
             em.persist(부평);
             em.persist(송도);
@@ -311,15 +244,10 @@ public class InitMovie {
 
             /** 강원 **/
 
-            SpecificArea 강릉 = SpecificArea.builder().name("강릉").build();
-            SpecificArea 원주 = SpecificArea.builder().name("원주").build();
-            SpecificArea 춘천 = SpecificArea.builder().name("춘천").build();
+            Theater 강릉 = Theater.builder().name("HCY강원강릉").area("강원").specificArea("강릉").build();
+            Theater 원주 = Theater.builder().name("HCY강원원주").area("강원").specificArea("원주").build();
+            Theater 춘천 = Theater.builder().name("HCY강원춘천").area("강원").specificArea("춘천").build();
 
-            강릉.setArea(강원);
-            원주.setArea(강원);
-            춘천.setArea(강원);
-
-            em.persist(강원);
             em.persist(강릉);
             em.persist(원주);
             em.persist(춘천);
@@ -328,27 +256,16 @@ public class InitMovie {
 
             /** 대전/충청 **/
 
-            SpecificArea 논산 = SpecificArea.builder().name("논산").build();
-            SpecificArea 당진 = SpecificArea.builder().name("당진").build();
-            SpecificArea 대전 = SpecificArea.builder().name("대전").build();
-            SpecificArea 보령 = SpecificArea.builder().name("보령").build();
-            SpecificArea 서산 = SpecificArea.builder().name("서산").build();
-            SpecificArea 세종 = SpecificArea.builder().name("세종").build();
-            SpecificArea 천안 = SpecificArea.builder().name("천안").build();
-            SpecificArea 청주 = SpecificArea.builder().name("청주").build();
-            SpecificArea 충북 = SpecificArea.builder().name("충북").build();
+            Theater 논산 = Theater.builder().name("HCY충청논산").area("대전/충청").specificArea("논산").build();
+            Theater 당진 = Theater.builder().name("HCY충청당진").area("대전/충청").specificArea("당진").build();
+            Theater 대전 = Theater.builder().name("HCY대전").area("대전/충청").specificArea("대전").build();
+            Theater 보령 = Theater.builder().name("HCY충청보령").area("대전/충청").specificArea("보령").build();
+            Theater 서산 = Theater.builder().name("HCY충청서산").area("대전/충청").specificArea("서산").build();
+            Theater 세종 = Theater.builder().name("HCY충청세종").area("대전/충청").specificArea("세종").build();
+            Theater 천안 = Theater.builder().name("HCY충청천안").area("대전/충청").specificArea("천안").build();
+            Theater 청주 = Theater.builder().name("HCY충청청주").area("대전/충청").specificArea("청주").build();
+            Theater 충북 = Theater.builder().name("HCY충청충북").area("대전/충청").specificArea("충북").build();
 
-            논산.setArea(대전충청);
-            당진.setArea(대전충청);
-            대전.setArea(대전충청);
-            보령.setArea(대전충청);
-            서산.setArea(대전충청);
-            세종.setArea(대전충청);
-            천안.setArea(대전충청);
-            청주.setArea(대전충청);
-            충북.setArea(대전충청);
-
-            em.persist(대전충청);
             em.persist(논산);
             em.persist(당진);
             em.persist(대전);
@@ -360,45 +277,28 @@ public class InitMovie {
             em.persist(충북);
 
 
-
             /** 대구 **/
 
-            SpecificArea 수성 = SpecificArea.builder().name("수성").build();
-            SpecificArea 월성 = SpecificArea.builder().name("월성").build();
-            SpecificArea 대구스타디움 = SpecificArea.builder().name("대구스타디움").build();
 
-            수성.setArea(대구);
-            월성.setArea(대구);
-            대구스타디움.setArea(대구);
+            Theater 수성 = Theater.builder().name("HCY대구수성").area("대구").specificArea("수성").build();
+            Theater 월성 = Theater.builder().name("HCY대구월성").area("대구").specificArea("월성").build();
+            Theater 대구스타디움 = Theater.builder().name("HCY대구대구스타디움").area("대구").specificArea("대구스타디움").build();
 
-
-            em.persist(대구);
             em.persist(수성);
             em.persist(월성);
             em.persist(대구스타디움);
 
-
             /** 부산/울산 **/
 
-            SpecificArea 남포 = SpecificArea.builder().name("남포").build();
-            SpecificArea 대연 = SpecificArea.builder().name("대연").build();
-            SpecificArea 동래 = SpecificArea.builder().name("동래").build();
-            SpecificArea 서면 = SpecificArea.builder().name("서면").build();
-            SpecificArea 센텀시티 = SpecificArea.builder().name("센텀시티").build();
-            SpecificArea 울산삼산 = SpecificArea.builder().name("울산삼산").build();
-            SpecificArea 울산신천 = SpecificArea.builder().name("울산신천").build();
-            SpecificArea 화명 = SpecificArea.builder().name("화명").build();
+            Theater 남포 = Theater.builder().name("HCY부산남포").area("부산/울산").specificArea("남포").build();
+            Theater 대연 = Theater.builder().name("HCY부산대연").area("부산/울산").specificArea("대연").build();
+            Theater 동래 = Theater.builder().name("HCY부산동래").area("부산/울산").specificArea("동래").build();
+            Theater 서면 = Theater.builder().name("HCY부산서면").area("부산/울산").specificArea("서면").build();
+            Theater 센텀시티 = Theater.builder().name("HCY부산센텀시티").area("부산/울산").specificArea("센텀시티").build();
+            Theater 울산삼산 = Theater.builder().name("HCY울산삼산").area("부산/울산").specificArea("삼산").build();
+            Theater 울산신천 = Theater.builder().name("HCY울산신천").area("부산/울산").specificArea("신천").build();
+            Theater 화명 = Theater.builder().name("HCY울산화명").area("부산/울산").specificArea("화명").build();
 
-            남포.setArea(부산울산);
-            대연.setArea(부산울산);
-            동래.setArea(부산울산);
-            서면.setArea(부산울산);
-            센텀시티.setArea(부산울산);
-            울산삼산.setArea(부산울산);
-            울산신천.setArea(부산울산);
-            화명.setArea(부산울산);
-
-            em.persist(부산울산);
             em.persist(남포);
             em.persist(대연);
             em.persist(동래);
@@ -411,25 +311,15 @@ public class InitMovie {
 
             /** 경상 **/
 
-            SpecificArea 거제 = SpecificArea.builder().name("거제").build();
-            SpecificArea 고성 = SpecificArea.builder().name("고성").build();
-            SpecificArea 구미 = SpecificArea.builder().name("구미").build();
-            SpecificArea 김천율곡 = SpecificArea.builder().name("김천율곡").build();
-            SpecificArea 김해 = SpecificArea.builder().name("김해").build();
-            SpecificArea 마산 = SpecificArea.builder().name("마산").build();
-            SpecificArea 북포항 = SpecificArea.builder().name("북포항").build();
-            SpecificArea 창원 = SpecificArea.builder().name("창원").build();
+            Theater 거제 = Theater.builder().name("HCY경상거제").area("경상").specificArea("거제").build();
+            Theater 고성 = Theater.builder().name("HCY경상고성").area("경상").specificArea("고성").build();
+            Theater 구미 = Theater.builder().name("HCY경상구미").area("경상").specificArea("구미").build();
+            Theater 김천율곡 = Theater.builder().name("HCY경상김천율곡").area("경상").specificArea("김천율곡").build();
+            Theater 김해 = Theater.builder().name("HCY경상김해").area("경상").specificArea("김해").build();
+            Theater 마산 = Theater.builder().name("HCY경상마산").area("경상").specificArea("마산").build();
+            Theater 북포항 = Theater.builder().name("HCY경상북포항").area("경상").specificArea("북포항").build();
+            Theater 창원 = Theater.builder().name("HCY경상창원").area("경상").specificArea("창원").build();
 
-            거제.setArea(경상);
-            고성.setArea(경상);
-            구미.setArea(경상);
-            김천율곡.setArea(경상);
-            김해.setArea(경상);
-            마산.setArea(경상);
-            북포항.setArea(경상);
-            창원.setArea(경상);
-
-            em.persist(경상);
             em.persist(거제);
             em.persist(고성);
             em.persist(구미);
@@ -442,29 +332,17 @@ public class InitMovie {
 
             /** 광주/전라/제주 **/
 
-            SpecificArea 광양 = SpecificArea.builder().name("광양").build();
-            SpecificArea 광주충장로 = SpecificArea.builder().name("광주충장로").build();
-            SpecificArea 광주터미널 = SpecificArea.builder().name("광주터미널").build();
-            SpecificArea 나주 = SpecificArea.builder().name("나주").build();
-            SpecificArea 목포 = SpecificArea.builder().name("목포").build();
-            SpecificArea 전주 = SpecificArea.builder().name("전주").build();
-            SpecificArea 순천 = SpecificArea.builder().name("순천").build();
-            SpecificArea 여수 = SpecificArea.builder().name("여수").build();
-            SpecificArea 정읍 = SpecificArea.builder().name("정읍").build();
-            SpecificArea 제주 = SpecificArea.builder().name("제주").build();
+            Theater 광양 = Theater.builder().name("HCY전라광양").area("광주/전라/제주").specificArea("광양").build();
+            Theater 광주충장로 = Theater.builder().name("HCY전라광양충장로").area("광주/전라/제주").specificArea("광양충장로").build();
+            Theater 광주터미널 = Theater.builder().name("HCY전라광양터미널").area("광주/전라/제주").specificArea("광양터미널").build();
+            Theater 나주 = Theater.builder().name("HCY전라나주").area("광주/전라/제주").specificArea("나주").build();
+            Theater 목포 = Theater.builder().name("HCY전라목포").area("광주/전라/제주").specificArea("목포").build();
+            Theater 전주 = Theater.builder().name("HCY전라전주").area("광주/전라/제주").specificArea("전주").build();
+            Theater 순천 = Theater.builder().name("HCY전라순천").area("광주/전라/제주").specificArea("순천").build();
+            Theater 여수 = Theater.builder().name("HCY전라여수").area("광주/전라/제주").specificArea("여수").build();
+            Theater 정읍 = Theater.builder().name("HCY전라정읍").area("광주/전라/제주").specificArea("정읍").build();
+            Theater 제주 = Theater.builder().name("HCY제주").area("광주/전라/제주").specificArea("제주").build();
 
-            광양.setArea(광주전라제주);
-            광주충장로.setArea(광주전라제주);
-            광주터미널.setArea(광주전라제주);
-            나주.setArea(광주전라제주);
-            목포.setArea(광주전라제주);
-            전주.setArea(광주전라제주);
-            순천.setArea(광주전라제주);
-            여수.setArea(광주전라제주);
-            정읍.setArea(광주전라제주);
-            제주.setArea(광주전라제주);
-
-            em.persist(광주전라제주);
             em.persist(광양);
             em.persist(광주충장로);
             em.persist(광주터미널);

@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"theaters"})
+@ToString()
 public class Movie extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,4 @@ public class Movie extends BaseEntity{
 
     private int runningTime;
 
-    @OneToMany(mappedBy = "movie")
-    @Builder.Default
-    private List<Theater> theaters = new ArrayList<>();
 }

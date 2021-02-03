@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"specificAreas", "theaters"})
 @Entity
 public class Area extends BaseEntity{
 
@@ -20,12 +19,7 @@ public class Area extends BaseEntity{
 
     private String name;
 
-    @OneToMany(mappedBy = "area")
-    @Builder.Default
-    private List<Theater> theaters = new ArrayList<>();
+    private String specificName;
 
-    @OneToMany(mappedBy = "area")
-    @Builder.Default
-    private List<SpecificArea> specificAreas = new ArrayList<>();
 
 }

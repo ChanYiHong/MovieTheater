@@ -11,13 +11,15 @@ import lombok.Setter;
 public class AreaSaveRequestDto {
 
     private String name;
+    private String specificName;
 
     @Builder
-    public AreaSaveRequestDto(String areaName){
+    public AreaSaveRequestDto(String areaName, String specificName){
         this.name = areaName;
+        this.specificName = specificName;
     }
 
     public Area toEntity(){
-        return Area.builder().name(this.name).build();
+        return Area.builder().name(this.name).specificName(this.specificName).build();
     }
 }

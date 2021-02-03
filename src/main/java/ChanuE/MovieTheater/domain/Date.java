@@ -7,36 +7,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@ToString(exclude = {"specificArea", "timeTables"})
-@Getter
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString(exclude = {"cinema", "times"})
 public class Date extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "date_id")
     private Long id;
 
     private LocalDate localDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "specific_area_id")
-    private SpecificArea specificArea;
-
-    @Builder
-    public Date(LocalDate localDate){
-        this.localDate = localDate;
-    }
+    private Cinema cinema;
 
     @OneToMany(mappedBy = "date")
     @Builder.Default
-    private List<TimeTable> timeTables = new ArrayList<>();
+    private List<Time> times = new ArrayList<>();
 
 
-    // == 연관 관계 메서드 == //
-    public void setSpecificArea(SpecificArea specificArea){
-        this.specificArea = specificArea;
-        specificArea.getDates().add(this);
-    }
 }

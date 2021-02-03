@@ -3,29 +3,24 @@ package ChanuE.MovieTheater.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@ToString(exclude = {"movie", "theater"})
-public class Cinema extends BaseEntity{
+@ToString
+public class Time extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cinema_id")
     private Long id;
 
-    private String name;
-
-    private Display display;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private Movie movie;
-
+    private LocalDateTime time;
     private int seats;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Theater theater;
+    @JoinColumn(name = "date_id")
+    private Date date;
 
 }

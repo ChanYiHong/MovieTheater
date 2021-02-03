@@ -1,4 +1,6 @@
-package ChanuE.MovieTheater.domain;
+package ChanuE.MovieTheater;
+
+import ChanuE.MovieTheater.domain.AgeLimit;
 
 public class EnumTest {
 

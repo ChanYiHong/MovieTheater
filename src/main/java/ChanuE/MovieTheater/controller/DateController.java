@@ -1,22 +1,10 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.dto.area.AreaResponseDto;
-import ChanuE.MovieTheater.dto.date.DateResponseDto;
-import ChanuE.MovieTheater.dto.date.DateSaveRequestDto;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
-import ChanuE.MovieTheater.dto.specificArea.SpecificAreaResponseDto;
 import ChanuE.MovieTheater.service.AreaService;
 import ChanuE.MovieTheater.service.DateService;
 import ChanuE.MovieTheater.service.MovieService;
-import ChanuE.MovieTheater.service.SpecificAreaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,7 +12,6 @@ public class DateController {
 
     private final MovieService movieService;
     private final AreaService areaService;
-    private final SpecificAreaService specificAreaService;
     private final DateService dateService;
 
 //    @GetMapping("/{movie_id}/{area_id}/{specific_id}/date_list")

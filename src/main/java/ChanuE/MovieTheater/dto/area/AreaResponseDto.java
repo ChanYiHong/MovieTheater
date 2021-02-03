@@ -10,9 +10,11 @@ public class AreaResponseDto {
 
     private Long id;
     private String name;
+    private String specificName;
 
     public AreaResponseDto(Area area){
         this.id = area.getId();
         this.name = area.getName();
+        this.specificName = area.getSpecificName();
     }
 }
