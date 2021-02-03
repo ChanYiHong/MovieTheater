@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+
+    <th:block th:fragment="content">
+        <h1 class="mt-4" th:text="${theater.name}"></h1>
+
+        <form th:action="@{/cinemas/{id}/new (id=${theater.id})}" th:object="${cinemaSaveDTO}" method="post">
+            <div class="form-group">
+                <label >Cinema Name</label>
+                <input type="text" class="form-control" th:field="*{name}" size="50" placeholder="상영관 이름 등록해주세요!" />
+            </div>
+            <div class="form-group">
+                <label >영화 선택 : </label>
+                <select th:field="*{movieName}" class="form-control">
+                    <option th:each="movie : ${movies}" th:value="${movie.movieName}" th:text="${movie.movieName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >Display 선택 : </label>
+                <select th:field="*{display}" class="form-control">
+                    <option th:each="display : ${T(ChanuE.MovieTheater.domain.Display).values()}"
+                            th:value="${display}"
+                            th:text="${display}">
+                    </option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >좌석 수 : </label>
+                <select th:field="*{seats}" class="form-control">
+                    <option value="0">선택해주세요</option>
+                    <option value=100>100</option>
+                    <option value=120>120</option>
+                </select>
+            </div>
+            <div>
+                <label>년도 선택:</label>
+                <select th:field="*{year}" class="form-control">
+                    <option th:value=0 th:text="선택해주세요"></option>
+                    <option th:each="i : ${#numbers.sequence(2021, 2022)}" th:value="${i}" th:text="${i} + '년'"></option>
+                </select>
+            </div>
+            <div>
+                <label>월 선택:</label>
+                <select th:field="*{month}" class="form-control">
+                    <option th:value=0 th:text="선택해주세요"></option>
+                    <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i} + '월'"></option>
+                </select>
+            </div>
+            <div>
+                <label>일 선택:</label>
+                <select th:field="*{day}" class="form-control">
+                    <option th:value=0 th:text="선택해주세요"></option>
+                    <option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i} + '일'"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">저장</button>
+        </form>
+
+    </th:block>
+</th:block>
+</html>

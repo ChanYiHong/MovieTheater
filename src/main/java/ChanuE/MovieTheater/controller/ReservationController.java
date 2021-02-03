@@ -20,7 +20,6 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final MemberService memberService;
     private final MovieService movieService;
-    private final AreaService areaService;
 
     @GetMapping("/reservations")
     public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,

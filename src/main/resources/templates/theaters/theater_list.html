@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <div>
+            <h1 class="mt-4">Admin Theater List</h1>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Area</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="theater : ${result.dtoList}">
+                    <td>[[${theater.id}]]</td>
+                    <th scope="row">
+                        <a th:href="@{/cinemas/{id} (id=${theater.id})}">
+                            [[${theater.name}]]
+                        </a>
+                    </th>
+                    <td>[[${theater.area}]]</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item " th:if="${result.prev}">
+                    <a class="page-link" th:href="@{/theaters/all(page=${result.start-1})}" tabindex="-1">PREVIOUS</a>
+                </li>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList}">
+                    <a class="page-link" th:href="@{/theaters/all(page=${page})}">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:if="${result.next}">
+                    <a class="page-link" th:href="@{/theaters/all(page=${result.end+1})}">NEXT</a>
+                </li>
+            </ul>
+
+        </div>
+    </th:block>
+</th:block>
+</html>

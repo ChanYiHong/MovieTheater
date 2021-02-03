@@ -1,8 +1,10 @@
 package ChanuE.MovieTheater.domain;
 
+import ChanuE.MovieTheater.converter.DisplayConverter;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -18,14 +20,16 @@ public class Cinema extends BaseEntity{
 
     private String name;
 
+    @Convert(converter = DisplayConverter.class)
     private Display display;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Movie movie;
+    private LocalDate date;
 
     private int seats;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Theater theater;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    private Movie movie;
 }

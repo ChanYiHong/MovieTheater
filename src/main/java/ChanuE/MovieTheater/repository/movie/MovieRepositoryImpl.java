@@ -20,8 +20,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static ChanuE.MovieTheater.domain.QArea.area;
 import static ChanuE.MovieTheater.domain.QMovie.movie;
 import static ChanuE.MovieTheater.domain.QReview.review;
 

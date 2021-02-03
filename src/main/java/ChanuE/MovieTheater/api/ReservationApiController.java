@@ -1,6 +1,5 @@
 package ChanuE.MovieTheater.api;
 
-import ChanuE.MovieTheater.service.AreaService;
 import ChanuE.MovieTheater.service.ReservationServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +14,6 @@ import java.util.List;
 public class ReservationApiController {
 
     private final ReservationServiceImpl reservationServiceImpl;
-    private final AreaService areaService;
 
 //    @GetMapping("")
 //    public Result reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch){

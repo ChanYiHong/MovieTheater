@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <div>
+            <h1 class="mt-4" th:text="${theater.name} + ' Cinema List'"></h1>
+
+            <a th:href="@{/cinemas/{id}/new (id=${theater.id})}">
+                <button type="button" class="btn btn-outline-primary">생성</button>
+            </a>
+
+            <div>
+                <form th:action="@{/cinemas/{id} (id=${theater.id})}" th:object="${cinemaSearch}" class="form-inline">
+                    <label>년도 선택:</label>
+                    <select th:field="*{year}" class="form-control">
+                        <option th:value=0 th:text="선택안함"></option>
+                        <option th:each="i : ${#numbers.sequence(2021, 2022)}" th:value="${i}" th:text="${i} + '년'"></option>
+                    </select>
+                    <label>월 선택:</label>
+                    <select th:field="*{month}" class="form-control">
+                        <option th:value=0 th:text="선택안함"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i} + '월'"></option>
+                    </select>
+                    <label>일 선택:</label>
+                    <select th:field="*{day}" class="form-control">
+                        <option th:value=0 th:text="선택안함"></option>
+                        <option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i} + '일'"></option>
+                    </select>
+                    <button type="submit" class="btn btn-primary mb-2">검색</button>
+                </form>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Display</th>
+                    <th scope="col">MovieName</th>
+                    <th scope="col">Seats</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cinema : ${result.dtoList}">
+                    <td>[[${cinema.name}]]</td>
+                    <td>[[${cinema.display}]]</td>
+                    <td>[[${cinema.movieName}]]</td>
+                    <td>[[${cinema.seats}]]</td>
+                    <td>[[${cinema.date}]]</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item " th:if="${result.prev}">
+                    <a class="page-link" th:href="@{/cinemas/{id} (page=${result.start-1}, id=${theater.id})}" tabindex="-1">PREVIOUS</a>
+                </li>
+                <li th:class=" 'page-item ' + ${result.page == page?'active':''}" th:each="page : ${result.pageList}"}>
+                    <a class="page-link" th:href="@{/cinemas/{id} (page=${page}, id=${theater.id})}">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:if="${result.next}">
+                    <a class="page-link" th:href="@{/cinemas/{id} (page=${result.end+1}, id=${theater.id})}">NEXT</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <script inline="javascript">
+
+        </script>
+    </th:block>
+</th:block>
+</html>

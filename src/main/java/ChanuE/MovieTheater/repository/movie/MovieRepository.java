@@ -10,10 +10,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MovieRepository extends JpaRepository<Movie, Long>, MovieRepositoryCustom{
 
-    List<Movie> findMovieByMovieName(String name);
+    Optional<Movie> findMovieByMovieName(String name);
 
 //    @Query("select m, a, s, d from Movie m left join Area a on a.movie = m " +
 //            "left join SpecificArea s on s.area = a " +

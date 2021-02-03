@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -34,8 +35,8 @@ public class MovieService {
     }
 
     private void checkDuplicateMovie(String name){
-        List<Movie> movies = movieRepository.findMovieByMovieName(name);
-        if(!movies.isEmpty()){
+        Optional<Movie> movies = movieRepository.findMovieByMovieName(name);
+        if(!movies.isPresent()){
             throw new IllegalStateException("Duplicate Movie Name!! Please type other movie name!!");
         }
     }

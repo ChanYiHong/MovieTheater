@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.repository;
+package ChanuE.MovieTheater.repository.movie;
 
 import ChanuE.MovieTheater.domain.AgeLimit;
 import ChanuE.MovieTheater.domain.Movie;
@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,7 +67,13 @@ public class MovieRepositoryTest {
             System.out.println((Long)objects[1]);
             System.out.println((Double)objects[2]);
         });
+    }
 
+    @Test
+    public void findMovieByMovieNameTest() throws Exception {
+        Optional<Movie> result = movieRepository.findMovieByMovieName("소울");
+        Movie movie = result.get();
+        System.out.println(movie);
     }
 
 }

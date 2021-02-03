@@ -4,12 +4,14 @@ import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Display;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Theater;
-import ChanuE.MovieTheater.repository.date.DateRepository;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.theater.TheaterRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +28,6 @@ class CinemaRepositoryTest {
     MovieRepository movieRepository;
     @Autowired
     TheaterRepository theaterRepository;
-    @Autowired
-    DateRepository dateRepository;
     @Autowired
     CinemaRepository cinemaRepository;
 
@@ -104,6 +104,27 @@ class CinemaRepositoryTest {
         System.out.println("-------------------------");
 
         for (Cinema cinema : result4) {
+            System.out.println(cinema);
+        }
+    }
+
+    @Test
+    public void cinemaFindTest() throws Exception {
+        CinemaSearch cinemaSearch = new CinemaSearch();
+        cinemaSearch.setYear(2021);
+        cinemaSearch.setMonth(2);
+        cinemaSearch.setDay(6);
+        Pageable pageable = PageRequest.of(0, 10);
+        Long theaterId = 2L;
+        Page<Cinema> result = cinemaRepository.findCinemaWithSearchCond(theaterId, cinemaSearch, pageable);
+
+        List<Cinema> content = result.getContent();
+
+        System.out.println("+++++++++++++");
+        System.out.println(content.size());
+        System.out.println("+++++++++++++");
+
+        for (Cinema cinema : content) {
             System.out.println(cinema);
         }
     }

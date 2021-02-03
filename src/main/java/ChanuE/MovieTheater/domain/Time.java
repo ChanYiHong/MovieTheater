@@ -20,7 +20,5 @@ public class Time extends BaseEntity{
     private int seats;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "date_id")
-    private Date date;
-
+    private Cinema cinema;
 }
