@@ -10,7 +10,7 @@
                     <label>시간 선택:</label>
                     <select th:field="*{hour}" class="form-control">
                         <option th:value=0 th:text="선택안함"></option>
-                        <option th:each="i : ${#numbers.sequence(0, 23)}" th:value="${i}" th:text="${i} + '시간'"></option>
+                        <option th:each="i : ${#numbers.sequence(0, 23)}" th:value="${i}" th:text="${i} + '시'"></option>
                     </select>
                     <label>분 선택:</label>
                     <select th:field="*{minute}" class="form-control">
@@ -35,14 +35,113 @@
                 </thead>
                 <tbody>
                 <tr th:each="time : ${result}">
-                    <td>[[${time.time}]]</td>
+                    <td class="time" th:attr="data-id=${time.id}">[[${time.time}]]</td>
                     <td>[[${time.seatNum}]]</td>
                 </tr>
                 </tbody>
             </table>
         </div>
 
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">좌석 현황</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <table id="seat-table" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">1열</th>
+                            <th scope="col">2열</th>
+                            <th scope="col">3열</th>
+                            <th scope="col">4열</th>
+                            <th scope="col">5열</th>
+                            <th scope="col">6열</th>
+                            <th scope="col">7열</th>
+                            <th scope="col">8열</th>
+                            <th scope="col">9열</th>
+                            <th scope="col">10열</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary seatClose" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script inline="javascript">
+
+            $(document).ready(function(){
+                var modal = $(".modal");
+                var tr = $(".table-content");
+
+                $(".time").on("click", function() {
+
+                    var id = $(this).data("id");
+
+                    $.getJSON("/seats/"+id, function(arr){
+                        console.log(arr);
+
+                        var data = arr["data"];
+                        var size = arr["size"];
+
+                        console.log(data);
+                        console.log(size);
+
+                        // 전체 좌석이 100석
+                        if(size == 100) {
+
+                            for(var i = 0; i < 10; i++) {
+                                var str = "";
+                                for(var j = 0; j < 10; j++) {
+                                    if(data[i*10+j].available == true){
+                                        str += "<td style='background-color: #00CDFF'>" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    }
+                                    else{
+                                        str += "<td style='background-color: #FF9BE6'>" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    }
+                                }
+                                $('#seat-table > tbody:last').append('<tr >' + str + '</tr>');
+                            }
+                        }
+
+                        // 전체 좌석이 120석
+                        if(size == 120) {
+
+                            for(var i = 0; i < 10; i++) {
+                                var str = "";
+                                for(var j = 0; j < 12; j++) {
+                                    if(data[i*10+j].available == true){
+                                        str += "<td style='background-color: #00CDFF'>" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    }
+                                    else{
+                                        str += "<td style='background-color: #FF9BE6'>" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    }
+                                }
+                                $('#seat-table > tbody:last').append('<tr >' + str + '</tr>');
+                            }
+
+                        }
+
+                        modal.modal('show');
+
+                    });
+                });
+
+                $(".seatClose").on("click", function(){
+
+                    $('#seat-table > tbody').empty();
+                    modal.modal('hide');
+
+                });
+            });
 
         </script>
     </th:block>

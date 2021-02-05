@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -45,5 +46,11 @@ public class SeatServiceImpl implements SeatService{
             }
         }
         return seats;
+    }
+
+    @Override
+    public List<SeatDTO> getSeat(Long timeId) {
+        List<Seat> result = seatRepository.findByTimeId(timeId);
+        return result.stream().map(this::entityToDTO).collect(Collectors.toList());
     }
 }
