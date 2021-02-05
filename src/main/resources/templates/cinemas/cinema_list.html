@@ -42,7 +42,11 @@
                 </thead>
                 <tbody>
                 <tr th:each="cinema : ${result.dtoList}">
-                    <td>[[${cinema.name}]]</td>
+                    <th scope="row">
+                        <a th:href="@{/times/{id}/all (id=${cinema.id})}">
+                            [[${cinema.name}]]
+                        </a>
+                    </th>
                     <td>[[${cinema.display}]]</td>
                     <td>[[${cinema.movieName}]]</td>
                     <td>[[${cinema.seats}]]</td>

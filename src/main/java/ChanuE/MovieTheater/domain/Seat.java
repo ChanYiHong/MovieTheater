@@ -1,13 +1,16 @@
 package ChanuE.MovieTheater.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@ToString(exclude = {"time"})
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Seat {
 
@@ -16,29 +19,15 @@ public class Seat {
     private Long id;
 
     @Column(nullable = false)
-    private String location;
+    private int row;
 
-    @Column
-    private int isAvailable;
+    @Column(nullable = false)
+    private int col;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "time_id")
-//    private TimeTable timeTable;
+    @Column(nullable = false)
+    private boolean isAvailable;
 
-    @Builder
-    public Seat(String location, int isAvailable){
-        this.location = location;
-        this.isAvailable = isAvailable;
-    }
-
-
-    // == 연관관계 메서드 == //
-    // == Seat(다) <--> TimeTable(1)
-//
-//    public void setTimeTable(TimeTable timeTable){
-//        this.timeTable = timeTable;
-//        timeTable.getSeats().add(this);
-//    }
-
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "time_id")
+    private Time time;
 }

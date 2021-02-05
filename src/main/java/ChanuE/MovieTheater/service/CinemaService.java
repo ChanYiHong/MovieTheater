@@ -19,6 +19,8 @@ public interface CinemaService {
 
     PageResponseDTO<Cinema, CinemaDTO> list(Long theaterId, CinemaSearch cinemaSearch, PageRequestDTO pageRequestDTO);
 
+    CinemaDTO get(Long id);
+
     default Cinema dtoToEntity(CinemaSaveDTO cinemaSaveDTO, Movie movie, Theater theater){
         return Cinema.builder()
                 .id(cinemaSaveDTO.getId())

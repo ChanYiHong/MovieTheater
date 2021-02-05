@@ -8,6 +8,7 @@ import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Log4j2
 public class MovieService {
 
     private final MovieRepository movieRepository;
@@ -46,8 +48,12 @@ public class MovieService {
 
         List<Object[]> result = movieRepository.findMovieWithReviewCount(id);
         Object[] objects = result.get(0);
+        Movie movie = (Movie)objects[0];
+        Long reviewCnt = (Long)objects[1];
+        Double avg = (Double)objects[2];
 
-        return entityToDto((Movie)objects[0], (Long)objects[1], (Double)objects[2]);
+        if(avg == null) return entityToDto(movie, reviewCnt, 0);
+        else return entityToDto(movie, reviewCnt, avg);
     }
 
     // 영화 예약 화면에서 단순한 영화 목록만 조회시 사용.

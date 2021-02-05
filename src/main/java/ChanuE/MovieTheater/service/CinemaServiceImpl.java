@@ -62,4 +62,12 @@ public class CinemaServiceImpl implements CinemaService{
 
         return new PageResponseDTO<>(result, fn);
     }
+
+    @Override
+    public CinemaDTO get(Long id) {
+        log.info("Get one Cinema : " + id);
+        Cinema result = cinemaRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 Cinema!!!"));
+        return entityToDTO(result);
+    }
 }

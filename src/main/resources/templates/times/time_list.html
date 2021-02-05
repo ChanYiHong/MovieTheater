@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <div>
+            <h1 class="mt-4" th:text="${cinemaDTO.name} + ' Time Table'"></h1>
+
+            <div>
+                <form th:action="@{/times/{id}/new (id=${cinemaDTO.id})}" th:object="${timeSaveDTO}" class="form-inline" method="post">
+                    <label>시간 선택:</label>
+                    <select th:field="*{hour}" class="form-control">
+                        <option th:value=0 th:text="선택안함"></option>
+                        <option th:each="i : ${#numbers.sequence(0, 23)}" th:value="${i}" th:text="${i} + '시간'"></option>
+                    </select>
+                    <label>분 선택:</label>
+                    <select th:field="*{minute}" class="form-control">
+                        <option th:value=0 th:text="선택안함"></option>
+                        <option th:each="i : ${#numbers.sequence(0, 59)}" th:value="${i}" th:text="${i} + '분'"></option>
+                    </select>
+                    <div>
+                        <input type="hidden" th:value="${cinemaDTO.id}" id="cinemaId" name="cinemaId">
+                        <input type="hidden" th:value="${cinemaDTO.seats}" id="seatNum" name="seatNum">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">시간 생성</button>
+                </form>
+            </div>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Time</th>
+                    <th scope="col">TotalSeats</th>
+                    <th scope="col">AvailableSeats</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="time : ${result}">
+                    <td>[[${time.time}]]</td>
+                    <td>[[${time.seatNum}]]</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script inline="javascript">
+
+        </script>
+    </th:block>
+</th:block>
+</html>
