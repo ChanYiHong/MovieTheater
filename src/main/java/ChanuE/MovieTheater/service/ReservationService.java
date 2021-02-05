@@ -25,9 +25,8 @@ public interface ReservationService {
                 .movieId(movie.getId())
                 .memberName(member.getMemberName())
                 .movieName(movie.getMovieName())
-                .areaName(reservation.getAreaName())
-                .specificAreaName(reservation.getSpecificAreaName())
-                .movieDate(reservation.getMovieDate())
+                .areaName(reservation.getArea())
+                .specificAreaName(reservation.getSpecificArea())
                 .createdDate(reservation.getCreatedDate())
                 .status(reservation.getStatus())
                 .build();
@@ -40,9 +39,8 @@ public interface ReservationService {
                 .id(reservationDTO.getId())
                 .member(member)
                 .movie(movie)
-                .areaName(reservationDTO.getAreaName())
-                .specificAreaName(reservationDTO.getSpecificAreaName())
-                .movieDate(reservationDTO.getMovieDate())
+                .area(reservationDTO.getAreaName())
+                .specificArea(reservationDTO.getSpecificAreaName())
                 .status(reservationDTO.getStatus())
                 .build();
     }

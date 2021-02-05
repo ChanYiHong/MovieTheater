@@ -1,6 +1,6 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/reservations")
 @RequiredArgsConstructor
 public class ReservationController {
 
@@ -21,28 +22,25 @@ public class ReservationController {
     private final MemberService memberService;
     private final MovieService movieService;
 
-    @GetMapping("/reservations")
+    @GetMapping("")
     public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,
                                   PageRequestDTO pageRequestDTO, Model model){
 
         PageResponseDTO<Object[], ReservationDTO> reservations = reservationService.getList(reservationSearch, pageRequestDTO);
         model.addAttribute("result", reservations);
 
-        return "/reservations/reservation_list";
+        return "/reservation_list";
 
     }
 
-    @GetMapping("/reservations/create")
+    @GetMapping("/create")
     public String reservationForm(Model model)
     {
-        List<MovieResponseDto> movies = movieService.findAll();
-        model.addAttribute("movies", movies);
-
         return "/reservations/reservation_form";
     }
 
 
-    @PostMapping("/reservations/{reservation_id}/cancel")
+    @PostMapping("/{reservation_id}/cancel")
     public String cancelReservation(@PathVariable("reservation_id") Long id){
         reservationService.cancelReservation(id);
         return "redirect:/reservations";

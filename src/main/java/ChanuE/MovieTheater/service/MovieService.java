@@ -1,8 +1,8 @@
 package ChanuE.MovieTheater.service;
 
 import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
-import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
+import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
@@ -29,7 +29,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     @Transactional
-    public Long saveMovie(MovieSaveRequestDto requestDto){
+    public Long saveMovie(MovieSaveRequestDTO requestDto){
         Movie movie = dtoToEntity(requestDto);
         checkDuplicateMovie(movie.getMovieName());
         movieRepository.save(movie);
@@ -44,7 +44,7 @@ public class MovieService {
     }
 
     // 리뷰 개수 까지 출력.
-    public MovieResponseDto findOne(Long id){
+    public MovieResponseDTO findOne(Long id){
 
         List<Object[]> result = movieRepository.findMovieWithReviewCount(id);
         Object[] objects = result.get(0);
@@ -57,17 +57,17 @@ public class MovieService {
     }
 
     // 영화 예약 화면에서 단순한 영화 목록만 조회시 사용.
-    public List<MovieResponseDto> findAll(){
+    public List<MovieResponseDTO> findAll(){
         List<Movie> result = movieRepository.findAll();
         return result.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 
     // 영화 목록 페이징 추가.
-    public PageResponseDTO<Object[], MovieResponseDto> list(PageRequestDTO pageRequestDTO, MovieSearch movieSearch) {
+    public PageResponseDTO<Object[], MovieResponseDTO> list(PageRequestDTO pageRequestDTO, MovieSearch movieSearch) {
         Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").ascending());
         Page<Object[]> result = movieRepository.findAllBySearchCond(movieSearch, pageable);
         // Search condition, controller랑 view에 추가 하기 시작
-        Function<Object[], MovieResponseDto> fn = entity -> {
+        Function<Object[], MovieResponseDTO> fn = entity -> {
             if(entity[2] == null){
                 return entityToDto((Movie) entity[0], (Long) entity[1], 0);
             } else {
@@ -78,8 +78,8 @@ public class MovieService {
         return new PageResponseDTO<>(result, fn);
     }
 
-    private MovieResponseDto entityToDto(Movie movie) {
-        return MovieResponseDto.builder()
+    private MovieResponseDTO entityToDto(Movie movie) {
+        return MovieResponseDTO.builder()
                 .id(movie.getId())
                 .movieName(movie.getMovieName())
                 .ageLimit(movie.getAgeLimit())
@@ -89,8 +89,8 @@ public class MovieService {
                 .build();
     }
 
-    private MovieResponseDto entityToDto(Movie movie, Long reviewCnt, double gradeAvg) {
-        return MovieResponseDto.builder()
+    private MovieResponseDTO entityToDto(Movie movie, Long reviewCnt, double gradeAvg) {
+        return MovieResponseDTO.builder()
                 .id(movie.getId())
                 .movieName(movie.getMovieName())
                 .ageLimit(movie.getAgeLimit())
@@ -102,7 +102,7 @@ public class MovieService {
                 .build();
     }
 
-    private Movie dtoToEntity(MovieSaveRequestDto dto) {
+    private Movie dtoToEntity(MovieSaveRequestDTO dto) {
         return Movie.builder()
                 .movieName(dto.getName())
                 .director(dto.getDirector())

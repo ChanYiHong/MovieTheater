@@ -3,6 +3,7 @@ package ChanuE.MovieTheater.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,7 +19,6 @@ public class Reservation extends BaseEntity{
     private Long id;
 
     private int totalPerson;
-
     private int totalPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -31,9 +31,9 @@ public class Reservation extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
 
-    private String areaName;
-    private String specificAreaName;
-    private LocalDateTime movieDate;
+    private String area;
+    private String specificArea;
+    private LocalDate date;
 
 
     // == 생성 메서드 == //

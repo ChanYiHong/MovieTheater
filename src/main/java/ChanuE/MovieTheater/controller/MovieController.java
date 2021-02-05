@@ -1,8 +1,7 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
-import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
+import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
@@ -12,8 +11,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/movies/")
@@ -27,7 +24,7 @@ public class MovieController {
     public String movieList(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
                             PageRequestDTO pageRequestDTO, Model model){
         log.info("Get Movie List");
-        PageResponseDTO<Object[], MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
+        PageResponseDTO<Object[], MovieResponseDTO> result = movieService.list(pageRequestDTO, movieSearch);
         model.addAttribute("result", result);
         return "/movies/movie_list";
     }
@@ -39,7 +36,7 @@ public class MovieController {
     }
 
     @PostMapping("/create")
-    public String saveMovie(@ModelAttribute MovieSaveRequestDto requestDto){
+    public String saveMovie(@ModelAttribute MovieSaveRequestDTO requestDto){
         log.info("이름 : " + requestDto.getName());
         movieService.saveMovie(requestDto);
         return "redirect:/movies/list";
@@ -50,7 +47,7 @@ public class MovieController {
     public String movieInfo(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
                             PageRequestDTO pageRequestDTO, Model model) {
         log.info("Movie Information");
-        PageResponseDTO<Object[], MovieResponseDto> result = movieService.list(pageRequestDTO, movieSearch);
+        PageResponseDTO<Object[], MovieResponseDTO> result = movieService.list(pageRequestDTO, movieSearch);
         model.addAttribute("result", result);
         return "/movies/movie_info";
     }
@@ -60,7 +57,7 @@ public class MovieController {
     public String readMovie(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO,
                             @PathVariable("id") Long id, Model model) {
         log.info("Movie Specific");
-        MovieResponseDto findMovie = movieService.findOne(id);
+        MovieResponseDTO findMovie = movieService.findOne(id);
 
         log.info(findMovie);
         model.addAttribute("result", findMovie);

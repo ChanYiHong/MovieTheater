@@ -3,7 +3,7 @@ package ChanuE.MovieTheater.controller;
 import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.dto.cinema.CinemaDTO;
 import ChanuE.MovieTheater.dto.cinema.CinemaSaveDTO;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.theater.TheaterDTO;
@@ -46,7 +46,7 @@ public class CinemaController {
     @GetMapping("/{theater_id}/new")
     public String create(@PathVariable("theater_id") Long theaterId,
                          @ModelAttribute("cinemaSaveDTO") CinemaSaveDTO dto, Model model) {
-        List<MovieResponseDto> movies = movieService.findAll();
+        List<MovieResponseDTO> movies = movieService.findAll();
         TheaterDTO theater = theaterService.get(theaterId);
         model.addAttribute("movies", movies);
         model.addAttribute("theater", theater);

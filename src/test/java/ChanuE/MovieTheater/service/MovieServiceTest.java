@@ -1,6 +1,6 @@
 package ChanuE.MovieTheater.service;
 
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MovieServiceTest {
@@ -22,9 +20,9 @@ class MovieServiceTest {
 
         PageRequestDTO pageRequestDTO = new PageRequestDTO();
 
-        PageResponseDTO<Object[], MovieResponseDto> list = movieService.list(pageRequestDTO, new MovieSearch());
+        PageResponseDTO<Object[], MovieResponseDTO> list = movieService.list(pageRequestDTO, new MovieSearch());
 
-        List<MovieResponseDto> dtoList = list.getDtoList();
+        List<MovieResponseDTO> dtoList = list.getDtoList();
 
         dtoList.forEach(movieResponseDto -> System.out.println(movieResponseDto));
 

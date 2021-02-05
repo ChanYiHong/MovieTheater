@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-public class MovieResponseDto {
+public class MovieResponseDTO {
 
     private Long id;
     private String movieName;

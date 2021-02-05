@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @ToString
-public class MovieSaveRequestDto {
+public class MovieSaveRequestDTO {
 
     private String name;
     private String director;

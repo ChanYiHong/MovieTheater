@@ -14,9 +14,7 @@
 
         <div>
             <div class="box1 movieList">
-                <ul class="list-group" th:each="movie: ${movies}">
-                    <li class="list-group-item movieName" th:attr="data-id=${movie.id}" th:text="${movie.movieName}"></li>
-                </ul>
+
             </div>
             <div class="box2 areaList">
 
@@ -29,15 +27,29 @@
         <script th:inline="javascript">
             $(document).ready(function() {
 
+                var movieList = $(".movieList");
                 var areaList = $(".areaList");
                 var specificAreaList = $(".specificAreaList");
 
+                $.getJSON("/movies", function(arr) {
+
+                    var str = "";
+                    var data = arr["data"];
+
+                    $.each(data, function(idx, movie){
+                        str += "<div class='movie-body' data-id=" + movie.id + ">";  // areaId 하면 오류.. 소문자만
+                        str += "<h5 class='movie-title'>" + movie.movieName + "</h5>";
+                        str += "</div>";
+                    });
+                    movieList.html(str);
+                });
+
                 // 영화 제목 클릭시 지역 보이게!
-                $(".movieName").on("click", function() {
+                $(".movieList").on("click", ".movie-body" ,function() {
 
                     var movieId = $(this).data("id");
 
-                    $.getJSON('/api/areas/'+movieId, function(arr) {
+                    $.getJSON('/theaters/area/'+movieId, function(arr) {
 
                         var str = "";
 
@@ -46,24 +58,26 @@
                         $.each(data, function(idx, area){
 
                             console.log(idx + " : " + area);
-                            str += "<div class='card-body' data-areaid=" + area.id + ">";  // areaId 하면 오류.. 소문자만
-                            str += "<h5 class='card-title'>" + area.name + "</h5>";
+                            str += "<div class='area-body' data-movieid="+movieId+" data-area=" + area.area + ">";  // areaId 하면 오류.. 소문자만
+                            str += "<h5 class='area-title'>" + area.area + " (" + area.specificCnt + ")</h5>";
                             str += "</div>";
 
                         });
 
                         areaList.html(str);
+                        specificAreaList.html("");
 
                     });
 
                 });
 
                 // 지역 클릭시 구체적인 지역 보이게!
-                $(".areaList").on("click", ".card-body", function() {
+                $(".areaList").on("click", ".area-body", function() {
 
-                    var areaId = $(this).data("areaid");
+                    var area = $(this).data("area");
+                    var movieId = $(this).data("movieid");
 
-                    $.getJSON('/api/specificAreas/'+areaId, function(arr) {
+                    $.getJSON('/theaters/specificArea/?area='+area+'&movieId='+movieId, function(arr) {
 
                         var str = "";
 
@@ -72,8 +86,8 @@
                         $.each(data, function(idx, specificArea){
 
                             console.log(idx + " : " + specificArea);
-                            str += "<div class='card-body' data-specificareaid=" + specificArea.id + ">";
-                            str += "<h5 class='card-title'>" + specificArea.name + "</h5>";
+                            str += "<div class='specific-body'>";
+                            str += "<h5 class='specific-title'>" + specificArea.specificArea + "</h5>";
                             str += "</div>";
 
                         });

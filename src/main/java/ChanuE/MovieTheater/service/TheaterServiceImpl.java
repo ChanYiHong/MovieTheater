@@ -3,7 +3,10 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Theater;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
+import ChanuE.MovieTheater.dto.theater.TheaterAreaApiDTO;
 import ChanuE.MovieTheater.dto.theater.TheaterDTO;
+import ChanuE.MovieTheater.dto.theater.TheaterSpecAreaApiDTO;
+import ChanuE.MovieTheater.repository.theater.TheaterApiDTORepository;
 import ChanuE.MovieTheater.repository.theater.TheaterRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +27,7 @@ import java.util.function.Function;
 public class TheaterServiceImpl implements TheaterService{
 
     private final TheaterRepository theaterRepository;
+    private final TheaterApiDTORepository theaterApiDTORepository;
 
     @Override
     public PageResponseDTO<Theater, TheaterDTO> list(PageRequestDTO pageRequestDTO) {
@@ -46,5 +50,15 @@ public class TheaterServiceImpl implements TheaterService{
             throw new IllegalStateException("There is no theater for this id " + id);
         }
         return entityToDTO(result.get());
+    }
+
+    @Override
+    public List<TheaterAreaApiDTO> getAllAreas(Long movieId) {
+        return theaterApiDTORepository.findAllArea(movieId);
+    }
+
+    @Override
+    public List<TheaterSpecAreaApiDTO> getAllSpecAreas(String area, Long movieId) {
+        return theaterApiDTORepository.findAllSpecificAreaByArea(area, movieId);
     }
 }

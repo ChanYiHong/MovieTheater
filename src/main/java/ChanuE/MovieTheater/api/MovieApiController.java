@@ -1,42 +1,34 @@
 package ChanuE.MovieTheater.api;
 
-import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDto;
-import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDto;
-import ChanuE.MovieTheater.dto.page.PageResponseDTO;
+import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.service.MovieService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@RequestMapping("/movies")
 @RequiredArgsConstructor
 public class MovieApiController {
 
     private final MovieService movieService;
 
-
-    @PostMapping("/api/movie/create")
-    public String createMovie(@RequestBody @Valid MovieSaveRequestDto dto){
-        Long result = movieService.saveMovie(dto);
-        return "redirect:/";
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Result<MovieResponseDTO>> initMovieList() {
+        List<MovieResponseDTO> result = movieService.findAll();
+        return new ResponseEntity<>(new Result<>(result, result.size()), HttpStatus.OK);
     }
 
     @Data
     @AllArgsConstructor
     static class Result<T>{
-        private int count;
-        private T data;
+        private List<T> data;
+        private int size;
     }
-
-    @Data
-    @AllArgsConstructor
-    static class saveResponseDto{
-        private Long id;
-    }
-
 }
