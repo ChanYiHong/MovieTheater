@@ -50,6 +50,7 @@ public class TheaterApiDTORepositoryImpl implements TheaterApiDTORepositoryCusto
                 .leftJoin(cinema.theater, theater)
                 .leftJoin(cinema.movie, movie)
                 .where(theater.area.eq(area), movie.id.eq(movieId))
+                .groupBy(theater.specificArea)
                 .orderBy(theater.id.asc())
                 .fetch();
 

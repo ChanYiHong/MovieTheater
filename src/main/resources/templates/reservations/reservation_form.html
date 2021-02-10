@@ -199,6 +199,14 @@
                 overflow: scroll;
                 overflow-x: hidden;
             }
+
+            .movie-date-transparent {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 2px;
+                opacity: 0.2;
+            }
             
             .movie-date-wrapper {
                 display: flex;
@@ -289,7 +297,8 @@
 
                 const date = new Date();
                 const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-                const reserveDate = document.querySelector(".reserve-date");
+                //var reserveDate = document.querySelector(".reserve-date");
+                var reserveDate = $(".reserve-date");
             
                 const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"];
                 const year = date.getFullYear();
@@ -302,24 +311,86 @@
                     var area = $(this).data("area");
                     var specificArea = $(this).data("specific");
 
-                    $.getJSON("/cinemas/date/"+id+"?area="+area+"&specific="+specificArea, function(arr){
+                    reserveDate.html("");
+
+                    $.getJSON("/cinemas/date/"+movieId+"?area="+area+"&specific="+specificArea, function(arr){
                         console.log(arr);
+
+                        var data = arr["data"];
+                        var size = arr["size"];
+                        var idx = 0;
+                        console.log(data[idx].day);
+
+                        for (var i = 0; i < size; i++) {
+                            if(date.getDate() <= data[idx].day) {
+                                break;
+                            }
+                            idx++;
+                        }
+
+                        for (var i = date.getDate(); i <= lastDay.getDate(); i++) {
+
+                            console.log(i);
+                            const button = document.createElement("button");
+                            const spanWeekOfDay = document.createElement("span");
+                            const spanDay = document.createElement("span");
+
+                            //class넣기
+                            //button.classList = "movie-date-wrapper";
+                            spanWeekOfDay.classList = "movie-week-of-day";
+                            spanDay.classList = "movie-day";
+
+                            //weekOfDay[new Date(2020-03-날짜)]
+                            const dayOfWeek = weekOfDay[new Date(year + "-" + month + "-" + i).getDay()];
+
+                            //요일 넣기
+                            if (dayOfWeek === "토") {
+                                spanWeekOfDay.classList.add("saturday");
+                                spanDay.classList.add("saturday");
+                            } else if (dayOfWeek === "일") {
+                                spanWeekOfDay.classList.add("sunday");
+                                spanDay.classList.add("sunday");
+                            }
+                            spanWeekOfDay.innerHTML = dayOfWeek;
+                            button.append(spanWeekOfDay);
+                            //날짜 넣기
+                            spanDay.innerHTML = i;
+                            button.append(spanDay);
+                            //button.append(i);
+
+                            if(size > idx) {
+                                if(data[idx].day == i){
+                                    button.classList = "movie-date-wrapper";
+                                    console.log("같음");
+                                    idx++;
+                                }else{
+                                    button.classList = "movie-date-transparent";
+                                    button.disabled = true;
+                                }
+                            }else{
+                                button.classList = "movie-date-transparent";
+                                button.disabled = true;
+                            }
+
+                            reserveDate.append(button);
+
+                            // dayClickEvent(button);
+                        }
+
                     });
 
-                })
-
-                
+                });
 
 
-                function dayClickEvent(button) {
-                    button.addEventListener("click", function() {
-                        const movieDateWrapperActive = document.querySelectorAll(".movie-date-wrapper-active");
-                        movieDateWrapperActive.forEach((list) => {
-                            list.classList.remove("movie-date-wrapper-active");
-                        })
-                        button.classList.add("movie-date-wrapper-active");
-                    })
-                }
+                // function dayClickEvent(button) {
+                //     button.addEventListener("click", function() {
+                //         const movieDateWrapperActive = document.querySelectorAll(".movie-date-wrapper-active");
+                //         movieDateWrapperActive.forEach((list) => {
+                //             list.classList.remove("movie-date-wrapper-active");
+                //         })
+                //         button.classList.add("movie-date-wrapper-active");
+                //     })
+                // }
 
                 $.getJSON("/movies", function(arr) {
 
@@ -355,6 +426,7 @@
                         });
 
                         areaList.html("");
+                        reserveDate.html("");
                         areaList.html(str);
                         specificAreaList.html("영화와 지역을 먼저 선택해주세요!");
 
@@ -384,6 +456,7 @@
 
                         });
 
+                        reserveDate.html("");
                         specificAreaList.html(str);
 
                     });
