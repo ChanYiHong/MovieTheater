@@ -21,4 +21,7 @@ public interface CinemaRepositoryCustom {
 
     // 해당 극장에 있는 시네마를 날짜 별로 검색해서 가져오기 위함!
     Page<Cinema> findCinemaWithSearchCond(Long theaterId, CinemaSearch cinemaSearch, Pageable pageable);
+
+    // API 에서 날짜 가져올 때
+    List<LocalDate> findCinemaDateForAPI(Long movieId, String area, String specificArea);
 }

@@ -109,6 +109,22 @@ public class CinemaRepositoryImpl implements CinemaRepositoryCustom{
         return new PageImpl<>(content, pageable, total);
     }
 
+    @Override
+    public List<LocalDate> findCinemaDateForAPI(Long movieId, String area, String specificArea) {
+        return queryFactory
+                .select(cinema.date)
+                .from(cinema)
+                .leftJoin(cinema.movie, movie)
+                .leftJoin(cinema.theater, theater)
+                .where(
+                        movie.id.eq(movieId),
+                        theater.area.eq(area),
+                        theater.specificArea.eq(specificArea)
+                )
+                .orderBy(cinema.date.asc())
+                .fetch();
+    }
+
     private BooleanExpression yearEq(int year) {
         return year != 0 ? cinema.date.year().eq(year) : null;
     }

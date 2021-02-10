@@ -129,4 +129,11 @@ class CinemaRepositoryTest {
         }
     }
 
+    @Test
+    public void findDateForAPITest() throws Exception {
+        List<LocalDate> result = cinemaRepository.findCinemaDateForAPI(1L, "서울", "강남");
+        for (LocalDate localDate : result) {
+            System.out.println(localDate);
+        }
+    }
 }

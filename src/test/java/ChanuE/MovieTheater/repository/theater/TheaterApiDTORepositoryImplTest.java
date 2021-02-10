@@ -18,7 +18,7 @@ class TheaterApiDTORepositoryImplTest {
 
     @Test
     public void searchAllAreaWithSpecificAreaCount() throws Exception {
-        List<TheaterAreaApiDTO> result = theaterApiDTORepository.findAllArea();
+        List<TheaterAreaApiDTO> result = theaterApiDTORepository.findAllArea(1L);
 
         for (TheaterAreaApiDTO theaterAreaApiDTO : result) {
             System.out.println(theaterAreaApiDTO);
@@ -27,7 +27,7 @@ class TheaterApiDTORepositoryImplTest {
 
     @Test
     public void searchAllSpecificByArea() throws Exception {
-        List<TheaterSpecAreaApiDTO> result = theaterApiDTORepository.findAllSpecificAreaByArea("서울");
+        List<TheaterSpecAreaApiDTO> result = theaterApiDTORepository.findAllSpecificAreaByArea("서울", 1L);
 
         for (TheaterSpecAreaApiDTO theaterSpecAreaApiDTO : result) {
             System.out.println(theaterSpecAreaApiDTO);

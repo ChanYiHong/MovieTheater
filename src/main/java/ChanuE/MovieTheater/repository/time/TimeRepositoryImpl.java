@@ -1,16 +1,18 @@
 package ChanuE.MovieTheater.repository.time;
 
-import ChanuE.MovieTheater.domain.QCinema;
-import ChanuE.MovieTheater.domain.QSeat;
-import ChanuE.MovieTheater.domain.QTime;
-import ChanuE.MovieTheater.domain.Time;
+import ChanuE.MovieTheater.domain.*;
+import ChanuE.MovieTheater.dto.time.QTimeApiDTO;
+import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import static ChanuE.MovieTheater.domain.QCinema.cinema;
+import static ChanuE.MovieTheater.domain.QMovie.movie;
 import static ChanuE.MovieTheater.domain.QSeat.seat;
+import static ChanuE.MovieTheater.domain.QTheater.theater;
 import static ChanuE.MovieTheater.domain.QTime.time1;
 
 @RequiredArgsConstructor
@@ -32,5 +34,22 @@ public class TimeRepositoryImpl implements TimeRepositoryCustom{
                 .fetch();
 
         return result;
+    }
+
+    @Override
+    public List<LocalTime> findApiTime(Long movieId, String area, String specificArea) {
+        return queryFactory
+                .select(time1.time)
+                .from(cinema)
+                .join(time1).on(time1.cinema.eq(cinema))
+                .join(cinema.movie, movie)
+                .join(cinema.theater, theater)
+                .where(
+                        movie.id.eq(movieId),
+                        theater.area.eq(area),
+                        theater.specificArea.eq(specificArea)
+                )
+                .orderBy(time1.time.asc())
+                .fetch();
     }
 }

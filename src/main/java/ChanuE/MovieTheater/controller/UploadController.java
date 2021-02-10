@@ -65,18 +65,18 @@ public class UploadController {
 
             Path savePath = Paths.get(saveName);
 
-            try{
-                uploadFile.transferTo(savePath);
-
-                // Create Thumbnail
-                String thumbnailSaveName = uploadPath + File.separator + folderPath + File.separator + "s_" + uuid + "_" + fileName;
-                File thumbnailFile = new File(thumbnailSaveName);
-                Thumbnailator.createThumbnail(savePath.toFile(), thumbnailFile, 100, 100);
-
-                responseDTOList.add(new UploadResponseDTO(fileName, uuid, folderPath));
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+//            try{
+//                uploadFile.transferTo(savePath);
+//
+//                // Create Thumbnail
+//                String thumbnailSaveName = uploadPath + File.separator + folderPath + File.separator + "s_" + uuid + "_" + fileName;
+//                File thumbnailFile = new File(thumbnailSaveName);
+//                Thumbnailator.createThumbnail(savePath.toFile(), thumbnailFile, 100, 100);
+//
+//                responseDTOList.add(new UploadResponseDTO(fileName, uuid, folderPath));
+//            }catch(IOException e){
+//                e.printStackTrace();
+//            }
         }
         return new ResponseEntity<>(responseDTOList, HttpStatus.OK);
     }
@@ -87,7 +87,10 @@ public class UploadController {
 
         try{
             log.info("fileName: " + fileName);
-            String srcFileName = URLDecoder.decode(fileName, StandardCharsets.UTF_8);
+
+            String srcFileName = "";
+
+            //String srcFileName = URLDecoder.decode(fileName, StandardCharsets.UTF_8);
             log.info("srcFileName: " + srcFileName);
 
             File file = new File(uploadPath + File.separator + srcFileName);

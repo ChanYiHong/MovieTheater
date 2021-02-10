@@ -30,8 +30,8 @@ public class TheaterApiDTORepositoryImpl implements TheaterApiDTORepositoryCusto
                         theater.specificArea.count()
                 ))
                 .from(cinema)
-                .leftJoin(theater).on(cinema.theater.eq(theater)).fetchJoin()
-                .leftJoin(movie).on(cinema.movie.eq(movie)).fetchJoin()
+                .leftJoin(cinema.theater, theater)
+                .leftJoin(cinema.movie, movie)
                 .where(movie.id.eq(movieId))
                 .groupBy(theater.area)
                 .orderBy(theater.id.asc())
@@ -47,8 +47,8 @@ public class TheaterApiDTORepositoryImpl implements TheaterApiDTORepositoryCusto
                         theater.area,
                         theater.specificArea
                 )).from(cinema)
-                .leftJoin(theater).on(cinema.theater.eq(theater)).fetchJoin()
-                .leftJoin(movie).on(cinema.movie.eq(movie)).fetchJoin()
+                .leftJoin(cinema.theater, theater)
+                .leftJoin(cinema.movie, movie)
                 .where(theater.area.eq(area), movie.id.eq(movieId))
                 .orderBy(theater.id.asc())
                 .fetch();

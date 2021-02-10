@@ -4,6 +4,7 @@ import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Theater;
 import ChanuE.MovieTheater.dto.cinema.CinemaDTO;
+import ChanuE.MovieTheater.dto.cinema.CinemaDateApiDTO;
 import ChanuE.MovieTheater.dto.cinema.CinemaSaveDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
@@ -19,9 +20,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +72,16 @@ public class CinemaServiceImpl implements CinemaService{
         Cinema result = cinemaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 Cinema!!!"));
         return entityToDTO(result);
+    }
+
+    @Override
+    public List<CinemaDateApiDTO> getDateForAPI(Long movieId, String area, String specificArea) {
+        List<LocalDate> result = cinemaRepository.findCinemaDateForAPI(movieId, area, specificArea);
+        return result.stream().map(localDate -> {
+             return CinemaDateApiDTO.builder()
+                    .year(localDate.getYear())
+                    .month(localDate.getMonthValue())
+                    .day(localDate.getDayOfMonth()).build();
+        }).collect(Collectors.toList());
     }
 }

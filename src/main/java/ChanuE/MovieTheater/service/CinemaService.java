@@ -4,6 +4,7 @@ import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Theater;
 import ChanuE.MovieTheater.dto.cinema.CinemaDTO;
+import ChanuE.MovieTheater.dto.cinema.CinemaDateApiDTO;
 import ChanuE.MovieTheater.dto.cinema.CinemaSaveDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
@@ -12,6 +13,7 @@ import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface CinemaService {
 
@@ -20,6 +22,8 @@ public interface CinemaService {
     PageResponseDTO<Cinema, CinemaDTO> list(Long theaterId, CinemaSearch cinemaSearch, PageRequestDTO pageRequestDTO);
 
     CinemaDTO get(Long id);
+
+    List<CinemaDateApiDTO> getDateForAPI(Long movieId, String area, String specificArea);
 
     default Cinema dtoToEntity(CinemaSaveDTO cinemaSaveDTO, Movie movie, Theater theater){
         return Cinema.builder()

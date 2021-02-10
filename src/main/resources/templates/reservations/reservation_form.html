@@ -4,25 +4,281 @@
     <th:block th:fragment="content">
 
         <style>
-         .box1 {
-          float:left;
-          }
-         .box2 {
-          display:inline-block; margin-left:10px;
-          }
+            * {
+                font-size: 11px;
+            }
+            
+            body {
+                background-color: #FDFCF0;
+            }
+            
+            
+            /* header */
+            
+            .header-nav-wrapper {
+                background: url(../images/bg_header.gif) repeat-x 0 0;
+                background-position: center;
+                background-size: contain;
+                height: 120px;
+                padding-top: 4px;
+            }
+            
+            .header-nav-container {
+                position: fixed;
+            }
+            
+            .header {
+                display: flex;
+                justify-content: space-between;
+                padding-left: 40px;
+                padding-right: 150px;
+            }
+            
+            .header-inner {
+                display: flex;
+            }
+            
+            .header-inner>div {
+                border-right: 1px solid #DDDDDD;
+                margin-left: 8px;
+                padding-right: 4px;
+            }
+            
+            
+            /* //header */
+            
+            
+            /* nav */
+            
+            .nav-line {
+                background-color: red;
+                border-radius: 50px;
+                height: 5px;
+                /* background-image: linear-gradient(to right, white 33%, rgba(255, 255, 255, 0) 0%);
+            background-position: bottom;
+            background-size: 15px 1px;
+            background-repeat: repeat-x; */
+            }
+            
+            .nav-wrapper {
+                /* background: url(../images/bg_header.gif) repeat-x 0 0; */
+                /* width: 100%;*/
+                height: 94px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .nav-content {
+                padding-top: 15px;
+            }
+            
+            .movieLogo-wrapper {
+                text-align: center;
+            }
+            
+            .cgvLogo {
+                width: 120px;
+                margin-left: 150px;
+                /* margin-right: -40px; */
+            }
+            
+            .cgvMovie {
+                width: auto;
+                height: 28px;
+            }
+            
+            .nav-inner {
+                display: flex;
+                /* margin-left: -250px; */
+                margin-left: 150px;
+                margin-right: auto;
+                align-items: center;
+                padding-bottom: 15px;
+            }
+            
+            .nav-inner>div>button {
+                padding-top: 5px;
+                font-size: 14px;
+                font-weight: bold;
+                margin-left: 15px;
+            }
+            
+            .search-wrapper {
+                margin-left: 70px;
+                height: 20px;
+            }
+            
+            .search-wrapper>input {
+                width: 100px;
+                height: 20px;
+            }
+            
+            .searchButton {
+                margin: 0 !important;
+                padding: 2px !important;
+                background-color: red;
+                color: white;
+                width: 30px;
+                height: 100%;
+                font-size: 10px !important;
+            }
+            
+            
+            /* content */
+            
+            .reserve-container {
+                margin-top: 20px;
+                display: flex;
+                justify-content: center;
+                height: 800px;
+                /* border: 1px solid #dddddd; */
+            }
+            
+            .reserve-container>div {
+                border: 1px solid #dddddd;
+            }
+            
+            .reserve-title {
+                border-bottom: 1px solid #dddddd;
+                background-color: #444444;
+                text-align: center;
+                color: #dddddd;
+                padding: 5px;
+                font-size: 13px;
+                font-weight: bold;
+            }
+            
+            .movie-part {
+                width: 284px;
+            }
+            
+            .theater-part {
+                width: 264px;
+            }
+            
+            .day-part {
+                width: 91px;
+            }
+            
+            .time-part {
+                width: 384px;
+            }
+            
+            .sort-wrapper {
+                margin: 10px 6px 6px 10px;
+                /* padding: 3px; */
+                display: flex;
+                border-bottom: 1px solid #dddddd;
+                font-size: 12px;
+            }
+            
+            .sort-wrapper>div {
+                padding: 3px;
+            }
+            
+            .sort-wrapper>div:hover {
+                border-bottom: 1px solid #111111;
+            }
+            
+            .sort-selected {
+                font-weight: bold;
+                border-bottom: 1px solid #111111;
+            }
+            
+            .sort-korean {
+                margin-left: 6px;
+            }
+            
+            .reserve-date {
+                padding-top: 5px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                height: 770px;
+                overflow: scroll;
+                overflow-x: hidden;
+            }
+            
+            .movie-date-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 5px 2px;
+            }
+            
+            .movie-week-of-day {
+                margin-left: 5px;
+                font-size: 10px;
+                width: 12px;
+                height: 22px;
+                line-height: 22px;
+            }
+            
+            .movie-day {
+                text-align: center;
+                width: 34px;
+                height: 22px;
+                font-size: 17px;
+                font-weight: bold;
+            }
+            
+            .saturday {
+                color: #31597E;
+                font-weight: bold;
+            }
+            
+            .sunday {
+                color: #AF2D2D;
+                font-weight: bold;
+            }
+            
+            .movie-date-wrapper-active {
+                background-color: #333333;
+            }
+            
+            .movie-date-wrapper-active>* {
+                color: white;
+            }
         </style>
 
-        <div>
-            <div class="box1 movieList">
+        <div class="reserve-container">
+            <div class="movie-part">
+                <div class="reserve-title">영화</div>
+                <div class="movie-list movieList"></div>
+            </div>
+            <div class="theater-part">
+                <div class="reserve-title">극장</div>
+                <div class="area-list areaList">영화를 먼저 선택해주세요!</div>
+            </div>
+            <div class="theater-part">
+                <div class="reserve-title">극장지역</div>
+                <div class="area-list specificAreaList">영화와 지역을 먼저 선택해 주세요!</div>
+            </div>
+            <div class="day-part">
+                <div class="reserve-title">날짜</div>
+                <div class="reserve-date"></div>
+            </div>
+            <div class="time-part">
+                <div class="reserve-title">시간</div>
+            </div>
+
+        </div>
+
+        <!-- <div>
+            <div class="movie-part movieList">
 
             </div>
-            <div class="box2 areaList">
+            <div class="theater-part areaList">
 
             </div>
             <div class="list-group specificAreaList">
 
             </div>
-        </div>
+            <div class="dateList">
+                
+            </div>
+        </div> -->
 
         <script th:inline="javascript">
             $(document).ready(function() {
@@ -31,6 +287,40 @@
                 var areaList = $(".areaList");
                 var specificAreaList = $(".specificAreaList");
 
+                const date = new Date();
+                const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                const reserveDate = document.querySelector(".reserve-date");
+            
+                const weekOfDay = ["일", "월", "화", "수", "목", "금", "토"];
+                const year = date.getFullYear();
+                const month = date.getMonth() + 1;
+
+                
+                $(".specificAreaList").on("click", ".specific-body", function() {
+                    
+                    var movieId = $(this).data("movieid");
+                    var area = $(this).data("area");
+                    var specificArea = $(this).data("specific");
+
+                    $.getJSON("/cinemas/date/"+id+"?area="+area+"&specific="+specificArea, function(arr){
+                        console.log(arr);
+                    });
+
+                })
+
+                
+
+
+                function dayClickEvent(button) {
+                    button.addEventListener("click", function() {
+                        const movieDateWrapperActive = document.querySelectorAll(".movie-date-wrapper-active");
+                        movieDateWrapperActive.forEach((list) => {
+                            list.classList.remove("movie-date-wrapper-active");
+                        })
+                        button.classList.add("movie-date-wrapper-active");
+                    })
+                }
+
                 $.getJSON("/movies", function(arr) {
 
                     var str = "";
@@ -38,7 +328,7 @@
 
                     $.each(data, function(idx, movie){
                         str += "<div class='movie-body' data-id=" + movie.id + ">";  // areaId 하면 오류.. 소문자만
-                        str += "<h5 class='movie-title'>" + movie.movieName + "</h5>";
+                        str += "<h5 class='card-body'>" + movie.movieName + "</h5>";
                         str += "</div>";
                     });
                     movieList.html(str);
@@ -59,13 +349,14 @@
 
                             console.log(idx + " : " + area);
                             str += "<div class='area-body' data-movieid="+movieId+" data-area=" + area.area + ">";  // areaId 하면 오류.. 소문자만
-                            str += "<h5 class='area-title'>" + area.area + " (" + area.specificCnt + ")</h5>";
+                            str += "<h5 class='card-body'>" + area.area + " (" + area.specificCnt + ")</h5>";
                             str += "</div>";
 
                         });
 
+                        areaList.html("");
                         areaList.html(str);
-                        specificAreaList.html("");
+                        specificAreaList.html("영화와 지역을 먼저 선택해주세요!");
 
                     });
 
@@ -86,8 +377,9 @@
                         $.each(data, function(idx, specificArea){
 
                             console.log(idx + " : " + specificArea);
-                            str += "<div class='specific-body'>";
-                            str += "<h5 class='specific-title'>" + specificArea.specificArea + "</h5>";
+                            str += "<div class='specific-body' data-movieid="+ movieId + " data-area=" + area + 
+                            " data-specific=" + specificArea.specificArea + ">";
+                            str += "<h5 class='card-body'>" + specificArea.specificArea + "</h5>";
                             str += "</div>";
 
                         });
@@ -99,6 +391,8 @@
                 });
 
             });
+
+
 
 
             // 다음 할일 : 구체적 지역까지 띄우고 다시 영화 이름 눌렀을 때 다 삭제 되게 해야 될듯
