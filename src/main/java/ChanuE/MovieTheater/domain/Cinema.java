@@ -32,4 +32,12 @@ public class Cinema extends BaseEntity{
 
     @OneToOne(fetch = FetchType.LAZY)
     private Movie movie;
+
+    public void changeMovie(Movie movie){
+        this.movie = movie;
+    }
+
+    public void changeTheater(Theater theater){
+        this.theater = theater;
+    }
 }

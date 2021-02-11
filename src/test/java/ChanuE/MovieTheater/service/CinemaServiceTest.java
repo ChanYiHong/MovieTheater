@@ -6,6 +6,7 @@ import ChanuE.MovieTheater.dto.cinema.CinemaDateApiDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -39,5 +40,10 @@ class CinemaServiceTest {
         for (CinemaDateApiDTO cinemaDateApiDTO : result) {
             System.out.println(cinemaDateApiDTO);
         }
+    }
+
+    @Test
+    public void cinemaRemoveTest() throws Exception {
+        cinemaService.remove(1L);
     }
 }

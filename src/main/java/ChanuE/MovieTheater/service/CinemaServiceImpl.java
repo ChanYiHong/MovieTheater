@@ -3,6 +3,7 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Theater;
+import ChanuE.MovieTheater.domain.Time;
 import ChanuE.MovieTheater.dto.cinema.CinemaDTO;
 import ChanuE.MovieTheater.dto.cinema.CinemaDateApiDTO;
 import ChanuE.MovieTheater.dto.cinema.CinemaSaveDTO;
@@ -12,6 +13,7 @@ import ChanuE.MovieTheater.repository.cinema.CinemaRepository;
 import ChanuE.MovieTheater.repository.cinema.CinemaSearch;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.theater.TheaterRepository;
+import ChanuE.MovieTheater.repository.time.TimeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -35,6 +37,7 @@ public class CinemaServiceImpl implements CinemaService{
     private final CinemaRepository cinemaRepository;
     private final MovieRepository movieRepository;
     private final TheaterRepository theaterRepository;
+    private final TimeRepository timeRepository;
 
     @Override
     @Transactional
@@ -83,5 +86,22 @@ public class CinemaServiceImpl implements CinemaService{
                     .month(localDate.getMonthValue())
                     .day(localDate.getDayOfMonth()).build();
         }).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public void remove(Long cinemaId) {
+        Cinema cinema = cinemaRepository.findById(cinemaId)
+                .orElseThrow(() -> new IllegalStateException("존재하지 않는 상영관.. 삭제 불가능.."));
+
+        cinema.changeMovie(null);
+        cinema.changeTheater(null);
+
+        List<Time> times = timeRepository.findByCinemaId(cinemaId);
+        for (Time time : times) {
+            timeRepository.delete(time);
+        }
+
+        cinemaRepository.delete(cinema);
     }
 }

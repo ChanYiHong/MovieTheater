@@ -45,4 +45,9 @@ class TimeServiceTest {
         }
 
     }
+
+    @Test
+    public void removeTime() throws Exception {
+        timeService.remove(6L);
+    }
 }

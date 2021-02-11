@@ -17,6 +17,8 @@ public interface TimeService {
     // Time은 한 극장에 많지는 않으니까 페이징 x
     List<TimeResponseDTO> list(Long cinemaId);
 
+    void remove(Long timeId);
+
     default Time dtoToEntity(TimeSaveDTO timeSaveDTO, Cinema cinema) {
         return Time.builder()
                 .time(LocalTime.of(timeSaveDTO.getHour(),timeSaveDTO.getMinute()))

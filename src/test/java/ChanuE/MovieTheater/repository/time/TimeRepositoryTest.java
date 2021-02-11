@@ -19,7 +19,7 @@ class TimeRepositoryTest {
         List<LocalTime> result = timeRepository.findApiTime(1L, "서울", "강남");
 
         for (LocalTime localTime : result) {
-            System.out.println(result);
+            System.out.println(localTime);
         }
     }
 }

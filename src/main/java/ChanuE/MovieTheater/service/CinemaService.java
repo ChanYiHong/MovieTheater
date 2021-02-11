@@ -25,6 +25,8 @@ public interface CinemaService {
 
     List<CinemaDateApiDTO> getDateForAPI(Long movieId, String area, String specificArea);
 
+    void remove(Long cinemaId);
+
     default Cinema dtoToEntity(CinemaSaveDTO cinemaSaveDTO, Movie movie, Theater theater){
         return Cinema.builder()
                 .id(cinemaSaveDTO.getId())

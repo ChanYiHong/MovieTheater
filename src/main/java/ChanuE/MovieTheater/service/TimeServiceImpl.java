@@ -46,4 +46,12 @@ public class TimeServiceImpl implements TimeService{
         List<Time> result = timeRepository.findByCinemaId(cinemaId);
         return result.stream().map(this::entityToDTO).collect(Collectors.toList());
     }
+
+    /** Cascading remove 속성으로 인해 time을 지우면 seat이 다 지워짐..
+     * 문제는 seat이 100개면 100번의 seat을 지우는 쿼리가 나가는데, 이러면 효율이 떨어짐. 최적화가 필요!**/
+    @Override
+    @Transactional
+    public void remove(Long timeId) {
+        timeRepository.deleteById(timeId);
+    }
 }

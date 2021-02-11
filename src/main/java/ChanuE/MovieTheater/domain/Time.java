@@ -24,7 +24,8 @@ public class Time extends BaseEntity{
     private LocalTime time;
     private int seatNum;
 
-    @OneToMany(mappedBy = "time")
+    // Time이 삭제되면, 연관된 Seat도 전부 삭제되도록 설정.
+    @OneToMany(mappedBy = "time", cascade = CascadeType.REMOVE)
     private List<Seat> seats = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -41,9 +41,9 @@ public class TimeRepositoryImpl implements TimeRepositoryCustom{
         return queryFactory
                 .select(time1.time)
                 .from(cinema)
-                .join(time1).on(time1.cinema.eq(cinema))
-                .join(cinema.movie, movie)
-                .join(cinema.theater, theater)
+                .leftJoin(time1).on(time1.cinema.eq(cinema))
+                .leftJoin(cinema.movie, movie)
+                .leftJoin(cinema.theater, theater)
                 .where(
                         movie.id.eq(movieId),
                         theater.area.eq(area),

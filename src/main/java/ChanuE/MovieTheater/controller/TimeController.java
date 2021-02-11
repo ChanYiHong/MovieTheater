@@ -43,4 +43,11 @@ public class TimeController {
         timeService.save(timeSaveDTO);
         return "redirect:/times/{cinema_id}/all";
     }
+
+    @PostMapping("/{timeId}/remove")
+    public String removeTime(@PathVariable("timeId") Long timeId,
+                             @RequestParam("cinemaId") Long cinemaId) {
+        timeService.remove(timeId);
+        return "redirect:/times/"+cinemaId+"/all";
+    }
 }

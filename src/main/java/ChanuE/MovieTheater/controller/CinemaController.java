@@ -29,8 +29,8 @@ public class CinemaController {
     private final MovieService movieService;
     private final TheaterService theaterService;
 
-    @GetMapping("/{theater_id}")
-    public String list(@PathVariable("theater_id") Long theaterId,
+    @GetMapping("/{theaterId}")
+    public String list(@PathVariable("theaterId") Long theaterId,
                        @ModelAttribute("cinemaSearch") CinemaSearch cinemaSearch,
                        @ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO, Model model) {
         TheaterDTO theater = theaterService.get(theaterId);
@@ -43,8 +43,8 @@ public class CinemaController {
     }
 
     // form 에서 th:object 사용하려면 @ModelAttribute로 객체를 넘겨줘야 함!!
-    @GetMapping("/{theater_id}/new")
-    public String create(@PathVariable("theater_id") Long theaterId,
+    @GetMapping("/{theaterId}/new")
+    public String create(@PathVariable("theaterId") Long theaterId,
                          @ModelAttribute("cinemaSaveDTO") CinemaSaveDTO dto, Model model) {
         List<MovieResponseDTO> movies = movieService.findAll();
         TheaterDTO theater = theaterService.get(theaterId);
@@ -57,13 +57,20 @@ public class CinemaController {
         return "/cinemas/cinema_create";
     }
 
-    @PostMapping("/{theater_id}/new")
-    public String createCinema(@PathVariable("theater_id") Long theaterId,
+    @PostMapping("/{theaterId}/new")
+    public String createCinema(@PathVariable("theaterId") Long theaterId,
                                @ModelAttribute("cinemaSaveDTO") CinemaSaveDTO dto){
 
         System.out.println(dto);
         cinemaService.save(dto, theaterId);
 
+        return "redirect:/cinemas/"+theaterId;
+    }
+
+    @PostMapping("/{cinemaId}/remove")
+    public String removeCinema(@PathVariable("cinemaId") Long cinemaId,
+                               @RequestParam("theaterId") Long theaterId) {
+        cinemaService.remove(cinemaId);
         return "redirect:/cinemas/"+theaterId;
     }
 }
