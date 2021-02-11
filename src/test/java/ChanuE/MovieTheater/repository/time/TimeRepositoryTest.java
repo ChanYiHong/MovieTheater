@@ -1,5 +1,6 @@
 package ChanuE.MovieTheater.repository.time;
 
+import ChanuE.MovieTheater.domain.Time;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,10 +17,10 @@ class TimeRepositoryTest {
 
     @Test
     public void timeApiDataTest() throws Exception {
-        List<LocalTime> result = timeRepository.findApiTime(1L, "서울", "강남");
+        List<Time> result = timeRepository.findApiTime(1L, "서울", "강남");
 
-        for (LocalTime localTime : result) {
-            System.out.println(localTime);
+        for (Time time : result) {
+            System.out.println(time);
         }
     }
 }

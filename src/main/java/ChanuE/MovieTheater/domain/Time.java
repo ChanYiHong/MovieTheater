@@ -21,17 +21,20 @@ public class Time extends BaseEntity{
     @Column(name = "time_id")
     private Long id;
 
+    @Column(nullable = false)
     private LocalTime time;
+
+    @Column(nullable = false)
     private int seatNum;
+
+    @Column(nullable = false)
+    private int availableNum;
 
     // Time이 삭제되면, 연관된 Seat도 전부 삭제되도록 설정.
     @OneToMany(mappedBy = "time", cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<Seat> seats = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
-
-    public void setSeats(List<Seat> seats) {
-        this.seats = seats;
-    }
 }

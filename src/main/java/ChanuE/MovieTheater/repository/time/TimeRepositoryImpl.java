@@ -1,12 +1,9 @@
 package ChanuE.MovieTheater.repository.time;
 
 import ChanuE.MovieTheater.domain.*;
-import ChanuE.MovieTheater.dto.time.QTimeApiDTO;
-import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
-import java.time.LocalTime;
 import java.util.List;
 
 import static ChanuE.MovieTheater.domain.QCinema.cinema;
@@ -37,9 +34,9 @@ public class TimeRepositoryImpl implements TimeRepositoryCustom{
     }
 
     @Override
-    public List<LocalTime> findApiTime(Long movieId, String area, String specificArea) {
+    public List<Time> findApiTime(Long movieId, String area, String specificArea) {
         return queryFactory
-                .select(time1.time)
+                .select(time1)
                 .from(cinema)
                 .leftJoin(time1).on(time1.cinema.eq(cinema))
                 .leftJoin(cinema.movie, movie)

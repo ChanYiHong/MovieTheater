@@ -32,15 +32,16 @@ public class TimeServiceImpl implements TimeService{
                 .orElseThrow(() -> new IllegalStateException("해당 Cinema가 없음"));
 
         Time time = dtoToEntity(timeSaveDTO, cinema);
+
         // 처음 극장 시간 정할 때, 좌석을 모두 사용 가능한 상태로 넣어줌.
-        List<Seat> seats = seatService.makeSeats(timeSaveDTO.getSeatNum(), time);
-        time.setSeats(seats);
+        time = seatService.makeSeats(timeSaveDTO.getSeatNum(), time);
 
         timeRepository.save(time);
 
         return time.getId();
     }
 
+    /** 시간 생성 화면에서 좌석 볼 때.. **/
     @Override
     public List<TimeResponseDTO> list(Long cinemaId) {
         List<Time> result = timeRepository.findByCinemaId(cinemaId);
@@ -53,5 +54,13 @@ public class TimeServiceImpl implements TimeService{
     @Transactional
     public void remove(Long timeId) {
         timeRepository.deleteById(timeId);
+    }
+
+    /** 영화 예약 화면에서 볼 때 **/
+    @Override
+    public List<TimeResponseDTO> listForAPI(Long movieId, String area, String specificArea) {
+        List<Time> result = timeRepository.findApiTime(movieId, area, specificArea);
+
+        return result.stream().map(this::entityToDTO).collect(Collectors.toList());
     }
 }

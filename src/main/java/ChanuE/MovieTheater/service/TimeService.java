@@ -19,11 +19,15 @@ public interface TimeService {
 
     void remove(Long timeId);
 
+    // 예약 화면에서 시간 조회
+    List<TimeResponseDTO> listForAPI(Long movieId, String area, String specificArea);
+
     default Time dtoToEntity(TimeSaveDTO timeSaveDTO, Cinema cinema) {
         return Time.builder()
                 .time(LocalTime.of(timeSaveDTO.getHour(),timeSaveDTO.getMinute()))
                 .cinema(cinema)
                 .seatNum(timeSaveDTO.getSeatNum())
+                .availableNum(timeSaveDTO.getSeatNum())
                 .build();
     }
 
@@ -33,6 +37,9 @@ public interface TimeService {
                 .cinemaId(time.getCinema().getId())
                 .seatNum(time.getSeatNum())
                 .time(time.getTime())
+                .availableNum(time.getAvailableNum())
+                .cinemaName(time.getCinema().getName())
+                .display(time.getCinema().getDisplay())
                 .build();
     }
 

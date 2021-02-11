@@ -50,4 +50,12 @@ class TimeServiceTest {
     public void removeTime() throws Exception {
         timeService.remove(6L);
     }
+
+    @Test
+    public void timeAPISearchTest() throws Exception {
+        List<TimeResponseDTO> result = timeService.listForAPI(1L, "서울", "강남");
+        for (TimeResponseDTO timeResponseDTO : result) {
+            System.out.println(timeResponseDTO);
+        }
+    }
 }

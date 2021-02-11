@@ -1,5 +1,6 @@
 package ChanuE.MovieTheater.dto.time;
 
+import ChanuE.MovieTheater.domain.Display;
 import ChanuE.MovieTheater.domain.Seat;
 import ChanuE.MovieTheater.dto.seat.SeatDTO;
 import lombok.AllArgsConstructor;
@@ -21,5 +22,8 @@ public class TimeResponseDTO {
     private LocalTime time;
     private Long cinemaId;
     private int seatNum;
+    private int availableNum;
+    private Display display;
+    private String cinemaName;
 
 }

@@ -6,12 +6,12 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString(exclude = {"time"})
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString(exclude = {"time"})
 public class Seat {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,14 @@ public class Seat {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "time_id")
     private Time time;
+
+    public void setTime(Time time) {
+
+        if(this.time != null){
+            this.time.getSeats().remove(this);
+        }
+
+        this.time = time;
+        time.getSeats().add(this);
+    }
 }
