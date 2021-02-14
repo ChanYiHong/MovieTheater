@@ -3,6 +3,7 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Seat;
 import ChanuE.MovieTheater.domain.Time;
+import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import ChanuE.MovieTheater.dto.time.TimeResponseDTO;
 import ChanuE.MovieTheater.dto.time.TimeSaveDTO;
 import ChanuE.MovieTheater.repository.cinema.CinemaRepository;
@@ -58,8 +59,8 @@ public class TimeServiceImpl implements TimeService{
 
     /** 영화 예약 화면에서 볼 때 **/
     @Override
-    public List<TimeResponseDTO> listForAPI(Long movieId, String area, String specificArea) {
-        List<Time> result = timeRepository.findApiTime(movieId, area, specificArea);
+    public List<TimeResponseDTO> listForAPI(Long movieId, TimeApiDTO timeApiDTO) {
+        List<Time> result = timeRepository.findApiTime(movieId, timeApiDTO);
 
         return result.stream().map(this::entityToDTO).collect(Collectors.toList());
     }

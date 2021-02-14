@@ -113,9 +113,9 @@ class CinemaRepositoryTest {
         CinemaSearch cinemaSearch = new CinemaSearch();
         cinemaSearch.setYear(2021);
         cinemaSearch.setMonth(2);
-        cinemaSearch.setDay(6);
+        cinemaSearch.setDay(27);
         Pageable pageable = PageRequest.of(0, 10);
-        Long theaterId = 2L;
+        Long theaterId = 1L;
         Page<Cinema> result = cinemaRepository.findCinemaWithSearchCond(theaterId, cinemaSearch, pageable);
 
         List<Cinema> content = result.getContent();

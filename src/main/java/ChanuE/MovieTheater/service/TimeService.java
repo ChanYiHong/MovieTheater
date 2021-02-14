@@ -3,6 +3,7 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Time;
 import ChanuE.MovieTheater.dto.seat.SeatDTO;
+import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import ChanuE.MovieTheater.dto.time.TimeResponseDTO;
 import ChanuE.MovieTheater.dto.time.TimeSaveDTO;
 
@@ -20,7 +21,7 @@ public interface TimeService {
     void remove(Long timeId);
 
     // 예약 화면에서 시간 조회
-    List<TimeResponseDTO> listForAPI(Long movieId, String area, String specificArea);
+    List<TimeResponseDTO> listForAPI(Long movieId, TimeApiDTO timeApiDTO);
 
     default Time dtoToEntity(TimeSaveDTO timeSaveDTO, Cinema cinema) {
         return Time.builder()

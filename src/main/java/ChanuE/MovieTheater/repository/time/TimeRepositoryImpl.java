@@ -1,6 +1,7 @@
 package ChanuE.MovieTheater.repository.time;
 
 import ChanuE.MovieTheater.domain.*;
+import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +35,7 @@ public class TimeRepositoryImpl implements TimeRepositoryCustom{
     }
 
     @Override
-    public List<Time> findApiTime(Long movieId, String area, String specificArea) {
+    public List<Time> findApiTime(Long movieId, TimeApiDTO timeApiDTO) {
         return queryFactory
                 .select(time1)
                 .from(cinema)
@@ -43,8 +44,11 @@ public class TimeRepositoryImpl implements TimeRepositoryCustom{
                 .leftJoin(cinema.theater, theater)
                 .where(
                         movie.id.eq(movieId),
-                        theater.area.eq(area),
-                        theater.specificArea.eq(specificArea)
+                        theater.area.eq(timeApiDTO.getArea()),
+                        theater.specificArea.eq(timeApiDTO.getSpecific()),
+                        cinema.date.year().eq(timeApiDTO.getYear()),
+                        cinema.date.month().eq(timeApiDTO.getMonth()),
+                        cinema.date.dayOfMonth().eq(timeApiDTO.getDay())
                 )
                 .orderBy(time1.time.asc())
                 .fetch();
