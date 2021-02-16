@@ -24,8 +24,9 @@ public class TimeApiController {
 
     @GetMapping(value = "/{movieId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Result<TimeResponseDTO>> getTimeList(@PathVariable("movieId") Long movieId,
-                                                               @ModelAttribute TimeApiDTO timeApiDTO){
+                                                               @ModelAttribute("timeApiDTO") TimeApiDTO timeApiDTO){
 
+        log.info("timeApiDTO = " + timeApiDTO);
         List<TimeResponseDTO> result = timeService.listForAPI(movieId, timeApiDTO);
 
         return new ResponseEntity<>(new Result(result, result.size()), HttpStatus.OK);

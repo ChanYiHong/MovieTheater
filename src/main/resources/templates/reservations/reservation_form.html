@@ -3,252 +3,7 @@
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
 
-        <style>
-            * {
-                font-size: 11px;
-            }
-            
-            body {
-                background-color: #FDFCF0;
-            }
-            
-            
-            /* header */
-            
-            .header-nav-wrapper {
-                background: url(../images/bg_header.gif) repeat-x 0 0;
-                background-position: center;
-                background-size: contain;
-                height: 120px;
-                padding-top: 4px;
-            }
-            
-            .header-nav-container {
-                position: fixed;
-            }
-            
-            .header {
-                display: flex;
-                justify-content: space-between;
-                padding-left: 40px;
-                padding-right: 150px;
-            }
-            
-            .header-inner {
-                display: flex;
-            }
-            
-            .header-inner>div {
-                border-right: 1px solid #DDDDDD;
-                margin-left: 8px;
-                padding-right: 4px;
-            }
-            
-            
-            /* //header */
-            
-            
-            /* nav */
-            
-            .nav-line {
-                background-color: red;
-                border-radius: 50px;
-                height: 5px;
-                /* background-image: linear-gradient(to right, white 33%, rgba(255, 255, 255, 0) 0%);
-            background-position: bottom;
-            background-size: 15px 1px;
-            background-repeat: repeat-x; */
-            }
-            
-            .nav-wrapper {
-                /* background: url(../images/bg_header.gif) repeat-x 0 0; */
-                /* width: 100%;*/
-                height: 94px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            
-            .nav-content {
-                padding-top: 15px;
-            }
-            
-            .movieLogo-wrapper {
-                text-align: center;
-            }
-            
-            .cgvLogo {
-                width: 120px;
-                margin-left: 150px;
-                /* margin-right: -40px; */
-            }
-            
-            .cgvMovie {
-                width: auto;
-                height: 28px;
-            }
-            
-            .nav-inner {
-                display: flex;
-                /* margin-left: -250px; */
-                margin-left: 150px;
-                margin-right: auto;
-                align-items: center;
-                padding-bottom: 15px;
-            }
-            
-            .nav-inner>div>button {
-                padding-top: 5px;
-                font-size: 14px;
-                font-weight: bold;
-                margin-left: 15px;
-            }
-            
-            .search-wrapper {
-                margin-left: 70px;
-                height: 20px;
-            }
-            
-            .search-wrapper>input {
-                width: 100px;
-                height: 20px;
-            }
-            
-            .searchButton {
-                margin: 0 !important;
-                padding: 2px !important;
-                background-color: red;
-                color: white;
-                width: 30px;
-                height: 100%;
-                font-size: 10px !important;
-            }
-            
-            
-            /* content */
-            
-            .reserve-container {
-                margin-top: 20px;
-                display: flex;
-                justify-content: center;
-                height: 800px;
-                /* border: 1px solid #dddddd; */
-            }
-            
-            .reserve-container>div {
-                border: 1px solid #dddddd;
-            }
-            
-            .reserve-title {
-                border-bottom: 1px solid #dddddd;
-                background-color: #444444;
-                text-align: center;
-                color: #dddddd;
-                padding: 5px;
-                font-size: 13px;
-                font-weight: bold;
-            }
-            
-            .movie-part {
-                width: 284px;
-            }
-            
-            .theater-part {
-                width: 264px;
-            }
-            
-            .day-part {
-                width: 91px;
-            }
-            
-            .time-part {
-                width: 384px;
-            }
-            
-            .sort-wrapper {
-                margin: 10px 6px 6px 10px;
-                /* padding: 3px; */
-                display: flex;
-                border-bottom: 1px solid #dddddd;
-                font-size: 12px;
-            }
-            
-            .sort-wrapper>div {
-                padding: 3px;
-            }
-            
-            .sort-wrapper>div:hover {
-                border-bottom: 1px solid #111111;
-            }
-            
-            .sort-selected {
-                font-weight: bold;
-                border-bottom: 1px solid #111111;
-            }
-            
-            .sort-korean {
-                margin-left: 6px;
-            }
-            
-            .reserve-date {
-                padding-top: 5px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                height: 770px;
-                overflow: scroll;
-                overflow-x: hidden;
-            }
-
-            .movie-date-transparent {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 5px 2px;
-                opacity: 0.2;
-            }
-            
-            .movie-date-wrapper {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 5px 2px;
-            }
-            
-            .movie-week-of-day {
-                margin-left: 5px;
-                font-size: 10px;
-                width: 12px;
-                height: 22px;
-                line-height: 22px;
-            }
-            
-            .movie-day {
-                text-align: center;
-                width: 34px;
-                height: 22px;
-                font-size: 17px;
-                font-weight: bold;
-            }
-            
-            .saturday {
-                color: #31597E;
-                font-weight: bold;
-            }
-            
-            .sunday {
-                color: #AF2D2D;
-                font-weight: bold;
-            }
-            
-            .movie-date-wrapper-active {
-                background-color: #333333;
-            }
-            
-            .movie-date-wrapper-active>* {
-                color: white;
-            }
-        </style>
+        <link href="/css/reservation-form.css" rel="stylesheet">
 
         <div class="reserve-container">
             <div class="movie-part">
@@ -269,24 +24,10 @@
             </div>
             <div class="time-part">
                 <div class="reserve-title">시간</div>
+                <div class="time-list timeList"></div>
             </div>
 
         </div>
-
-        <!-- <div>
-            <div class="movie-part movieList">
-
-            </div>
-            <div class="theater-part areaList">
-
-            </div>
-            <div class="list-group specificAreaList">
-
-            </div>
-            <div class="dateList">
-                
-            </div>
-        </div> -->
 
         <script th:inline="javascript">
             $(document).ready(function() {
@@ -294,6 +35,7 @@
                 var movieList = $(".movieList");
                 var areaList = $(".areaList");
                 var specificAreaList = $(".specificAreaList");
+                var timeList = $(".timeList");
 
                 const date = new Date();
                 const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
@@ -372,32 +114,70 @@
                                 button.disabled = true;
                             }
 
+                            // 시간을 가져오기 위한 커스텀 attribute
+                            button.setAttribute("area", area);
+                            button.setAttribute("specific", specificArea);
+                            button.setAttribute("year", year);
+                            button.setAttribute("month", month);
+                            button.setAttribute("day", i);
+                            button.setAttribute("movieid", movieId);
+
                             reserveDate.append(button);
 
-                            // dayClickEvent(button);
+                            dayClickEvent(button);
                         }
+
+                        timeList.html("");
 
                     });
 
                 });
 
-                $(".reserveDate").on("click", ".movie-date", function(){
+                // 날짜 클릭 했을 때 시간 가져오기!
+                function dayClickEvent(button) {
+                    button.addEventListener("click", function() {
+                        const movieDateWrapperActive = document.querySelectorAll(".movie-date-wrapper-active");
+                        movieDateWrapperActive.forEach((list) => {
+                            list.classList.remove("movie-date-wrapper-active");
+                        })
+                        button.classList.add("movie-date-wrapper-active");
 
-                    
+                        var area = button.getAttribute("area");
+                        var specific = button.getAttribute("specific");
+                        var year = button.getAttribute("year");
+                        var month = button.getAttribute("month");
+                        var day = button.getAttribute("day");
 
-                });
+                        var movieId = button.getAttribute("movieid");
 
+                        $.ajax({
+                            url: "/times/"+movieId+"?area="+area+"&specific="+specific+"&year="+year+"&month="+month+"&day="+day,
+                            contentType: "application/json; charset=UTF-8",
+                            method: "GET",
+                            dataType: "json",
+                            success: function(result) {
+                                console.log(result);
 
-                // function dayClickEvent(button) {
-                //     button.addEventListener("click", function() {
-                //         const movieDateWrapperActive = document.querySelectorAll(".movie-date-wrapper-active");
-                //         movieDateWrapperActive.forEach((list) => {
-                //             list.classList.remove("movie-date-wrapper-active");
-                //         })
-                //         button.classList.add("movie-date-wrapper-active");
-                //     })
-                // }
+                                var data = result["data"];
+                                var str = "";
 
+                                $.each(data, function(idx, time) {
+                                    str += "<div class='time-body'>";
+                                    str += "<h5>"+time.display+"</h5>";
+                                    str += "<h5>"+time.cinemaName+"</h5>";
+                                    str += "<h4>"+time.time+"</h4>";
+                                    str += "<h5>총 좌석 :"+time.seatNum+"</h5>";
+                                    str += "<h4>잔여 좌석 :"+time.availableNum+"</h4>";
+                                    str += "</div>";
+                                });
+
+                                timeList.html(str);
+                            }
+                        })
+                    })
+                }
+
+                // 처음 영화 목록.
                 $.getJSON("/movies", function(arr) {
 
                     var str = "";
@@ -433,6 +213,7 @@
 
                         areaList.html("");
                         reserveDate.html("");
+                        timeList.html("");
                         areaList.html(str);
                         specificAreaList.html("영화와 지역을 먼저 선택해주세요!");
 
@@ -463,6 +244,7 @@
                         });
 
                         reserveDate.html("");
+                        timeList.html("");
                         specificAreaList.html(str);
 
                     });
