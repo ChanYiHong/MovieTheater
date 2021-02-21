@@ -4,6 +4,7 @@ import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
+import ChanuE.MovieTheater.dto.seat.SeatDTO;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.service.*;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +20,7 @@ import java.util.List;
 public class ReservationController {
 
     private final ReservationService reservationService;
-    private final MemberService memberService;
-    private final MovieService movieService;
+    private final SeatService seatService;
 
     @GetMapping("")
     public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,
@@ -46,5 +46,9 @@ public class ReservationController {
         return "redirect:/reservations";
     }
 
-
+    @GetMapping("/seats/{timeId}")
+    public String reservationSeats(@PathVariable("timeId") Long timeId, Model model) {
+        model.addAttribute("timeId", timeId);
+        return "/reservations/reservation_seat";
+    }
 }

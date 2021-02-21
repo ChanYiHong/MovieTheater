@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+        <style>
+            span {cursor:pointer; }
+            .number{
+                margin:100px;
+            }
+            .minus, .plus{
+                width:20px;
+                height:20px;
+                background:#f2f2f2;
+                border-radius:4px;
+                padding:8px 5px 8px 5px;
+                border:1px solid #ddd;
+                display: inline-block;
+                vertical-align: middle;
+                text-align: center;
+            }
+            input{
+                height:34px;
+                width: 100px;
+                text-align: center;
+                font-size: 26px;
+                border:1px solid #ddd;
+                border-radius:4px;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        </style>
+
+        <div class="container">
+            <div>
+                <table id="seat-table" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">1열</th>
+                        <th scope="col">2열</th>
+                        <th scope="col">3열</th>
+                        <th scope="col">4열</th>
+                        <th scope="col">5열</th>
+                        <th scope="col">6열</th>
+                        <th scope="col">7열</th>
+                        <th scope="col">8열</th>
+                        <th scope="col">9열</th>
+                        <th scope="col">10열</th>
+                    </tr>
+                    </thead>
+                    <tbody class='seatTable'>
+                    </tbody>
+                </table>
+            </div>
+            <div class='number'>
+                <span>인원수</span>
+                <span class='minus'>-</span>
+                <input class='personNum' type='text' value="1" />
+                <span class='plus'>+</span>
+            </div>
+        </div>
+
+        <script inline="javascript">
+
+            var List = function(){
+                this.dataStore = [];
+                this.pos = 0;
+                this.listSize = 0;
+            }
+
+            List.prototype.append = function(element) {
+                this.dataStore[this.listSize] = element;
+                this.listSize++;
+            }
+
+            List.prototype.find = function(element){
+                for(var i=0; i<this.listSize; i++){
+                    if(this.dataStore[i] === element){
+                            return i;
+                    }
+                }
+                return -1;
+            }
+
+            List.prototype.remove = function(element){
+                var removePos = this.find(element);
+
+                if(removePos > -1){
+                this.dataStore.splice(removePos, 1);
+                this.listSize--;
+                return true;
+                }
+                return false;
+            }
+
+            $(document).ready(function(){
+                
+                // 현재 선택된 좌석 수
+                let currentSelectedSeat = 0;
+
+                // 현재 선택된 좌석 id들
+                let seats = new List();
+                
+
+                $('.minus').click(function () {
+                    var $input = $(this).parent().find('input');
+                    var count = parseInt($input.val()) - 1;
+                    count = count < 1 ? 1 : count;
+                    $input.val(count);
+                    $input.change();
+                    return false;
+                });
+                $('.plus').click(function () {
+                    var $input = $(this).parent().find('input');
+                    $input.val(parseInt($input.val()) + 1);
+                    $input.change();
+                    return false;
+                });
+
+
+                var timeId = [[${timeId}]];
+
+                $.getJSON("/seats/"+timeId, function(arr){
+                    console.log(arr);
+
+                    var data = arr["data"];
+                    var size = arr["size"];
+
+                    console.log(data);
+                    console.log(size);
+
+                    // 전체 좌석이 100석
+                    if(size == 100) {
+
+                        for(var i = 0; i < 10; i++) {
+                            var str = "";
+                            for(var j = 0; j < 10; j++) {
+                                if(data[i*10+j].available == true){
+                                    str += "<td style='background-color: #00CDFF' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                }
+                                else{
+                                    str += "<td style='background-color: #FF9BE6' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                }
+                            }
+                            $('#seat-table > tbody:last').append('<tr >' + str + '</tr>');
+                        }
+                    }
+
+                    // 전체 좌석이 120석
+                    if(size == 120) {
+
+                        for(var i = 0; i < 10; i++) {
+                            var str = "";
+                            for(var j = 0; j < 12; j++) {
+                                if(data[i*10+j].available == true){
+                                    str += "<td style='background-color: #00CDFF' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                }
+                                else{
+                                    str += "<td style='background-color: #FF9BE6' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                }
+                            }
+                            $('#seat-table > tbody:last').append('<tr >' + str + '</tr>');
+                        }
+                    }
+                });
+
+                $(".seatTable").on("click", ".seat", function(){
+
+                    var seatId = $(this).data("id");
+                    console.log(seatId);
+                    console.log("선택된 좌석 : " + currentSelectedSeat);
+                    console.log(seats);
+                    console.log("=============");
+
+                    // 만약 이미 좌석이 선택 되었던 거라면...
+                    if(seats.find(seatId) != -1){
+                        seats.remove(seatId);
+                        currentSelectedSeat--;
+                        this.style.backgroundColor = "#00CDFF";
+                    }
+                    else{
+                        if(currentSelectedSeat + 1> $(".personNum").val()) {
+                            alert("인원 초과");
+                        }
+                        else {
+                            seats.append(seatId);
+                            currentSelectedSeat++;
+                            this.style.backgroundColor = "#FF9BE6";
+                        }
+                    }
+                })
+
+                
+            });
+        </script>
+    </th:block>
+</th:block>
+
+</html>
