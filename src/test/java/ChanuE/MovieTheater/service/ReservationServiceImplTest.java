@@ -49,7 +49,7 @@ class ReservationServiceImplTest {
                 .status(ReservationStatus.RESERVED)
                 .build();
 
-        Long id = reservationService.reservation(reservation);
+        //Long id = reservationService.reservation(reservation);
 
 //        Reservation findReservation = reservationRepository.getOne(id);
 //
@@ -66,9 +66,9 @@ class ReservationServiceImplTest {
 
         ReservationSearch search = ReservationSearch.builder().movieName("반지의 제왕").build();
 
-        PageResponseDTO<Object[], ReservationDTO> result = reservationService.getList(search, requestDTO);
+        //PageResponseDTO<Object[], ReservationDTO> result = reservationService.getList(search, requestDTO);
 
-        System.out.println(result.getDtoList().get(0));
+       // System.out.println(result.getDtoList().get(0));
 
     }
 

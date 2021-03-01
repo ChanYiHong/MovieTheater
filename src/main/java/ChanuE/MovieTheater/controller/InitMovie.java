@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.util.stream.IntStream;
 
 @Component
 @Profile("local")
@@ -50,13 +48,6 @@ public class InitMovie {
 //            Date date2 = new Date(LocalDate.of(2020,12,26));
 
 
-
-            Member member1 = Member.builder().memberName("찬의")
-                    .address(new Address("Seoul", "Jamsil"))
-                    .authority(Authority.ADMIN).build();
-            Member member2 = Member.builder().memberName("웅아")
-                    .address(new Address("Suwon", "Jungja"))
-                    .authority(Authority.USER).build();
 
             //Reservation reservation = Reservation.createReservation(member1, movie1);
 

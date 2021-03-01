@@ -1,7 +1,7 @@
 package ChanuE.MovieTheater.domain;
 
-public enum Authority {
+public enum MemberRole {
 
-    ADMIN, USER
+    USER, ADMIN
 
 }

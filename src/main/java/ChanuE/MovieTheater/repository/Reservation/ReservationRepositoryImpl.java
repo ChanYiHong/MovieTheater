@@ -30,55 +30,55 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
 
-    @Override
-    public Page<Object[]> findAllBySearchCond(ReservationSearch reservationSearch, Pageable pageable) {
-
-        QueryResults<Tuple> result = queryFactory
-                .select(reservation, movie, member)
-                .from(reservation)
-                .leftJoin(reservation.member, member)
-                .leftJoin(reservation.movie, movie)
-                .where(
-                        memberEq(reservationSearch.getMemberName()),
-                        movieEq(reservationSearch.getMovieName()),
-                        statusEq(reservationSearch.getReservationStatus())
-                )
-                .orderBy(getOrderSpecifiers(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .fetchResults();
-
-        List<Tuple> content = result.getResults();
-        long total = result.getTotal();
-
-        return new PageImpl<>(content.stream().map(tuple -> tuple.toArray()).collect(Collectors.toList()), pageable, total);
-    }
-
-    private BooleanExpression memberEq(String searchMemberName) {
-        return StringUtils.hasText(searchMemberName) ? reservation.member.memberName.containsIgnoreCase(searchMemberName) : null;
-    }
-
-    private BooleanExpression movieEq(String searchMovieName) {
-        return StringUtils.hasText(searchMovieName) ? reservation.movie.movieName.containsIgnoreCase(searchMovieName) : null;
-    }
-
-    private BooleanExpression statusEq(ReservationStatus searchReservationStatus) {
-        return searchReservationStatus != null ? reservation.status.eq(searchReservationStatus) : null;
-    }
-
-    private List<OrderSpecifier> getOrderSpecifiers(Sort sort){
-        List<OrderSpecifier> orders = new ArrayList<>();
-        sort.stream().forEach(order -> {
-            Order direction = order.getDirection().isAscending() ? Order.ASC : Order.DESC;
-            switch(order.getProperty()){
-                case "id":
-                    OrderSpecifier<?> orderId = CustomQuerydslUtils.getSortedColumn(direction, reservation, "id");
-                    orders.add(orderId);
-                    break;
-                default:
-                    break;
-            }
-        });
-        return orders;
-    }
+//    @Override
+//    public Page<Object[]> findAllBySearchCond(ReservationSearch reservationSearch, Pageable pageable) {
+//
+//        QueryResults<Tuple> result = queryFactory
+//                .select(reservation, movie, member)
+//                .from(reservation)
+//                .leftJoin(reservation.member, member)
+//                .leftJoin(reservation.movie, movie)
+//                .where(
+//                        memberEq(reservationSearch.getMemberName()),
+//                        movieEq(reservationSearch.getMovieName()),
+//                        statusEq(reservationSearch.getReservationStatus())
+//                )
+//                .orderBy(getOrderSpecifiers(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
+//                .offset(pageable.getOffset())
+//                .limit(pageable.getPageSize())
+//                .fetchResults();
+//
+//        List<Tuple> content = result.getResults();
+//        long total = result.getTotal();
+//
+//        return new PageImpl<>(content.stream().map(tuple -> tuple.toArray()).collect(Collectors.toList()), pageable, total);
+//    }
+//
+//    private BooleanExpression memberEq(String searchMemberName) {
+//        return StringUtils.hasText(searchMemberName) ? reservation.member.memberName.containsIgnoreCase(searchMemberName) : null;
+//    }
+//
+//    private BooleanExpression movieEq(String searchMovieName) {
+//        return StringUtils.hasText(searchMovieName) ? reservation.movie.movieName.containsIgnoreCase(searchMovieName) : null;
+//    }
+//
+//    private BooleanExpression statusEq(ReservationStatus searchReservationStatus) {
+//        return searchReservationStatus != null ? reservation.status.eq(searchReservationStatus) : null;
+//    }
+//
+//    private List<OrderSpecifier> getOrderSpecifiers(Sort sort){
+//        List<OrderSpecifier> orders = new ArrayList<>();
+//        sort.stream().forEach(order -> {
+//            Order direction = order.getDirection().isAscending() ? Order.ASC : Order.DESC;
+//            switch(order.getProperty()){
+//                case "id":
+//                    OrderSpecifier<?> orderId = CustomQuerydslUtils.getSortedColumn(direction, reservation, "id");
+//                    orders.add(orderId);
+//                    break;
+//                default:
+//                    break;
+//            }
+//        });
+//        return orders;
+//    }
 }

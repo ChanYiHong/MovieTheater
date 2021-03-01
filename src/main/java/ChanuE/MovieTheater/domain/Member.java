@@ -5,26 +5,29 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
 public class Member extends BaseEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
-    private Long id;
+    @Id
+    private String email;
+    private String password;
+    private String name;
+    private boolean fromSocial;
 
-    private String memberName;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<MemberRole> roleSet = new HashSet<>();
 
-    @Embedded
-    private Address address;
-
-    @Enumerated
-    private Authority authority;
-
+    public void addMemberRole(MemberRole memberRole) {
+        this.roleSet.add(memberRole);
+    }
 }

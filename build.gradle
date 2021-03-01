@@ -26,6 +26,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-devtools'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 	//querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa'
 
@@ -43,11 +46,13 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude module: 'junit'
 	}
+	testImplementation 'org.springframework.security:spring-security-test'
 
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 
 	compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time'
 }
 

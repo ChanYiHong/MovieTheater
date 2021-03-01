@@ -22,30 +22,30 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final SeatService seatService;
 
-    @GetMapping("")
-    public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,
-                                  PageRequestDTO pageRequestDTO, Model model){
-
-        PageResponseDTO<Object[], ReservationDTO> reservations = reservationService.getList(reservationSearch, pageRequestDTO);
-        model.addAttribute("result", reservations);
-
-        return "/reservation_list";
-
-    }
-
+//    @GetMapping("")
+//    public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,
+//                                  PageRequestDTO pageRequestDTO, Model model){
+//
+//        PageResponseDTO<Object[], ReservationDTO> reservations = reservationService.getList(reservationSearch, pageRequestDTO);
+//        model.addAttribute("result", reservations);
+//
+//        return "/reservation_list";
+//
+//    }
+//
     @GetMapping("/create")
     public String reservationForm(Model model)
     {
         return "/reservations/reservation_form";
     }
-
-
-    @PostMapping("/{reservation_id}/cancel")
-    public String cancelReservation(@PathVariable("reservation_id") Long id){
-        reservationService.cancelReservation(id);
-        return "redirect:/reservations";
-    }
-
+//
+//
+//    @PostMapping("/{reservation_id}/cancel")
+//    public String cancelReservation(@PathVariable("reservation_id") Long id){
+//        reservationService.cancelReservation(id);
+//        return "redirect:/reservations";
+//    }
+//
     @GetMapping("/seats/{timeId}")
     public String reservationSeats(@PathVariable("timeId") Long timeId, Model model) {
         model.addAttribute("timeId", timeId);
