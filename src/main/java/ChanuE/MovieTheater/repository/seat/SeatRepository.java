@@ -12,4 +12,7 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
     @Query("select s from Seat s where s.time.id = :id")
     List<Seat> findByTimeId(@Param("id") Long timeId);
 
+    @Query("select s from Seat s where s.reservation.id = :id")
+    List<Seat> findByReservationId(@Param("id") Long reservationId);
+
 }

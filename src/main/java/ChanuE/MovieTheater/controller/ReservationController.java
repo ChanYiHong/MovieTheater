@@ -22,33 +22,48 @@ public class ReservationController {
     private final ReservationService reservationService;
     private final SeatService seatService;
 
-//    @GetMapping("")
-//    public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,
-//                                  PageRequestDTO pageRequestDTO, Model model){
-//
-//        PageResponseDTO<Object[], ReservationDTO> reservations = reservationService.getList(reservationSearch, pageRequestDTO);
-//        model.addAttribute("result", reservations);
-//
-//        return "/reservation_list";
-//
-//    }
-//
+    @GetMapping("")
+    public String reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch,
+                                  PageRequestDTO pageRequestDTO, Model model){
+
+        PageResponseDTO<Object[], ReservationDTO> reservations = reservationService.getList(reservationSearch, pageRequestDTO);
+        model.addAttribute("result", reservations);
+
+        return "/reservation_list";
+
+    }
+
     @GetMapping("/create")
     public String reservationForm(Model model)
     {
         return "/reservations/reservation_form";
     }
-//
-//
-//    @PostMapping("/{reservation_id}/cancel")
-//    public String cancelReservation(@PathVariable("reservation_id") Long id){
-//        reservationService.cancelReservation(id);
-//        return "redirect:/reservations";
-//    }
-//
+
+
+    @PostMapping("/{reservation_id}/cancel")
+    public String cancelReservation(@PathVariable("reservation_id") Long id){
+        reservationService.cancelReservation(id);
+        return "redirect:/reservations";
+    }
+
     @GetMapping("/seats/{timeId}")
     public String reservationSeats(@PathVariable("timeId") Long timeId, Model model) {
         model.addAttribute("timeId", timeId);
         return "/reservations/reservation_seat";
     }
+
+    @PostMapping("/create")
+    public String createReservation(@ModelAttribute("reservationDTO") ReservationDTO reservationDTO){
+        Long id = reservationService.reservation(reservationDTO);
+
+        return "redirect:/reservations/"+id;
+    }
+
+    // 예약이 끝난 결과 화면 출력용. 하나만 가져옴.
+//    @GetMapping("/{id}")
+//    public String getReservationResult(@PathVariable("id") Long id, Model model) {
+//        ReservationDTO result = reservationService.getOne(id);
+//        model.addAttribute("dto", )
+//    }
+
 }

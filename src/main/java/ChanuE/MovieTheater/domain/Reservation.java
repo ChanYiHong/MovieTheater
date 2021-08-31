@@ -1,10 +1,14 @@
 package ChanuE.MovieTheater.domain;
 
+import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -27,13 +31,15 @@ public class Reservation extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-    // 다 : 1 "단 방향"
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Movie movie;
-
+    private String movieName;
     private String area;
     private String specificArea;
     private LocalDate date;
+    private LocalTime time;
+
+    @OneToMany(mappedBy = "reservation")
+    @Builder.Default
+    private List<Seat> seats = new ArrayList<>();
 
 
     // == 생성 메서드 == //
@@ -43,6 +49,22 @@ public class Reservation extends BaseEntity{
 //        reservation.setMember(member);
 //        return reservation;
 //    }
+
+    public static Reservation createReservation(ReservationDTO reservationDTO, Member member) {
+        Reservation reservation = Reservation.builder()
+                .movieName(reservationDTO.getMovieName())
+                .area(reservationDTO.getArea())
+                .specificArea(reservationDTO.getSpecificArea())
+                .date(reservationDTO.getDate())
+                .time(reservationDTO.getTime())
+                .status(ReservationStatus.RESERVED)
+                .totalPerson(reservationDTO.getTotalPerson())
+                .totalPrice(reservationDTO.getTotalPrice())
+                .member(member)
+                .build();
+
+        return reservation;
+    }
 
 
     // == 취소 메서드 == //

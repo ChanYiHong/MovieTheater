@@ -24,4 +24,12 @@ class SeatRepositoryTest {
         }
     }
 
+    @Test
+    public void findSeatByReservationId() throws Exception {
+        List<Seat> result = seatRepository.findByReservationId(2L);
+        for (Seat seat : result) {
+            System.out.println(seat);
+        }
+    }
+
 }

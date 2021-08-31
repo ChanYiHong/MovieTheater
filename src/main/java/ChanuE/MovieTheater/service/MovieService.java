@@ -1,6 +1,7 @@
 package ChanuE.MovieTheater.service;
 
 import ChanuE.MovieTheater.domain.Movie;
+import ChanuE.MovieTheater.domain.MovieImage;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
@@ -46,14 +47,15 @@ public class MovieService {
     // 리뷰 개수 까지 출력.
     public MovieResponseDTO findOne(Long id){
 
-        List<Object[]> result = movieRepository.findMovieWithReviewCount(id);
+        List<Object[]> result = movieRepository.findMovieWithImageAndReviewCount(id);
         Object[] objects = result.get(0);
         Movie movie = (Movie)objects[0];
-        Long reviewCnt = (Long)objects[1];
-        Double avg = (Double)objects[2];
+        MovieImage movieImage = (MovieImage)objects[1];
+        Long reviewCnt = (Long)objects[2];
+        Double avg = (Double)objects[3];
 
-        if(avg == null) return entityToDto(movie, reviewCnt, 0);
-        else return entityToDto(movie, reviewCnt, avg);
+        if(avg == null) return entityToDto(movie, movieImage, reviewCnt, 0);
+        else return entityToDto(movie, movieImage, reviewCnt, avg);
     }
 
     // 영화 예약 화면에서 단순한 영화 목록만 조회시 사용.
@@ -69,10 +71,10 @@ public class MovieService {
         // Search condition, controller랑 view에 추가 하기 시작
         Function<Object[], MovieResponseDTO> fn = entity -> {
             if(entity[2] == null){
-                return entityToDto((Movie) entity[0], (Long) entity[1], 0);
+                return entityToDto((Movie) entity[0], (MovieImage) entity[1], (Long) entity[2], 0);
             } else {
                 return entityToDto(
-                        (Movie) entity[0], (Long) entity[1], (Double) entity[2]);
+                        (Movie) entity[0], (MovieImage) entity[1] ,(Long) entity[2], (Double) entity[3]);
             }
         };
         return new PageResponseDTO<>(result, fn);
@@ -89,7 +91,7 @@ public class MovieService {
                 .build();
     }
 
-    private MovieResponseDTO entityToDto(Movie movie, Long reviewCnt, double gradeAvg) {
+    private MovieResponseDTO entityToDto(Movie movie, MovieImage movieImage ,Long reviewCnt, double gradeAvg) {
         return MovieResponseDTO.builder()
                 .id(movie.getId())
                 .movieName(movie.getMovieName())
@@ -99,6 +101,7 @@ public class MovieService {
                 .description(movie.getDescription())
                 .gradeAvg(gradeAvg)
                 .reviewCnt(reviewCnt.intValue())
+                .movieImage(movieImage)
                 .build();
     }
 

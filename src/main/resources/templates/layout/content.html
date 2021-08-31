@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:fragment="setContent(content)">
 
     <head>
@@ -21,6 +21,12 @@
         <script src=/vendor/jquery/jquery.min.js></script>
         <script src=/vendor/bootstrap/js/bootstrap.bundle.min.js></script>
 
+        <style>
+            body {
+              background-color: #FDFCF0;
+          }
+          </style>
+
 
     </head>
 
@@ -36,18 +42,23 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Home
+                        <a class="nav-link" href="/movies/info">영화
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/reservations/create">예매</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                        <a class="nav-link" href="/theaters/all">극장</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <div sec:authorize="isAnonymous()">
+                            <a class="nav-link" href="/login">로그인</a>
+                          </div>
+                          <div sec:authorize="isAuthenticated()">
+                            <a class="nav-link" href="/logout">로그아웃</a>
+                          </div>
                     </li>
                 </ul>
             </div>

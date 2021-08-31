@@ -3,6 +3,7 @@ package ChanuE.MovieTheater.service;
 import ChanuE.MovieTheater.domain.Member;
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.Reservation;
+import ChanuE.MovieTheater.domain.Seat;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
@@ -10,6 +11,7 @@ import ChanuE.MovieTheater.repository.Reservation.ReservationRepository;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.repository.member.MemberRepository;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
+import ChanuE.MovieTheater.repository.seat.SeatRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -28,48 +31,71 @@ import java.util.function.Function;
 public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
+    private final MemberRepository memberRepository;
+    private final SeatRepository seatRepository;
 
     /** 예약 **/
-//    @Transactional
-//    public Long reservation(ReservationDTO reservationDTO){
-//
-////        // Entity inquire (조회)
-////        Member member = memberRepository.findById(memberId)
-////                .orElseThrow(() -> new IllegalArgumentException("해당 member 없음 id = " + memberId));
-////
-////        Movie movie = movieRepository.findById(movieId)
-////                .orElseThrow(() -> new IllegalArgumentException("해당 movie 없음 id = " + movieId));
-////
-////        Reservation reservation = Reservation.createReservation(member, movie);
-////
-////        memberRepository.save(member);
-////        movieRepository.save(movie);
-////        reservationRepository.save(reservation);
-//
-//        Reservation reservation = dtoToEntity(reservationDTO);
-//
-//        log.info("Reservation Register");
-//        log.info(reservation);
-//
-//        reservationRepository.save(reservation);
-//
-//        return reservation.getId();
-//    }
+    @Transactional
+    public Long reservation(ReservationDTO reservationDTO){
 
-//    /** 검색 **/
-//    public PageResponseDTO<Object[], ReservationDTO> getList(ReservationSearch reservationSearch, PageRequestDTO pageRequestDTO){
-//        Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").ascending());
-//        Page<Object[]> result = reservationRepository.findAllBySearchCond(reservationSearch, pageable);
-//        Function<Object[], ReservationDTO> fn = objects -> entityToDTO((Reservation)objects[0], (Movie)objects[1], (Member)objects[2]);
-//        return new PageResponseDTO<>(result, fn);
-//    }
-//
-//    /** 취소 **/
-//    @Transactional
-//    public void cancelReservation(Long id){
-//        Reservation findReservation = reservationRepository.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("해당 예약이 없습니다. id = " + id));
-//        findReservation.cancel();
-//    }
+        String memberId = reservationDTO.getMemberId();
+
+        // Entity inquire (조회)
+        Member member = memberRepository.findByEmail(false, memberId)
+                .orElseThrow(() -> new IllegalArgumentException("해당 member 없음 id = " + memberId));
+
+        // 예약 만들기.
+        Reservation reservation = Reservation.createReservation(reservationDTO, member);
+
+
+        // 좌석을 찾아서 inavailable 로 바꾸고, 예약 설정.
+        List<Long> seats = reservationDTO.getSeatId();
+
+        for (Long seatId : seats) {
+            Optional<Seat> seatOptional = seatRepository.findById(seatId);
+            if(!seatOptional.isPresent()) {
+                throw new IllegalStateException("해당 좌석 없음 id = " + seatId);
+            }
+            Seat seat = seatOptional.get();
+            seat.setAvailable(false);
+            seat.setReservation(reservation);
+        }
+
+        reservationRepository.save(reservation);
+
+        return reservation.getId();
+    }
+
+    /** 검색 **/
+    public PageResponseDTO<Object[], ReservationDTO> getList(ReservationSearch reservationSearch, PageRequestDTO pageRequestDTO){
+        Pageable pageable = pageRequestDTO.getPageable(Sort.by("id").ascending());
+        Page<Object[]> result = reservationRepository.findAllBySearchCond(reservationSearch, pageable);
+        Function<Object[], ReservationDTO> fn = objects -> entityToDTO((Reservation)objects[0], (Member)objects[1]);
+        return new PageResponseDTO<>(result, fn);
+    }
+
+    @Override
+    public ReservationDTO getOne(Long id) {
+
+        Object[] result = reservationRepository.getReservation(id);
+        return entityToDTO((Reservation) result[0], (Member) result[1]);
+
+    }
+
+    /** 취소 **/
+    @Transactional
+    public void cancelReservation(Long id){
+        Reservation findReservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 예약이 없습니다. id = " + id));
+
+        // 예약을 취소하면 해당 좌석도 다시 사용 가능하게 만들어 주어야 한다.
+        List<Seat> seats = seatRepository.findByReservationId(id);
+
+        for (Seat seat : seats) {
+            seat.setAvailable(true);
+        }
+
+        findReservation.cancel();
+    }
 
 }

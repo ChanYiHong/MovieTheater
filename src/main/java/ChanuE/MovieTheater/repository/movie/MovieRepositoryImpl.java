@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import static ChanuE.MovieTheater.domain.QMovie.movie;
+import static ChanuE.MovieTheater.domain.QMovieImage.movieImage;
 import static ChanuE.MovieTheater.domain.QReview.review;
 
 @RequiredArgsConstructor
@@ -31,8 +32,9 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom{
     @Override
     public Page<Object[]> findAllBySearchCond(MovieSearch movieSearch, Pageable pageable) {
         QueryResults<Tuple> results = queryFactory
-                .select(movie, review.count(), review.grade.avg())
+                .select(movie, movieImage, review.count(), review.grade.avg())
                 .from(movie)
+                .leftJoin(movieImage).on(movieImage.movie.eq(movie))
                 .leftJoin(review).on(review.movie.eq(movie))
                 .where(movieNameEq(movieSearch.getMovieName()))
                 .orderBy(getOrderSpecifiers(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))

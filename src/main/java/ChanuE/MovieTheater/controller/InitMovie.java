@@ -4,14 +4,17 @@ import ChanuE.MovieTheater.domain.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.Role;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
-@Profile("local")
+//@Profile("local")
 @RequiredArgsConstructor
 public class InitMovie {
 
@@ -22,6 +25,7 @@ public class InitMovie {
         //initMovieService.init();
         //initMovieService.initMovie();
         //initMovieService.initTheater();
+//        initMovieService.initMember();
     }
 
     @Component
@@ -345,6 +349,18 @@ public class InitMovie {
             em.persist(정읍);
             em.persist(제주);
 
+        }
+
+        @Transactional
+        public void initMember() {
+            Set<MemberRole> set = new HashSet<>();
+            set.add(MemberRole.USER);
+            set.add(MemberRole.ADMIN);
+
+            Member 관리자홍 = Member.builder().email("admin@hcy.com").password("1234").fromSocial(false).name("관리자홍")
+                    .roleSet(set).build();
+
+            em.persist(관리자홍);
         }
     }
 }
