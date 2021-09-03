@@ -2,6 +2,7 @@ package ChanuE.MovieTheater.repository.movie;
 
 import ChanuE.MovieTheater.domain.AgeLimit;
 import ChanuE.MovieTheater.domain.Movie;
+import ChanuE.MovieTheater.domain.MovieImage;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import org.junit.jupiter.api.Test;
@@ -74,6 +75,22 @@ public class MovieRepositoryTest {
         Optional<Movie> result = movieRepository.findMovieByMovieName("소울");
         Movie movie = result.get();
         System.out.println(movie);
+    }
+
+    @Test
+    void findMovieWithImageAndReviewCntTest(){
+        List<Object[]> result = movieRepository.findMovieWithImageAndReviewCount(6L);
+
+        Object[] objects = result.get(0);
+        Movie movie = (Movie) objects[0];
+        MovieImage movieImage = (MovieImage) objects[1];
+        Long reviewCnt = (Long)objects[2];
+        Double avg = (Double)objects[3];
+
+        System.out.println(movie);
+        System.out.println(movieImage);
+        System.out.println(reviewCnt);
+        System.out.println(avg);
     }
 
 }

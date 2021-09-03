@@ -19,8 +19,8 @@ public interface MovieRepository extends JpaRepository<Movie, Long>, MovieReposi
     @Query("select m, count(r), avg(coalesce(r.grade, 1)) from Movie m join Review r on r.movie = m where m.id = :id")
     List<Object[]> findMovieWithReviewCount(@PathVariable("id") Long id);
 
-    @Query("select m, mi, count(r), avg(coalesce(r.grade, 1)) from Movie m join MovieImage mi on mi.movie = m " +
-            "join Review r on r.movie = m where m.id = :id")
+    @Query("select m, mi, count(r), avg(coalesce(r.grade, 1)) from Movie m left join MovieImage mi on mi.movie = m " +
+            "left join Review r on r.movie = m where m.id = :id")
     List<Object[]> findMovieWithImageAndReviewCount(@PathVariable("id") Long id);
 
 
