@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Role;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +23,8 @@ public class InitMovie {
 
     @PostConstruct
     public void init() {
-        //initMovieService.init();
-        //initMovieService.initMovie();
-        //initMovieService.initTheater();
+//        initMovieService.initMovie();
+//        initMovieService.initTheater();
 //        initMovieService.initMember();
     }
 
@@ -33,40 +33,8 @@ public class InitMovie {
 
         @Autowired
         private EntityManager em;
-
-        @Transactional
-        public void init() {
-
-//            Movie movie1 = Movie.builder().movieName("반지의 제왕").build();
-//            Movie movie2 = Movie.builder().movieName("담보").build();
-
-//            IntStream.rangeClosed(1,200).forEach(value -> {
-//                Movie movie = Movie.builder()
-//                        .movieName("Movie Name " + value)
-//                        .build();
-//                em.persist(movie);
-//            });
-
-
-//            Date date1 = new Date(LocalDate.of(2020,12,25));
-//            Date date2 = new Date(LocalDate.of(2020,12,26));
-
-
-
-            //Reservation reservation = Reservation.createReservation(member1, movie1);
-
-//            em.persist(movie1);
-//            em.persist(movie2);
-//            em.persist(area1);
-//            em.persist(area2);
-//            em.persist(specificArea1);
-//            em.persist(specificArea2);
-//            em.persist(date1);
-//            em.persist(date2);
-//            em.persist(member1);
-//            em.persist(member2);
-            //em.persist(reservation);
-        }
+        @Autowired
+        PasswordEncoder passwordEncoder;
 
         @Transactional
         public void initMovie() {
@@ -360,7 +328,12 @@ public class InitMovie {
             Member 관리자홍 = Member.builder().email("admin@hcy.com").password("1234").fromSocial(false).name("관리자홍")
                     .roleSet(set).build();
 
-            em.persist(관리자홍);
+            Member 메인관리자 = Member.builder().email("main@hcy.com").password(passwordEncoder.encode("1234")).fromSocial(false).name("메인관리자")
+                    .roleSet(set).build();
+
+//            em.persist(관리자홍);
+            em.persist(메인관리자);
+
         }
     }
 }

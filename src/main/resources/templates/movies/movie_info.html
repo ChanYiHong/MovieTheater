@@ -18,6 +18,7 @@
                 <thead>
                 <tr>
                     <th scope="col">AgeLimit</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Title</th>
                     <th scope="col">Director</th>
                     <th scope="col">RunningTime</th>
@@ -39,6 +40,10 @@
                         <span th:if="${movie.ageLimit == T(ChanuE.MovieTheater.domain.AgeLimit).valueOf('NINETEEN')}">
                             <img th:src="@{/img/19.png}" alt="19세이용가">
                         </span>
+                    </td>
+                    <td>
+                        <img th:if="${movie.movieImageDTO.path != null}"
+                             th:src="|/display?filePath=${movie.movieImageDTO.getThumbnailURL()}|">
                     </td>
                     <th scope="row">
                         <a th:href="@{/movies/{id} (id=${movie.id}, page=${result.page})}">

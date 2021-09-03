@@ -17,10 +17,16 @@ public class MovieImage {
 
     private String uuid;
     private String imgName;
+    private String storeFileName;
 
     private String path;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Movie movie;
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+//        movie.getMovieImages().add(this);
+    }
 
 }

@@ -1,16 +1,23 @@
 package ChanuE.MovieTheater.controller;
 
+import ChanuE.MovieTheater.domain.MovieImage;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
-import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDTO;
+import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
-import ChanuE.MovieTheater.service.MovieService;
+import ChanuE.MovieTheater.service.movie.MovieService;
+import ChanuE.MovieTheater.service.movie.MovieServiceImpl;
+import ChanuE.MovieTheater.upload.FileStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/movies/")
@@ -19,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 public class MovieController {
 
     private final MovieService movieService;
+    private final FileStore fileStore;
 
     @GetMapping("/list")
     public String movieList(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
@@ -30,16 +38,33 @@ public class MovieController {
     }
 
     @GetMapping("/create")
-    public String createMovie(){
+    public String createMovie(@ModelAttribute MovieRequestDTO movieRequestDTO){
         log.info("Get Movie Create View");
         return "/movies/movie_create";
     }
 
     @PostMapping("/create")
-    public String saveMovie(@ModelAttribute MovieSaveRequestDTO requestDto){
-        log.info("이름 : " + requestDto.getName());
-        movieService.saveMovie(requestDto);
-        return "redirect:/movies/list";
+    public String saveMovie(@ModelAttribute MovieRequestDTO movieRequestDTO) throws IOException {
+        log.info("이름 : " + movieRequestDTO.getMovieName());
+
+        List<MultipartFile> imageFiles = movieRequestDTO.getImageFiles();
+
+        for (MultipartFile imageFile : imageFiles) {
+            log.info("이미지 이름 : {}", imageFile.getOriginalFilename());
+            if (!imageFile.getContentType().startsWith("image")) {
+                log.warn("This file is not image type");
+                return "/movies/movie_create";
+            }
+        }
+
+        List<MovieImage> movieImages = fileStore.storeFiles(imageFiles);
+
+        for (MovieImage movieImage : movieImages) {
+            log.info("movieImage : {}", movieImage);
+        }
+
+        movieService.saveMovie(movieRequestDTO, movieImages);
+        return "redirect:/admin";
     }
 
     // 사용자 영화 목록 화면 조회용.

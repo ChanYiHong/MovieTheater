@@ -42,24 +42,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //http.addFilterBefore(apiCheckFilter(), UsernamePasswordAuthenticationFilter.class);
         //http.addFilterBefore(apiLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.logout().logoutSuccessUrl("/");
     }
 
 
 
-    @Bean
-    public ApiLoginFilter apiLoginFilter() throws Exception {
-        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login");
-        apiLoginFilter.setAuthenticationManager(authenticationManager());
-        return apiLoginFilter;
-    }
+//    @Bean
+//    public ApiLoginFilter apiLoginFilter() throws Exception {
+//        ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login");
+//        apiLoginFilter.setAuthenticationManager(authenticationManager());
+//        return apiLoginFilter;
+//    }
 
     @Bean
     public MemberLoginSuccessHandler successHandler() {
         return new MemberLoginSuccessHandler(passwordEncoder());
     }
 
-    @Bean
-    public ApiCheckFilter apiCheckFilter() {
-        return new ApiCheckFilter("/reviews/**/*");
-    }
+//    @Bean
+//    public ApiCheckFilter apiCheckFilter() {
+//        return new ApiCheckFilter("/reviews/**/*");
+//    }
 }

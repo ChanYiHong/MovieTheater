@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+
+    <hr class="my-4">
+    <h1>어서오세요 관리자님!!</h1>
+        <div>
+            <a href="/movies/create">영화 추가</a>
+            <a href="/theaters/create">영화관 추가(미완)</a>
+            <a href="/theaters/all">영화 상영시간 추가</a>
+        </div>
+
+    </th:block>
+</th:block>
+</html>

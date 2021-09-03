@@ -11,7 +11,8 @@
             <input class="form-control" th:value="${result.movieName}" name="title" readonly>
         </div>
         <div class="form-group">
-            <p>Image Location</p>
+            <img th:if="${result.movieImageDTO.path != null}"
+                 th:src="|/display?filePath=${result.movieImageDTO.getImageURL()}|">
         </div>
         <div class="form-group">
             <label >Director</label>

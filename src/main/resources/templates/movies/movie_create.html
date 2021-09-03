@@ -5,17 +5,36 @@
     <th:block th:fragment="content">
     <h1 class="mt-4">관리자 권한 : 영화 추가 화면</h1>
 
-    <form th:action="@{/movies/create}" method="post">
+    <form th:action="@{/movies/create}" th:object="${movieRequestDTO}" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label >영화 제목 : </label>
-            <input type="text" class="form-control" name="name" size="50" placeholder="제목 입력란" /><br/>
+            <label for="movieName" >영화 제목 : </label>
+            <input id="movieName" type="text" class="form-control" th:field="*{movieName}" size="50" placeholder="제목 입력란" /><br/>
+        </div>
+        <div>
+            <div th:each="ageLimit : ${T(ChanuE.MovieTheater.domain.AgeLimit).values()}" class="form-check form-check-inline">
+                <input type="radio" th:field="*{ageLimit}" th:value="${ageLimit.name()}">
+                <label th:for="${#ids.prev('ageLimit')}" th:text="${ageLimit.description}"></label>
+            </div>
         </div>
         <div class="form-group">
-            <label ></label>
+            <label for="director">감독</label>
+            <input id="director" type="text" class="form-control" th:field="*{director}">
         </div>
-        <button type="submit">저장</button>
+        <div class="form-group">
+            <label for="description">줄거리 및 설명</label>
+            <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="runningtime">상영 시간(분)</label>
+            <input id="runningtime" type="text" class="form-control" th:field="*{runningTime}">
+        </div>
+        <div class="form-group">
+            <label >사진</label>
+            <input type="file" name="imageFiles" value="imageFiles" multiple="multiple" th:field=*{imageFiles} class="form-control-file">
+        </div>
+        <button class="btn btn-primary" type="submit">저장</button>
+        <a class="btn btn-secondary" href="/admin">돌아가기</a>
     </form>
-
     </th:block>
 </th:block>
 </html>

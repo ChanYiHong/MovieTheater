@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @Builder
-@ToString()
+@ToString(exclude = {"movieImages"})
 public class Movie extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,15 @@ public class Movie extends BaseEntity{
     @Column(nullable = false)
     private AgeLimit ageLimit;
 
+    @Lob
     private String description;
 
     private String director;
 
     private int runningTime;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
+    private List<MovieImage> movieImages = new ArrayList<>();
 
 }

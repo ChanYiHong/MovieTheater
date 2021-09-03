@@ -1,15 +1,17 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.movie;
 
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.MovieImage;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
-import ChanuE.MovieTheater.dto.movie.MovieSaveRequestDTO;
+import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
+import ChanuE.MovieTheater.repository.movieimage.MovieImageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -24,22 +26,34 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-@Log4j2
-public class MovieService {
+@Slf4j
+public class MovieServiceImpl implements MovieService{
 
     private final MovieRepository movieRepository;
+    private final MovieImageRepository movieImageRepository;
 
     @Transactional
-    public Long saveMovie(MovieSaveRequestDTO requestDto){
-        Movie movie = dtoToEntity(requestDto);
+    public Long saveMovie(MovieRequestDTO movieRequestDTO, List<MovieImage> movieImages){
+        Movie movie = dtoToEntity(movieRequestDTO, movieImages);
         checkDuplicateMovie(movie.getMovieName());
+
         movieRepository.save(movie);
+
+        log.info("영화 저장 {}", movie);
+
+        for (MovieImage movieImage : movieImages) {
+            movieImage.setMovie(movie);
+            movieImageRepository.save(movieImage);
+
+            log.info("영화 이미지 저장 {}", movieImage);
+        }
+
         return movie.getId();
     }
 
     private void checkDuplicateMovie(String name){
         Optional<Movie> movies = movieRepository.findMovieByMovieName(name);
-        if(!movies.isPresent()){
+        if(movies.isPresent()){
             throw new IllegalStateException("Duplicate Movie Name!! Please type other movie name!!");
         }
     }
@@ -70,48 +84,15 @@ public class MovieService {
         Page<Object[]> result = movieRepository.findAllBySearchCond(movieSearch, pageable);
         // Search condition, controller랑 view에 추가 하기 시작
         Function<Object[], MovieResponseDTO> fn = entity -> {
-            if(entity[2] == null){
+            if(entity[3] == null){
                 return entityToDto((Movie) entity[0], (MovieImage) entity[1], (Long) entity[2], 0);
             } else {
                 return entityToDto(
-                        (Movie) entity[0], (MovieImage) entity[1] ,(Long) entity[2], (Double) entity[3]);
+                        (Movie) entity[0], (MovieImage) entity[1], (Long) entity[2], (Double) entity[3]);
             }
         };
+
         return new PageResponseDTO<>(result, fn);
     }
 
-    private MovieResponseDTO entityToDto(Movie movie) {
-        return MovieResponseDTO.builder()
-                .id(movie.getId())
-                .movieName(movie.getMovieName())
-                .ageLimit(movie.getAgeLimit())
-                .director(movie.getDirector())
-                .runningTime(movie.getRunningTime())
-                .description(movie.getDescription())
-                .build();
-    }
-
-    private MovieResponseDTO entityToDto(Movie movie, MovieImage movieImage ,Long reviewCnt, double gradeAvg) {
-        return MovieResponseDTO.builder()
-                .id(movie.getId())
-                .movieName(movie.getMovieName())
-                .ageLimit(movie.getAgeLimit())
-                .director(movie.getDirector())
-                .runningTime(movie.getRunningTime())
-                .description(movie.getDescription())
-                .gradeAvg(gradeAvg)
-                .reviewCnt(reviewCnt.intValue())
-                .movieImage(movieImage)
-                .build();
-    }
-
-    private Movie dtoToEntity(MovieSaveRequestDTO dto) {
-        return Movie.builder()
-                .movieName(dto.getName())
-                .director(dto.getDirector())
-                .ageLimit(dto.getAgeLimit())
-                .runningTime(dto.getRunningTime())
-                .description(dto.getDescription())
-                .build();
-    }
 }

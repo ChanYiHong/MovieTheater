@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-@ToString(exclude = {"member", "movie"})
+@ToString(exclude = {"member", "seats"})
 public class Reservation extends BaseEntity{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
