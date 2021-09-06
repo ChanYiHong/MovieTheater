@@ -1,31 +1,36 @@
 package ChanuE.MovieTheater.api;
 
+import ChanuE.MovieTheater.dto.reservation.ReservationRequestDTO;
+import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
+import ChanuE.MovieTheater.service.ReservationService;
 import ChanuE.MovieTheater.service.ReservationServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reservations/")
+@RequestMapping("/api/reservations")
 @RequiredArgsConstructor
+@Slf4j
 public class ReservationApiController {
 
-    private final ReservationServiceImpl reservationServiceImpl;
+    private final ReservationService reservationService;
 
-//    @GetMapping("")
-//    public Result reservationList(@ModelAttribute("reservationSearch") ReservationSearch reservationSearch){
-//        List<ReservationResponseDto> result = reservationService.findAll(reservationSearch);
-//        return new Result(result.size(), result);
-//    }
-//
-//    @PostMapping("/v2")
-//    public Result reservationListV2(@RequestBody ReservationSearch reservationSearch){
-//        List<ReservationResponseDto> result = reservationService.findAll(reservationSearch);
-//        return new Result(result.size(), result);
-//    }
+    @PostMapping
+    public ResponseEntity<String> reservationRegister(@RequestBody ReservationRequestDTO dto,
+                                                      @AuthenticationPrincipal AuthMemberDTO memberDTO) {
+
+        log.info("reservation : {}", dto);
+        reservationService.reservation(dto, memberDTO.getEmail());
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
 
     @Data
     @AllArgsConstructor

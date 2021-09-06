@@ -46,6 +46,20 @@
                 const year = date.getFullYear();
                 const month = date.getMonth() + 1;
 
+                // 처음 영화 목록.
+                $.getJSON("/movies", function(arr) {
+
+                    var str = "";
+                    var data = arr["data"];
+
+                    $.each(data, function(idx, movie){
+                        str += "<div class='movie-body' data-id=" + movie.id + ">";  // areaId 하면 오류.. 소문자만
+                        str += "<h5 class='card-body'>" + movie.movieName + "</h5>";
+                        str += "</div>";
+                    });
+                    movieList.html(str);
+                });
+
                 
                 $(".specificAreaList").on("click", ".specific-body", function() {
                     
@@ -168,29 +182,19 @@
                                     str += "<h4>"+time.time+"</h4>";
                                     str += "<h5>총 좌석 :"+time.seatNum+"</h5>";
                                     str += "<h4>잔여 좌석 :"+time.availableNum+"</h4>";
-                                    str += "<a class='btn btn-primary' href='/reservations/seats/"+time.id+"'>예약하러가기</a>"
+                                    str += "<button type='button' data-movieid="+movieId+" data-area="+area+
+                                            " data-specific="+specific+" data-year="+year+" data-month="+month+
+                                            " data-day="+day+" data-timeid="+time.id+" class='reserve btn btn-primary'>예약하러가기</a>"
+                                        // href='/reservations/seats/"+time.id+"'
                                     str += "</div>";
                                 });
 
                                 timeList.html(str);
                             }
-                        })
+                        });
                     })
                 }
 
-                // 처음 영화 목록.
-                $.getJSON("/movies", function(arr) {
-
-                    var str = "";
-                    var data = arr["data"];
-
-                    $.each(data, function(idx, movie){
-                        str += "<div class='movie-body' data-id=" + movie.id + ">";  // areaId 하면 오류.. 소문자만
-                        str += "<h5 class='card-body'>" + movie.movieName + "</h5>";
-                        str += "</div>";
-                    });
-                    movieList.html(str);
-                });
 
                 // 영화 제목 클릭시 지역 보이게!
                 $(".movieList").on("click", ".movie-body" ,function() {
@@ -254,7 +258,62 @@
 
             });
 
+            $(".timeList").on("click", ".reserve", function() {
+                
+                var movieId = $(this).data("movieid");
+                var area = $(this).data("area");
+                var specific = $(this).data("specific");
+                var year = $(this).data("year");
+                var month = $(this).data("month");
+                var day = $(this).data("day");
+                var timeId = $(this).data("timeid");
 
+                var form = document.createElement("form");
+
+                form.setAttribute("method", "POST");
+                form.setAttribute("charset", "utf-8");
+                form.setAttribute("action", "/reservations/seats/"+timeId);
+
+                var input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "movieId");
+                input.setAttribute("value", movieId);
+                form.appendChild(input);
+
+                input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "area");
+                input.setAttribute("value", area);
+                form.appendChild(input);
+
+                input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "specific");
+                input.setAttribute("value", specific);
+                form.appendChild(input);
+
+                input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "year");
+                input.setAttribute("value", year);
+                form.appendChild(input);
+
+                input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "month");
+                input.setAttribute("value", month);
+                form.appendChild(input);
+
+                input = document.createElement("input");
+                input.setAttribute("type", "text");
+                input.setAttribute("name", "day");
+                input.setAttribute("value", day);
+                form.appendChild(input);
+
+                document.body.appendChild(form);
+                form.submit();
+
+            });
 
 
             // 다음 할일 : 구체적 지역까지 띄우고 다시 영화 이름 눌렀을 때 다 삭제 되게 해야 될듯

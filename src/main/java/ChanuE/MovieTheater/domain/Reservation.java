@@ -1,6 +1,7 @@
 package ChanuE.MovieTheater.domain;
 
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
+import ChanuE.MovieTheater.dto.reservation.ReservationRequestDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -50,16 +51,19 @@ public class Reservation extends BaseEntity{
 //        return reservation;
 //    }
 
-    public static Reservation createReservation(ReservationDTO reservationDTO, Member member) {
+    public static Reservation createReservation(ReservationRequestDTO reservationDTO, String movieName, Time time, Member member) {
+
+        LocalDate date = LocalDate.of(reservationDTO.getYear(), reservationDTO.getMonth(), reservationDTO.getDay());
+
         Reservation reservation = Reservation.builder()
-                .movieName(reservationDTO.getMovieName())
+                .movieName(movieName)
                 .area(reservationDTO.getArea())
-                .specificArea(reservationDTO.getSpecificArea())
-                .date(reservationDTO.getDate())
-                .time(reservationDTO.getTime())
+                .specificArea(reservationDTO.getSpecific())
+                .date(date)
+                .time(time.getTime())
                 .status(ReservationStatus.RESERVED)
                 .totalPerson(reservationDTO.getTotalPerson())
-                .totalPrice(reservationDTO.getTotalPrice())
+                .totalPrice(reservationDTO.getTotalPerson() * 10000) // 티켓 한장 당 만원으로 초기 설정..
                 .member(member)
                 .build();
 

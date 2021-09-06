@@ -7,4 +7,6 @@ public interface MemberService {
 
     void joinMember(MemberSaveDTO memberSaveDTO);
 
+
+
 }

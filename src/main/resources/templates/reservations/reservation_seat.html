@@ -59,10 +59,20 @@
                 <span class='plus'>+</span>
             </div>
 
-            <button>예약</button>
+            <h1 class="mt-4">[[${movieName}]]</h1>
+            <div class="form-group">
+                <label >지역</label>
+                <input class="form-control" th:value="|${info.area} ${info.specific}|" readonly>
+            </div>
+            <div class="form-group">
+                <label >날짜</label>
+                <input class="form-control" th:value="|${info.year}년 ${info.month}월 ${info.day}일|" name="runningTime" readonly>
+            </div>
+
+            <button type="button" id="reservation" class="btn btn-primary">예약</button>
         </div>
 
-        <script inline="javascript">
+        <script th:inline="javascript">
 
             var List = function(){
                 this.dataStore = [];
@@ -88,9 +98,9 @@
                 var removePos = this.find(element);
 
                 if(removePos > -1){
-                this.dataStore.splice(removePos, 1);
-                this.listSize--;
-                return true;
+                    this.dataStore.splice(removePos, 1);
+                    this.listSize--;
+                    return true;
                 }
                 return false;
             }
@@ -114,7 +124,9 @@
                 });
                 $('.plus').click(function () {
                     var $input = $(this).parent().find('input');
-                    $input.val(parseInt($input.val()) + 1);
+                    var count = parseInt($input.val()) + 1;
+                    count = count > 10 ? 10 : count; // 최대 10명까지만 예약 가능.
+                    $input.val(count);
                     $input.change();
                     return false;
                 });
@@ -190,7 +202,40 @@
                             this.style.backgroundColor = "#FF9BE6";
                         }
                     }
-                })
+                });
+
+                // 예약
+                $("#reservation").on("click", function() {
+
+                    var area = [[${info.area}]];
+                    var specific = [[${info.specific}]];
+                    
+                    var sendData = {
+                        "totalPerson": currentSelectedSeat,
+                        "seatList": seats.dataStore,
+                        "timeId": [[${timeId}]],
+                        "movieId": [[${info.movieId}]],
+                        "area": area,
+                        "specific": specific,
+                        "year": [[${info.year}]],
+                        "month": [[${info.month}]],
+                        "day": [[${info.day}]]
+                    };
+
+                    console.log(sendData);
+
+                    $.ajax({
+                        url: "/api/reservations",
+                        method: "post",
+                        data: JSON.stringify(sendData),
+                        contentType: "application/json; charset=utf-8",
+                        success: function(result) {
+                            console.log(result);
+                            window.location.href="/";
+                        }
+                    });
+
+                });
 
                 
             });

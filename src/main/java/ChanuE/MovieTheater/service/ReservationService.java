@@ -6,13 +6,14 @@ import ChanuE.MovieTheater.domain.Reservation;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
+import ChanuE.MovieTheater.dto.reservation.ReservationRequestDTO;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 
 import java.util.List;
 
 public interface ReservationService {
 
-    Long reservation(ReservationDTO reservationDTO);
+    Long reservation(ReservationRequestDTO reservationDTO, String memberId);
 
     PageResponseDTO<Object[], ReservationDTO> getList(ReservationSearch reservationSearch, PageRequestDTO pageRequestDTO);
 

@@ -1,17 +1,16 @@
 package ChanuE.MovieTheater.service;
 
-import ChanuE.MovieTheater.domain.Member;
-import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.domain.Reservation;
-import ChanuE.MovieTheater.domain.Seat;
+import ChanuE.MovieTheater.domain.*;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
+import ChanuE.MovieTheater.dto.reservation.ReservationRequestDTO;
 import ChanuE.MovieTheater.repository.Reservation.ReservationRepository;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.repository.member.MemberRepository;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.seat.SeatRepository;
+import ChanuE.MovieTheater.repository.time.TimeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -31,25 +30,30 @@ import java.util.function.Function;
 public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
+    private final MovieRepository movieRepository;
     private final MemberRepository memberRepository;
     private final SeatRepository seatRepository;
+    private final TimeRepository timeRepository;
 
     /** 예약 **/
     @Transactional
-    public Long reservation(ReservationDTO reservationDTO){
-
-        String memberId = reservationDTO.getMemberId();
+    public Long reservation(ReservationRequestDTO reservationDTO, String memberId){
 
         // Entity inquire (조회)
         Member member = memberRepository.findByEmail(false, memberId)
                 .orElseThrow(() -> new IllegalArgumentException("해당 member 없음 id = " + memberId));
 
+        Movie movie = movieRepository.findById(reservationDTO.getMovieId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 movie 없음 id = " + reservationDTO.getMovieId()));
+
+        Time time = timeRepository.findById(reservationDTO.getTimeId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 Time 없음 id = " + reservationDTO.getTimeId()));
+
         // 예약 만들기.
-        Reservation reservation = Reservation.createReservation(reservationDTO, member);
+        Reservation reservation = Reservation.createReservation(reservationDTO, movie.getMovieName(), time, member);
 
-
-        // 좌석을 찾아서 inavailable 로 바꾸고, 예약 설정.
-        List<Long> seats = reservationDTO.getSeatId();
+        // 좌석을 찾아서 unavailable 로 바꾸고, 예약 설정.
+        List<Long> seats = reservationDTO.getSeatList();
 
         for (Long seatId : seats) {
             Optional<Seat> seatOptional = seatRepository.findById(seatId);
