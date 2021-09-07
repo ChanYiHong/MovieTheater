@@ -7,6 +7,7 @@ import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import ChanuE.MovieTheater.dto.time.TimeResponseDTO;
 import ChanuE.MovieTheater.dto.time.TimeSaveDTO;
 import ChanuE.MovieTheater.repository.cinema.CinemaRepository;
+import ChanuE.MovieTheater.repository.seat.SeatRepository;
 import ChanuE.MovieTheater.repository.time.TimeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -25,6 +26,7 @@ public class TimeServiceImpl implements TimeService{
     private final TimeRepository timeRepository;
     private final CinemaRepository cinemaRepository;
     private final SeatService seatService;
+    private final SeatRepository seatRepository;
 
     @Override
     @Transactional

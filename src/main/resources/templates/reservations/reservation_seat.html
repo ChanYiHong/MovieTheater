@@ -150,10 +150,10 @@
                             var str = "";
                             for(var j = 0; j < 10; j++) {
                                 if(data[i*10+j].available == true){
-                                    str += "<td style='background-color: #00CDFF' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    str += "<td style='background-color: #00CDFF' class='seat' data-available='1' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
                                 }
                                 else{
-                                    str += "<td style='background-color: #FF9BE6' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    str += "<td style='background-color: black' class='seat' data-available='0' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
                                 }
                             }
                             $('#seat-table > tbody:last').append('<tr >' + str + '</tr>');
@@ -167,10 +167,10 @@
                             var str = "";
                             for(var j = 0; j < 12; j++) {
                                 if(data[i*10+j].available == true){
-                                    str += "<td style='background-color: #00CDFF' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    str += "<td style='background-color: #00CDFF' class='seat' data-available='1' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
                                 }
                                 else{
-                                    str += "<td style='background-color: #FF9BE6' class='seat' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
+                                    str += "<td style='background-color: black' class='seat' data-available='0' data-id="+ data[i*10+j].id +">" + data[i*10+j].row + "-" + data[i*10+j].col + "</td>";
                                 }
                             }
                             $('#seat-table > tbody:last').append('<tr >' + str + '</tr>');
@@ -181,6 +181,12 @@
                 $(".seatTable").on("click", ".seat", function(){
 
                     var seatId = $(this).data("id");
+                    var available = $(this).data("available");
+
+                    if (available == 0) {
+                        return;
+                    }
+
                     console.log(seatId);
                     console.log("선택된 좌석 : " + currentSelectedSeat);
                     console.log(seats);

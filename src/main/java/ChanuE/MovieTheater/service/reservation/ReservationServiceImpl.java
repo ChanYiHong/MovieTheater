@@ -66,6 +66,10 @@ public class ReservationServiceImpl implements ReservationService {
             seat.setReservation(reservation);
         }
 
+        // 해당 영화 time의 총 가능한 좌석 수 줄이기.
+        int curAvailableNum = time.getAvailableNum() - reservationDTO.getTotalPerson();
+        time.setAvailableNum(curAvailableNum);
+
         reservationRepository.save(reservation);
 
         return reservation.getId();
@@ -101,6 +105,12 @@ public class ReservationServiceImpl implements ReservationService {
         }
 
         findReservation.cancel();
+
+        // 해당 영화 time의 이용가능 좌석도 늘려준다.
+        Time time = seats.get(0).getTime();
+        int availableNum = time.getAvailableNum();
+        int curAvailableNum = availableNum + findReservation.getTotalPerson();
+        time.setAvailableNum(curAvailableNum);
     }
 
 }

@@ -37,4 +37,8 @@ public class Time extends BaseEntity{
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Cinema cinema;
+
+    public void setAvailableNum(int availableNum) {
+        this.availableNum = availableNum;
+    }
 }

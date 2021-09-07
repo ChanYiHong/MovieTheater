@@ -37,7 +37,7 @@
                 <tr th:each="time : ${result}">
                     <td class="time" th:attr="data-id=${time.id}">[[${time.time}]]</td>
                     <td>[[${time.seatNum}]]</td>
-                    <td>미구현</td>
+                    <td>[[${time.availableNum}]]</td>
                     <td>
                         <button class="btn btn-danger" type="button" id="timeRemove" th:value="${time.id}">제거</button>
                     </td>
