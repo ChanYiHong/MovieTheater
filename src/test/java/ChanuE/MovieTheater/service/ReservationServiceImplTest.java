@@ -63,9 +63,9 @@ class ReservationServiceImplTest {
                 .seatId(seats)
                 .build();
 
-        Long reservationId = reservationService.reservation(dto);
-
-        System.out.println(reservationId);
+//        Long reservationId = reservationService.reservation(dto);
+//
+//        System.out.println(reservationId);
 
     }
 

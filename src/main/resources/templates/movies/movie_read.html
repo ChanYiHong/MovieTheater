@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
@@ -31,7 +31,9 @@
         <button type="button" class="btn btn-primary">
             Review Count <span class="badge badge-light">[[${result.reviewCnt}]]</span>
         </button>
-        <button type="button" class="btn btn-light addReview">리뷰 작성</button>
+        <div sec:authorize="isAuthenticated()">
+            <button type="button" class="btn btn-light addReview">리뷰 작성</button>
+        </div>
 
         <div class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -53,7 +55,7 @@
                         </div>
                         <div class="form-group">
                             <Label >작성자</Label>
-                            <input class="form-control" type="text" name="writer" placeholder="작성자">
+                            <input class="form-control" type="text" name="writer" th:value="${member.name}" th:placeholder="${member.name}" readonly>
                             <input type="hidden" name="id">
                         </div>
                     </div>
@@ -173,10 +175,12 @@
                 // 리뷰 모달창에서 저장 버튼 누를때!
                 $(".reviewSave").on("click", function() {
 
+                    var writer = [[${member.name}]];
+
                     var data = {
                         movieId: movieId,
                         content: $('input[name="content"]').val(),
-                        writer: $('input[name="writer"]').val(),
+                        writer: writer,
                         grade: grade
                     }
 

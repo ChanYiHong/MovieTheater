@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+
+    <div class="container">
+        <div class="py-5 text-center">
+            <h1 class="mt-4">회원 정보</h1>
+        </div>
+
+        <hr class="my-4">
+        <div>
+            <h4 class="mb-3">회원 상세 정보</h4>
+
+            <div class="form-group">
+                <label for="name">이메일</label>
+                <input class="form-control title" id="name" th:value="${member.email}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="loginId">닉네임</label>
+                <input class="form-control" id="loginId" th:value="${member.name}" readonly>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <h4 class="mb-3">예약 현황 ( [[${memberInfo.reservationCnt}]] 건 )</h4>
+        <div th:if="${memberInfo.reservationResponseDTO.size() != 0}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>예약번호</th>
+                        <th>영화제목</th>
+                        <th>상영관</th>
+                        <th>상영 시간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="reservation : ${memberInfo.reservationResponseDTO}">
+                        <td th:text="${reservation.reservationId}"></td>
+                        <td th:text="${reservation.movieName}"></td>
+                        <td th:text="|${reservation.area} ${reservation.specific}|"></td>
+                        <td th:text="|${reservation.date} ${reservation.time}|"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${memberInfo.reservationResponseDTO.size() == 0}">
+            <p>아직 예약한 영화가 없어요~</p>
+            <a href="/reservations/create">예약하러 가기</a>
+        </div>
+
+        <hr class="my-4">
+
+        <h4 class="mb-3">작성한 댓글 ( [[${memberInfo.reviewCnt}]] 개 )</h4>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>영화제목</th>
+                        <th>댓글내용</th>
+                        <th>평점</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="review : ${memberInfo.reviewResponseDTO.dtoList}">
+                    <td th:text="${review.movieName}"></td>
+                    <td th:text="${review.content}"></td>
+                    <td th:text="${review.grade}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination h-100 justify-content-center align-items-center">
+                <li class="page-item " th:if="${memberInfo.reviewResponseDTO.prev}">
+                    <a class="page-link" th:href="@{/memberInfo(page=${memberInfo.reviewResponseDTO.start-1})}" tabindex="-1">PREVIOUS</a>
+                </li>
+                <li th:class=" 'page-item ' + ${memberInfo.reviewResponseDTO.page == page?'active':''}" th:each="page : ${memberInfo.reviewResponseDTO.pageList}">
+                    <a class="page-link" th:href="@{/memberInfo(page=${page})}">[[${page}]]</a>
+                </li>
+                <li class="page-item" th:if="${memberInfo.reviewResponseDTO.next}">
+                    <a class="page-link" th:href="@{/memberInfo(page=${memberInfo.reviewResponseDTO.end+1})}">NEXT</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    </th:block>
+</th:block>

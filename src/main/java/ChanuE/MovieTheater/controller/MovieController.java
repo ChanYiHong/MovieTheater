@@ -6,11 +6,13 @@ import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
+import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
 import ChanuE.MovieTheater.service.movie.MovieService;
 import ChanuE.MovieTheater.service.movie.MovieServiceImpl;
 import ChanuE.MovieTheater.upload.FileStore;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -80,12 +82,16 @@ public class MovieController {
     // 사용자 영화 상세 정보창.
     @GetMapping("/{id}")
     public String readMovie(@ModelAttribute("pageRequestDTO") PageRequestDTO pageRequestDTO,
-                            @PathVariable("id") Long id, Model model) {
+                            @PathVariable("id") Long id, @AuthenticationPrincipal AuthMemberDTO memberDTO, Model model) {
         log.info("Movie Specific");
         MovieResponseDTO findMovie = movieService.findOne(id);
 
         log.info(findMovie);
         model.addAttribute("result", findMovie);
+
+        if (memberDTO != null) {
+            model.addAttribute("member", memberDTO);
+        }
         return "/movies/movie_read";
     }
 }

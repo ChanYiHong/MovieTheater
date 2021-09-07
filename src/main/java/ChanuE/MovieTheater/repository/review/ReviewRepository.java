@@ -12,4 +12,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     Page<Review> findByMovie(Movie movie, Pageable pageable);
 
+    @Query("select r from Review r where r.writer = :name")
+    Page<Review> findByMember(@Param("name") String name, Pageable pageable);
+
 }

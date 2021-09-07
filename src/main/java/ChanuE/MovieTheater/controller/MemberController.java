@@ -1,10 +1,15 @@
 package ChanuE.MovieTheater.controller;
 
+import ChanuE.MovieTheater.dto.member.MemberInfoDTO;
 import ChanuE.MovieTheater.dto.member.MemberSaveDTO;
+import ChanuE.MovieTheater.dto.page.PageRequestDTO;
+import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
 import ChanuE.MovieTheater.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +33,14 @@ public class MemberController {
 
         memberService.joinMember(memberSaveDTO);
         return "redirect:/";
+    }
+
+    @GetMapping("/memberInfo")
+    public String memberInfoPage(@ModelAttribute PageRequestDTO pageRequestDTO, @AuthenticationPrincipal AuthMemberDTO memberDTO, Model model) {
+        MemberInfoDTO memberInfo = memberService.getMemberInfo(memberDTO, pageRequestDTO);
+        model.addAttribute("memberInfo", memberInfo);
+        model.addAttribute("member", memberDTO);
+        return "members/info";
     }
 
 }

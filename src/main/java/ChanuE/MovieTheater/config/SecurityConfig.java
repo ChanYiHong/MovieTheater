@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin();
         http.csrf().disable();
+        http.authorizeRequests()
+                .antMatchers("/reservations/seats/**", "/memberInfo").hasRole("USER");
 //        http.oauth2Login();
 
         //http.rememberMe().tokenValiditySeconds(60 * 60 * 24 * 7).userDetailsService(memberDetailsService);
