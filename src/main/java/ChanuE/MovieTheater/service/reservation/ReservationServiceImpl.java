@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.reservation;
 
 import ChanuE.MovieTheater.domain.*;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
@@ -11,6 +11,7 @@ import ChanuE.MovieTheater.repository.member.MemberRepository;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.seat.SeatRepository;
 import ChanuE.MovieTheater.repository.time.TimeRepository;
+import ChanuE.MovieTheater.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;

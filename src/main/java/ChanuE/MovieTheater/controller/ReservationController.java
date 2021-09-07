@@ -1,22 +1,20 @@
 package ChanuE.MovieTheater.controller;
 
 import ChanuE.MovieTheater.domain.Movie;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationInfoForSeatReservationDTO;
-import ChanuE.MovieTheater.dto.seat.SeatDTO;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.service.*;
+import ChanuE.MovieTheater.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller

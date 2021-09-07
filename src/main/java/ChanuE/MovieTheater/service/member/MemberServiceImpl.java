@@ -1,9 +1,6 @@
 package ChanuE.MovieTheater.service.member;
 
-import ChanuE.MovieTheater.domain.Member;
-import ChanuE.MovieTheater.domain.MemberRole;
-import ChanuE.MovieTheater.domain.Reservation;
-import ChanuE.MovieTheater.domain.Review;
+import ChanuE.MovieTheater.domain.*;
 import ChanuE.MovieTheater.dto.member.MemberInfoDTO;
 import ChanuE.MovieTheater.dto.member.MemberSaveDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
@@ -65,7 +62,7 @@ public class MemberServiceImpl implements MemberService{
                 .findByMember(member.getName(), pageRequestDTO.getPageable(Sort.by("id").descending()));
 
         // 나의 예약 내역 확인..
-        List<Reservation> reservations = reservationRepository.findByMemberName(member.getName());
+        List<Reservation> reservations = reservationRepository.findByMemberName(member.getName(), ReservationStatus.RESERVED);
 
         Function<Review, ReviewResponseDTO> fn = review -> {
             return ReviewResponseDTO.builder()

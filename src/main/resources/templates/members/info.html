@@ -34,6 +34,7 @@
                         <th>영화제목</th>
                         <th>상영관</th>
                         <th>상영 시간</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,9 @@
                         <td th:text="${reservation.movieName}"></td>
                         <td th:text="|${reservation.area} ${reservation.specific}|"></td>
                         <td th:text="|${reservation.date} ${reservation.time}|"></td>
+                        <td>
+                            <button class="btn btn-danger cancel" type="button" th:attr="data-id=${reservation.reservationId}">예약취소</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -84,6 +88,26 @@
             </ul>
         </div>
     </div>
+
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            
+            $(".cancel").on("click", function() {
+                var id = $(this).data("id");
+                console.log(id);
+
+                $.ajax({
+                    url: "/api/reservations/"+id,
+                    method: "DELETE",
+                    success: function(result) {
+                        console.log(result);
+                        window.location.reload();
+                    }
+                })
+            })
+
+        });
+    </script>
 
     </th:block>
 </th:block>

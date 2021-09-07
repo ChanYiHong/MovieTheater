@@ -2,8 +2,7 @@ package ChanuE.MovieTheater.api;
 
 import ChanuE.MovieTheater.dto.reservation.ReservationRequestDTO;
 import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
-import ChanuE.MovieTheater.service.ReservationService;
-import ChanuE.MovieTheater.service.ReservationServiceImpl;
+import ChanuE.MovieTheater.service.reservation.ReservationService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +22,21 @@ public class ReservationApiController {
 
     private final ReservationService reservationService;
 
+    // 예약 좌석까지 확정 후에 ajax로 예약.
     @PostMapping
     public ResponseEntity<String> reservationRegister(@RequestBody ReservationRequestDTO dto,
                                                       @AuthenticationPrincipal AuthMemberDTO memberDTO) {
 
         log.info("reservation : {}", dto);
         reservationService.reservation(dto, memberDTO.getEmail());
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    // 예약 취소하기.
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> cancelReservation(@PathVariable("id") Long id) {
+        log.info("Cancel reservation : {}", id);
+        reservationService.cancelReservation(id);
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 

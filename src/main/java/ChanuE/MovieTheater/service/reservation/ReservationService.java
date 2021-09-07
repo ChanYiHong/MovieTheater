@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.reservation;
 
 import ChanuE.MovieTheater.domain.Member;
 import ChanuE.MovieTheater.domain.Movie;

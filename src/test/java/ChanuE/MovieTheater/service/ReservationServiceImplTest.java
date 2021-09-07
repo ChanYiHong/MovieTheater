@@ -1,31 +1,25 @@
 package ChanuE.MovieTheater.service;
 
-import ChanuE.MovieTheater.domain.*;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.reservation.ReservationDTO;
 import ChanuE.MovieTheater.repository.Reservation.ReservationRepository;
 import ChanuE.MovieTheater.repository.Reservation.ReservationSearch;
 import ChanuE.MovieTheater.repository.member.MemberRepository;
-import ChanuE.MovieTheater.repository.movie.MovieRepository;
+import ChanuE.MovieTheater.service.reservation.ReservationService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.shouldHaveThrown;
 
 @SpringBootTest
 @Transactional
