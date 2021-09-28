@@ -14,11 +14,11 @@ class ReservationRepositoryTest {
 
     @Autowired
     ReservationRepository reservationRepository;
-
-    @Test
-    void findByMemberName() {
-
-        List<Reservation> result = reservationRepository.findByMemberName("메인관리자");
-
-    }
+//
+//    @Test
+//    void findByMemberName() {
+//
+//        List<Reservation> result = reservationRepository.findByMemberName("메인관리자");
+//
+//    }
 }
