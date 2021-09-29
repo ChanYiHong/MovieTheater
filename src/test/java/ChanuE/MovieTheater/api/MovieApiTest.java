@@ -1,5 +1,6 @@
 package ChanuE.MovieTheater.api;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @SpringBootTest
@@ -110,6 +113,8 @@ public class MovieApiTest {
         System.out.println("display : " + jsonObject.get("display"));
         System.out.println("start : " + jsonObject.get("start"));
 
+        List<MovieJson> movieJsonList = new ArrayList<>();
+
         for (int i = 0; i < items.size(); i++) {
             JSONObject item = (JSONObject) items.get(i);
 
@@ -121,9 +126,38 @@ public class MovieApiTest {
             System.out.println("title : " + item.get("title"));
             System.out.println("pubDate : " + item.get("pubDate"));
             System.out.println("userRating : " + item.get("userRating"));
+
+            MovieJson movieJson = new MovieJson();
+            movieJson.setActor((String) item.get("actor"));
+            movieJson.setImage((String) item.get("image"));
+            movieJson.setDirector((String) item.get("director"));
+            movieJson.setSubtitle((String) item.get("subtitle"));
+            movieJson.setLink((String) item.get("link"));
+            movieJson.setTitle((String) item.get("title"));
+            movieJson.setPubDate((String) item.get("pubDate"));
+            movieJson.setUserRating((String) item.get("userRating"));
+
+            movieJsonList.add(movieJson);
         }
 
+        for (MovieJson movieJson : movieJsonList) {
+            System.out.println(movieJson);
+            System.out.println("================");
+        }
 
+    }
+
+    @Data
+    private static class MovieJson {
+
+        private String actor;
+        private String image;
+        private String director;
+        private String subtitle;
+        private String link;
+        private String title;
+        private String pubDate;
+        private String userRating;
 
     }
 

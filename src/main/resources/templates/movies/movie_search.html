@@ -3,7 +3,33 @@
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
 
-        
+        <div class="container">
+            <div>
+                <form th:action="@{/movies/public/search}" th:object="${moviePublicSearch}" method="get">
+                    <label for="title" />
+                    <input type="text" id="title" th:field="*{title}">
+                    <button type="submit" class="btn btn-secondary">검색</button>
+                </form>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Director</th>
+                    <th>Rating</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="movie : ${movies}">
+                    <td th:if="${movie.image != null}"><img th:src="${movie.image}" /></td>
+                    <td th:text="${movie.title}"></td>
+                    <td th:text="${movie.director}"></td>
+                    <td th:text="${movie.userRating}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     </th:block>
 </th:block>

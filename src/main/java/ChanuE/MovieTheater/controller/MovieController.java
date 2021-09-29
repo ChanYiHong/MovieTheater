@@ -1,5 +1,6 @@
 package ChanuE.MovieTheater.controller;
 
+import ChanuE.MovieTheater.api.PublicMovieApiController;
 import ChanuE.MovieTheater.domain.MovieImage;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
@@ -10,15 +11,27 @@ import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
 import ChanuE.MovieTheater.service.movie.MovieService;
 import ChanuE.MovieTheater.service.movie.MovieServiceImpl;
 import ChanuE.MovieTheater.upload.FileStore;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,6 +42,11 @@ public class MovieController {
 
     private final MovieService movieService;
     private final FileStore fileStore;
+
+    @Value("${HCY.api.clientId}")
+    private String clientId;
+    @Value("${HCY.api.clientSecret}")
+    private String clientKey;
 
     @GetMapping("/list")
     public String movieList(@ModelAttribute("MovieSearch") MovieSearch movieSearch,
@@ -93,5 +111,124 @@ public class MovieController {
             model.addAttribute("member", memberDTO);
         }
         return "/movies/movie_read";
+    }
+
+    // == 관리자 권한 == //
+    // 네이버 API 사용. 영화 검색.
+    @GetMapping("/public/search")
+    public String publicMovieSearch(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
+
+        BufferedReader bufferedReader = null;
+        HttpURLConnection connection = null;
+        StringBuilder result;
+
+        List<MovieInfo> movieInfoList = new ArrayList<>();
+
+        log.info("publicMovieSearch : " + moviePublicSearch);
+
+        if (moviePublicSearch.title == null) {
+            return "/movies/movie_search";
+        }
+
+        try {
+            StringBuilder urlBuilder = new StringBuilder("https://openapi.naver.com/v1/search/movie.json");
+            urlBuilder.append("?" + URLEncoder.encode("query", "UTF-8") + "=" + URLEncoder.encode(moviePublicSearch.getTitle(), "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("yearfrom", "UTF-8") + "=" + URLEncoder.encode("2000", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("yearto", "UTF-8") + "=" + URLEncoder.encode("2021", "UTF-8"));
+
+            URL url = new URL(urlBuilder.toString());
+
+            connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("X-Naver-Client-Id", clientId);
+            connection.setRequestProperty("X-Naver-Client-Secret", clientKey);
+
+            if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 300) {
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+
+            result = new StringBuilder();
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                result.append(line);
+            }
+
+            log.info("Result : {}", result.toString());
+
+            bufferedReader.close();
+            connection.disconnect();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(result.toString());
+            JSONArray items = (JSONArray) jsonObject.get("items");
+
+            System.out.println("total : " + jsonObject.get("total"));
+            System.out.println("lastBuildDate : " + jsonObject.get("lastBuildDate"));
+            System.out.println("display : " + jsonObject.get("display"));
+            System.out.println("start : " + jsonObject.get("start"));
+
+            for (int i = 0; i < items.size(); i++) {
+                JSONObject item = (JSONObject) items.get(i);
+
+                System.out.println("actor : " + item.get("actor"));
+                System.out.println("image : " + item.get("image"));
+                System.out.println("director : " + item.get("director"));
+                System.out.println("subtitle : " + item.get("subtitle"));
+                System.out.println("link : " + item.get("link"));
+                System.out.println("title : " + item.get("title"));
+                System.out.println("pubDate : " + item.get("pubDate"));
+                System.out.println("userRating : " + item.get("userRating"));
+
+                MovieInfo movieInfo = new MovieInfo();
+                String title = (String) item.get("title");
+                title = title.replaceAll("<b>", "");
+                title = title.replaceAll("</b>", "");
+
+                String director = (String) item.get("director");
+                director = director.replaceAll("<b>", "");
+                director = director.replaceAll("</b>", "");
+
+                movieInfo.setActor((String) item.get("actor"));
+                movieInfo.setImage((String) item.get("image"));
+                movieInfo.setDirector(director);
+                movieInfo.setSubtitle((String) item.get("subtitle"));
+                movieInfo.setLink((String) item.get("link"));
+                movieInfo.setTitle(title);
+                movieInfo.setPubDate((String) item.get("pubDate"));
+                movieInfo.setUserRating((String) item.get("userRating"));
+
+                movieInfoList.add(movieInfo);
+            }
+        }
+        catch (IOException | ParseException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("movies", movieInfoList);
+
+        return "/movies/movie_search";
+    }
+
+    @Data
+    static class MoviePublicSearch {
+        private String title;
+    }
+
+    @Data
+    static class MovieInfo {
+
+        private String actor;
+        private String image;
+        private String director;
+        private String subtitle;
+        private String link;
+        private String title;
+        private String pubDate;
+        private String userRating;
+
     }
 }

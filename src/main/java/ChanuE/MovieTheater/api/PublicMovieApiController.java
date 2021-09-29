@@ -112,7 +112,7 @@ public class PublicMovieApiController {
     }
 
     // Json 방식.
-    @GetMapping(path = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MovieJson>> searchMovie(@RequestParam("query") String query) {
 
         log.info("movie search : {}", query);
