@@ -14,7 +14,7 @@ public class CinemaDTO {
 
     private Long id;
     private String name;
-    private String movieName;
+    private String title;
     private String area;
     private String specificArea;
     private int seats;

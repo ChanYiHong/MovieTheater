@@ -54,7 +54,7 @@
 
                     $.each(data, function(idx, movie){
                         str += "<div class='movie-body' data-id=" + movie.id + ">";  // areaId 하면 오류.. 소문자만
-                        str += "<h5 class='card-body'>" + movie.movieName + "</h5>";
+                        str += "<h5 class='card-body'>" + movie.title + "</h5>";
                         str += "</div>";
                     });
                     movieList.html(str);

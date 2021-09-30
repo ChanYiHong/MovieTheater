@@ -43,7 +43,7 @@ public interface CinemaService {
         return CinemaDTO.builder()
                 .id(cinema.getId())
                 .name(cinema.getName())
-                .movieName(cinema.getMovie().getMovieName())
+                .title(cinema.getMovie().getTitle())
                 .area(cinema.getTheater().getArea())
                 .specificArea(cinema.getTheater().getSpecificArea())
                 .display(cinema.getDisplay())

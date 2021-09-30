@@ -33,8 +33,10 @@ public class MovieApiTest {
 
         StringBuilder urlBuilder = new StringBuilder("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.xml");
         urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=" + URLEncoder.encode("782990556149f979dfb986fdbf70abf7", "UTF-8"));
-        urlBuilder.append("&" + URLEncoder.encode("openStartDt", "UTF-8") + "=" + URLEncoder.encode("2021", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("openStartDt", "UTF-8") + "=" + URLEncoder.encode("2000", "UTF-8")); /*한 페이지 결과 수*/
         urlBuilder.append("&" + URLEncoder.encode("openEndDt", "UTF-8") + "=" + URLEncoder.encode("2021", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("movieNm", "UTF-8") + "=" + URLEncoder.encode("해리 포터와 죽음의 성물", "UTF-8"));
+
 //        urlBuilder.append("&" + URLEncoder.encode("startCreate_dt", "UTF-8") + "=" + URLEncoder.encode("20210821", "UTF-8")); /*한 페이지 결과 수*/
 //        urlBuilder.append("&" + URLEncoder.encode("endCreateDt",StandardCharsets.UTF_8) + "=" + URLEncoder.encode("20210821", StandardCharsets.UTF_8)); /*한 페이지 결과 수*/
 
@@ -65,6 +67,41 @@ public class MovieApiTest {
         bufferedReader.close();
         connection.disconnect();
 
+    }
+
+    @Test
+    void getSpecificMovieApi() throws IOException{
+        StringBuilder urlBuilder = new StringBuilder("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.xml");
+        urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=" + URLEncoder.encode("782990556149f979dfb986fdbf70abf7", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("movieCd", "UTF-8") + "=" + URLEncoder.encode("20111009", "UTF-8")); /*한 페이지 결과 수*/
+
+
+        URL url = new URL(urlBuilder.toString());
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("GET");
+
+        BufferedReader bufferedReader;
+
+        if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 300) {
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        }
+        else {
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+        }
+
+        StringBuilder result = new StringBuilder();
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
+            result.append(line);
+        }
+
+        log.info("Result : {}", result.toString());
+
+        bufferedReader.close();
+        connection.disconnect();
     }
 
     @Test

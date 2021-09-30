@@ -21,7 +21,7 @@ public class ReservationDTO {
     private String memberId;
     private Long movieId;
     private String memberName;
-    private String movieName;
+    private String title;
     private LocalDate date;
     private LocalTime time;
     private List<Long> seatId;

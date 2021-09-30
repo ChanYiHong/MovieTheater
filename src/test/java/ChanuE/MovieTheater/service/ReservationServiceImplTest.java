@@ -47,7 +47,7 @@ class ReservationServiceImplTest {
 
         ReservationDTO dto = ReservationDTO.builder()
                 .memberId("user1@hcy.com")
-                .movieName("소울")
+                .title("소울")
                 .area("서울")
                 .specificArea("강남")
                 .date(LocalDate.now())
@@ -65,7 +65,7 @@ class ReservationServiceImplTest {
 
     @Test
     public void reservationList() throws Exception {
-        ReservationSearch rs = ReservationSearch.builder().movieName("소울").build();
+        ReservationSearch rs = ReservationSearch.builder().title("소울").build();
         PageRequestDTO pageRequestDTO = new PageRequestDTO();
 
         PageResponseDTO<Object[], ReservationDTO> list = reservationService.getList(rs, pageRequestDTO);

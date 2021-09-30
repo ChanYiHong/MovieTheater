@@ -42,7 +42,7 @@ public class CinemaServiceImpl implements CinemaService{
     @Override
     @Transactional
     public Long save(CinemaSaveDTO cinemaSaveDTO, Long theaterId) {
-        Optional<Movie> movie = movieRepository.findMovieByMovieName(cinemaSaveDTO.getMovieName());
+        Optional<Movie> movie = movieRepository.findMovieByTitle(cinemaSaveDTO.getTitle());
         if(!movie.isPresent()){
             throw new IllegalStateException("Not Exist Movie!!!");
         }

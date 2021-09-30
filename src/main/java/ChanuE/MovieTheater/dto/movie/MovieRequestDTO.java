@@ -14,7 +14,7 @@ import java.util.List;
 @ToString
 public class MovieRequestDTO {
 
-    private String movieName;
+    private String title;
     private String director;
     private String description;
     private AgeLimit ageLimit;

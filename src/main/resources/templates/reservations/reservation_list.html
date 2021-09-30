@@ -8,7 +8,7 @@
                     <form th:object="${reservationSearch}" class="form-inline">
                         <div class="form-group mb-2">
                         <input type="text" th:field="*{memberName}" class="form-control" placeholder="회원명"/>
-                        <input type="text" th:field="*{movieName}" class="form-control" placeholder="영화명"/>
+                        <input type="text" th:field="*{title}" class="form-control" placeholder="영화명"/>
                         </div>
                             <div class="form-group mx-sm-1 mb-2">
                                 <select th:field="*{reservationStatus}" class="form-control"> <option value="">예약상태</option>
@@ -34,7 +34,7 @@
                     <tr th:each="booking : ${result.dtoList}">
                         <td th:text="${booking.id}"></td>
                         <td th:text="${booking.memberName}"></td>
-                        <td th:text="${booking.movieName}"></td>
+                        <td th:text="${booking.title}"></td>
                         <td th:text="${booking.status}"></td>
                         <td>
                             <a th:if="${booking.status.name() == 'RESERVED'}" href="#" th:href="'javascript:cancel('+${booking.id}+')'"

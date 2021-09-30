@@ -14,7 +14,7 @@
             <div>
                 <form th:action="@{/movies/list}" th:object="${MovieSearch}" class="form-inline">
                     <div class="form-group mb-2">
-                        <input type="text" th:field="*{movieName}" class="form-control" placeholder="영화명"/>
+                        <input type="text" th:field="*{title}" class="form-control" placeholder="영화명"/>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
@@ -30,7 +30,7 @@
                 <tbody>
                 <tr th:each="movie : ${result.dtoList}">
                     <td>[[${movie.id}]]</td>
-                    <td>[[${movie.movieName}]]</td>
+                    <td>[[${movie.title}]]</td>
                     <td>
                         <a class="btn btn-primary" th:text="지역" th:href="@{/{id}/area (id=${movie.id})}"></a>
                     </td>

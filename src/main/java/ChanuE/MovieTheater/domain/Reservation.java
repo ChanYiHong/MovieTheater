@@ -32,7 +32,7 @@ public class Reservation extends BaseEntity{
     @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-    private String movieName;
+    private String title;
     private String area;
     private String specificArea;
     private LocalDate date;
@@ -51,12 +51,12 @@ public class Reservation extends BaseEntity{
 //        return reservation;
 //    }
 
-    public static Reservation createReservation(ReservationRequestDTO reservationDTO, String movieName, Time time, Member member) {
+    public static Reservation createReservation(ReservationRequestDTO reservationDTO, String title, Time time, Member member) {
 
         LocalDate date = LocalDate.of(reservationDTO.getYear(), reservationDTO.getMonth(), reservationDTO.getDay());
 
         Reservation reservation = Reservation.builder()
-                .movieName(movieName)
+                .title(title)
                 .area(reservationDTO.getArea())
                 .specificArea(reservationDTO.getSpecific())
                 .date(date)

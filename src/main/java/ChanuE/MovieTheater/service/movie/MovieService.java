@@ -2,6 +2,8 @@ package ChanuE.MovieTheater.service.movie;
 
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.MovieImage;
+import ChanuE.MovieTheater.dto.movie.MovieApiSaveDTO;
+import ChanuE.MovieTheater.dto.movie.MovieRatingHomeViewDTO;
 import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.movieimage.MovieImageDTO;
@@ -15,6 +17,12 @@ public interface MovieService {
 
     Long saveMovie(MovieRequestDTO movieRequestDTO, List<MovieImage> movieImages);
 
+    // 관리자 영화 추가 API (네이버, Kobis api 연동)
+    boolean saveMovieApi(MovieApiSaveDTO movieApiSaveDTO);
+
+    // 홈 화면에 평점 높은 순으로
+    List<MovieRatingHomeViewDTO> getMovieForHomeView();
+
     MovieResponseDTO findOne(Long id);
 
     List<MovieResponseDTO> findAll();
@@ -24,7 +32,7 @@ public interface MovieService {
     default MovieResponseDTO entityToDto(Movie movie) {
         return MovieResponseDTO.builder()
                 .id(movie.getId())
-                .movieName(movie.getMovieName())
+                .title(movie.getTitle())
                 .ageLimit(movie.getAgeLimit())
                 .director(movie.getDirector())
                 .runningTime(movie.getRunningTime())
@@ -37,7 +45,7 @@ public interface MovieService {
         if (movieImage == null) {
             return MovieResponseDTO.builder()
                     .id(movie.getId())
-                    .movieName(movie.getMovieName())
+                    .title(movie.getTitle())
                     .ageLimit(movie.getAgeLimit())
                     .director(movie.getDirector())
                     .runningTime(movie.getRunningTime())
@@ -56,7 +64,7 @@ public interface MovieService {
 
         return MovieResponseDTO.builder()
                 .id(movie.getId())
-                .movieName(movie.getMovieName())
+                .title(movie.getTitle())
                 .ageLimit(movie.getAgeLimit())
                 .director(movie.getDirector())
                 .runningTime(movie.getRunningTime())
@@ -69,7 +77,7 @@ public interface MovieService {
 
     default Movie dtoToEntity(MovieRequestDTO dto, List<MovieImage> movieImages) {
         return Movie.builder()
-                .movieName(dto.getMovieName())
+                .title(dto.getTitle())
                 .director(dto.getDirector())
                 .ageLimit(dto.getAgeLimit())
                 .runningTime(dto.getRunningTime())

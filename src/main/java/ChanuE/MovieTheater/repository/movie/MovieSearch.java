@@ -8,6 +8,6 @@ import java.time.LocalDate;
 @Getter @Setter
 public class MovieSearch {
 
-    private String movieName;
+    private String title;
 
 }

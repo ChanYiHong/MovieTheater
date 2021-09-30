@@ -40,7 +40,7 @@ public class InitMovie {
         public void initMovie() {
             Movie 소울 = Movie.builder()
                     .ageLimit(AgeLimit.ALL)
-                    .movieName("소울")
+                    .title("소울")
                     .director("피트 닥터")
                     .description("나는 어떻게 '나'로 태어나게 되었을까? 지구에 오기 전 영혼들이 머무는 '태어나기 전 세상이 있다면?'")
                     .runningTime(107)
@@ -48,7 +48,7 @@ public class InitMovie {
 
             Movie 세자매 = Movie.builder()
                     .ageLimit(AgeLimit.FIFTEEN)
-                    .movieName("세자매")
+                    .title("세자매")
                     .director("이승원")
                     .description("내 부모에게 진정한 사과를 받고 싶었던, 문제적 자매들이 폭발한다!")
                     .runningTime(115)
@@ -56,7 +56,7 @@ public class InitMovie {
 
             Movie 캐롤 = Movie.builder()
                     .ageLimit(AgeLimit.NINETEEN)
-                    .movieName("캐롤")
+                    .title("캐롤")
                     .director("토드 헤인즈")
                     .description("1950년대 뉴욕, 맨해튼 백화점 점원인 테레즈와 손님으로 찾아온 캐롤은 처음 만난 순간부터 거부할 수 없는 강한 끌림을 느낀다.")
                     .runningTime(118)
@@ -64,7 +64,7 @@ public class InitMovie {
 
             Movie 테넷 = Movie.builder()
                     .ageLimit(AgeLimit.TWELVE)
-                    .movieName("테넷")
+                    .title("테넷")
                     .director("크리스토퍼 놀란")
                     .description("당신에게 줄 건 한단어 '테넷' 이해하지 말고 느껴라!")
                     .runningTime(150)
@@ -72,7 +72,7 @@ public class InitMovie {
 
             Movie 어바웃타임 = Movie.builder()
                     .ageLimit(AgeLimit.FIFTEEN)
-                    .movieName("어바웃타임")
+                    .title("어바웃타임")
                     .director("리차드 커티스")
                     .description("어떠한 순간을 다시 살게 된다면, 과연 완벽한 사랑을 이룰 수 있을까?")
                     .runningTime(123)

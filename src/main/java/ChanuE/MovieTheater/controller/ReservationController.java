@@ -64,7 +64,7 @@ public class ReservationController {
 
         model.addAttribute("info", dto);
         model.addAttribute("timeId", timeId);
-        model.addAttribute("movieName", optionalMovie.get().getMovieName());
+        model.addAttribute("title", optionalMovie.get().getTitle());
 
         return "/reservations/reservation_seat";
     }

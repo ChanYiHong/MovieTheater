@@ -39,7 +39,7 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
                 .leftJoin(reservation.member, member)
                 .where(
                         memberEq(reservationSearch.getMemberName()),
-                        movieEq(reservationSearch.getMovieName()),
+                        movieEq(reservationSearch.getTitle()),
                         statusEq(reservationSearch.getReservationStatus())
                 )
                 .orderBy(getOrderSpecifiers(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
@@ -57,8 +57,8 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom{
         return StringUtils.hasText(searchMemberName) ? member.name.containsIgnoreCase(searchMemberName) : null;
     }
 
-    private BooleanExpression movieEq(String searchMovieName) {
-        return StringUtils.hasText(searchMovieName) ? reservation.movieName.containsIgnoreCase(searchMovieName) : null;
+    private BooleanExpression movieEq(String searchTitle) {
+        return StringUtils.hasText(searchTitle) ? reservation.title.containsIgnoreCase(searchTitle) : null;
     }
 
     private BooleanExpression statusEq(ReservationStatus searchReservationStatus) {

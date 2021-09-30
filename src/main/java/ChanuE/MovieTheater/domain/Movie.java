@@ -21,7 +21,7 @@ public class Movie extends BaseEntity{
     private Long id;
 
     @Column(nullable = false)
-    private String movieName;
+    private String title;
 
     @Convert(converter = AgeLimitConverter.class)
     @Column(nullable = false)
@@ -31,6 +31,8 @@ public class Movie extends BaseEntity{
     private String description;
 
     private String director;
+
+    private String image;
 
     private int runningTime;
 

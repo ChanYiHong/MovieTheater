@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface MovieRepositoryCustom {
     Page<Object[]> findAllBySearchCond(MovieSearch movieSearch, Pageable pageable);
+
+    List<Object[]> findMovieWithAvgRatingForHomeView();
 }

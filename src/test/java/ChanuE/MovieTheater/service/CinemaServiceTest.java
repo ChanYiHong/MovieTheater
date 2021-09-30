@@ -23,7 +23,7 @@ class CinemaServiceTest {
     public void createCinema() throws Exception {
 //        CinemaDTO cinemaDTO = CinemaDTO.builder()
 //                .name("3관")
-//                .movieName("소울")
+//                .title("소울")
 //                .area("서울")
 //                .specificArea("강변")
 //                .display(Display.TWO_D)

@@ -29,14 +29,14 @@ public class CinemaRepositoryImpl implements CinemaRepositoryCustom{
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<Cinema> findCinemaWithMovieTheaterDate(String movieName, String area, String specificArea, LocalDate localDate) {
+    public List<Cinema> findCinemaWithMovieTheaterDate(String title, String area, String specificArea, LocalDate localDate) {
 
         List<Cinema> result = queryFactory
                 .selectFrom(cinema)
                 .leftJoin(cinema.theater, theater).fetchJoin()
                 .leftJoin(cinema.movie, movie).fetchJoin()
                 .where(
-                        movie.movieName.eq(movieName),
+                        movie.title.eq(title),
                         theater.area.eq(area),
                         theater.specificArea.eq(specificArea),
                         cinema.date.eq(localDate)
@@ -46,13 +46,13 @@ public class CinemaRepositoryImpl implements CinemaRepositoryCustom{
     }
 
     @Override
-    public List<Cinema> findCinemaWithMovieTheater(String movieName, String area, String specificArea) {
+    public List<Cinema> findCinemaWithMovieTheater(String title, String area, String specificArea) {
         List<Cinema> result = queryFactory
                 .selectFrom(cinema)
                 .leftJoin(cinema.theater, theater).fetchJoin()
                 .leftJoin(cinema.movie, movie).fetchJoin()
                 .where(
-                        movie.movieName.eq(movieName),
+                        movie.title.eq(title),
                         theater.area.eq(area),
                         theater.specificArea.eq(specificArea)
                 )
@@ -61,12 +61,12 @@ public class CinemaRepositoryImpl implements CinemaRepositoryCustom{
     }
 
     @Override
-    public List<Cinema> findCinemaWithMovie(String movieName) {
+    public List<Cinema> findCinemaWithMovie(String title) {
         List<Cinema> result = queryFactory
                 .selectFrom(cinema)
                 .leftJoin(cinema.movie, movie).fetchJoin()
                 .where(
-                        movie.movieName.eq(movieName)
+                        movie.title.eq(title)
                 )
                 .fetch();
         return result;

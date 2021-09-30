@@ -15,7 +15,7 @@ import java.time.LocalTime;
 public class ReservationResponseDTO {
 
     private Long reservationId;
-    private String movieName;
+    private String title;
     private String area;
     private String specific;
     private LocalDate date;

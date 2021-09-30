@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.dto.review;
+package ChanuE.MovieTheater.dto.movie;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReviewResponseDTO {
+public class MovieApiSaveDTO {
 
     private String title;
-    private String content;
-    private Integer grade;
+    private String director;
+    private String image;
 
 }

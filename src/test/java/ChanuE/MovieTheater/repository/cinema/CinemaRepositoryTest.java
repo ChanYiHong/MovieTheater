@@ -48,7 +48,7 @@ class CinemaRepositoryTest {
 
         Cinema findCinema = cinemaRepository.getOne(1L);
         System.out.println(findCinema);
-        System.out.println(findCinema.getMovie().getMovieName());
+        System.out.println(findCinema.getMovie().getTitle());
         System.out.println(findCinema.getTheater().getName());
 
 

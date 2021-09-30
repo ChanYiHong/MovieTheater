@@ -10,7 +10,7 @@ import lombok.*;
 public class ReservationSearch {
 
     private String memberName;
-    private String movieName;
+    private String title;
     private ReservationStatus reservationStatus;
 
 }

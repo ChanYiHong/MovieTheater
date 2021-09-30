@@ -12,8 +12,8 @@
             </div>
             <div class="form-group">
                 <label >영화 선택 : </label>
-                <select th:field="*{movieName}" class="form-control">
-                    <option th:each="movie : ${movies}" th:value="${movie.movieName}" th:text="${movie.movieName}"></option>
+                <select th:field="*{title}" class="form-control">
+                    <option th:each="movie : ${movies}" th:value="${movie.title}" th:text="${movie.title}"></option>
                 </select>
             </div>
             <div class="form-group">

@@ -65,7 +65,7 @@ public class MovieController {
 
     @PostMapping("/create")
     public String saveMovie(@ModelAttribute MovieRequestDTO movieRequestDTO) throws IOException {
-        log.info("이름 : " + movieRequestDTO.getMovieName());
+        log.info("이름 : " + movieRequestDTO.getTitle());
 
         List<MultipartFile> imageFiles = movieRequestDTO.getImageFiles();
 

@@ -42,9 +42,9 @@ public class IndexControllerTest {
 
         mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
 
-        movie1 = Movie.builder().movieName("name1").build();
-        movie2 = Movie.builder().movieName("name2").build();
-        movie3 = Movie.builder().movieName("name3").build();
+        movie1 = Movie.builder().title("name1").build();
+        movie2 = Movie.builder().title("name2").build();
+        movie3 = Movie.builder().title("name3").build();
 
         movieRepository.save(movie1);
         movieRepository.save(movie2);

@@ -40,7 +40,7 @@
                 <tbody>
                     <tr th:each="reservation : ${memberInfo.reservationResponseDTO}">
                         <td th:text="${reservation.reservationId}"></td>
-                        <td th:text="${reservation.movieName}"></td>
+                        <td th:text="${reservation.title}"></td>
                         <td th:text="|${reservation.area} ${reservation.specific}|"></td>
                         <td th:text="|${reservation.date} ${reservation.time}|"></td>
                         <td>
@@ -69,7 +69,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="review : ${memberInfo.reviewResponseDTO.dtoList}">
-                    <td th:text="${review.movieName}"></td>
+                    <td th:text="${review.title}"></td>
                     <td th:text="${review.content}"></td>
                     <td th:text="${review.grade}"></td>
                 </tr>

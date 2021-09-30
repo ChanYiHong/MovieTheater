@@ -14,7 +14,7 @@ import lombok.*;
 public class MovieResponseDTO {
 
     private Long id;
-    private String movieName;
+    private String title;
     private AgeLimit ageLimit;
     private String description;
     private String director;

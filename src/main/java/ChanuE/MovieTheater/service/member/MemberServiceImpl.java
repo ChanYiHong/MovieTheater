@@ -68,14 +68,14 @@ public class MemberServiceImpl implements MemberService{
             return ReviewResponseDTO.builder()
                     .content(review.getContent())
                     .grade(review.getGrade())
-                    .movieName(review.getMovie().getMovieName())
+                    .title(review.getMovie().getTitle())
                     .build();
         };
 
         PageResponseDTO<Review, ReviewResponseDTO> reviewResponseDTO = new PageResponseDTO<>(reviews, fn);
 
         List<ReservationResponseDTO> reservationDTos = reservations.stream().map(reservation ->
-                ReservationResponseDTO.builder().reservationId(reservation.getId()).movieName(reservation.getMovieName())
+                ReservationResponseDTO.builder().reservationId(reservation.getId()).title(reservation.getTitle())
                         .area(reservation.getArea()).specific(reservation.getSpecificArea()).date(reservation.getDate())
                         .time(reservation.getTime()).totalPerson(reservation.getTotalPerson()).totalPrice(reservation.getTotalPrice()).build())
                 .collect(Collectors.toList());

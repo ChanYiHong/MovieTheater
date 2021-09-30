@@ -2,6 +2,8 @@ package ChanuE.MovieTheater.service.movie;
 
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.MovieImage;
+import ChanuE.MovieTheater.dto.movie.MovieApiSaveDTO;
+import ChanuE.MovieTheater.dto.movie.MovieRatingHomeViewDTO;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -35,7 +38,7 @@ public class MovieServiceImpl implements MovieService{
     @Transactional
     public Long saveMovie(MovieRequestDTO movieRequestDTO, List<MovieImage> movieImages){
         Movie movie = dtoToEntity(movieRequestDTO, movieImages);
-        checkDuplicateMovie(movie.getMovieName());
+        checkDuplicateMovie(movie.getTitle());
 
         movieRepository.save(movie);
 
@@ -51,8 +54,37 @@ public class MovieServiceImpl implements MovieService{
         return movie.getId();
     }
 
+    @Override
+    public boolean saveMovieApi(MovieApiSaveDTO movieApiSaveDTO) {
+
+        // duplicate check
+        Optional<Movie> movie = movieRepository.findMovieByTitle(movieApiSaveDTO.getTitle());
+        if (movie.isPresent()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public List<MovieRatingHomeViewDTO> getMovieForHomeView() {
+        List<Object[]> result = movieRepository.findMovieWithAvgRatingForHomeView();
+
+        List<MovieRatingHomeViewDTO> ret = new ArrayList<>();
+        result.forEach(objects -> {
+            Movie movie = (Movie) objects[0];
+            Double avg = (Double) objects[1];
+
+            MovieRatingHomeViewDTO.builder()
+                    .title(movie.getTitle())
+                    .rating(avg).build();
+        });
+
+        return ret;
+    }
+
     private void checkDuplicateMovie(String name){
-        Optional<Movie> movies = movieRepository.findMovieByMovieName(name);
+        Optional<Movie> movies = movieRepository.findMovieByTitle(name);
         if(movies.isPresent()){
             throw new IllegalStateException("Duplicate Movie Name!! Please type other movie name!!");
         }

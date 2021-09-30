@@ -4,11 +4,11 @@
 <th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
     <th:block th:fragment="content">
 
-        <h1 class="mt-4">[[${result.movieName}]]</h1>
+        <h1 class="mt-4">[[${result.title}]]</h1>
 
         <div class="form-group">
             <label >Title</label>
-            <input class="form-control" th:value="${result.movieName}" name="title" readonly>
+            <input class="form-control" th:value="${result.title}" name="title" readonly>
         </div>
         <div class="form-group">
             <img th:if="${result.movieImageDTO.path != null}"

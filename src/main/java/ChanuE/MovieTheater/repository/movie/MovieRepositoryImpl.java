@@ -17,6 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Nullable;
+import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ import static ChanuE.MovieTheater.domain.QReview.review;
 public class MovieRepositoryImpl implements MovieRepositoryCustom{
 
     private final JPAQueryFactory queryFactory;
+    private final EntityManager em;
 
     @Override
     public Page<Object[]> findAllBySearchCond(MovieSearch movieSearch, Pageable pageable) {
@@ -36,7 +38,7 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom{
                 .from(movie)
                 .leftJoin(movieImage).on(movieImage.movie.eq(movie))
                 .leftJoin(review).on(review.movie.eq(movie))
-                .where(movieNameEq(movieSearch.getMovieName()))
+                .where(titleEq(movieSearch.getTitle()))
                 .orderBy(getOrderSpecifiers(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
                 .groupBy(movie)
                 .offset(pageable.getOffset())
@@ -49,8 +51,21 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom{
         return new PageImpl<>(content.stream().map(Tuple::toArray).collect(Collectors.toList()), pageable, total);
     }
 
-    private BooleanExpression movieNameEq(String movieName) {
-        return (StringUtils.hasText(movieName)) ? movie.movieName.containsIgnoreCase(movieName) : null;
+    // queryDSL x. JPQL
+    @Override
+    public List<Object[]> findMovieWithAvgRatingForHomeView() {
+
+        List<Object[]> resultList = em.createQuery("select m, avg(coalesce(r.grade, 1)) as g from Movie m join Review r on r.movie = m order by g desc", Object[].class)
+                .setFirstResult(0)
+                .setMaxResults(2)
+                .getResultList();
+
+        return resultList;
+
+    }
+
+    private BooleanExpression titleEq(String title) {
+        return (StringUtils.hasText(title)) ? movie.title.containsIgnoreCase(title) : null;
     }
 
     private List<OrderSpecifier> getOrderSpecifiers(Sort sort){

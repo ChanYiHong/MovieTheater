@@ -45,10 +45,10 @@ public class MovieRepositoryTest {
     @Rollback(false)
     public void converterTest() throws Exception {
 
-        Movie movie = Movie.builder().movieName("Test").ageLimit(AgeLimit.NINETEEN).build();
+        Movie movie = Movie.builder().title("Test").ageLimit(AgeLimit.NINETEEN).build();
         movieRepository.save(movie);
 
-        Query nativeQuery = em.createQuery("Select m from Movie m where m.movieName = :name", Movie.class);
+        Query nativeQuery = em.createQuery("Select m from Movie m where m.title = :name", Movie.class);
         nativeQuery.setParameter("name", "Test");
         List<Movie> results = nativeQuery.getResultList();
 
@@ -71,8 +71,8 @@ public class MovieRepositoryTest {
     }
 
     @Test
-    public void findMovieByMovieNameTest() throws Exception {
-        Optional<Movie> result = movieRepository.findMovieByMovieName("소울");
+    public void findMovieByTitleTest() throws Exception {
+        Optional<Movie> result = movieRepository.findMovieByTitle("소울");
         Movie movie = result.get();
         System.out.println(movie);
     }
@@ -91,6 +91,19 @@ public class MovieRepositoryTest {
         System.out.println(movieImage);
         System.out.println(reviewCnt);
         System.out.println(avg);
+    }
+
+    @Test
+    void findTwoMovieForMainPage(){
+        List<Object[]> result = movieRepository.findMovieWithAvgRatingForHomeView();
+
+        for (Object[] objects : result) {
+            Movie movie = (Movie) objects[0];
+            Double avg = (Double) objects[1];
+
+            System.out.println(movie);
+            System.out.println(avg);
+        }
     }
 
 }

@@ -51,7 +51,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 Time 없음 id = " + reservationDTO.getTimeId()));
 
         // 예약 만들기.
-        Reservation reservation = Reservation.createReservation(reservationDTO, movie.getMovieName(), time, member);
+        Reservation reservation = Reservation.createReservation(reservationDTO, movie.getTitle(), time, member);
 
         // 좌석을 찾아서 unavailable 로 바꾸고, 예약 설정.
         List<Long> seats = reservationDTO.getSeatList();

@@ -8,7 +8,7 @@
             <div>
                 <form th:action="@{/movies/info}" th:object="${MovieSearch}" class="form-inline">
                     <div class="form-group mb-2">
-                        <input type="text" th:field="*{movieName}" class="form-control" placeholder="영화명"/>
+                        <input type="text" th:field="*{title}" class="form-control" placeholder="영화명"/>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
@@ -47,7 +47,7 @@
                     </td>
                     <th scope="row">
                         <a th:href="@{/movies/{id} (id=${movie.id}, page=${result.page})}">
-                            [[${movie.movieName}]]
+                            [[${movie.title}]]
                         </a>
                     </th>
                     <td>[[${movie.director}]]</td>

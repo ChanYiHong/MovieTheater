@@ -16,7 +16,7 @@ public class CinemaSaveDTO {
 
     private Long id;
     private String name;
-    private String movieName;
+    private String title;
     private int seats;
     private int year;
     private int month;

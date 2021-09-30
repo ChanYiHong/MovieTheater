@@ -25,7 +25,7 @@ public interface ReservationService {
         return ReservationDTO.builder()
                 .id(reservation.getId())
                 .memberName(member.getName())
-                .movieName(reservation.getMovieName())
+                .title(reservation.getTitle())
                 .area(reservation.getArea())
                 .specificArea(reservation.getSpecificArea())
                 .createdDate(reservation.getCreatedDate())
