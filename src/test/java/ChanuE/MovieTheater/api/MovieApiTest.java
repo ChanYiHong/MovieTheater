@@ -1,5 +1,7 @@
 package ChanuE.MovieTheater.api;
 
+import ChanuE.MovieTheater.controller.MovieController;
+import ChanuE.MovieTheater.dto.movie.MovieKobisApiSaveDTO;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.json.simple.JSONArray;
@@ -184,6 +186,77 @@ public class MovieApiTest {
 
     }
 
+    @Test
+    void getKobisJsonData() throws IOException, ParseException {
+        StringBuilder urlBuilder = new StringBuilder("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json");
+        urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=" + URLEncoder.encode("782990556149f979dfb986fdbf70abf7", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("openStartDt", "UTF-8") + "=" + URLEncoder.encode("2000", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("openEndDt", "UTF-8") + "=" + URLEncoder.encode("2021", "UTF-8"));
+        urlBuilder.append("&" + URLEncoder.encode("movieNm", "UTF-8") + "=" + URLEncoder.encode("해리 포터와 죽음의 성물", "UTF-8"));
+
+//        urlBuilder.append("&" + URLEncoder.encode("startCreate_dt", "UTF-8") + "=" + URLEncoder.encode("20210821", "UTF-8")); /*한 페이지 결과 수*/
+//        urlBuilder.append("&" + URLEncoder.encode("endCreateDt",StandardCharsets.UTF_8) + "=" + URLEncoder.encode("20210821", StandardCharsets.UTF_8)); /*한 페이지 결과 수*/
+
+        URL url = new URL(urlBuilder.toString());
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+        connection.setRequestMethod("GET");
+
+        BufferedReader bufferedReader;
+
+        if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 300) {
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        }
+        else {
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+        }
+
+        StringBuilder result = new StringBuilder();
+        String line;
+
+        while ((line = bufferedReader.readLine()) != null) {
+            result.append(line);
+        }
+
+        log.info("Result : {}", result.toString());
+
+        List<MovieInfoKobis> movieInfoKobisList = new ArrayList<>();
+
+        bufferedReader.close();
+        connection.disconnect();
+        JSONParser jsonParser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) jsonParser.parse(result.toString());
+        JSONObject movieListResult = (JSONObject) jsonObject.get("movieListResult");
+        JSONArray movieList = (JSONArray) movieListResult.get("movieList");
+
+        System.out.println(movieList);
+
+        for (int i = 0; i < movieList.size(); i++) {
+            JSONObject movie = (JSONObject) movieList.get(i);
+
+            MovieInfoKobis movieInfoKobis = new MovieInfoKobis();
+            movieInfoKobis.setMovieCd((String) movie.get("movieCd"));
+            movieInfoKobis.setMovieNm((String) movie.get("movieNm"));
+            movieInfoKobis.setMovieNmEn((String) movie.get("movieNmEn"));
+            movieInfoKobis.setPrdtYear((String) movie.get("prdtYear"));
+            movieInfoKobis.setOpenDt((String) movie.get("openDt"));
+            movieInfoKobis.setTypeNm((String) movie.get("typeNm"));
+            movieInfoKobis.setPrdtStatNm((String) movie.get("prdtStatNm"));
+            movieInfoKobis.setNationAlt((String) movie.get("nationAlt"));
+            movieInfoKobis.setGenreAlt((String) movie.get("genreAlt"));
+            movieInfoKobis.setRepNationNm((String) movie.get("repNationNm"));
+            movieInfoKobis.setRepGenreNm((String) movie.get("repGenreNm"));
+
+            movieInfoKobisList.add(movieInfoKobis);
+        }
+
+        for (MovieInfoKobis movieInfoKobis : movieInfoKobisList) {
+            System.out.println(movieInfoKobis);
+        }
+
+    }
+
     @Data
     private static class MovieJson {
 
@@ -195,6 +268,23 @@ public class MovieApiTest {
         private String title;
         private String pubDate;
         private String userRating;
+
+    }
+
+    @Data
+    private static class MovieInfoKobis {
+
+        private String movieCd;
+        private String movieNm;
+        private String movieNmEn;
+        private String prdtYear;
+        private String openDt;
+        private String typeNm;
+        private String prdtStatNm;
+        private String nationAlt;
+        private String genreAlt;
+        private String repNationNm;
+        private String repGenreNm;
 
     }
 

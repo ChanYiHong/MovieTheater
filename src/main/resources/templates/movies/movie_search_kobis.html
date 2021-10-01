@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+    <th:block th:fragment="content">
+
+        <div class="container">
+            <div>
+                <form th:action="@{/movies/public/search}" th:object="${moviePublicSearch}" method="get">
+                    <label for="title" ></label>
+                    <input type="text" id="title" th:field="*{title}">
+                    <button type="submit" class="btn btn-secondary">검색</button>
+                </form>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>MovieCode</th>
+                    <th>Title</th>
+                    <th>OpenDate</th>
+                    <th>Genre</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="movie : ${movies}">
+                    <td th:text="${movie.movieCd}"></td>
+                    <td th:text="${movie.movieNm}"></td>
+                    <td th:text="${movie.openDt}"></td>
+                    <td th:text="${movie.genreAlt}"></td>
+                    <td>
+                        <button type="button" class="btn btn-danger" th:attr="data-movieCode=${movie.movieCd}, data-title=${movie.movieNm},
+                                    data-openDate=${movie.openDt}, data-genre=${movie.genreAlt}">추가</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <script th:inline="javascript">
+
+            $(document).ready(function() {
+                $(".btn-danger").on("click", function() {
+                    var movieCode = $(this).data("movieCode");
+                    var title = $(this).data("title");
+                    var openDate = $(this).data("openDate");
+                    var genre = $(this).data("genre");
+
+                    console.log(movieCode);
+                    console.log(title);
+                    console.log(openDate);
+                    console.log(genre);
+
+                    var sendData = {
+                        "movieCode": movieCode,
+                        "title": title,
+                        "openDate": openDate,
+                        "genre": genre
+                    }
+
+                    $.ajax({
+                        url: "/movies/api/save",
+                        data: JSON.stringify(sendData),
+                        processData: false,
+                        contentType: "application/json; charset=utf-8",
+                        method: "POST",
+                        success: function(result) {
+                            alert(result);
+                            window.location.href = "/";
+                        },
+                        error: function(result) {
+                            alert(result);
+                        }
+                    });
+                });
+            });
+
+        </script>
+
+    </th:block>
+</th:block>
+</html>

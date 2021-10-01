@@ -115,7 +115,7 @@ public class MovieController {
 
     // == 관리자 권한 == //
     // 네이버 API 사용. 영화 검색.
-    @GetMapping("/public/search")
+//    @GetMapping("/public/search")
     public String publicMovieSearch(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
 
         BufferedReader bufferedReader = null;
@@ -213,6 +213,88 @@ public class MovieController {
         return "/movies/movie_search";
     }
 
+
+    // Kobis Api List (Image x)
+    @GetMapping("/public/search")
+    public String publicMovieSearchKobis(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
+
+        log.info("publicMovieSearch : " + moviePublicSearch);
+
+        if (moviePublicSearch.title == null) {
+            return "/movies/movie_search";
+        }
+
+        List<MovieInfoKobis> movieInfoKobisList = new ArrayList<>();
+
+        try {
+            StringBuilder urlBuilder = new StringBuilder("http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieList.json");
+            urlBuilder.append("?" + URLEncoder.encode("key", "UTF-8") + "=" + URLEncoder.encode("782990556149f979dfb986fdbf70abf7", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("openStartDt", "UTF-8") + "=" + URLEncoder.encode("2000", "UTF-8")); /*한 페이지 결과 수*/
+            urlBuilder.append("&" + URLEncoder.encode("openEndDt", "UTF-8") + "=" + URLEncoder.encode("2021", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("movieNm", "UTF-8") + "=" + URLEncoder.encode(moviePublicSearch.getTitle(), "UTF-8"));
+
+
+            URL url = new URL(urlBuilder.toString());
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            connection.setRequestMethod("GET");
+
+            BufferedReader bufferedReader;
+
+            if (connection.getResponseCode() >= 200 && connection.getResponseCode() <= 300) {
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            } else {
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
+
+            StringBuilder result = new StringBuilder();
+            String line;
+
+            while ((line = bufferedReader.readLine()) != null) {
+                result.append(line);
+            }
+
+            log.info("Result : {}", result.toString());
+
+            bufferedReader.close();
+            connection.disconnect();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject jsonObject = (JSONObject) jsonParser.parse(result.toString());
+            JSONObject movieListResult = (JSONObject) jsonObject.get("movieListResult");
+            JSONArray movieList = (JSONArray) movieListResult.get("movieList");
+
+            for (int i = 0; i < movieList.size(); i++) {
+                JSONObject movie = (JSONObject) movieList.get(i);
+
+                MovieInfoKobis movieInfoKobis = new MovieInfoKobis();
+                movieInfoKobis.setMovieCd((String) movie.get("movieCd"));
+                movieInfoKobis.setMovieNm((String) movie.get("movieNm"));
+                movieInfoKobis.setMovieNmEn((String) movie.get("movieNmEn"));
+                movieInfoKobis.setPrdtYear((String) movie.get("prdtYear"));
+                movieInfoKobis.setOpenDt((String) movie.get("openDt"));
+                movieInfoKobis.setTypeNm((String) movie.get("typeNm"));
+                movieInfoKobis.setPrdtStatNm((String) movie.get("prdtStatNm"));
+                movieInfoKobis.setNationAlt((String) movie.get("nationAlt"));
+                movieInfoKobis.setGenreAlt((String) movie.get("genreAlt"));
+                movieInfoKobis.setRepNationNm((String) movie.get("repNationNm"));
+                movieInfoKobis.setRepGenreNm((String) movie.get("repGenreNm"));
+
+                movieInfoKobisList.add(movieInfoKobis);
+            }
+
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("movies", movieInfoKobisList);
+
+        return "/movies/movie_search_kobis";
+
+    }
+
     @Data
     static class MoviePublicSearch {
         private String title;
@@ -229,6 +311,23 @@ public class MovieController {
         private String title;
         private String pubDate;
         private String userRating;
+
+    }
+
+    @Data
+    static class MovieInfoKobis {
+
+        private String movieCd;
+        private String movieNm;
+        private String movieNmEn;
+        private String prdtYear;
+        private String openDt;
+        private String typeNm;
+        private String prdtStatNm;
+        private String nationAlt;
+        private String genreAlt;
+        private String repNationNm;
+        private String repGenreNm;
 
     }
 }
