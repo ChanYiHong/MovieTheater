@@ -26,3 +26,10 @@ CGV 영화관 사이트를 모티브로 영화관 영화 예매 시스템을 개
 ### 테이블 설계
 
 <img width="520" alt="스크린샷 2021-10-16 오후 10 50 32" src="https://user-images.githubusercontent.com/33217033/137590076-028f0286-dd33-4cbd-99ea-800c88edfe55.png">
+
+<img width="871" alt="스크린샷 2021-10-17 오전 1 34 04" src="https://user-images.githubusercontent.com/33217033/137595198-c1a25d8f-1204-4e54-bb52-f3eb446fdb15.png">
+
+<img width="943" alt="스크린샷 2021-10-17 오전 1 32 54" src="https://user-images.githubusercontent.com/33217033/137595219-6ae2b587-0f69-4da7-8018-0928e1f40340.png">
+
+<img width="1069" alt="스크린샷 2021-10-17 오전 1 33 47" src="https://user-images.githubusercontent.com/33217033/137595254-b1dba300-c4f5-4794-814a-5e7f0beff61e.png">
+
