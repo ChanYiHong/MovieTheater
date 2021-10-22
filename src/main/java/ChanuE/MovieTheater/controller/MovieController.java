@@ -106,11 +106,16 @@ public class MovieController {
 
         log.info(findMovie);
         model.addAttribute("result", findMovie);
+//
 
+        log.info(memberDTO);
         if (memberDTO != null) {
             model.addAttribute("member", memberDTO);
+            return "/movies/movie_read_auth";
         }
-        return "/movies/movie_read";
+        else {
+            return "/movies/movie_read";
+        }
     }
 
     // == 관리자 권한 == //
