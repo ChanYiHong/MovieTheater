@@ -60,6 +60,12 @@
       </div>
 
     <div class="jumbotron"> <h1>HCY 영화관</h1>
+        <div class="row">
+            <div class="col" th:each="movie : ${topRateMovie}">
+                <h1 th:text="${movie.title}"></h1>
+                <h1 th:text="${movie.rating}"></h1>
+            </div>
+        </div>
         <!-- <p class="lead">회원 기능</p> <p>
             <a class="btn btn-lg btn-secondary" href="/login">로그인</a>
             <a class="btn btn-lg btn-secondary" href="/members">회원 목록</a> </p>

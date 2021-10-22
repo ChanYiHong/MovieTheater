@@ -55,7 +55,8 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom{
     @Override
     public List<Object[]> findMovieWithAvgRatingForHomeView() {
 
-        List<Object[]> resultList = em.createQuery("select m, avg(coalesce(r.grade, 1)) as g from Movie m join Review r on r.movie = m order by g desc", Object[].class)
+        List<Object[]> resultList = em.createQuery("select m, avg(coalesce(r.grade, 1)) as g from Movie m join Review r on r.movie = m " +
+                "group by m order by g desc", Object[].class)
                 .setFirstResult(0)
                 .setMaxResults(2)
                 .getResultList();

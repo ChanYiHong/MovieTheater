@@ -75,9 +75,9 @@ public class MovieServiceImpl implements MovieService{
             Movie movie = (Movie) objects[0];
             Double avg = (Double) objects[1];
 
-            MovieRatingHomeViewDTO.builder()
+            ret.add(MovieRatingHomeViewDTO.builder()
                     .title(movie.getTitle())
-                    .rating(avg).build();
+                    .rating(avg).build());
         });
 
         return ret;
@@ -126,5 +126,4 @@ public class MovieServiceImpl implements MovieService{
 
         return new PageResponseDTO<>(result, fn);
     }
-
 }

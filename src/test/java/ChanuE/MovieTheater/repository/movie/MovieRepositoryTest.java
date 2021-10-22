@@ -99,10 +99,10 @@ public class MovieRepositoryTest {
 
         for (Object[] objects : result) {
             Movie movie = (Movie) objects[0];
-            Double avg = (Double) objects[1];
+//            Double avg = (Double) objects[1];
 
             System.out.println(movie);
-            System.out.println(avg);
+//            System.out.println(avg);
         }
     }
 
