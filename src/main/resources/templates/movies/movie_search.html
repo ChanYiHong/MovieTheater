@@ -54,9 +54,48 @@
                         "image": image
                     }
 
-                    $.ajax({
-                        url: "/"
-                    });
+                    var form = document.createElement("form");
+
+                    form.setAttribute("charset", "UTF-8");
+                    form.setAttribute("method", "Get");
+                    form.setAttribute("action", "/movies/public/modify");
+
+                    var hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", "title");
+                    hiddenField.setAttribute("value", title);
+                    form.appendChild(hiddenField);
+
+                    hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", "director");
+                    hiddenField.setAttribute("value", director);
+                    form.appendChild(hiddenField);
+
+                    hiddenField = document.createElement("input");
+                    hiddenField.setAttribute("type", "hidden");
+                    hiddenField.setAttribute("name", "image");
+                    hiddenField.setAttribute("value", image);
+                    form.appendChild(hiddenField);
+
+                    document.body.appendChild(form);
+                    form.submit();
+
+                    //$.ajax({
+                    //    url: "/movies/api/save",
+                    //    data: JSON.stringify(sendData),
+                    //    processData: false,
+                    //    contentType: "application/json; charset=utf-8",
+                    //    method: "POST",
+                    //    success: function(result) {
+                    //        alert(result);
+                    //        window.location.href = "/";
+                    //    },
+                    //    error: function(result) {
+                    //        alert(result);
+                    //    }
+                    //});
+
                 });
             });
 

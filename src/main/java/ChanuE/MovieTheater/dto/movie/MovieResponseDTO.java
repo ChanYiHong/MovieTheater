@@ -22,6 +22,8 @@ public class MovieResponseDTO {
 
     private MovieImageDTO movieImageDTO;
 
+    private String image;
+
     private int reviewCnt;
     private double gradeAvg;
 

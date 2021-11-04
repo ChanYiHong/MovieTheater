@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout/content :: setContent(~{this :: content})}">
+
+    <th:block th:fragment="content">
+        <h1 class="mt-4">관리자 권한 : 영화 추가 수정 화면</h1>
+
+        <form th:action="@{/movies/public/modify}" th:object="${movieApiSaveDTO}" method="post">
+            <div class="form-group">
+                <label for="title" >영화 제목 : </label>
+                <input id="title" type="text" class="form-control" th:field="*{title}" th:value="${movieApiInfo.title}" size="50" placeholder="제목 입력란" /><br/>
+            </div>
+            <div>
+                <img th:src="${movieApiInfo.image}" />
+                <input th:field="*{image}" />
+            </div>
+            <div>
+                <div th:each="ageLimit : ${T(ChanuE.MovieTheater.domain.AgeLimit).values()}" class="form-check form-check-inline">
+                    <input type="radio" th:field="*{ageLimit}" th:value="${ageLimit.name()}">
+                    <label th:for="${#ids.prev('ageLimit')}" th:text="${ageLimit.description}"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="director">감독</label>
+                <input id="director" type="text" class="form-control" th:field="*{director}" th:value="${movieApiInfo.director}">
+            </div>
+            <div class="form-group">
+                <label for="description">줄거리 및 설명</label>
+                <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="runningtime">상영 시간(분)</label>
+                <input id="runningtime" type="text" class="form-control" th:field="*{runningTime}">
+            </div>
+            <button class="btn btn-primary" type="submit">저장</button>
+            <a class="btn btn-secondary" href="/admin">돌아가기</a>
+        </form>
+    </th:block>
+</th:block>
+</html>

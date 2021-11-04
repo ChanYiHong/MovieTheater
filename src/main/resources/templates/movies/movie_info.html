@@ -41,9 +41,12 @@
                             <img th:src="@{/img/19.png}" alt="19세이용가">
                         </span>
                     </td>
+<!--                    <td>-->
+<!--                        <img th:if="${movie.movieImageDTO.path != null}"-->
+<!--                             th:src="|/display?filePath=${movie.movieImageDTO.getThumbnailURL()}|">-->
+<!--                    </td>-->
                     <td>
-                        <img th:if="${movie.movieImageDTO.path != null}"
-                             th:src="|/display?filePath=${movie.movieImageDTO.getThumbnailURL()}|">
+                        <img th:src="${movie.image}" />
                     </td>
                     <th scope="row">
                         <a th:href="@{/movies/{id} (id=${movie.id}, page=${result.page})}">

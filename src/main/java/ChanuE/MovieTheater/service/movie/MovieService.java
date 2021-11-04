@@ -2,10 +2,7 @@ package ChanuE.MovieTheater.service.movie;
 
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.MovieImage;
-import ChanuE.MovieTheater.dto.movie.MovieApiSaveDTO;
-import ChanuE.MovieTheater.dto.movie.MovieRatingHomeViewDTO;
-import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
+import ChanuE.MovieTheater.dto.movie.*;
 import ChanuE.MovieTheater.dto.movieimage.MovieImageDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
@@ -17,8 +14,8 @@ public interface MovieService {
 
     Long saveMovie(MovieRequestDTO movieRequestDTO, List<MovieImage> movieImages);
 
-    // 관리자 영화 추가 API (네이버, Kobis api 연동)
-    boolean saveMovieApi(MovieApiSaveDTO movieApiSaveDTO);
+    // 관리자 영화 추가 API (네이버 API 연동)
+    boolean saveMovieApi(MovieApiSaveDTO movieApiSaveDTODTO);
 
     // 홈 화면에 평점 높은 순으로
     List<MovieRatingHomeViewDTO> getMovieForHomeView();
@@ -35,8 +32,10 @@ public interface MovieService {
                 .title(movie.getTitle())
                 .ageLimit(movie.getAgeLimit())
                 .director(movie.getDirector())
+                .image(movie.getImage())
                 .runningTime(movie.getRunningTime())
                 .description(movie.getDescription())
+                .image(movie.getImage())
                 .build();
     }
 
@@ -49,6 +48,7 @@ public interface MovieService {
                     .ageLimit(movie.getAgeLimit())
                     .director(movie.getDirector())
                     .runningTime(movie.getRunningTime())
+                    .image(movie.getImage())
                     .description(movie.getDescription())
                     .gradeAvg(gradeAvg)
                     .reviewCnt(reviewCnt.intValue())
@@ -69,6 +69,7 @@ public interface MovieService {
                 .director(movie.getDirector())
                 .runningTime(movie.getRunningTime())
                 .description(movie.getDescription())
+                .image(movie.getImage())
                 .gradeAvg(gradeAvg)
                 .reviewCnt(reviewCnt.intValue())
                 .movieImageDTO(movieImageDTO)

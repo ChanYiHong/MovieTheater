@@ -2,17 +2,13 @@ package ChanuE.MovieTheater.service.movie;
 
 import ChanuE.MovieTheater.domain.Movie;
 import ChanuE.MovieTheater.domain.MovieImage;
-import ChanuE.MovieTheater.dto.movie.MovieApiSaveDTO;
-import ChanuE.MovieTheater.dto.movie.MovieRatingHomeViewDTO;
-import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
-import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
+import ChanuE.MovieTheater.dto.movie.*;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import ChanuE.MovieTheater.repository.movie.MovieRepository;
 import ChanuE.MovieTheater.repository.movieimage.MovieImageRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,11 +54,22 @@ public class MovieServiceImpl implements MovieService{
     public boolean saveMovieApi(MovieApiSaveDTO movieApiSaveDTO) {
 
         // duplicate check
-        Optional<Movie> movie = movieRepository.findMovieByTitle(movieApiSaveDTO.getTitle());
-        if (movie.isPresent()) {
+        Optional<Movie> findMovie = movieRepository.findMovieByTitle(movieApiSaveDTO.getTitle());
+        if (findMovie.isPresent()) {
             return false;
         }
 
+        // 관리자가 부족한 부분은 수정을 통해 추가로 삽입해야함.
+        Movie movie = Movie.builder()
+                .title(movieApiSaveDTO.getTitle())
+                .image(movieApiSaveDTO.getImage())
+                .director(movieApiSaveDTO.getDirector())
+                .runningTime(movieApiSaveDTO.getRunningTime())
+                .description(movieApiSaveDTO.getDescription())
+                .ageLimit(movieApiSaveDTO.getAgeLimit())
+                .build();
+
+        movieRepository.save(movie);
         return true;
     }
 

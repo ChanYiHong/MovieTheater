@@ -1,7 +1,7 @@
 package ChanuE.MovieTheater.controller;
 
-import ChanuE.MovieTheater.api.PublicMovieApiController;
 import ChanuE.MovieTheater.domain.MovieImage;
+import ChanuE.MovieTheater.dto.movie.MovieApiSaveDTO;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.dto.movie.MovieRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
@@ -9,7 +9,6 @@ import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.repository.movie.MovieSearch;
 import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
 import ChanuE.MovieTheater.service.movie.MovieService;
-import ChanuE.MovieTheater.service.movie.MovieServiceImpl;
 import ChanuE.MovieTheater.upload.FileStore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -118,9 +117,28 @@ public class MovieController {
         }
     }
 
+
+    // 영화 api 로 저장할 때 추가 정보 넣어주는 화면
+    @GetMapping("/public/modify")
+    public String publicMovieModify(@ModelAttribute MovieApiSaveDTO movieApiSaveDTO, Model model) {
+
+        model.addAttribute("movieApiInfo", movieApiSaveDTO);
+        return "/movies/movie_api_modify";
+
+    }
+
+    @PostMapping("/public/modify")
+    public String publicMovieModify(@ModelAttribute MovieApiSaveDTO movieApiSaveDTO) {
+
+        movieService.saveMovieApi(movieApiSaveDTO);
+        return "redirect:/";
+
+    }
+
+
     // == 관리자 권한 == //
     // 네이버 API 사용. 영화 검색.
-//    @GetMapping("/public/search")
+    @GetMapping("/public/search")
     public String publicMovieSearch(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
 
         BufferedReader bufferedReader = null;
@@ -220,7 +238,7 @@ public class MovieController {
 
 
     // Kobis Api List (Image x)
-    @GetMapping("/public/search")
+    //@GetMapping("/public/search")
     public String publicMovieSearchKobis(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
 
         log.info("publicMovieSearch : " + moviePublicSearch);

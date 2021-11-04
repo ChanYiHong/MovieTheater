@@ -1,10 +1,9 @@
 package ChanuE.MovieTheater.api;
 
-import ChanuE.MovieTheater.dto.movie.MovieApiSaveDTO;
+import ChanuE.MovieTheater.dto.movie.MovieApiDTO;
 import ChanuE.MovieTheater.dto.movie.MovieKobisApiSaveDTO;
 import ChanuE.MovieTheater.dto.movie.MovieResponseDTO;
 import ChanuE.MovieTheater.service.movie.MovieService;
-import ChanuE.MovieTheater.service.movie.MovieServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -31,16 +30,18 @@ public class MovieApiController {
     }
 
     // 관리자 권한으로 영화 저장. (네이버 api로 검색 후 저장버튼 눌렀을 때)
-//    @PostMapping(value = "/api/save", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> saveMovie(@RequestBody MovieApiSaveDTO movieApiSaveDTO) {
+    @PostMapping(value = "/api/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> saveMovie(@RequestBody MovieApiDTO movieApiDTO) {
 
-        log.info("movie api save request : {}", movieApiSaveDTO);
+        log.info("movie api save request : {}", movieApiDTO);
+
+//        movieService.saveMovieApi(movieApiDTO);
 
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 
     // 관리자 권한으로 영화 저장. (Kobis API로 검색후 저장버튼 눌렀을 때)
-    @PostMapping(value = "/api/save", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @PostMapping(value = "/api/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> saveMovieKobis(@RequestBody MovieKobisApiSaveDTO movieKobisApiSaveDTO) {
 
         log.info("movie kobis api save request : {}", movieKobisApiSaveDTO);
