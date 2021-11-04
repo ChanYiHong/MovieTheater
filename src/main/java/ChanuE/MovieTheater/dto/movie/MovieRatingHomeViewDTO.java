@@ -15,4 +15,5 @@ public class MovieRatingHomeViewDTO {
     private Double rating;
     private String image;
 
+
 }

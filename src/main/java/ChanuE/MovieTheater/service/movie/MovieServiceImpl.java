@@ -84,6 +84,7 @@ public class MovieServiceImpl implements MovieService{
 
             ret.add(MovieRatingHomeViewDTO.builder()
                     .title(movie.getTitle())
+                    .image(movie.getImage())
                     .rating(avg).build());
         });
 

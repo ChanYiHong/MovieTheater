@@ -59,11 +59,12 @@
         </button>
       </div>
 
-    <div class="jumbotron"> <h1>HCY 영화관</h1>
+    <div class="jumbotron"> <h1 style="text-align: center;">TOP RATING</h1>
         <div class="row">
             <div class="col" th:each="movie : ${topRateMovie}">
                 <h1 th:text="${movie.title}"></h1>
                 <h1 th:text="${movie.rating}"></h1>
+                <img th:src="${movie.image}" />
             </div>
         </div>
         <!-- <p class="lead">회원 기능</p> <p>
