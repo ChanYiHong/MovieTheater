@@ -14,6 +14,7 @@ import ChanuE.MovieTheater.service.movie.MovieServiceImpl;
 import ChanuE.MovieTheater.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +31,7 @@ public class CinemaController {
     private final MovieService movieService;
     private final TheaterService theaterService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{theaterId}")
     public String list(@PathVariable("theaterId") Long theaterId,
                        @ModelAttribute("cinemaSearch") CinemaSearch cinemaSearch,
@@ -44,6 +46,7 @@ public class CinemaController {
     }
 
     // form 에서 th:object 사용하려면 @ModelAttribute로 객체를 넘겨줘야 함!!
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{theaterId}/new")
     public String create(@PathVariable("theaterId") Long theaterId,
                          @ModelAttribute("cinemaSaveDTO") CinemaSaveDTO dto, Model model) {
@@ -58,6 +61,7 @@ public class CinemaController {
         return "/cinemas/cinema_create";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{theaterId}/new")
     public String createCinema(@PathVariable("theaterId") Long theaterId,
                                @ModelAttribute("cinemaSaveDTO") CinemaSaveDTO dto){
@@ -68,6 +72,7 @@ public class CinemaController {
         return "redirect:/cinemas/"+theaterId;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{cinemaId}/remove")
     public String removeCinema(@PathVariable("cinemaId") Long cinemaId,
                                @RequestParam("theaterId") Long theaterId) {

@@ -7,6 +7,7 @@ import ChanuE.MovieTheater.security.dto.AuthMemberDTO;
 import ChanuE.MovieTheater.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,7 @@ public class MemberController {
         return "redirect:/";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/memberInfo")
     public String memberInfoPage(@ModelAttribute PageRequestDTO pageRequestDTO, @AuthenticationPrincipal AuthMemberDTO memberDTO, Model model) {
         MemberInfoDTO memberInfo = memberService.getMemberInfo(memberDTO, pageRequestDTO);

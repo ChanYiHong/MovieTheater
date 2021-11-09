@@ -18,6 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,12 +57,14 @@ public class MovieController {
         return "/movies/movie_list";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/create")
     public String createMovie(@ModelAttribute MovieRequestDTO movieRequestDTO){
         log.info("Get Movie Create View");
         return "/movies/movie_create";
     }
 
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/create")
     public String saveMovie(@ModelAttribute MovieRequestDTO movieRequestDTO) throws IOException {
         log.info("이름 : " + movieRequestDTO.getTitle());
@@ -119,6 +122,7 @@ public class MovieController {
 
 
     // 영화 api 로 저장할 때 추가 정보 넣어주는 화면
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/public/modify")
     public String publicMovieModify(@ModelAttribute MovieApiSaveDTO movieApiSaveDTO, Model model) {
 
@@ -127,6 +131,7 @@ public class MovieController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/public/modify")
     public String publicMovieModify(@ModelAttribute MovieApiSaveDTO movieApiSaveDTO) {
 
@@ -138,6 +143,7 @@ public class MovieController {
 
     // == 관리자 권한 == //
     // 네이버 API 사용. 영화 검색.
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/public/search")
     public String publicMovieSearch(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
 
@@ -239,6 +245,7 @@ public class MovieController {
 
     // Kobis Api List (Image x)
     //@GetMapping("/public/search")
+    @PreAuthorize("hasRole('ADMIN')")
     public String publicMovieSearchKobis(@ModelAttribute MoviePublicSearch moviePublicSearch, Model model) {
 
         log.info("publicMovieSearch : " + moviePublicSearch);

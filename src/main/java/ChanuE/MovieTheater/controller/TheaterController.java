@@ -7,6 +7,7 @@ import ChanuE.MovieTheater.dto.theater.TheaterDTO;
 import ChanuE.MovieTheater.service.TheaterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ public class TheaterController {
 
     private final TheaterService theaterService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/all")
     public String getList(PageRequestDTO pageRequestDTO, Model model) {
         PageResponseDTO<Theater, TheaterDTO> result = theaterService.list(pageRequestDTO);
