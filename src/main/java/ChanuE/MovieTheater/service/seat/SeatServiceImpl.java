@@ -1,16 +1,14 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.seat;
 
 import ChanuE.MovieTheater.domain.Seat;
 import ChanuE.MovieTheater.domain.Time;
 import ChanuE.MovieTheater.dto.seat.SeatDTO;
 import ChanuE.MovieTheater.repository.seat.SeatRepository;
-import ChanuE.MovieTheater.repository.time.TimeRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,22 +1,20 @@
 package ChanuE.MovieTheater.service;
 
-import ChanuE.MovieTheater.dto.seat.SeatDTO;
 import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import ChanuE.MovieTheater.dto.time.TimeResponseDTO;
 import ChanuE.MovieTheater.dto.time.TimeSaveDTO;
+import ChanuE.MovieTheater.service.time.TimeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.time.LocalTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class TimeServiceTest {
 
-    @Autowired TimeService timeService;
+    @Autowired
+    TimeService timeService;
 
     @Test
     public void setTimeTest() throws Exception {

@@ -1,7 +1,6 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.time;
 
 import ChanuE.MovieTheater.domain.Cinema;
-import ChanuE.MovieTheater.domain.Seat;
 import ChanuE.MovieTheater.domain.Time;
 import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import ChanuE.MovieTheater.dto.time.TimeResponseDTO;
@@ -9,6 +8,7 @@ import ChanuE.MovieTheater.dto.time.TimeSaveDTO;
 import ChanuE.MovieTheater.repository.cinema.CinemaRepository;
 import ChanuE.MovieTheater.repository.seat.SeatRepository;
 import ChanuE.MovieTheater.repository.time.TimeRepository;
+import ChanuE.MovieTheater.service.seat.SeatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

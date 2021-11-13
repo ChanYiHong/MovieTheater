@@ -1,17 +1,12 @@
 package ChanuE.MovieTheater.service;
 
-import ChanuE.MovieTheater.domain.Display;
-import ChanuE.MovieTheater.dto.cinema.CinemaDTO;
 import ChanuE.MovieTheater.dto.cinema.CinemaDateApiDTO;
+import ChanuE.MovieTheater.service.cinema.CinemaService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class CinemaServiceTest {

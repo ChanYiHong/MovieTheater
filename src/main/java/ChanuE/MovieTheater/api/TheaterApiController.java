@@ -1,9 +1,8 @@
 package ChanuE.MovieTheater.api;
 
 import ChanuE.MovieTheater.dto.theater.TheaterAreaApiDTO;
-import ChanuE.MovieTheater.dto.theater.TheaterDTO;
 import ChanuE.MovieTheater.dto.theater.TheaterSpecAreaApiDTO;
-import ChanuE.MovieTheater.service.TheaterService;
+import ChanuE.MovieTheater.service.theater.TheaterService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.List;
 
 @RestController

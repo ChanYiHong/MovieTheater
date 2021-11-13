@@ -4,7 +4,7 @@ import ChanuE.MovieTheater.domain.Theater;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.theater.TheaterDTO;
-import ChanuE.MovieTheater.service.TheaterService;
+import ChanuE.MovieTheater.service.theater.TheaterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.security.access.prepost.PreAuthorize;

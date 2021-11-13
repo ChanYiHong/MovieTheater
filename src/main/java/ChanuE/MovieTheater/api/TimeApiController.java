@@ -2,7 +2,7 @@ package ChanuE.MovieTheater.api;
 
 import ChanuE.MovieTheater.dto.time.TimeApiDTO;
 import ChanuE.MovieTheater.dto.time.TimeResponseDTO;
-import ChanuE.MovieTheater.service.TimeService;
+import ChanuE.MovieTheater.service.time.TimeService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

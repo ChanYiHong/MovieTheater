@@ -1,7 +1,7 @@
 package ChanuE.MovieTheater.api;
 
 import ChanuE.MovieTheater.dto.seat.SeatDTO;
-import ChanuE.MovieTheater.service.SeatService;
+import ChanuE.MovieTheater.service.seat.SeatService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

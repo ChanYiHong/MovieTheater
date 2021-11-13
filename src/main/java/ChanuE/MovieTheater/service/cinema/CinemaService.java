@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.cinema;
 
 import ChanuE.MovieTheater.domain.Cinema;
 import ChanuE.MovieTheater.domain.Movie;

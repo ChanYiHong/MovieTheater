@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.service;
+package ChanuE.MovieTheater.service.theater;
 
 import ChanuE.MovieTheater.domain.Theater;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;

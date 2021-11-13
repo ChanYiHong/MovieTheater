@@ -5,6 +5,7 @@ import ChanuE.MovieTheater.domain.Review;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.review.ReviewDTO;
+import ChanuE.MovieTheater.service.review.ReviewService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,12 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class ReviewServiceTest {
 
-    @Autowired ReviewService reviewService;
+    @Autowired
+    ReviewService reviewService;
 
     @Test
     public void insertReviews() throws Exception {

@@ -1,7 +1,7 @@
 package ChanuE.MovieTheater.api;
 
 import ChanuE.MovieTheater.dto.cinema.CinemaDateApiDTO;
-import ChanuE.MovieTheater.service.CinemaService;
+import ChanuE.MovieTheater.service.cinema.CinemaService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

@@ -4,7 +4,7 @@ import ChanuE.MovieTheater.domain.Review;
 import ChanuE.MovieTheater.dto.page.PageRequestDTO;
 import ChanuE.MovieTheater.dto.page.PageResponseDTO;
 import ChanuE.MovieTheater.dto.review.ReviewDTO;
-import ChanuE.MovieTheater.service.ReviewService;
+import ChanuE.MovieTheater.service.review.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
