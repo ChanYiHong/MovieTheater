@@ -24,17 +24,17 @@
             <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
           </div>
           <div>
-            <label for="signup_id" class="signup_label"> <span>Email</span> </label>
+            <label for="signup_id" class="signup_label"> <span th:text="#{join.email}">Email</span> </label>
             <input type="email" id="signup_id" th:field="*{email}" th:errorclass="field-error"/>
             <div class="field-error" th:errors="*{email}">Email Error</div>
           </div>
           <div>
-            <label for="signup_pw" class="signup_label"> <span>Password</span> </label>
+            <label for="signup_pw" class="signup_label"> <span th:text="#{join.password}">Password</span> </label>
             <input type="text" id="signup_pw" th:field="*{password}" th:errorclass="field-error"/>
             <div class="field-error" th:errors="*{password}">Password Error</div>
           </div>
           <div>
-            <label for="signup_name" class="signup_label"> <span>Name</span> </label>
+            <label for="signup_name" class="signup_label"> <span th:text="#{join.name}">Name</span> </label>
             <input type="text" id="signup_name" th:field="*{name}" th:errorclass="field-error"/>
             <div class="field-error" th:errors="*{name}">Name Error</div>
           </div>
