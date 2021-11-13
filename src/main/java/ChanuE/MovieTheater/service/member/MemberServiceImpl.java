@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -81,5 +82,12 @@ public class MemberServiceImpl implements MemberService{
                 .collect(Collectors.toList());
 
         return makeInfo(reviewResponseDTO, reservationDTos, member, (int) reviews.getTotalElements());
+    }
+
+    @Override
+    public boolean isDuplicateEmail(String email) {
+
+        return memberRepository.findByEmail(false, email).isPresent();
+
     }
 }

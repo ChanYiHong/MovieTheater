@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +31,21 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String signupMember(@ModelAttribute MemberSaveDTO memberSaveDTO) {
+    public String signupMember(@Validated @ModelAttribute MemberSaveDTO memberSaveDTO, BindingResult bindingResult) {
         log.info("Member Save Request : {}", memberSaveDTO);
+
+        // 입력 형식 오류. DTO annotation validation 이용.
+        if (bindingResult.hasErrors()) {
+            log.info("signup error : {}", bindingResult);
+            return "/members/signup";
+        }
+
+        // 중복 회원 체크
+        if (memberService.isDuplicateEmail(memberSaveDTO.getEmail())) {
+            log.info("duplicate email");
+            bindingResult.reject("emailDuplicate");
+            return "/members/signup";
+        }
 
         memberService.joinMember(memberSaveDTO);
         return "redirect:/";

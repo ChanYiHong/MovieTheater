@@ -5,27 +5,38 @@
   <link rel="stylesheet" href="css/index.css">
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <meta charset="utf-8" />
+
+  <style>
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+   </style>
+
 </head>
 <body>
-
     <!-- Body -->
     <div class="container">
       <button id="back_button" onclick="history.back();"> <i class="far fa-arrow-alt-circle-left"></i></button>
-
-
       <div class="signup">
         <form method="POST" th:action="@{/signup}" th:object="${memberSaveDTO}">
+          <div th:if="${#fields.hasGlobalErrors()}">
+            <p class="field-error" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></p>
+          </div>
           <div>
             <label for="signup_id" class="signup_label"> <span>Email</span> </label>
-            <input type="email" id="signup_id" th:field="*{email}" required />
+            <input type="email" id="signup_id" th:field="*{email}" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{email}">Email Error</div>
           </div>
           <div>
             <label for="signup_pw" class="signup_label"> <span>Password</span> </label>
-            <input type="text" id="signup_pw" th:field="*{password}" required />
+            <input type="text" id="signup_pw" th:field="*{password}" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{password}">Password Error</div>
           </div>
           <div>
             <label for="signup_name" class="signup_label"> <span>Name</span> </label>
-            <input type="text" id="signup_name" th:field="*{name}" required />
+            <input type="text" id="signup_name" th:field="*{name}" th:errorclass="field-error"/>
+            <div class="field-error" th:errors="*{name}">Name Error</div>
           </div>
 
           <div>

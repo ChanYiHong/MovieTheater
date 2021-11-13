@@ -19,6 +19,8 @@ public interface MemberService {
 
     MemberInfoDTO getMemberInfo(AuthMemberDTO member, PageRequestDTO pageRequestDTO);
 
+    boolean isDuplicateEmail(String email);
+
     default MemberInfoDTO makeInfo(PageResponseDTO<Review, ReviewResponseDTO> pageResponseDTO, List<ReservationResponseDTO> reservations,
                                    AuthMemberDTO member, Integer totalReviewCnt) {
 
