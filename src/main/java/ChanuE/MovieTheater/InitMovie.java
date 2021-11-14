@@ -1,4 +1,4 @@
-package ChanuE.MovieTheater.controller;
+package ChanuE.MovieTheater;
 
 import ChanuE.MovieTheater.domain.*;
 import lombok.RequiredArgsConstructor;
