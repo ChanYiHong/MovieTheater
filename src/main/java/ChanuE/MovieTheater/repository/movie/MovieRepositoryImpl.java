@@ -38,7 +38,10 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom{
                 .from(movie)
                 .leftJoin(movieImage).on(movieImage.movie.eq(movie))
                 .leftJoin(review).on(review.movie.eq(movie))
-                .where(titleEq(movieSearch.getTitle()))
+                .where(
+                        titleEq(movieSearch.getTitle()),
+                        ageLimitEq(movieSearch.getAgeLimit())
+                )
                 .orderBy(getOrderSpecifiers(pageable.getSort()).stream().toArray(OrderSpecifier[]::new))
                 .groupBy(movie)
                 .offset(pageable.getOffset())
@@ -67,6 +70,10 @@ public class MovieRepositoryImpl implements MovieRepositoryCustom{
 
     private BooleanExpression titleEq(String title) {
         return (StringUtils.hasText(title)) ? movie.title.containsIgnoreCase(title) : null;
+    }
+
+    private BooleanExpression ageLimitEq(AgeLimit ageLimit) {
+        return ageLimit != null ? movie.ageLimit.eq(ageLimit) : null;
     }
 
     private List<OrderSpecifier> getOrderSpecifiers(Sort sort){

@@ -14,7 +14,15 @@
             <div>
                 <form th:action="@{/movies/list}" th:object="${MovieSearch}" class="form-inline">
                     <div class="form-group mb-2">
-                        <input type="text" th:field="*{title}" class="form-control" placeholder="영화명"/>
+                        <input type="text" th:field="*{title}" class="form-control" placeholder="연령제한"/>
+                        <div class="form-group mx-sm-1 mb-2">
+                            <select th:field="*{ageLimit}" class="form-control"> <option value="">연령제한</option>
+                                <option th:each="age : ${T(ChanuE.MovieTheater.domain.AgeLimit).values()}"
+                                        th:value="${age}"
+                                        th:text="${age}">option
+                                </option>
+                            </select>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">검색</button>
                 </form>
