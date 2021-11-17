@@ -38,7 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     /** 예약 **/
     @Transactional
-    public Long reservation(ReservationRequestDTO reservationDTO, String memberId){
+    public synchronized Long reservation(ReservationRequestDTO reservationDTO, String memberId){
 
         // Entity inquire (조회)
         Member member = memberRepository.findByEmail(false, memberId)
