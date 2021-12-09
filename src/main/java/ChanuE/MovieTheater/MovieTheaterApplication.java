@@ -1,5 +1,7 @@
 package ChanuE.MovieTheater;
 
+import ChanuE.MovieTheater.log.logtrace.LogTrace;
+import ChanuE.MovieTheater.log.logtrace.ThreadLocalLogTrace;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,6 +21,11 @@ public class MovieTheaterApplication {
 	@Bean
 	JPAQueryFactory jpaQueryFactory(EntityManager em){
 		return new JPAQueryFactory(em);
+	}
+
+	@Bean
+	LogTrace logTrace() {
+		return new ThreadLocalLogTrace();
 	}
 
 }

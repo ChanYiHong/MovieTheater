@@ -6,7 +6,7 @@
         <div class="container">
             <div>
                 <form th:action="@{/movies/public/search}" th:object="${moviePublicSearch}" method="get">
-                    <label for="title" ></label>
+                    <label for="title" >제목</label>
                     <input type="text" id="title" th:field="*{title}">
                     <button type="submit" class="btn btn-secondary">검색</button>
                 </form>
