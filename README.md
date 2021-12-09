@@ -17,9 +17,9 @@ CGV 영화관 사이트를 모티브로 영화관 영화 예매 시스템을 개
 
 - Spring Security 를 통한 간단한 로그인 기능 구현
 - querydsl을 통한 동적 쿼리 검색 기능 구현 (상영중인 영화 검색)
-- Ajax 기술을 활용해 restAPI 구현 (댓글, 영화 좌석)
+- restAPI 구현 (댓글, 영화 좌석) (Spring MVC, AJAX)
 - Controller, Service, Repository, DTO, Domain 패키지로 나누어 유지보수가 쉽게 설계
-- Spring Data JPA 사용으로 기본적인 CRUD 해결
+- Spring Data JPA 사용으로 기본적인 CRUD operation 해결
 - OPEN API 로 받은 데이터 파싱 작업 (JSON, XML → JAVA 객체)
 - 테스트 코드 작성 연습 (JUnit)
 
